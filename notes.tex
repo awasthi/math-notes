@@ -1,0 +1,21 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+\documentclass[letterpaper]{report}
+\usepackage{notes}
+\begin{document}
+\input{title}
+% Table of contents
+\tableofcontents
+% Introduction
+\input{intro}
+% Parts
+\input{./parts/algebra}
+\input{./parts/analysis}
+\input{./parts/foundations}
+% Bibliography
+\addcontentsline{toc}{part}{Bibliography}
+\nocite{*}
+\bibliography{notes}
+\end{document}

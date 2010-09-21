@@ -1,0 +1,48 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Algebra
+% Groups
+% Groups and Subgroups
+%
+\section{Groups and Subgroups}
+\subsection*{Theorems}
+\begin{thm}[Structure of cyclic groups]
+Let \(G=\groupclosure{x}\) be a cyclic group of order~\(n\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] Every subgroup of~\(G\) is cyclic. More specifically, if \(H\subgroupeq G\), then \(H=1\) or \(H=\groupclosure{x^d}\), where \(d\)~is least positive such that \(x^d\in H\).
+\item[(b)] If \(n<\infty\),
+\begin{enumerate}[itemsep=0pt]
+\item[(i)] For each positive divisor~\(d\) of~\(n\), \(G\)~has a unique subgroup of order~\(d\), namely \(H=\groupclosure{x^a}\) where \(a=n/d\).
+\item[(ii)] For any \(a\in\Z\), \(\groupclosure{x^a}=\groupclosure{x^{(a,n)}}\).
+\item[(iii)] For any \(a,b\in\Z\), \(\groupclosure{x^a}\subgroupeq\groupclosure{x^b}\) iff \((b,n)|(a,n)\).
+\end{enumerate}
+\item[(c)] If \(n=\infty\),
+\begin{enumerate}[itemsep=0pt]
+\item[(i)] For any \(a,b\in\Z\) nonnegative with \(a\ne b\), \(\groupclosure{x^a}\ne\groupclosure{x^b}\).
+\item[(ii)] For any \(a\in\Z\), \(\groupclosure{x^a}=\groupclosure{x^{\abs{a}}}\).
+\item[(iii)] For any \(a,b\in\Z\), \(\groupclosure{x^a}\subgroupeq\groupclosure{x^b}\) iff \(b|a\).
+\end{enumerate}
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), by division with remainder.
+
+For~(b), by calculating orders of elements. For~(i), \(\ord{H}=\ord{x^a}=n/(a,n)=n/a=d\). If \(K\subgroupeq G\) with \(\ord{K}=d\), then by~(a) \(K=\groupclosure{x^b}\) with \(n/(b,n)=\ord{x^b}=d=n/a\), so~\(a|b\) and \(K\subgroupeq H\). Since \(\ord{H}=\ord{K}\), \(K=H\). For~(ii), similarly. For~(iii), assume without loss of generality that \(a|n\)~and~\(b|n\) by~(ii). If \(\groupclosure{x^a}\subgroupeq\groupclosure{x^b}\), then \(x^a=(x^b)^k=x^{bk}\) for some~\(k\), so \(n/a=n/(a,n)=\ord{x^a}=\ord{x^{bk}}=n/(bk,n)=n/[b(k,n)]\), so \(b|a\). The reverse direction is immediate.
+
+For~(c), by even simpler arguments.\qedhere
+\end{proof}
+\begin{rmk}
+By this result, the subgroups of a cyclic group correspond bijectively to either the positive divisors of the order of the group (if the group is finite) or the positive integers (if the group is infinite), and all inclusions among subgroups are determined by divisibility. This gives us the complete structure for the group.
+\end{rmk}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Using basic number theory for calculations with group elements.
+\item Using subgroup lattices to understand the structure of groups.
+\end{itemize}
+
+\begin{rmk}
+Take care when using subgroup lattices. Two nonisomorphic groups may have the same lattice. Also, if \(N\normsubgroupeq G\), the isomorphism type of~\(G\) is not in general uniquely determined by the isomorphism types of factors \(G/N\)~and~\(N\), so a group isomorphism type is not in general uniquely determined for a lattice even when types for its `top' and `bottom' relative to a fixed normal subgroup are.
+\end{rmk}

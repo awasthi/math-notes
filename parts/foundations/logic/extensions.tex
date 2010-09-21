@@ -1,0 +1,64 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Logic
+% Extensions of First-Order Logic
+\section{Extensions of First-Order Logic}
+\subsection*{Theorems}
+Recall \(\Lf\)~denotes first-order logic.
+\begin{thm}[\(\Ls\)]
+For second-order logic~\(\Ls\) (which allows quantification over \(n\)-ary relations on the domain of a model),
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\Ls\)~is more expressively powerful than~\(\Lf\).
+\item[(b)] Compactness fails in~\(\Ls\).
+\item[(c)] L\"owenheim-Skolem fails in~\(\Ls\).
+\item[(d)] Completeness fails in~\(\Ls\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), note for example \(\Ls\)~can axiomatize the Peano structure on~\(\N\) up to isomorphism (by expressing the induction axiom), while \(\Lf\)~cannot.
+
+For~(b), construct a sentence~\(\varphi_{\mathrm{fin}}\) which states `every injective function (on the domain of the model) is surjective'. Then a model satisfies~\(\varphi_{\mathrm{fin}}\) iff the model is finite. Therefore the set
+\[\Phi=\{\varphi_{\mathrm{fin}}\}\union\{\,\varphi_{\ge n}\mid n\ge 2\,\}\]
+is finitely satisfiable but not satisfiable.
+
+For~(c), construct a sentence~\(\varphi_{\mathrm{unc}}\) which states `there exists a linear ordering (on the domain of the model) under which not every element has only finitely many predecessors'. Then a model satisfies~\(\varphi_{\mathrm{unc}}\) iff the model is uncountable.
+
+Now (d)~follows from (b)~and~(c) since if completeness holds (in the usual sense), then compactness and L\"owenheim-Skolem follow.
+\end{proof}
+
+\begin{thm}[\(\Lo\)]
+For the infinitary logic~\(\Lo\) (which allows infinite disjunctions and conjunctions),
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\Lo\)~is more expressively powerful than~\(\Lf\).
+\item[(b)] Compactness fails in~\(\Lo\).
+\item[(c)] L\"owenheim-Skolem holds in~\(\Lo\).
+\item[(d)] Completeness holds in~\(\Lo\) for infinitary proofs.
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), note for example \(\Ls\)~can axiomatize the Peano structure on~\(\N\) up to isomorphism (by expressing the fact that every element is a finite successor of~\(0\)), while \(\Lf\)~cannot.
+
+For~(b), construct a sentence~\(\varphi_{\mathrm{fin}}=\biglor_{n\ge1}\varphi_n\) where \(\varphi_n\)~states `there exist exactly~\(n\) elements'. Then a model satisfies~\(\varphi_{\mathrm{fin}}\) iff the model is finite.
+
+For~(c), if \(\varphi\)~has a model, construct an at most countable submodel one step at a time in countably many steps. More specifically, given a model of~\(\varphi\), start with a nonempty subset of the domain which contains all constants. Then, one step at a time, close the subset under function applications and existential quantifications over elements from the previous step. Take the union. Argue that it is an at most countable submodel of~\(\varphi\).
+\end{proof}
+
+\begin{thm}[\(\Lq\)]
+For the logic~\(\Lq\) (which allows quantification over uncountably many elements),
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\Lq\)~is more expressively powerful than~\(\Lf\).
+\item[(b)] Compactness holds in~\(\Lq\) for at most countable sets of formulas.
+\item[(c)] L\"owenheim-Skolem fails in~\(\Lq\).
+\item[(d)] Completeness holds in~\(\Lq\) for at most countable sets of formulas.
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For (a)~and~(c), note \(\varphi_{\mathrm{unc}}=Qx\,x\equiv x\) characterizes uncountable models. Note (b)~follows from~(d).
+\end{proof}
+
+\begin{rmk}
+The results in this chapter suggest that compactness or L\"owenheim-Skolem (or both) will fail to hold in any logical system more expressively powerful than~\(\Lf\). This is confirmed by Lindstr\"om's theorems.
+\end{rmk}

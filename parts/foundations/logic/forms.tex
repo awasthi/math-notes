@@ -1,0 +1,97 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Logic
+% Syntactic Interpretations and Normal Forms
+\section{Syntactic Interpretations and Normal Forms}
+\subsection*{Theorems}
+Recall a formula~\(\varphi\) is \emph{term reduced} if its atomic subformulas are of the form \(x\equiv y\), \(x\equiv c\), \(x\equiv f x_1\cdots x_n\), and \(R x_1\cdots x_n\).
+
+\begin{thm}[Term reduction]
+For every formula~\(\varphi\), there is a logically equivalent term reduced formula~\(\varphi^*\) with \(\free(\varphi)=\free(\varphi^*)\).
+\end{thm}
+\begin{proof}[Proof idea]
+Define~\(\varphi^*\) by recursion, then prove properties by induction.
+\end{proof}
+\begin{app}
+Simplifying inductive proofs and recursive definitions.
+\end{app}
+
+\begin{thm}[Relational symbol sets]
+Let \(S\)~be a symbol set, and \(S^r\)~the corresponding relational symbol set. For an \(S\)-structure~\(\A\), let \(\A^r\)~denote the corresponding relational \(S^r\)-structure.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] For all \(\varphi\in L^S\), there exists \(\varphi^r\in L^{S^r}\) such that for all \(S\)-interpretations \((\A,\beta)\),
+\[(\A,\beta)\models\varphi\iff(\A^r,\beta)\models\varphi^r\]
+\item[(b)] For all \(\psi\in L^{S^r}\), there exists \(\psi^{-r}\in L^S\) such that for all \(S\)-interpretations \((\A,\beta)\),
+\[(\A,\beta)\models\psi^{-r}\iff(\A^r,\beta)\models\psi\]
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+Define \(\varphi^r\)~and~\(\psi^{-r}\) by recursion on term-reduced formulas, and prove equivalence by induction.
+\end{proof}
+\begin{app}
+Simplifying arguments.
+\end{app}
+
+\begin{thm}[Syntactic interpretations]
+Let \(S\)~and~\(S'\) be symbol sets and \(I\)~be a syntactic interpretation of~\(S'\) in~\(S\).
+
+For every \(\psi\in L^{S'}\), there exists \(\psi^I\in L^S\) with \(\free(\psi^I)\subseteq\free(\psi)\) and such that for all interpreting \(S\)-structures~\(\A\) (i.e., \(\A\models\Phi_I\)) and assignments~\(\beta\) over the interpreted structure~\(\A^{-I}\),
+\[(\A^{-I},\beta)\models\psi\iff(\A,\beta)\models\psi^I\]
+\end{thm}
+\begin{proof}[Proof idea]
+Define~\(\psi^I\) by recursion on term-reduced formulas using the syntactic interpretation, then prove equivalence by induction.
+\end{proof}
+\begin{app}
+Talking about one structure within another structure. In particular relativization and extension by syntactic definition.
+\end{app}
+
+\begin{cor}[Relativization]
+Let \(S'\)~be a symbol set. Fix a unary relation symbol \(P\not\in S'\) and set \(S=S'\union\{P\}\). For all \(\psi\in L_0^{S'}\), there exists \(\psi^P\in L_0^S\) such that for all  \(S\)-structures \((\A,P^A)\) where \(P^A\)~is \(S'\)-closed,
+\[[P^A]^{\A}\models\psi\iff(\A,P^A)\models\psi^P\]
+\end{cor}
+\begin{proof}[Proof idea]
+Syntactically interpret~\(S'\) in~\(S\) according to the identity, using~\(P\) to delimit the interpreted domain.
+\end{proof}
+\begin{app}
+Talking about a substructure  within a larger structure. For example, talking about the field of scalars within a (one-sorted) vector space.
+\end{app}
+
+\begin{cor}[Definitions]
+Let \(S\)~be a symbol set and \(\Phi\subseteq L_0^S\). Let \(s\not\in S\) and \(\delta_s\)~be an \(S\)-definition of~\(s\) in~\(\Phi\). Let \(I\)~be the corresponding syntactic interpretation.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] For all \(\varphi\in L_0^S\), \(\Phi\models\varphi\) iff \(\Phi\union\{\delta_s\}\models\varphi\).
+\item[(b)] For all \(\psi\in L_0^{S\union\{s\}}\), \(\Phi\union\{\delta_s\}\models\psi\liff\psi^I\).
+\item[(c)] For all \(\psi\in L_0^{S\union\{s\}}\), \(\Phi\union\{\delta_s\}\models\psi\) iff \(\Phi\models\psi^I\).
+\end{enumerate}
+\end{cor}
+\begin{app}
+Allowing the introduction of defined symbols which simplify notation but preserve theory.
+\end{app}
+
+\noindent Recall a formula~\(\varphi\) is in \emph{disjunctive normal form} if it is a disjunction of conjunctions of atomic or negated atomic formulas.
+
+\begin{thm}[Disjunctive normal form]
+For every quantifier free formula~\(\varphi\), there is a logically equivalent formula~\(\psi\) in disjunctive normal form.
+\end{thm}
+\begin{proof}[Proof idea]
+Note \(\varphi\)~is in the boolean closure of its finitely many atomic subformulas. Consider now all finitely many possible configurations of these subformulas over structures and tuples satisfying~\(\varphi\). Each such configuration can be expressed as a conjunction, and the disjunction~\(\psi\) over all of them is equivalent to~\(\varphi\).
+\end{proof}
+
+\noindent Recall a formula~\(\varphi\) is in \emph{prenex normal form} if \(\varphi=Q_1 x_1\cdots Q_n x_n\psi\) where \(Q_i\in\{\forall,\exists\}\) for \(1\le i\le n\) and \(\psi\)~is quantifier free.
+
+\begin{thm}[Prenex normal form]
+For every formula~\(\varphi\), there is a logically equivalent formula~\(\psi\) in prenex normal form with \(\free(\varphi)=\free(\psi)\).
+\end{thm}
+\begin{proof}[Proof idea]
+Induction on the number of quantifiers in~\(\varphi\), using basic properties of logical equivalence to move quantifiers to the left.
+\end{proof}
+
+\begin{thm}[Skolem normal form]
+For every formula~\(\varphi\), there is a universal formula~\(\psi\) in prenex normal form such that \(\free(\varphi)=\free(\psi)\), \(\psi\models\varphi\), and \(\varphi\)~and~\(\psi\) are equivalent for satisfaction.
+\end{thm}
+\begin{proof}[Proof idea]
+Induction on the number of existential quantifiers in~\(\varphi\), introducing new function and constant symbols to construct `witness terms' and eliminate existential quantifiers.
+\end{proof}

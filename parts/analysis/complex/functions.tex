@@ -1,0 +1,69 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Analysis
+% Complex Analysis
+% Elementary Functions
+%
+\section{Elementary Functions}
+\subsection*{Definitions}
+Definitions of real elementary functions assumed.
+\begin{defn}
+The \emph{exponential function} is given by
+\[e^z=e^x(\cos y+i\sin y)\]
+where \(z=x+iy\). It is also denoted~\(\exp z\).
+\end{defn}
+\begin{defn}
+The trigonometric functions \(\cos\)~and~\(\sin\) are given by
+\[\cos z=\frac{e^{iz}+e^{-iz}}{2}\qquad\sin z=\frac{e^{iz}-e^{-iz}}{2i}\]
+The rest of the trigonometric functions are then defined as usual.
+\end{defn}
+\begin{defn}
+The hyperbolic functions \(\cosh\)~and~\(\sinh\) are given by
+\[\cosh z=\frac{e^z+e^{-z}}{2}\qquad\sinh z=\frac{e^z-e^{-z}}{2}\]
+The rest of the hyperbolic functions are then defined as usual.
+\end{defn}
+\begin{defn}
+For \(z\ne0\), the multivalued \emph{argument function}~\(\arg z\) gives the angles of~\(z\) from polar form. The \emph{principal argument function}~\(\Arg z\) gives the unique angle in \((-\pi,\pi]\).
+\end{defn}
+\begin{defn}
+The multivalued \emph{logarithmic function} is given by
+\[\log z=\ln\abs{z}+i\arg z\quad(z\ne0)\]
+\end{defn}
+\begin{defn}
+The multivalued \emph{generalized power function} is given by
+\[z^c=\exp(c\log z)\quad(z\ne0)\]
+\end{defn}
+\begin{defn}
+The multivalued \emph{generalized exponential function} is given by
+\[c^z=\exp(z\log c)\quad(c\ne0)\]
+\end{defn}
+
+\begin{defn}
+A \emph{branch} of a multivalued function~\(f\) is a function~\(f^*\) defined on some domain~\(D\) which is analytic on~\(D\) and takes on values of~\(f\) in~\(D\).
+
+A \emph{branch cut} of~\(f\) is a portion of a line or curve used to define a branch of~\(f\).
+
+A \emph{branch point} of~\(f\) is a point common to all branch cuts of~\(f\).
+\end{defn}
+
+\begin{defn}
+The \emph{principal branch} of the logarithmic [generalized power, generalized exponential] function uses angles in \((-\pi,\pi)\) and is denoted~\(\Log z\) [P.V.~\(z^c\), P.V. \(c^z\)].
+\end{defn}
+\subsection*{Theorems}
+Basic properties of elementary functions assumed.
+\begin{rmk}
+The following functions are all multivalued without suitable restrictions (e.g., to branches):
+\begin{itemize}[itemsep=0pt]
+\item \(\arg\) (argument)
+\item \(\log\) (logarithm)
+\item \(z^c\) (generalized power function, including \(n\)-th root function~\(z^{1/n}\))
+\item \(c^z\) (generalized exponential function)
+\item Inverse trigonometric functions
+\item Inverse hyperbolic functions
+\end{itemize}
+All of this owes ultimately to the periodicity of angles in the complex plane.
+
+There is sometimes ambiguity. For instance, does \(e^{1/n}\)~denote the single real value~\(\sqrt[n]{e}\), or the set of \(n\)~complex \(n\)-th roots of~\(e\)? The former is conventionally the value of~\(e^z\) at \(z=1/n\), while the latter is the value of \(z^{1/n}\) at \(z=e\). Also, note \(c^z\)~is multivalued in general, while \(e^z\)~is not (\(e^z\)~is obtained from~\(c^z\) by taking the principal branch with \(c=e\)). Ambiguity is resolved by context.
+\end{rmk}

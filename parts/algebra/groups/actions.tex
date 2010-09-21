@@ -1,0 +1,97 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Algebra
+% Groups
+% Group Actions
+%
+\section{Group Actions}
+\subsection*{Theorems}
+\begin{thm}[Orbit partitioning]
+Let \(G\)~act on~\(A\). The orbits of~\(A\) under~\(G\) partition~\(A\), so if \(a_1,\ldots,a_k\) are representatives from the orbits,
+\[\ord{A}=\ord{O_{a_1}}+\cdots+\ord{O_{a_k}}\]
+\end{thm}
+\begin{proof}[Proof idea]
+Orbits are equivalence classes.
+\end{proof}
+\begin{app}
+Getting combinatorial information from group actions.
+\end{app}
+
+\begin{thm}[Orbit-stabilizer]
+Let \(G\)~act on~\(A\). If \(a\in A\), \(\ord{O_a}=\idx{G_a}{G}\), so
+\[\ord{G}=\ord{G_a}\ord{O_a}\]
+\end{thm}
+\begin{proof}[Proof idea]
+By the map \(gG_a\mapsto g\cdot a\) (\(g\in G\)) and Lagrange.
+\end{proof}
+\begin{app}
+Getting combinatorial information from group actions.
+\end{app}
+\begin{cor}[Cycle decomposition in~\(S_n\)]
+If \(\sigma\in S_n\), \(\sigma\)~has a decomposition of the form
+\[\sigma=(a_1\cdots a_{m_1})\cdots(a_{m_{k-1}+1}\cdots a_{m_k})\]
+where the cycles partition \(\{1,\ldots,n\}\). This decomposition is unique up to the order of the cycles and cyclic permutation of the numbers in the cycles.
+\end{cor}
+\begin{proof}[Proof idea]
+Let \(\sigma\)~act on \(\{1,\ldots,n\}\). Then the orbits uniquely determine the cycles.
+\end{proof}
+\begin{app}
+Cycle shape, conjugacy classes in~\(S_n\).
+\end{app}
+
+\begin{thm}[Cayley]
+If \(G\)~is a group, \(G\)~is isomorphic to some permutation group. In particular, if \(\ord{G}=n\), \(G\)~is isomorphic to a subgroup of~\(S_n\).
+\end{thm}
+\begin{proof}[Proof idea]
+Let \(G\)~act on itself by left multiplication.
+\end{proof}
+\begin{app}
+Getting permutations from abstract groups, showing that the study of abstract groups is (in a certain sense) equivalent to the study of permutation groups, getting combinatorial information about finite groups.
+\end{app}
+
+\begin{thm}[Class equation]
+If \(G\)~is finite and \(g_1,\ldots,g_k\in G\) are representatives from the noncentral conjugacy classes in~\(G\), then
+\[\ord{G}=\ord{Z(G)}+\sum_{i=1}^k\idx{C_G(g_i)}{G}\]
+\end{thm}
+\begin{proof}[Proof idea]
+Let \(G\)~act on itself by conjugation, then apply the orbit partitioning and orbit-stabilizer theorems, noting that central conugacy classes are singletons.
+\end{proof}
+\begin{app}
+Getting combinatorial information about groups, normal subgroups (which are unions of conjugacy classes), centers, centralizers, etc. and ruling out possibilities.
+\end{app}
+
+\begin{thm}[Sylow]
+Let \(G\)~be a group with \(\ord{G}=p^a m\) where \(p\)~is prime not dividing~\(m\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] There exists a Sylow \(p\)-subgroup of~\(G\).
+\item[(b)] If \(Q\)~is a \(p\)-subgroup of~\(G\), there exists \(g\in G\) and a Sylow \(p\)-subgroup~\(P\) of~\(G\) such that \(Q\subgroupeq gPg^{-1}\). In particular, all Sylow \(p\)-subgroups of~\(G\) are conjugate.
+\item[(c)] If \(n_p\)~is the number of Sylow \(p\)-subgroups of~\(G\), \(n_p\equiv 1\) (mod~\(p\)). If \(P\)~is a Sylow \(p\)-subgroup of~\(G\), \(n_p=\idx{N_G(P)}{G}\), so \(n_p\)~divides~\(m\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), by induction on~\(\ord{G}\). If \(p\)~divides~\(\ord{Z(G)}\), then (by induction on abelian groups) there exists \(N\subgroupeq Z(G)\) with \(\ord{N}=p\). Now \(N\normsubgroupeq G\), so for \(\res{G}=G/N\), \(\ord{\res{G}}=p^{a-1}m\). By induction, \(\res{G}\)~has a subgroup \(\res{P}=P/N\) where \(N\subgroupeq P\subgroupeq G\) and \(\ord{\res{P}}=p^{a-1}\). Then \(\ord{P}=p^a\), so \(P\)~is a Sylow \(p\)-subgroup of~\(G\). If \(p\)~does not divide~\(\ord{Z(G)}\), by the class equation there must exist \(g\in G-Z(G)\) such that \(p^a\)~divides~\(\ord{C_G(g)}\). Since \(\ord{C_G(g)}<\ord{G}\), by induction \(C_G(g)\)~has a Sylow \(p\)-subgroup which is also a Sylow \(p\)-subgroup of~\(G\).
+
+For (b)~and~(c), by group action. Fix a Sylow \(p\)-subgroup~\(P_1\) of~\(G\) and let \(\mathcal{C}=\{P_1,\ldots,P_k\}\) be the set of all \(G\)-conjugates of~\(P_1\). Then \(Q\)~acts on~\(\mathcal{C}\) by conjugation and partitions~\(\mathcal{C}\) into orbits of size \(\idx{N_G(P_i)\sect Q}{Q}=\idx{P_i\sect Q}{Q}\) (for representative~\(P_i\)). Taking \(Q=P_1\), it follows \(k\equiv1\) (mod~\(p\)). Moreover, there cannot be any \(p\)-subgroup~\(Q\) not contained in some~\(P_i\) lest \(k\not\equiv1\) (mod~\(p\)), so (b)~holds. Now \(\mathcal{C}\)~just consists of the Sylow \(p\)-subgroups of~\(G\), so \(n_p=k\) and (c)~follows.
+\end{proof}
+\begin{app}
+Breaking groups into simpler pieces (\(p\)-subgroups), finding normal subgroups, proving groups are not simple, classifying groups.
+\end{app}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Getting information about groups using group actions:
+\begin{itemize}[itemsep=0pt]
+\item On arbitrary sets.
+\item By left multiplication on cosets and elements of the group.
+\item By conjugation on subsets of the group.
+\end{itemize}
+\item Applying combinatorial results (orbit partitioning, orbit-stabilizer, the class equation).
+\item Getting information about (quotients of) normalizers and centralizers from information about automorphism groups.
+\item Using induction on the order of a group.
+\item Restricting the source of group actions to subgroups about which we know more, to get additional combinatorial information.
+\item Breaking down groups with Sylow's theorems.
+\item Using permutation representations to prove groups isomorphic to subgroups of \(S_n\)~and~\(A_n\).
+\item Using cycle shapes to determine conjugacy classes in~\(S_n\).
+\end{itemize}

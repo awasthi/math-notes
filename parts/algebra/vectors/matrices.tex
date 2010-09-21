@@ -1,0 +1,116 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Algebra
+% Vector Spaces
+% Matrices
+%
+\section{Matrices}
+\subsection*{Definitions}
+\begin{defn}
+If \(T\in\Hom(V)\) and \(n=\dim V\), the \emph{trace} of~\(T\) is \(-1\)~times the coefficient of~\(z^{n-1}\) in the characteristic polynomial of~\(T\), and is denoted~\(\trace T\).
+\end{defn}
+
+\begin{defn}
+If \(T\in\Hom(V)\) and \(n=\dim V\), the \emph{determinant} of~\(T\) is \((-1)^n\)~times the constant in the characteristic polynomial of~\(T\), and is denoted~\(\det T\).
+\end{defn}
+
+\begin{defn}
+If \(A\)~is an \(n\)-by-\(n\) matrix, the \emph{trace} of~\(A\) is \(\trace A=\sum A_{ii}\).
+\end{defn}
+
+\begin{defn}
+If \(A\)~is an \(n\)-by-\(n\) matrix, the \emph{determinant} of~\(A\) is
+\[\det A=\sum_{\pi\in\perm n}\sign\pi A_{\pi(1)1}\cdots A_{\pi(n)n}\]
+\end{defn}
+
+\subsection*{Theorems}
+\begin{thm}[Change of basis]
+If \(T\in\Hom(V)\) and \((u_1,\ldots,u_n)\) and \((v_1,\ldots,v_n)\) are bases of~\(V\), then
+\[\mat(T,(u_1,\ldots,u_n))=A^{-1}\mat(T,(v_1,\ldots,v_n))A\]
+where \(A=\mat(I,(u_1,\ldots,u_n),(v_1,\ldots,v_n))\).
+\end{thm}
+\begin{proof}[Proof idea]
+By computation.
+\end{proof}
+\begin{app}
+Showing that change of basis is just conjugation.
+\end{app}
+
+\begin{thm}[Trace of matrices]
+If \(A\)~and~\(B\) are \(n\)-by-\(n\) matrices over~\(\F\) and \(c\in\F\),
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\trace(A+B)=\trace A+\trace B\).
+\item[(b)] \(\trace(cA)=c\trace A\).
+\item[(c)] \(\trace(AB)=\trace(BA)\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+By direct computation.
+
+For~(c),
+\begin{align*}
+\trace(AB)&=\sum_{i=1}^n(AB)_{ii}\\
+	&=\sum_{i=1}^n\sum_{j=1}^n A_{ij}B_{ji}\\
+	&=\sum_{j=1}^n\sum_{i=1}^n B_{ji}A_{ij}\\
+	&=\sum_{j=1}^n(BA)_{jj}=\trace(BA)\qedhere
+\end{align*}
+\end{proof}
+
+\begin{thm}[Trace of operators]
+If \(V\)~is finite-dimensional, \(S,T\in\Hom(V)\), and \(c\in\F\),
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\trace S=\trace\mat(S)\) with respect to any basis of~\(V\).
+\item[(b)] \(\trace(S+T)=\trace S+\trace T\).
+\item[(c)] \(\trace(cS)=c\trace S\).
+\item[(d)] \(\trace(ST)=\trace(TS)\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), first argue directly that it is true for a basis with respect to which \(T\)~has an upper-triangular matrix (if \(\F=\C\)) or an appropriate block upper-triangular matrix (if \(\F=\R\)), then use change of basis and trace of the matrix product for the case of an arbitrary basis.
+
+For (b)--(d), by (a)~and properties of traces of matrices.
+\end{proof}
+\begin{app}
+Calculating traces of operators.
+\end{app}
+
+\begin{thm}[Determinant of matrices]
+If \(A\)~and~\(B\) are \(n\)-by-\(n\) matrices over~\(\F\),
+\[\det(AB)=(\det A)(\det B)\]
+\end{thm}
+
+\begin{thm}[Determinant of operators]
+If \(V\)~is finite-dimensional and \(S,T\in\Hom(V)\),
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\det S=\det\mat(S)\) with respect to any basis of~\(V\).
+\item[(b)] \(\det(ST)=(\det S)(\det T)\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+By the same ideas in the proof for traces of operators.
+\end{proof}
+\begin{app}
+Calculating determinants of operators.
+\end{app}
+
+\begin{rmk}
+The determinant is not a linear map on matrices or operators, although it is multilinear in the columns and rows of a matrix.
+\end{rmk}
+
+\begin{thm}[Determinant characterization of invertibility]
+If \(V\)~is finite-dimensional and \(T\in\Hom(V)\), \(T\)~is invertible iff \(\det T\ne0\).
+\end{thm}
+\begin{proof}[Proof idea]
+By definition, \(\det T\)~is the product of all the eigenvalues of~\(T\) (if \(\F=\C\)) together with possibly other nonzero values (if \(\F=\R\)), so \(\det T\ne0\) iff \(0\)~is not an eigenvalue of~\(T\), which is true iff \(T\)~is injective, which is true iff \(T\)~is invertible.
+\end{proof}
+\begin{app}
+Determining invertibility of operators, etc.
+\end{app}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Using matrices to compute traces and determinants of operators.
+\item Using determinants to determine invertibility of operators, etc.
+\end{itemize}

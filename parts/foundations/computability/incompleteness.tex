@@ -1,0 +1,94 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Computability
+% Incompleteness
+%
+\section{Incompleteness}
+\subsection*{Theorems}
+\noindent Recall \(\T\)~denotes the set of true formal statements in ordinary arithmetic on~\(\N\).
+
+\begin{lem}[Representations]
+For any decidable predicate~\(M(\vec{x})\), there is a statement~\(\sigma_M(\vec{x})\) of formal arithmetic such that, for any \(\vec{a}\in\N^n\),
+\[M(\vec{a})\iff\sigma_M(\vec{\mathbf{a}})\in\T\]
+\end{lem}
+\begin{app}
+This result establishes that formal arithmetic \emph{allows representations} of decidable predicates. Intuitively, this means that formal arithmetic is rich enough to describe machine computations. On the other hand, formal arithmetic is finitary enough that machines can compute with its objects (statements, proofs, etc.). This relationship makes computability a useful tool when studying formal arithmetic, and opens the door to self-reference as it (explicitly or implicitly) occurs in results like Carnap's fixed-point theorem, Tarski's theorem, G\"odel's theorems, etc.
+\end{app}
+
+\begin{thm}
+\(\T\)~is productive.
+\end{thm}
+\begin{proof}[Proof idea]
+Talk about~\(K\) in arithmetic. More specifically, using the above lemma, construct formal statements corresponding to \(n\in K\) and \(n\not\in K\), and use the latter type to reduce~\(\overline{K}\) to~\(\T\).
+\end{proof}
+
+\begin{lem}
+In any recursively axiomatized formal system of arithmetic, the set of all provable statements is recursively enumerable.
+\end{lem}
+\begin{proof}[Proof idea]
+Since the set of axioms is recursive and proofs and statements are finite,
+\[P(\sigma,p)\equiv\text{`}p\text{ is a proof of }\sigma\text{ from the axioms'}\]
+is a decidable predicate. Then \(\sigma\)~is provable iff there exists~\(p\) with~\(P(\sigma,p)\), which is partially decidable, so provable statements are~r.e.
+\end{proof}
+
+\begin{thm}[G\"odel incompleteness]
+In any recursively axiomatized formal system of arithmetic in which provable statements are true, there exists a statement~\(\sigma\) that is true but not provable (and hence \(\lnot\sigma\)~is not provable either).
+\end{thm}
+\begin{proof}[Proof idea]
+Let \(\P\)~denote the set of provable statements. By assumption \(\P\subseteq\T\). By the above, \(\P\)~is r.e. and \(\T\)~is productive, hence there exists \(\sigma\in\T-\P\).
+\end{proof}
+
+\noindent Recall Peano arithmetic is a particular recursive axiomatization of arithmetic.
+
+\begin{lem}[Representations]
+For any decidable predicate~\(M(\vec{x})\), there is a statement~\(\sigma_M(\vec{x})\) of formal arithmetic such that, for all \(\vec{a}\in\N^n\),
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(M(\vec{a})\)~holds, then \(\sigma_M(\vec{\mathbf{a}})\)~is provable in Peano arithmetic.
+\item[(b)] If \(M(\vec{a})\)~does not hold, then \(\lnot\sigma_M(\vec{\mathbf{a}})\)~is provable in Peano arithmetic.
+\end{enumerate}
+\end{lem}
+\begin{app}
+As above, but for Peano arithmetic.
+\end{app}
+
+\begin{thm}[G\"odel incompleteness]
+There exists a statement~\(\sigma\) of formal arithmetic such that
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If Peano arithmetic is consistent, \(\sigma\)~is not provable.
+\item[(b)] If Peano arithmetic is \(\omega\)-consistent, \(\lnot\sigma\)~is not provable.
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+Again, talk about~\(K\) in arithmetic and use the productivity of~\(\overline{K}\).
+
+In more detail, using the above lemma construct a formal statement \(\mathbf{n\in K}\) that corresponds to \(n\in K\). Consider the sets
+\begin{align*}
+P&=\{\,n\mid\mathbf{n\in K}\text{ is provable}\,\}\\
+R&=\{\,n\mid\mathbf{n\in K}\text{ is refutable}\,\}
+\end{align*}
+Now \(K\subseteq P\), and consistency implies \(P\)~and~\(R\) are disjoint, so \(R\subseteq\overline{K}\). Since \(R\)~is r.e. and \(\overline{K}\)~is productive, there exists \(n\in\overline{K}-R\). It follows that \(\lnot(\mathbf{n\in K})\) is not provable. If \(\omega\)-consistency holds, \(K=P\), so \(n\not\in P\) and \(\mathbf{n\in K}\) is not provable either.
+\end{proof}
+
+\begin{thm}[Rosser incompleteness]
+There exists a statement~\(\sigma\) of formal arithmetic such that if Peano arithmetic is consistent, neither \(\sigma\)~nor~\(\lnot\sigma\) is provable.
+\end{thm}
+\begin{proof}[Proof idea]
+Talk about \(K_0=\{\,x\mid\phi_x(x)=0\,\}\) and \(K_1=\{\,x\mid\phi_x(x)=1\,\}\) in arithmetic, and appeal to their recursive inseparability.
+\end{proof}
+
+\begin{rmk}
+Although not clear from these notes, the G\"odel and Rosser theorems have constructivist and finitist proofs. That is, given an explicit specification of Peano arithmetic, the proofs (in full detail) show how to explicitly construct the undecided statements~\(\sigma\), and from a proof of~\(\sigma\) how to explicitly construct a proof of~\(\lnot\sigma\).
+\end{rmk}
+\begin{rmk}
+The G\"odel and Rosser theorems apply to all sufficiently strong recursively axiomatized formal systems. In particular, adding any recursive number of axioms does not eliminate incompleteness.
+\end{rmk}
+
+\begin{thm}
+In any recursively axiomatized, \(\omega\)-consistent formal system of arithmetic in which all decidable predicates are representable, the set of provable statements is creative.
+\end{thm}
+\begin{proof}[Proof idea]
+Again, talk about~\(K\), then reduce~\(K\) to the set of provable statements.
+\end{proof}

@@ -1,0 +1,198 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Algebra
+% Vector Spaces
+% Inner Product Spaces
+%
+\section{Inner Product Spaces}
+Let \(V\)~and~\(W\) be inner product spaces over~\(\F\).
+\subsection*{Definitions}
+\begin{defn}
+An \emph{inner product} on~\(V\) is a function \(\innerprod{\quad}{\quad}:V\times V\to\F\) satisfying the following properties:
+\begin{description}[itemsep=0pt]
+\item[Positivity] \(\innerprod{v}{v}\ge0\) for all \(v\in V\).
+\item[Definiteness] \(\innerprod{v}{v}=0\) iff \(v=0\).
+\item[Left additivity] \(\innerprod{u+v}{w}=\innerprod{u}{w}+\innerprod{v}{w}\) for all \(u,v,w\in V\).
+\item[Left homogeneity] \(\innerprod{\alpha u}{v}=\alpha\innerprod{u}{v}\) for all \(\alpha\in\F\) and \(u,v\in V\).
+\item[Conjugate symmetry] \(\innerprod{u}{v}=\conj{\innerprod{v}{u}}\) for all \(u,v\in V\).
+\end{description}
+An \emph{inner product space} is a vector space together with an inner product on the space.
+\end{defn}
+
+\begin{defn}
+A list \((v_1,\ldots,v_n)\) is \emph{orthogonal} if \(\innerprod{v_i}{v_j}=0\) when \(i\ne j\).
+\end{defn}
+
+\begin{defn}
+The \emph{norm} of a vector~\(v\) is \(\norm{v}=\sqrt{\innerprod{v}{v}}\).
+\end{defn}
+
+\begin{defn}
+A vector~\(v\) is \emph{normal} if \(\norm{v}=1\).
+\end{defn}
+
+\begin{defn}
+A list \((v_1,\ldots,v_n)\) is \emph{orthonormal} if it is orthogonal and contains only normal vectors.
+\end{defn}
+
+\begin{defn}
+If \(U\)~is a subset of~\(V\), the \emph{orthogonal complement} of~\(U\) is
+\[\comp{U}=\{\,v\in V\mid\innerprod{u}{v}=0\text{ for all }u\in U\,\}\]
+If \(V=U\directsum\comp{U}\), the \emph{orthogonal projection} of~\(V\) onto~\(U\) is defined by \(P_Uv=u\) where \(v-u\in\comp{U}\).
+\end{defn}
+
+\begin{defn}
+A \emph{linear functional} on~\(V\) is a linear map \(\varphi\in\Hom(V,\F)\).
+\end{defn}
+
+\begin{defn}
+If \(T\in\Hom(V,W)\), the \emph{adjoint} of~\(T\) is the linear map \(T^*\in\Hom(W,V)\) such that
+\[\innerprod{Tv}{w}=\innerprod{v}{T^*w}\]
+for all \(v\in V\) and \(w\in W\).
+\end{defn}
+
+\begin{defn}
+If \(M\)~is an \(m\)-by-\(n\) matrix over~\(\F\), the \emph{conjugate transpose} of~\(M\) is the \(n\)-by-\(m\) matrix~\(N\) defined by \(N_{ij}=\conj{M_{ji}}\).
+\end{defn}
+
+\subsection*{Theorems}
+\begin{thm}[Geometry]
+Let \(u,v\in V\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] (Pythagorean theorem) If \(\innerprod{u}{v}=0\), \(\norm{u+v}^2=\norm{u}^2+\norm{v}^2\).
+\item[(b)] (Cauchy-Schwarz inequality) \(\abs{\innerprod{u}{v}}\le\norm{u}\norm{v}\), and equality holds iff one of \(u\)~or~\(v\) is a scalar multiple of the other.
+\item[(c)] (Triangle inequality) \(\norm{u+v}\le\norm{u}+\norm{v}\), and equality holds iff one of \(u\)~or~\(v\) is a nonnegative scalar multiple of the other.
+\item[(d)] (Parallelogram equality) \(\norm{u+v}^2+\norm{u-v}^2=2\left(\norm{u}^2+\norm{v}^2\right)\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), by expanding the inner product on the left.
+
+For~(b), by orthogonal decomposition and the pythagorean theorem. Assume without loss of generality that \(u\ne0\) and write
+\[v=\frac{\innerprod{v}{u}}{\norm{u}^2}u+w\]
+where \(\innerprod{u}{w}=0\). Then
+\[\norm{v}^2=\frac{\abs{\innerprod{u}{v}}^2}{\norm{u}^2}+\norm{w}^2\ge\frac{\abs{\innerprod{u}{v}}^2}{\norm{u}^2}\]
+from which the desired inequality follows.
+
+For~(c), by the Cauchy-Schwarz inequality,
+\begin{align*}
+\norm{u+v}^2&=\norm{u}^2+2\Re{\innerprod{u}{v}}+\norm{v}^2\\
+	&\le\norm{u}^2+2\abs{\innerprod{u}{v}}+\norm{v}^2\\
+	&\le\norm{u}^2+2\norm{u}\norm{v}+\norm{v}^2\\
+	&=\left(\norm{u}+\norm{v}\right)^2
+\end{align*}
+from which the desired inequality follows.
+
+For~(d), by expanding the inner products on the left.
+\end{proof}
+
+\begin{thm}[Computation with orthonormal lists]
+If \((e_1,\ldots,e_n)\) is orthonormal and \(v=a_1e_1+\cdots+a_ne_n\) where \(a_1,\ldots,a_n\in\F\), then \(a_i=\innerprod{v}{e_i}\) for \(i\in\{1,\ldots,n\}\), and
+\[\norm{v}^2=\abs{\innerprod{v}{e_1}}^2+\cdots+\abs{\innerprod{v}{e_n}}^2\]
+\end{thm}
+\begin{proof}[Proof idea]
+By properties of the inner product and orthonormality.
+\end{proof}
+\begin{app}
+Computing with orthonormal bases.
+\end{app}
+\begin{cor}[Linear independence of orthonormal lists]
+Orthonormal lists are linearly independent.
+\end{cor}
+\begin{proof}[Proof idea]
+If \(a_1e_1+\cdots+a_ne_n=0\), then \(\abs{a_1}^2+\cdots+\abs{a_n}^2=0\), so \(a_1=\cdots=a_n=0\).
+\end{proof}
+
+\begin{thm}[Gram-Schmidt]
+If \((v_1,\ldots,v_n)\) is linearly independent, there exists an orthonormal list \((e_1,\ldots,e_n)\) with \(\spn(e_1,\ldots,e_k)=\spn(v_1,\ldots,v_k)\) for all \(k\in\{1,\ldots,n\}\).
+\end{thm}
+\begin{proof}[Proof idea]
+By recursively defining a new list, ensuring orthogonality and normality at each step.
+
+For \(i\in\{1,\ldots,n\}\), define
+\begin{equation*}
+e_i=\frac{v_i-\innerprod{v_i}{e_1}e_1-\cdots-\innerprod{v_i}{e_{i-1}}e_{i-1}}{\norm{v_i-\innerprod{v_i}{e_1}e_1-\cdots-\innerprod{v_i}{e_{i-1}}e_{i-1}}}\qedhere
+\end{equation*}
+\end{proof}
+\begin{app}
+Constructing orthonormal bases.
+\end{app}
+\begin{cor}[Existence of orthonormal bases]
+In a finite-dimensional inner product space, any orthonormal list can be extended to an orthonormal basis. In particular, every finite-dimensional inner product space has an orthonormal basis.
+\end{cor}
+\begin{cor}[Upper-triangular matrices over~\(\C\)]
+Every linear operator on a nonzero, finite-dimensional complex inner product space has an upper-triangular matrix with respect to some orthonormal basis.
+\end{cor}
+
+\begin{thm}[Orthogonal decomposition]
+If \(U\)~is a finite-dimensional subspace of~\(V\), then \(V=U\directsum\comp{U}\).
+\end{thm}
+\begin{proof}[Proof idea]
+By computing with an orthonormal basis.
+
+Fix an orthonormal basis \((e_1,\ldots,e_n)\) of~\(U\). For \(v\in V\),
+\[v=\bigl(\innerprod{v}{e_1}e_1+\cdots+\innerprod{v}{e_n}e_n\bigr)+\bigl(v-\innerprod{v}{e_1}e_1-\cdots-\innerprod{v}{e_n}e_n\bigr)\]
+which shows \(v\in U+\comp{U}\). By definiteness, \(U\sect\comp{U}=\{0\}\).
+\end{proof}
+\begin{app}
+Orthogonal projection.
+\end{app}
+\begin{rmk}
+Orthogonal decomposition (with a one-dimensional subspace) was already used in the proof of Cauchy-Schwarz. Note the technique used to construct a vector orthogonal to a list of vectors is from Gram-Schmidt.
+\end{rmk}
+
+\begin{thm}[Orthogonal projection]
+If \(U\)~is a finite-dimensional subspace of~\(V\) and \(v\in V\), then
+\[\norm{v-P_Uv}\le\norm{v-u}\]
+for all \(u\in U\), and equality holds iff \(u=P_Uv\).
+\end{thm}
+\begin{proof}[Proof idea]
+By the pythagorean theorem, for \(u\in U\),
+\begin{equation*}
+\norm{v-P_Uv}^2\le\norm{v-P_Uv}^2+\norm{P_Uv-u}^2=\norm{v-u}^2\qedhere
+\end{equation*}
+\end{proof}
+\begin{app}
+Minimization, approximation.
+\end{app}
+
+\begin{thm}[Linear functionals are given by inner products]
+If \(V\)~is finite-dimensional and \(\varphi\in\Hom(V,\F)\) is a linear functional, there exists a unique \(v\in V\) such that \(\varphi(u)=\innerprod{u}{v}\) for all \(u\in V\).
+\end{thm}
+\begin{proof}[Proof idea]
+By computing with an orthonormal basis.
+
+Fix an orthonormal basis \((e_1,\ldots,e_n)\) of~\(V\). For \(u\in V\),
+\begin{align*}
+\varphi(u)&=\varphi(\innerprod{u}{e_1}e_1+\cdots+\innerprod{u}{e_n}e_n)\\
+	&=\innerprod{u}{e_1}\varphi(e_1)+\cdots+\innerprod{u}{e_n}\varphi(e_n)\\
+	&=\innerprod{u}{\conj{\varphi(e_1)}e_1}+\cdots+\innerprod{u}{\conj{\varphi(e_n)}e_n}\\
+	&=\innerprod{u}{\conj{\varphi(e_1)}e_1+\cdots+\conj{\varphi(e_n)}e_n}
+\end{align*}
+So set \(v=\conj{\varphi(e_1)}e_1+\cdots+\conj{\varphi(e_n)}e_n\). Uniqueness follows from definiteness.
+\end{proof}
+\begin{app}
+Adjoints.
+\end{app}
+
+\begin{thm}[Matrix of the adjoint]
+Let \(T\in\Hom(V,W)\), \((e_1,\ldots,e_n)\) an orthonormal basis of~\(V\), and \((f_1,\ldots,f_m)\) an orthonormal basis of~\(W\). Then
+\[\mat(T^*,(f_1,\ldots,f_m),(e_1,\ldots,e_n))\]
+is the conjugate transpose of
+\[\mat(T,(e_1,\ldots,e_n),(f_1,\ldots,f_m))\]
+\end{thm}
+\begin{proof}[Proof idea]
+By computing the matrix entries (with the orthonormal bases!),
+\begin{equation*}
+\mat(T)_{ij}=\innerprod{Te_j}{f_i}=\innerprod{e_j}{T^*f_i}=\conj{\innerprod{T^*f_i}{e_j}}=\conj{\mat(T^*)_{ji}}\qedhere
+\end{equation*}
+\end{proof}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Using orthogonal decomposition and projection, often in combination with geometrical results, in particular for minimization and approximation.
+\item Computing with orthonormal bases.
+\item Translating between equality and nullity using properties of the inner product.
+\end{itemize}

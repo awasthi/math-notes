@@ -1,0 +1,186 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Algebra
+% Vector Spaces
+% Linear Transformations
+%
+\section{Linear Transformations}
+\subsection*{Definitions}
+\begin{defn}
+A \emph{linear map} or \emph{linear transformation} from~\(V\) to~\(W\) is a map \(T:V\to W\) satisfying the following \emph{linearity} properties:
+\begin{description}[itemsep=0pt]
+\item[Additivity] \(T(u+v)=Tu+Tv\) for all \(u,v\in V\).
+\item[Homogeneity] \(T(\alpha u)=\alpha Tu\) for all \(\alpha\in\F\) and \(u\in V\).
+\end{description}
+The space of all linear maps from~\(V\) to~\(W\) is denoted~\(\Hom(V,W)\).
+
+A linear map from~\(V\) to~\(V\) is called a \emph{linear operator} on~\(V\). The space of all linear operators on~\(V\) is denoted~\(\Hom(V)\).
+\end{defn}
+
+\begin{defn}
+If \(T\in\Hom(V,W)\), the \emph{null space} or \emph{kernel} of~\(T\) is
+\[\ker T=\{\,v\in V\mid Tv=0\,\}\]
+The \emph{nullity} of~\(T\) is~\(\dim\ker T\).
+\end{defn}
+
+\begin{defn}
+If \(T\in\Hom(V,W)\), the \emph{range} or \emph{image} of~\(T\) is
+\[\range T=\{\,Tv\mid v\in V\,\}\]
+The \emph{rank} of~\(T\) is~\(\dim\range T\).
+\end{defn}
+
+\begin{defn}
+A linear map \(T\in\Hom(V,W)\) is \emph{invertible} if there exists \(S\in\Hom(W,V)\) such that \(ST=I_V\) and \(TS=I_W\).
+\end{defn}
+
+\begin{defn}
+\(V\)~and~\(W\) are \emph{isomorphic} if there is an invertible linear map \(T\in\Hom(V,W)\).
+\end{defn}
+
+\begin{defn}
+An \(m\)-by-\(n\) \emph{matrix}~\(M\) over~\(\F\) is a rectangular array of elements of~\(\F\) with \(m\)~rows and \(n\)~columns. Entry~\((i,j)\) of~\(M\) is often denoted~\(M_{ij}\). The space of all \(m\)-by-\(n\) matrices over~\(\F\) is denoted~\(\Mat(m,n,\F)\).
+
+If \(T\in\Hom(V,W)\), \((v_1,\ldots,v_n)\) is a basis of~\(V\) and \((w_1,\ldots,w_m)\) is a basis of~\(W\), then the matrix of~\(T\) with respect to these bases is
+\[\mat(T,(v_1,\ldots,v_n),(w_1,\ldots,w_n))=\left[\begin{matrix}
+a_{1,1}&\cdots&a_{1,n}\\
+\vdots&\ddots&\vdots\\
+a_{m,1}&\cdots&a_{m,n}
+\end{matrix}\right]\]
+where \(Tv_i=a_{1,i}w_1+\cdots+a_{m,i}w_m\) for \(i\in\{1,\ldots,n\}\).
+
+If \(v\in V\),
+\[\mat(v,(v_1,\ldots,v_n))=\left[\begin{matrix}
+a_1\\
+\vdots\\
+a_n
+\end{matrix}\right]\]
+where \(v=a_1v_1+\cdots+a_n v_n\).
+
+If the bases are understood or unimportant, they are omitted.
+\end{defn}
+
+\subsection*{Theorems}
+\begin{thm}[Uniqueness]
+A linear map is uniquely determined by its action on a basis.
+\end{thm}
+\begin{proof}[Proof idea]
+By linearity.
+
+Let \(S,T\in\Hom(V,W)\), and let \((v_1,\ldots,v_n)\) be a basis of~\(V\) on which \(S\)~and~\(T\) agree. For any \(v\in V\), there exist \(a_1,\ldots,a_n\in\F\) with \(v=a_1v_1+\cdots+a_nv_n\), so
+\begin{align*}
+Sv&=S(a_1v_1+\cdots+a_nv_n)\\
+	&=a_1Sv_1+\cdots+a_nSv_n\\
+	&=a_1Tv_1+\cdots+a_nTv_n\\
+	&=T(a_1v_1+\cdots+a_nv_n)=Tv
+\end{align*}
+So \(S=T\).
+\end{proof}
+\begin{cor}
+If \((v_1,\ldots,v_n)\) is a basis of~\(V\) and \((w_1,\ldots,w_n)\) are any vectors in~\(W\), there exists a unique linear map \(T\in\Hom(V,W)\) with \(Tv_i=w_i\) for \(i\in\{1,\ldots,n\}\).
+\end{cor}
+\begin{proof}[Proof idea]
+Define~\(T\) by
+\begin{equation*}
+T(a_1v_1+\cdots+a_nv_n)=a_1w_1+\cdots+a_nw_n\qedhere
+\end{equation*}
+\end{proof}
+\begin{app}
+Defining linear maps by specifying their action on a basis.
+\end{app}
+
+\begin{thm}[Rank nullity]
+If \(V\)~is finite-dimensional and \(T\in\Hom(V,W)\),
+\[\dim V=\dim\ker T+\dim\range T\]
+\end{thm}
+\begin{proof}[Proof idea]
+Extend a basis \((u_1,\ldots,u_m)\) of~\(\ker T\) to a basis \((u_1,\ldots,u_m,w_1,\ldots,w_n)\) of~\(V\), and argue that \((Tw_1,\ldots,Tw_n)\) is a basis of~\(\range T\).
+\end{proof}
+\begin{app}
+Structure of vector spaces, behavior of linear maps.
+\end{app}
+\begin{rmk}
+Since the dimension of a finite-dimensional vector space characterizes its isomorphism type, this is just a disguised form of the first isomorphism theorem.
+\end{rmk}
+\begin{cor}
+If \(\dim V>\dim W\), there is no injective linear map from~\(V\) to~\(W\).
+\end{cor}
+\begin{cor}
+If \(\dim V<\dim W\), there is no surjective linear map from~\(V\) to~\(W\).
+\end{cor}
+\begin{app}
+Systems of linear equations.
+\end{app}
+
+\begin{thm}[Characterization of injectivity]
+A linear map is injective iff its null space is zero.
+\end{thm}
+\begin{proof}[Proof idea]
+By translating between equality and nullity. If \(T\)~is a linear map,
+\begin{equation*}
+Tv=Tw\iff Tv-Tw=0\iff T(v-w)=0\iff v-w\in\ker T\qedhere
+\end{equation*}
+\end{proof}
+
+\begin{thm}[Characterization of invertibility]
+A linear map is invertible iff it is both injective and surjective.
+\end{thm}
+\begin{proof}[Proof idea]
+By a standard argument, a linear map \(T\)~has a unique inverse \emph{function}~\(T^{-1}\) iff \(T\)~is injective and surjective. Linearity of~\(T^{-1}\) follows from linearity of~\(T\).
+\end{proof}
+\begin{cor}
+If \(V\)~is finite-dimensional and \(T\in\Hom(V)\), the following are equivalent:
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(T\)~is invertible
+\item[(b)] \(T\)~is injective
+\item[(c)] \(T\)~is surjective
+\end{enumerate}
+\end{cor}
+\begin{proof}[Proof idea]
+By rank nullity and the characterization of injectivity, (b)\(\iff\)(c). Now the result follows from the theorem.
+\end{proof}
+
+\begin{thm}[Dimension and isomorphism type]
+Two finite-dimensional vector spaces are isomorphic iff they have the same dimension.
+\end{thm}
+\begin{proof}
+By rank nullity for the forward direction and by mapping a basis to a basis for the reverse direction.
+\end{proof}
+\begin{app}
+Determining isomorphism, calculating dimension.
+\end{app}
+\begin{rmk}
+The isomorphism is not natural in general, since it relies on choice of bases.
+\end{rmk}
+
+\begin{thm}[Matrices]
+If \(V\)~and~\(W\) are finite-dimensional, \(T\in\Hom(V,W)\), and \(v\in V\), then
+\[\mat(Tv)=\mat(T)\mat(v)\]
+relative to any fixed bases for \(V\)~and~\(W\).
+\end{thm}
+\begin{proof}[Proof idea]
+By definitions.
+\end{proof}
+\begin{app}
+Computation.
+\end{app}
+
+\begin{thm}
+If \(V\)~and~\(W\) are finite-dimensional,
+\[\mat:\Hom(V,W)\iso\Mat(\dim W,\dim V,\F)\]
+\end{thm}
+\begin{proof}[Proof idea]
+By direct argument.
+\end{proof}
+\begin{cor}
+If \(V\)~and~\(W\) are finite-dimensional,
+\[\dim\Hom(V,W)=(\dim V)(\dim W)\]
+\end{cor}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Choosing a basis for manipulation, computation, etc.
+\item Using rank nullity to analyze the structure of vector spaces and behavior of linear maps.
+\item Translating between equality and nullity.
+\end{itemize}

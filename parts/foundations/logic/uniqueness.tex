@@ -1,0 +1,84 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Logic
+% Uniqueness of First-Order Logic
+%
+\section{Uniqueness of First-Order Logic}
+\subsection*{Theorems}
+\begin{lem}[Expressive power]
+Let \(\L\)~be a regular logical system with \(\Lf\le\L\). Let \(S\)~be relational and suppose \(\psi\in L(S)\) is not logically equivalent to a first-order sentence. Then for every finite \(S_0\subseteq S\) and \(m\in\N\), there exist \(S\)-structures \(\A\)~and~\(\B\) with
+\[\A|_{S_0}\iso_m\B|_{S_0}\quad\text{and}\quad\A\models_{\L}\psi\text{ and }\B\models_{\L}\lnot\psi\]
+\end{lem}
+\begin{proof}[Proof idea]
+Fix finite \(S_0\subseteq S\) and \(m\in\N\). Define a first-order sentence by taking a disjunction over the \(m\)-isomorphism types of (\(S_0\)-reducts of) models of~\(\psi\):
+\[\varphi=\biglor\{\ \varphi_{\A|_{S_0}}^m\mid\A\text{ an }S\text{-structure and }\A\models_{\L}\psi\ \}\]
+Let \(\varphi^*\in L(S)\) be the corresponding sentence in~\(\L\). Clearly \(\psi\)~implies~\(\varphi\), and so by assumption \(\varphi\)~cannot imply~\(\psi\). Therefore there must exist \(S\)-structures \(\A\)~and~\(\B\) satisfying~\(\varphi\) with \(\A\models\psi\) and \(\B\models\lnot\psi\). Now \(\B\models\varphi_{\A|_{S_0}}^m\), so \(\A|_{S_0}\iso_m\B|_{S_0}\).
+\end{proof}
+\begin{rmk}
+Intuitively, this result shows that if \(\psi\)~is more powerful than a first-order sentence, we can find structures disagreeing on~\(\psi\) which agree up to any desired amount on first-order theory.
+
+Note the similarity between this result and the Fra\"isse method for establishing first-order non-axiomatizability. Indeed, by assumption, the class of models of~\(\psi\) is not elementary.
+\end{rmk}
+
+\begin{lem}[Compact systems]
+Let \(\L\)~be a compact regular logical system with \(\Lf\le\L\). Let \(S\)~be relational and suppose \(\psi\in L(S)\). Then there exists finite \(S_0\subseteq S\) such that for all \(S\)-structures \(\A\)~and~\(\B\),
+\[\A|_{S_0}\iso\B|_{S_0}\quad\implies\quad(\A\models_{\L}\psi\iff\B\models_{\L}\psi)\]
+\end{lem}
+\begin{proof}[Proof idea]
+Model theory within models.
+
+In~\(\L_I\), so also in~\(\L\), we can describe isomorphism between two substructures of a model. Using relativization in~\(\L\), we can also express that a given statement is true in (relative to) a substructure. Therefore, if \(U\)~and~\(V\) represent substructures, the fact that isomorphism between \(U\)~and~\(V\) implies agreement on~\(\psi\) by \(U\)~and~\(V\) can be captured by a logical implication in~\(\L\) of the form
+\[\Phi^*\models\psi^U\liff\psi^V\]
+where \(\Phi\subseteq L_I(S)\)~describes isomorphism between \(U\)~and~\(V\) in~\(\L_I\), and \(\Phi^*\subseteq L(S)\) is the corresponding description in~\(\L\).
+
+Now by compactness of~\(\L\), there exists finite \(\Phi_0\subseteq\Phi\) with \(\Phi_0^*\models\psi^U\liff\psi^V\). For a finite \(S_0\subseteq S\), \(\Phi_0\subseteq L_I(S_0)\). Now if \(\A\)~and~\(\B\) are \(S\)-structures and \(\A|_{S_0}\iso\B|_{S_0}\), we can construct a structure~\(\CC\) containing \(\A\)~and~\(\B\) and describing this isomorphism as an isomorphism between substructures with \(U=A\) and \(V=B\). Then \(\CC\models\Phi^*\), so \(\CC\models\psi^A\liff\psi^B\), so \(\A\models\psi\) iff \(\B\models\psi\) by relativization.
+\end{proof}
+\begin{rmk}
+Intuitively, this result shows that the meaning of any sentence in a compact regular logical system depends upon only finitely many symbols.
+\end{rmk}
+
+\begin{lem}[L\"oSko systems]
+Let \(\L\)~be a regular logical system where \(\Lf\le\L\) and where L\"owenheim-Skolem holds. Let \(S\)~be relational and suppose \(\psi\in L(S)\) is not logically equivalent to a first-order sentence. Then one of the following holds:
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] For all finite \(S_0\subseteq S\), there exist \(S\)-structures \(\A\)~and~\(\B\) with
+\[\A|_{S_0}\iso\B|_{S_0}\quad\text{and}\quad\A\models\psi\text{ and }\B\models\lnot\psi\]
+\item[(b)] For suitable \(S^*\) with \(S\subseteq S^*\) and a unary relation symbol \(W\in S^*\), there exists \(\chi^*\in L(S^*)\) having models with arbitrarily large sets~\(W\) but having no model with infinite set~\(W\).
+\end{enumerate}
+\end{lem}
+\begin{proof}[Proof idea]
+Model theory within models, again.
+
+Let \(\chi\)~be a first-order sentence describing the situation in the first lemma above. That is, let \(\chi\)~describe that the reducts of two substructures are finitely (or partially) isomorphic, and that the substructures disagree on~\(\psi\). Use the symbol~\(W\) in~\(\chi\) to index the sets of partial isomorphisms. Let \(\chi^*\)~correspond to~\(\chi\).
+
+If (a)~does not hold, choose a witness~\(S_0\) and construct~\(\chi^*\) for~\(S_0\). By the first lemma above, we know there exist models of~\(\chi^*\) with arbitrarily large sets~\(W\). Now suppose \(\chi^*\)~has a model with infinite~\(W\). It can be shown that the substructure reducts described by~\(\chi^*\) are actually partially isomorphic in this model. Now by L\"owenheim-Skolem, we may assume them to be at most countable. But then they are actually isomorphic, contradicting choice of~\(S_0\). Therefore \(\chi^*\)~has no model with infinite~\(W\).
+\end{proof}
+
+\begin{thm}[First theorem (Lindstr\"om)]
+Let \(\L\)~be a compact regular logical system where \(\Lf\le\L\) and L\"owenheim-Skolem holds. Then \(\Lf\sim\L\).
+\end{thm}
+\begin{proof}[Proof idea]
+If \(\psi\)~is not logically equivalent to a first-order formula, then by the third lemma either the meaning of~\(\psi\) does not depend upon only finitely many symbols, so compactness does not hold (by the second lemma), or else we can find sets of sentences with only finite models, so compactness does not hold again.
+\end{proof}
+\begin{app}
+Uniqueness of first-order logic.
+\end{app}
+
+\begin{thm}[Second theorem (Lindstr\"om)]
+Let \(\L\)~be an effectively regular logical system where \(\Lf\ele\L\), L\"owenheim-Skolem holds, and the validities are recursively enumerable. Then \(\Lf\esim\L\).
+\end{thm}
+\begin{proof}[Proof idea]
+Reduce Trahtenbrot's theorem to this problem.
+
+In more detail, first argue \(\L\le\Lf\). Suppose towards a contradiction \(\psi\in L(S)\) is not logically equivalent to a first-order sentence. By effectiveness, assume \(S\)~is finite (and hence recursive) and relational. By the previous lemma, there must exist recursive \(S^*\supseteq S\) with \(W\in S^*\) and \(\chi^*\in L(S^*)\) such that \(\chi^*\)~has models with arbitrarily large finite~\(W\). As these models vary, \(W\)~varies over all finite sets. By Trahtenbrot's theorem, there exists recursive~\(S^{**}\) disjoint from~\(S^*\) such that the finite \(S^{**}\)-validities are not recursively enumerable. But for \(\varphi\in L_I(S^{**})\),
+\[\varphi\text{ is a finite }S^{**}\text{-validity}\quad\iff\quad\models_{\L}\chi^*\limp(\varphi^*)^W\]
+and the validities on the right are recursively enumerable in~\(\L\)---a contradiction. Therefore \(\L\le\Lf\).
+
+Now \(\L\ele\Lf\) is witnessed by the following search procedure: given \(\psi\in L(S)\), enumerate validities in~\(\L\) until one of the form \(\psi\liff(\varphi^*)\) is found where \(\varphi\in L_I(S)\), then return~\(\varphi\).
+\end{proof}
+
+\begin{app}
+Uniqueness of first-order logic.
+\end{app}

@@ -1,0 +1,142 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Logic
+% Limitations of the Formal Method
+\section{Limitations of the Formal Method}
+\subsection*{Theorems}
+\begin{lem}
+Let \(T\)~be a first-order theory.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(T\)~is recursively axiomatizable, \(T\)~is recursively enumerable.
+\item[(b)] If \(T\)~is recursively enumerable and complete, then \(T\)~is decidable.
+\end{enumerate}
+\end{lem}
+\begin{proof}[Proof idea]
+For~(a), write \(T=\Phi^{\proves}\) where \(\Phi\)~is a recursive set of axioms. Systematically generate all possible sequent derivations, and use the decision procedure for~\(\Phi\) to decide for each one whether it is a derivation from~\(\Phi\). List only the consequences derivable from~\(\Phi\).
+
+For~(b), to decide whether \(\varphi\in T\), enumerate~\(T\) until either \(\varphi\)~or~\(\lnot\varphi\) is found.
+\end{proof}
+
+\begin{thm}[Halting problem]
+The set of programs which halt on an empty input is undecidable.
+\end{thm}
+\begin{proof}[Proof idea]
+Diagonalization.
+
+First, choose an effective coding of programs as strings over a finite alphabet. Then argue that the set of programs which halt on their own coding is undecidable, lest we could diagonalize and construct a program different from every program. Now reduce this case to the desired case.
+\end{proof}
+\begin{app}
+Reducing to other problems to establish undecidability.
+\end{app}
+
+\begin{thm}[Undecidability of first-order logic (Church)]
+The first-order validities are undecidable.
+\end{thm}
+\begin{proof}[Proof idea]
+Reduce the halting problem to this problem.
+
+For a given program, choose an appropriate (effectively given) symbol set and effectively construct a sentence which describes the operation and halting of the program (on the empty input). Then the program halts iff the sentence is valid, so the validities must be undecidable.
+
+In more detail, given a program~\(P\) with instructions \(\alpha_0,\ldots,\alpha_k\) and using at most \(r\)~registers, choose a symbol set which is suitable for representing ordered numerals and contains an \((r+2)\)-ary relation symbol~\(R\). Use \(R\)~to describe the states reached by~\(P\) under its computation on the empty input (where a \emph{state} consists of a step, instruction pointer, and register dump, all represented as numerals). Construct a sentence
+\[\varphi_P=(\psi_E\land\psi_I\land\psi_{\alpha_0}\land\cdots\land\psi_{\alpha_k})\limp\psi_H\]
+where \(\psi_E\)~asserts basic properties of the ordering, \(\psi_I\)~describes the initial state, \(\psi_{\alpha_i}\)~describes the state transitions induced by instruction~\(\alpha_i\), and \(\psi_H\)~asserts the existence of a halting state. Then \(\varphi_P\)~is valid iff \(P\)~halts on the empty input.
+\end{proof}
+
+\begin{thm}[Trahtenbrot]
+The first-order finite validities are not recursively enumerable.
+\end{thm}
+\begin{proof}[Proof idea]
+Reduce the halting problem to this problem.
+
+The set~\(\fs\) of finitely \emph{satisfiable} sentences is recursively enumerable, since it is possible to effectively generate all first-order sentences and all finite models. But \(\fs\)~is not decidable, lest it is possible to decide the halting problem by making use of the antecedent of~\(\varphi_P\) from the last proof. Now \(\varphi\not\in\fs\) iff \(\lnot\varphi\in\fv\), so \(\fv\)~cannot be recursively enumerable.
+\end{proof}
+\begin{app}
+Reducing to other problems, for example to show that the validities in stronger logical systems (where finiteness can be characterized somehow) are not recursively enumerable. See the incompleteness of second-order logic (below), Lindstr\"om's Second Theorem.
+\end{app}
+
+\begin{thm}[Incompleteness of second-order logic (G\"odel)]
+The second-order validities are not recursively enumerable.
+\end{thm}
+\begin{proof}[Proof idea]
+Reduce the first-order finite validities to the second-order validities.
+
+Let \(\varphi_{\mathrm{fin}}\)~be a second-order sentence characterizing the finite models. Then for a first-order sentence~\(\psi\), \(\varphi_{\mathrm{fin}}\limp\psi\) is a second-order validity iff \(\psi\)~is a first-order finite validity. The result follows from Trahtenbrot's theorem.
+\end{proof}
+\begin{app}
+We know that there is no correct and complete sequent calculus for second-order logic in general. This result shows that there is no such calculus for even the validities.
+\end{app}
+
+\begin{thm}[Undecidability of arithmetic]
+The first-order theory of ordinary arithmetic is undecidable.
+\end{thm}
+\begin{proof}[Proof idea]
+Reduce the halting problem to this problem, as with the proof of the undecidability of first-order logic. The only new difficulty is talking about sequences of numbers within arithmetic, which can be overcome using an effective coding (e.g. a prime coding, \(p\)-adic coding, etc.).
+\end{proof}
+\begin{rmk}
+This proof demonstrates that ordinary arithmetic \emph{allows representations} of decidable predicates. This is also true for the axiomatic system of Peano arithmetic.
+\end{rmk}
+
+\begin{cor}
+Ordinary arithmetic is not recursively enumerable, and so not recursively axiomatizable. Equivalently, for any recursive axiomatization of ordinary arithmetic, there exist true statements which cannot be proved.
+\end{cor}
+\begin{proof}[Proof idea]
+Since the theory is complete, this follows from the lemma above.
+\end{proof}
+
+\noindent For the following theorems, we work in the language~\(L^{S_{\mathrm{ar}}}\) of first-order arithmetic. Fix an effective, bijective coding (G\"odel numbering) of formulas by natural numbers, and let \(\code{n}{\varphi}\)~denote the code of~\(\varphi\).
+
+\begin{thm}[Fixed point theorem (Carnap)]
+Let \(\Phi\)~be a set of sentences which allows representations. For every formula~\(\psi(x)\), there exists a sentence~\(\varphi\) such that
+\[\Phi\proves\varphi\liff\psi(\code{n}{\varphi})\]
+\end{thm}
+\begin{proof}[Proof idea]
+Diagonalization.
+
+For notational convenience, identify formulas with their code numbers. Now let \(\varphi_0(x),\varphi_1(x),\ldots\) be an enumeration of formulas with one free variable~\(x\). For each~\(k\), consider the enumeration
+\[\mathbf{E}_k:\quad\varphi_k(\varphi_0)\quad\varphi_k(\varphi_1)\quad\cdots\quad\varphi_k(\varphi_k)\quad\cdots\]
+of sentences obtained by syntactically substituting formulas (code numbers) into~\(\varphi_k\). Then the diagonal enumeration is given by
+\[\mathbf{D}:\quad\varphi_0(\varphi_0)\quad\varphi_1(\varphi_1)\quad\cdots\quad\varphi_k(\varphi_k)\quad\cdots\]
+Substitute the sentences (code numbers) on~\(\mathbf{D}\) into~\(\psi\) to obtain the enumeration
+\[\mathbf{D}^*:\quad\psi(\varphi_0(\varphi_0))\quad\psi(\varphi_1(\varphi_1))\quad\cdots\quad\psi(\varphi_k(\varphi_k))\quad\cdots\]
+Since sentences on \(\mathbf{D}^*\)~can be obtained by effective syntactic operation, and \(\Phi\)~allows representations, it can be argued that \(\mathbf{D}^*\)~is `equivalent' to some~\(\mathbf{E}_k\). In other words, for some~\(k\), for all~\(x\), \(\Phi\proves\varphi_k(\varphi_x)\liff\psi(\varphi_k(\varphi_x))\). Now \(\mathbf{D}\)~and~\(\mathbf{E}_k\) have their \((k+1)\)-th entry in common, hence we obtain a fixed point at \(x=k\) by letting \(\varphi=\varphi_k(\varphi_k)\). Then \(\Phi\proves\varphi\liff\psi(\varphi)\) as desired.
+\end{proof}
+\begin{app}
+Self-referential statements. Tarski's theorem. G\"odel's theorems.
+\end{app}
+
+\begin{thm}[Tarski]
+Let \(\Phi\)~be a consistent set of sentences which allows representations. Then \(\Phi\)~cannot represent its own theory.
+\end{thm}
+\begin{proof}[Proof idea]
+Suppose \(\chi\)~represents the theory, so for all sentences~\(\varphi\), if \(\Phi\models\varphi\) then \(\Phi\proves\chi(\code{n}{\varphi})\), and if not \(\Phi\models\varphi\) then \(\Phi\proves\lnot\chi(\code{n}{\varphi})\). Let \(\varphi\)~be a fixed point of \(\psi=\lnot\chi\) (so intuitively \(\varphi\)~states `I am not true'). Then
+\[\Phi\models\varphi\iff\Phi\proves\varphi\iff\Phi\proves\lnot\chi(\code{n}{\varphi})\iff\text{ not }\Phi\models\varphi\]
+---a contradiction.
+\end{proof}
+
+\begin{cor}
+Ordinary arithmetic cannot represent its own theory.
+\end{cor}
+
+\begin{thm}[First incompleteness theorem (G\"odel)]
+Let \(\Phi\)~be a consistent, recursive set of sentences which allows representations. Then the theory of~\(\Phi\) is incomplete, that is, there exists a sentence~\(\varphi\) such that not \(\Phi\proves\varphi\) and not \(\Phi\proves\lnot\varphi\).
+\end{thm}
+\begin{proof}[Proof idea]
+If the theory of~\(\Phi\) is complete, then it is decidable (by the lemma above). But then since \(\Phi\)~allows representations, \(\Phi\)~can represent its theory, contradicting Tarski's theorem (in syntactic form).
+\end{proof}
+
+\begin{thm}[Second incompleteness theorem (G\"odel)]
+Let \(\Phi\)~be a consistent, recursive set of sentences extending Peano arithmetic. Then \(\Phi\)~cannot prove its own consistency.
+\end{thm}
+\begin{proof}[Proof idea]
+Since \(\Phi\)~is recursive and allows representations (since Peano arithmetic does), \(\Phi\)~can represent derivability from~\(\Phi\). That is, there exists a formula~\(\delta(x)\) such that for all sentences~\(\varphi\), if \(\Phi\proves\varphi\), then \(\Phi\proves\delta(\code{n}{\varphi})\). (This does \emph{not} mean that \(\Phi\)~can represent its theory!) Note \(\Phi\)~is consistent iff not \(\Phi\proves\lnot0\equiv 0\), hence the sentence \(\varphi_{\mathrm{con}}=\lnot\delta(\code{n}{\lnot0\equiv0})\) expresses the consistency of~\(\Phi\).
+
+Now let \(\varphi\)~be a fixed point for \(\psi=\lnot\delta\) (so intuitively \(\varphi\)~states `I am not provable'). Since \(\Phi\)~is consistent, not \(\Phi\proves\varphi\). It can be shown that
+\[\Phi\proves\varphi_{\mathrm{con}}\limp\lnot\delta(\code{n}{\varphi})\]
+Therefore if \(\Phi\proves\varphi_{\mathrm{con}}\), then \(\Phi\proves\lnot\delta(\code{n}{\varphi})\). But then since \(\varphi\)~is a fixed point, \(\Phi\proves\varphi\)---a contradiction.
+\end{proof}
+\begin{app}
+Derailing Hilbert's program.
+\end{app}

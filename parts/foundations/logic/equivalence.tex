@@ -1,0 +1,69 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Logic
+% Elementary Equivalence
+\section{Elementary Equivalence}
+\subsection*{Theorems}
+\begin{lem}[Partial isomorphisms]
+\ 
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(S\)~is relational and \(\A\)~and~\(\B\) are \(S\)-structures, then for all \(r\)-tuples \(\vec{a}\in A\) and \(\vec{b}\in B\), the map \(\vec{a}\mapsto\vec{b}\) determines a partial isomorphism iff for all atomic~\(\varphi\), \(\A\models\varphi[\vec{a}]\) iff \(\B\models\varphi[\vec{b}]\).
+\item[(b)] If \(\A\iso\B\), then \(\A\piso\B\).
+\item[(c)] If \(\A\piso\B\), then \(\A\fiso\B\).
+\item[(d)] If \(\A\fiso\B\) and \(A\)~is finite, then \(\A\iso\B\).
+\item[(e)] If \(\A\piso\B\) and \(A\)~and~\(B\) are at most countable, then \(\A\iso\B\).
+\end{enumerate}
+\end{lem}
+\begin{proof}[Proof idea]
+(a)~is immediate since atomic formulas describe all relations (including equality) satisfied by elements. (b)-(d) are trivial.
+
+For (e), proceed one step at a time in countably many steps using the back and forth properties. In detail, write \(A=\{a_0,a_1,\ldots\}\) and \(B=\{b_0,b_1,\ldots\}\). Then starting from the empty map, recursively build an ascending chain of partial isomorphisms using the back and forth properties with elements \(a_0,b_0,a_1,b_1,\ldots\). Take the union. Argue that it is an isomorphism.
+\end{proof}
+\begin{rmk}
+Note that (a)~does not hold in general for non-relational symbol sets or non-atomic formulas, both of which (either explicitly with existential quantifiers or implicitly with `witness terms') may refer to existence of other elements not involved in the partial isomorphism.
+\end{rmk}
+
+\begin{cor}[Cantor]
+Any two countable dense linear orderings without endpoins are isomorphic.
+\end{cor}
+\begin{proof}[Proof idea]
+Argue that any two arbitrary dense linear orderings without endpoints are partially isomorphic, then appeal to~(e) above.
+\end{proof}
+
+\begin{thm}[Fra\"isse, Hintikka, Ehrenfeucht]
+Let \(S\)~be a finite symbol set and \(\A\)~and~\(\B\) \(S\)-structures. Then the following are equivalent:
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\A\equiv\B\)
+\item[(b)] \(\A\fiso\B\)
+\item[(c)] \(\A\models\varphi_{\B}^n\) for all \(n\ge 1\)
+\item[(d)] The responding player has a winning strategy in the Ehrenfeucht game for \(\A\)~and~\(\B\)
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+(b)\(\iff\)(d) is immediate from the definition of the Ehrenfeucht game.
+
+(a)\(\implies\)(c) is immediate since \(\B\models\varphi_{\B}^n\) for all \(n\ge1\). For (c)\(\implies\)(b), argue by induction on~\(n\) that if \(\A\models\varphi_{\B,\vec{b}}^n[\vec{a}]\), then by construction of the formula the map \(\vec{a}\mapsto\vec{b}\) is a partial isomorphism admitting of extension by the back and forth properties \(n\)~times. The result follows for \(\vec{a}=\vec{b}=\emptyset\).
+
+Finally, for (b)\(\implies\)(a), argue by induction on formulas that if \(\vec{a}\mapsto\vec{b}\) is a partial isomorphism admitting of extension by the back and forth properties \(n\)~times, then for all formulas~\(\varphi\) with quantifier rank~\(\le n\), \(\A\models\varphi[\vec{a}]\iff\B\models\varphi[\vec{b}]\). Use the back and forth property to handle the quantifier case. Again take \(\vec{a}=\vec{b}=\emptyset\).
+\end{proof}
+\noindent The proof yields the corollary:
+\begin{cor}
+Let \(S\)~be a finite symbol set and \(\A\)~and~\(\B\) \(S\)-structures. Then the following are equivalent:
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\A\equiv_m\B\)
+\item[(b)] \(\A\iso_m\B\)
+\item[(c)] \(\A\models\varphi_{\B}^n\) for all \(1\le n\le m\)
+\item[(d)] The responding player has a winning strategy in the \(m\)-Ehrenfeucht game for \(\A\)~and~\(\B\)
+\end{enumerate}
+\end{cor}
+\begin{app}
+Proving elementary equivalence. Establishing non-axiomatizability results (even in finite model theory). Proving the completeness of theories (since a theory~\(T\) is complete iff any two models of~\(T\) are elementarily equivalent).
+\end{app}
+\begin{rmk}
+Fix finite~\(S\) and let \(\K\)~be a class of \(S\)-structures. If for every~\(m\) there exist \(S\)-structures \(\A\)~and~\(\B\) with \(\A\iso_m\B\), \(\A\in\K\) and \(\B\not\in\K\), then \(\K\)~is not axiomatizable by a first-order sentence (i.e., \(\K\)~is not elementary). Indeed, by the corollary, if \(\varphi\)~is any sentence, then for \(m\)~the quantifier rank of~\(\varphi\), the assumption implies \(\K\ne\mods^S\varphi\). This approach can be used in finite model theory, if the assumption holds among finite structures.
+
+When working with finite structures, the intuition is that if structures are `locally' similar and sufficiently large, they should be finitely isomorphic up to a point. For a partial isomorphism to be extensible, elements that are sufficiently `close' to each other (under the relations of the structure) need to be mapped to elements having the same `close'-ness, and elements that are `far' apart need to be kept `far' apart. This prevents any conflicts from occurring when an extension is made. Of course, this gets harder to maintain as the partial isomorphism grows. A `strategy' based on these observations is often formalized using truncated distance functions.
+\end{rmk}

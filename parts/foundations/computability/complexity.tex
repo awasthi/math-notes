@@ -1,0 +1,96 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Computability
+% Computational Complexity
+%
+\section{Computational Complexity}
+\subsection*{Theorems}
+In what follows, \(\Phi\)~denotes an arbitrary computational complexity measure.
+
+\begin{thm}[Rabin]
+Let \(b\)~be a total computable function. Then there exists a total computable function~\(f\) taking only values in \(\{0,1\}\) such that, if \(e\)~is any index of~\(f\), \(\Phi_e(n)>b(n)\) for almost all~\(n\).
+\end{thm}
+\begin{proof}[Proof idea]
+Diagonalize against all programs not satisfying the desired property.
+
+In more detail, define~\(f\) in stages. At stage~\(n\), let \(i_n\)~be the least new index \(i\le n\) such that \(\Phi_i(n)\le b(n)\), or be undefined if no such index exists. Make~\(f(n)\) differ from~\(\phi_{i_n}(n)\) if \(i_n\)~is defined. Then if \(f=\phi_e\), it must be that \(\Phi_e(n)>b(n)\) for almost all~\(n\), or else \(e=i_n\) for some~\(n\).
+\end{proof}
+\begin{app}
+Establishing the existence of arbitrarily hard problems.
+\end{app}
+
+\begin{thm}[Blum's speed-up theorem]
+Let \(r\)~be a total computable function. Then there exists a total computable function~\(f\) such that, if \(j\)~is any index for~\(f\), there exists another index~\(k\) with \(r(\Phi_k(n))<\Phi_j(n)\) for almost all~\(n\).
+\end{thm}
+\begin{proof}[Proof idea]
+Define an infinite sequence of programs \(\ldots,F_2,F_1,F_0\) leading up to a program~\(F_0\) for~\(f\) where for all~\(n\), \(f_{F_{n+1}}\subseteq f_{F_n}\) almost everywhere. At each stage~\(n\), for input~\(x\), check that the computation \(F_{i+1}(x)\)~is sufficiently simpler (relative to~\(\Phi\)) than the computation~\(P_i(x)\) for all indices \(n\le i<x\); wherever this fails, ensure \(f_{F_n}(x)\ne\phi_i(x)\), and hence \(f(x)\ne\phi_i(x)\). (Note that the second recursion theorem is required to make sense of this definition.)
+
+It can be shown that \(f\)~is a total. If \(P_j\)~computes~\(f\), then \(F_{j+1}\)~also computes~\(f\) almost everywhere, and sufficiently simply for all \(x>j\) (otherwise the definition of our sequence would have ensured \(f(x)\ne\phi_j(x)\)). Now the desired program for~\(f\) can be obtained by patching~\(F_{j+1}\) with a table lookup for finitely many values.
+\end{proof}
+\begin{app}
+Establishing that no matter which computational complexity measure we choose, there will always be functions with no `best' implementation under this measure.
+\end{app}
+
+\noindent Recall \(\CC_b=\{\,f\mid \exists e[f=\phi_e\land\Phi_e(n)\le b(n)\text{ for almost all }n]\,\}\).
+
+\begin{thm}[Borodin's gap theorem]
+Let \(r\)~be a total computable function such that \(r(x)\ge x\) for all~\(x\). Then there exists a total computable function~\(b\) with \(\CC_b=\CC_{r\circ b}\).
+\end{thm}
+\begin{proof}[Proof idea]
+Use cardinality when constructing~\(b\).
+
+To calculate~\(b(x)\), apply~\(r\) to obtain a sequence \(k_0=0\), \(k_{i+1}=r(k_i)+1\) for \(i\le x\), and consider the induced disjoint sequences
+\[[k_0,r(k_0)]\quad[k_1,r(k_1)]\quad\cdots\quad[k_x,r(k_x)]\]
+Now let~\(b(x)\) be the least~\(k_j\) such that \(\Phi_i(x)\not\in[k_j,r(k_j)]\) for all \(i<x\) (such a~\(k_j\) exists since there are at most~\(x\) values~\(\Phi_i(x)\) for \(i<x\), but \(x+1\) disjoint intervals). It is then immediate that for any~\(e\), \(\Phi_e(x)\not\in[b(x),r(b(x))]\) for any \(x>e\).
+\end{proof}
+
+\begin{app}
+Tells against our intuition that with increased resources we should always be able to compute more functions.
+\end{app}
+
+\begin{rmk}
+The preceding three proofs all share a similar underlying approach. During a construction, at a parameter~\(x\), all programs~\(P_i\) with \(i\le x\) are considered, and any such programs \emph{not} satisfying a desired property are `ruled out' or `cancelled' in some manner. Then, relative to the construction, it can be proved that any~\(P_i\) satisfies the property almost everywhere (often for all \(x>i\)).
+\end{rmk}
+
+\begin{thm}[Elementary functions]
+\ 
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] The class~\(\E\) of elementary functions contains the basic functions and is closed under substitution, limited recursion, and bounded minimalization.
+\item[(c)] The class of elementary predicates is closed under negation, conjunction, disjunction, and bounded quantification.
+\end{enumerate}
+\end{thm}
+
+\begin{cor}
+The computation state functions~\(\sigma_n\) are elementary.
+\end{cor}
+
+\noindent Define \(B_0(z)=z\) and \(B_k(z)=2^{B_{k-1}(z)}\) for all \(z>0\).
+
+\begin{thm}
+If \(f\)~is elementary, there exists~\(k\) such that \(f(\vec{x})\le B_k(\max(\vec{x}))\) for all~\(\vec{x}\).
+\end{thm}
+\begin{proof}[Proof idea]
+Induction on~\(\E\).
+\end{proof}
+
+\begin{thm}
+The following are equivalent:
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(f\)~is elementary
+\item[(b)] \(f\)~is computable in elementary time
+\item[(c)] There exists~\(k\) such that \(f(\vec{x})\)~is computable in time \(\le B_k(\max(\vec{x}))\) for all~\(\vec{x}\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+(a)\(\implies\)(b) by induction on~\(\E\), (b)\(\implies\)(c) by the previous theorem, and (c)\(\implies\)(a) by the previous corollary and the fact that \(B_k(\max(\vec{x}))\) is elementary.
+\end{proof}
+
+\begin{cor}
+\(\E\subset\PRR\)
+\end{cor}
+\begin{proof}[Proof idea]
+Trivially \(\E\subseteq\PRR\), and \(B_x(x)\in\PRR-\B\).
+\end{proof}

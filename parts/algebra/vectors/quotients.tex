@@ -1,0 +1,55 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Algebra
+% Vector Spaces
+% Quotients
+%
+\section{Quotients}
+\subsection*{Definitions}
+\begin{defn}
+If \(U\)~is a subspace of~\(V\), then for \(v\in V\), the set
+\[v+U=\{\,v+u\mid u\in U\,\}\]
+is called the \emph{coset} of~\(U\) containing~\(v\).
+\end{defn}
+\begin{defn}
+If \(U\)~is a subspace of~\(V\), then the \emph{quotient space} of~\(V\) modulo~\(U\), denoted~\(V/U\), is the set of cosets of~\(U\) in~\(V\)
+\[V/U=\{\,v+U\mid v\in V\,\}\]
+with the following laws of composition:
+\begin{align*}
+(v+U)+(w+U)&=(v+w)+U\\
+\alpha(v+U)&=\alpha v+U
+\end{align*}
+for all \(v,w\in V\) and \(\alpha\in\F\).
+\end{defn}
+\begin{defn}
+If \(U\)~is a subspace of~\(V\), the \emph{canonical map} from~\(V\) to~\(V/U\) is the map \(\pi:V\to V/U\) mapping \(v\mapsto(v+U)\).
+\end{defn}
+\subsection*{Theorems}
+\begin{thm}[Quotient space]
+If \(U\)~is a subspace of~\(V\), then the quotient space~\(V/U\) forms a vector space.
+\end{thm}
+
+\begin{thm}[First isomorphism theorem]
+If \(T\in\Hom(V,W)\) is surjective and \(U=\ker T\), the map \(\overline{T}:V/U\to W\) mapping \((v+U)\mapsto Tv\) witnesses an isomorphism \(V/U\iso W\). Moreover, \(T=\overline{T}\pi\), where \(\pi\)~is the canonical map.
+\end{thm}
+\begin{proof}
+By direct computation,
+\begin{align*}
+v+U=w+U&\iff(v-w)+U=U\\
+        &\iff(v-w)\in U\\
+        &\iff T(v-w)=0\\
+        &\iff Tv-Tw=0\\
+        &\iff Tv=Tw
+\end{align*}
+for all \(v,w\in V\), so \(\overline{T}\)~is well-defined and injective. Linearity and surjectivity of~\(\overline{T}\) are induced from~\(T\), so \(\overline{T}\)~is an isomorphism. Finally,
+\[(\overline{T}\pi)v=\overline{T}(\pi(v))=\overline{T}(v+U)=Tv\qedhere\]
+\end{proof}
+\begin{app}
+Induction on the order of finite vector spaces.
+\end{app}
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Induction on the order of finite vector spaces.
+\end{itemize}

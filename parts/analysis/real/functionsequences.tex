@@ -1,0 +1,206 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Analysis
+% Real Analysis
+% Sequences and Series of Functions
+%
+\section{Sequences and Series of Functions}
+All functions are \(\C\)-valued unless otherwise implied.
+\subsection*{Definitions}
+\begin{defn}
+Let \(E\)~be a set. A sequence~\(\{f_n\}\) of functions on~\(E\) \emph{converges (pointwise)} to the function~\(f\) on~\(E\) if
+\[f(x)=\lim_{n\to\infty}f_n(x)\qquad(x\in E)\]
+In this case, \(f\)~is the \emph{(pointwise) limit} of~\(\{f_n\}\) on~\(E\), denoted \(f=\lim f_n\) or \(f_n\to f\).
+
+As usual, the series~\(\sum f_n\) is just the sequence of partial sums \(s_n=\sum_{i=1}^n f_i\), and if \(\sum f_n\)~converges we informally identify~\(\sum f_n\) with the limit, the \emph{(pointwise) sum}.\footnote{Note there are at least three ways one might decide to interpret a statement of the form \(f=\sum f_n\), namely (i) that \(f\)~is a function mapping numbers to numbers, or (ii) that \(f\)~is a function mapping numbers to sequences of partial sums of numbers, or (iii) that \(f\)~is a sequence of partial sums of functions. We are formally following~(iii), but also informally following~(i).}
+\end{defn}
+
+\begin{defn}
+Let \(E\)~be a set. A sequence~\(\{f_n\}\) of functions on~\(E\) \emph{converges uniformly} to the function~\(f\) on~\(E\) if for every \(\epsilon>0\), there exists~\(N\) such that for all \(n\ge N\) and \(x\in E\),
+\[\abs{f_n(x)-f(x)}<\epsilon\]
+In this case, \(f\)~is a \emph{uniform limit}.
+
+A uniform limit of~\(\sum f_n\) is called a \emph{uniform sum}.
+\end{defn}
+
+\begin{defn}
+Let \(X\)~be a metric space. Then \(\CF(X)\)~denotes the set of all bounded, continuous functions on~\(X\).
+
+For \(f\in\CF(X)\), define the \emph{supremum norm} of~\(f\) by
+\[\supnorm{f}=\sup_{x\in X}\abs{f(x)}\]
+
+For \(f,g\in\CF(X)\), define the distance between \(f\)~and~\(g\) by \(\supnorm{f-g}\), so \(\CF(X)\)~forms a metric space.
+\end{defn}
+
+\begin{defn}
+A set~\(\A\) of functions on a set~\(E\) is an \emph{algebra} if it is closed under addition, scalar multiplication, and multiplication. (If considering only \(\R\)-valued functions, scalars are assumed in~\(\R\).)
+
+The \emph{uniform closure}~\(\close{\A}\) of~\(\A\) consists of all functions which are uniform limits of sequences in~\(\A\). \(\A\)~is \emph{uniformly closed} if \(\A=\close{\A}\).
+
+\(\A\)~\emph{separates points} on~\(E\) if for all \(x,y\in E\) with \(x\ne y\), there exists \(f\in\A\) with \(f(x)\ne f(y)\).
+
+\(\A\)~\emph{vanishes nowhere} on~\(E\) if for all \(x\in E\), there exists \(f\in\A\) with \(f(x)\ne0\).
+
+\(\A\)~is \emph{self-adjoint} if \(\conj{f}\in\A\) for all \(f\in\A\).
+\end{defn}
+
+\subsection*{Theorems}
+\begin{thm}[Characterizations of uniform convergence]
+Let \(\{f_n\}\)~be a sequence of functions defined on a set~\(E\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] (Cauchy criterion) \(\{f_n\}\)~converges uniformly iff for every \(\epsilon>0\), there exists~\(N\) such that for all \(m,n\ge N\) and \(x\in E\),
+\[\abs{f_m(x)-f_n(x)}<\epsilon\]
+\item[(b)] (Supremum limit criterion) If \(f\)~is defined on~\(E\) and \(M_n=\sup_{x\in E}\abs{f_n(x)-f(x)}\), then \(f_n\to f\) uniformly iff \(M_n\to 0\) as \(n\to\infty\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), the forward direction immediate. For the reverse direction, note for each \(x\in E\) that the sequence~\(\{f_n(x)\}\) is Cauchy and hence converges to some value~\(f(x)\) (by completeness of~\(\C\)), and trivially \(f_n\to f\) uniformly.
+
+Note (b)~is immediate from definitions.
+\end{proof}
+\begin{app}
+Proving uniform convergence without reference to a limit.
+\end{app}
+\begin{cor}
+\(\sum f_n\)~converges uniformly iff for every \(\epsilon>0\), there exists~\(N\) such that for all \(n\ge m\ge N\) and \(x\in E\),
+\begin{equation*}
+\abs{\sum_{i=m}^n f_i(x)}<\epsilon
+\end{equation*}
+\end{cor}
+\begin{cor}
+\(f_n\to f\) in~\(\CF(X)\) iff \(f_n\to f\) uniformly.
+\end{cor}
+
+\begin{thm}[Weierstrass]
+Let \(\{f_n\}\)~be a sequence of functions. If \(\abs{f_n}\le M_n\) for all~\(n\) and \(\sum M_n\)~converges, then \(\sum f_n\)~converges uniformly.
+\end{thm}
+\begin{proof}[Proof idea]
+By the Cauchy criterion.
+\end{proof}
+\begin{app}
+Proving uniform convergence.
+\end{app}
+
+\begin{rmk}
+Uniform convergence of function sequences [series] is like convergence of numerical sequences [series].
+\end{rmk}
+
+\begin{thm}[Uniform convergence and continuity]
+If \(\{f_n\}\)~is a sequence of continuous functions and \(f_n\to f\) uniformly, then \(f\)~is continuous.
+\end{thm}
+\begin{proof}[Proof idea]
+Use continuous functions close to~\(f\).
+
+In detail, let \(p\)~be a point and \(\epsilon>0\). Choose~\(N\) with \(\abs{f-f_N}<\epsilon/3\). By continuity of~\(f_N\) at~\(p\), there exists \(\delta>0\) such that \(\abs{f_N(x)-f_N(p)}<\epsilon/3\) whenever \(d(x,p)<\delta\). Therefore
+\[\abs{f(x)-f(p)}\le\abs{f(x)-f_N(x)}+\abs{f_N(x)-f_N(p)}+\abs{f_N(p)-f(p)}<\frac{\epsilon}{3}+\frac{\epsilon}{3}+\frac{\epsilon}{3}=\epsilon\]
+whenever \(d(x,p)<\delta\). So \(f\)~is continuous at~\(p\).
+\end{proof}
+
+\begin{cor}
+If \(\{f_n\}\)~is a sequence of continuous functions and \(\sum f_n\)~converges uniformly, then \(\sum f_n\)~is continuous.
+\end{cor}
+
+\begin{cor}
+\(\CF(X)\)~is a complete metric space.
+\end{cor}
+\begin{proof}[Proof idea]
+A Cauchy sequence in~\(\CF(X)\) is convergent by the Cauchy criterion, and the limit is uniform and hence bounded and continuous.
+\end{proof}
+
+\begin{thm}[Uniform convergence and integration]
+Let \(\alpha:[a,b]\to\R\). If \(\{f_n\}\)~is a sequence of functions defined on~\([a,b]\) with \(f_n\in\RI(\alpha)\) for all~\(n\), and \(f_n\to f\) uniformly, then \(f\in\RI(\alpha)\) and
+\[\int_a^b\lim f_n\,d\alpha=\lim\int_a^b f_n\,d\alpha\]
+\end{thm}
+\begin{proof}[Proof idea]
+Assume without loss of generality that the functions are \(\R\)-valued, and use integrable functions close to~\(f\).
+
+In detail, given \(\epsilon>0\), choose~\(N\) with \(\abs{f-f_n}<\epsilon\) for \(n\ge N\), so \(f_n-\epsilon<f<f_n+\epsilon\) for \(n\ge N\). Then by properties of sums,
+\[\int_a^b f_n\,d\alpha-\epsilon[\alpha(b)-\alpha(a)]<\lowerint{a}{b}f\,d\alpha\le\upperint{a}{b}f\,d\alpha<\int_a^b f_n\,d\alpha+\epsilon[\alpha(b)-\alpha(a)]\]
+for \(n\ge N\). Now let \(\epsilon\to0\).
+\end{proof}
+
+\begin{cor}
+If \(\alpha:[a,b]\to\R\) and \(\{f_n\}\)~is a sequence of functions defined on~\([a,b]\) with \(f_n\in\RI(\alpha)\) for all~\(n\), and \(\sum f_n\)~converges uniformly, then \(\sum f_n\in\RI(\alpha)\) and
+\[\int_a^b\sum f_n\,d\alpha=\sum\int_a^b f_n\,d\alpha\]
+\end{cor}
+\begin{app}
+Integrating certain series (like power series) term by term.
+\end{app}
+
+\begin{thm}[Uniform convergence and differentiation]
+If \(\{f_n\}\)~is a sequence of functions differentiable on~\([a,b]\) which converges at some point, and \(\{f_n'\}\)~converges uniformly, then \(\{f_n\}\)~converges uniformly to a differentiable function and
+\[(\lim f_n)'=\lim f_n'\]
+\end{thm}
+\begin{proof}[Proof idea]
+Use the mean value inequality to establish uniform convergence of~\(\{f_n\}\) from uniform convergence of~\(\{f_n'\}\) (and convergence of~\(\{f_n\}\) at a point).
+
+Now look at difference quotients. Write \(f=\lim f_n\). Fix~\(x\), and for \(t\ne x\) let \(\phi(t)\)~be the difference quotient of~\(f\), and \(\phi_n(t)\)~the difference quotient of~\(f_n\), for all~\(n\). Then for \(t\ne x\), \(\phi_n\)~is continuous for all~\(n\), and \(\phi_n\to\phi\) uniformly. Thus we can interchange limit processes to obtain
+\begin{equation*}
+f'(x)=\lim_{t\to x}\phi(t)=\lim_{t\to x}\lim_{n\to\infty}\phi_n(t)=\lim_{n\to\infty}\lim_{t\to x}\phi_n(t)=\lim_{n\to\infty}f_n'(x)\qedhere
+\end{equation*}
+\end{proof}
+\begin{cor}
+If \(\{f_n\}\)~is a sequence of functions differentiable on~\([a,b]\), \(\sum f_n\)~converges at some point, and \(\sum f_n'\)~converges uniformly, then \(\sum f_n\)~converges uniformly and
+\[\bigl(\sum f_n\bigr)'=\sum f_n'\]
+\end{cor}
+\begin{app}
+Differentiating certain series (like power series) term by term.
+\end{app}
+\begin{rmk}
+Note we assume uniform convergence of the sequence of \emph{derivatives}, not the sequence of functions.
+\end{rmk}
+
+\begin{thm}[Weierstrass]
+If \(f:[a,b]\to\C\) is continuous, there exists a sequence~\(\{P_n\}\) of polynomials with coefficients in~\(\C\) such that \(P_n\to f\) uniformly on~\([a,b]\).
+
+The \(P_n\)~may be assumed to have coefficients in~\(\R\) if \(f\)~is \(\R\)-valued.
+\end{thm}
+\begin{proof}[Proof idea]
+Assume without loss of generality that \([a,b]=[0,1]\) and \(f(x)=0\) for all \(x\not\in(0,1)\).
+
+For each~\(n\), define a polynomial~\(Q_n\) which forms a single `bump' of unit area over \([-1,1]\), where bumps get narrower in the middle as \(n\to\infty\). Then define~\(P_n(x)\) to `accumulate' an approximate value for~\(f(x)\) by integrating over the bump~\(Q_n\):
+\[P_n(x)=\int_{-1}^1 f(x+t)Q_n(t)\,dt\]
+Since the bumps get arbitrarily narrow as \(n\to\infty\), this integral gets arbitrarily close to `picking out' the single value~\(f(x)\) as \(n\to\infty\). Therefore the approximation converges uniformly as \(n\to\infty\). 
+\end{proof}
+\begin{app}
+Approximating continuous functions by polynomials.
+\end{app}
+
+\begin{thm}[Stone]
+Let \(K\)~be a compact set.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] Let \(\A\)~be an algebra of continuous \(\R\)-valued functions on~\(K\). If \(\A\)~separates points on~\(K\) and vanishes nowhere on~\(K\), then the uniform closure of~\(\A\) consists of all continuous \(\R\)-valued functions on~\(K\).
+\item[(b)] Let \(\A\)~be an algebra of continuous \(\C\)-valued functions on~\(K\). If \(\A\)~is self-adjoint, separates points on~\(K\), and vanishes nowhere on~\(K\), then the uniform closure of~\(\A\) consists of all continuous \(\C\)-valued functions on~\(K\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), proceed in steps.
+
+First, argue that \(\abs{f}\in\close{\A}\) whenever \(f\in\close{\A}\) using Weierstrass' theorem, and use this together with some algebra and induction to show that \(\min(f_1,\ldots,f_n)\in\close{\A}\) and \(\max(f_1,\ldots,f_n)\in\close{\A}\) whenever \(f_1,\ldots,f_n\in\close{\A}\).
+
+Then let \(g:K\to\R\) be continuous. Given \(\epsilon>0\), find \(f\in\close{\A}\) with \(\abs{f-g}<\epsilon\) in two steps. For all \(x,y\in K\), construct \(f_{x,y}\in\close{\A}\) with \(f_{x,y}(x)=g(x)\) and \(f_{x,y}(y)=g(y)\). For each fixed~\(x\), using continuity of \(f_{x,y}\)~and~\(g\) at each \(y\in K\), compactness of~\(K\), and maximization, construct a function \(f_x\in\close{\A}\) with \(f_x(x)=g(x)\) and \(g-\epsilon<f_x\) on~\(K\). Then by continuity of \(f_x\)~and~\(g\) at each \(x\in K\), compactness of~\(K\), and minimization, construct \(f\in\close{\A}\) with \(g-\epsilon<f<g+\epsilon\) on~\(K\), as desired.
+
+For~(b), note by self-adjointness that the \(\R\)-valued components of functions in~\(\A\) form a subalgebra of~\(\A\) satisfying the hypotheses of~(a). Therefore (b)~follows from~(a).
+\end{proof}
+\begin{app}
+Approximating continuous (periodic) functions with trigonometric polynomials, etc.
+\end{app}
+\begin{rmk}
+Stone's theorem generalizes Weierstrass' theorem, which is the special case for algebras of polynomials.
+\end{rmk}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Proving uniform convergence:
+\begin{itemize}[itemsep=0pt]
+\item Cauchy criterion.
+\item Supremum limit criterion (limit criterion in~\(\CF(X)\)).
+\item Weierstrass \(M\)-test.
+\end{itemize}
+\item Mean value theorem to relate values of functions to values of their derivatives.
+\item Approximating functions by integrating.
+\item Approximating functions with polynomials (etc.).
+\item Reducing \(\C\)-valued functions to \(\R\)-valued (component) functions.
+\end{itemize}

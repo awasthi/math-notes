@@ -1,0 +1,179 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Analysis
+% Complex Analysis
+% Analyticity
+%
+\section{Analyticity}
+\subsection*{Definitions}
+\begin{defn}
+Let \(f\)~be defined in some deleted neighborhood of~\(z_0\) and \(w_0\)~be fixed. If for each \(\epsilon>0\) there exists \(\delta>0\) such that \(\abs{f(z)-w_0}<\epsilon\) whenever \(0<\abs{z-z_0}<\delta\), then \(w_0\)~is called a \emph{limit} of~\(f(z)\) as \(z\)~approaches~\(z_0\), denoted
+\[\lim_{z\to z_0}f(z)=w_0\qquad\text{or}\qquad f(z)\to w_0\text{ as }z\to z_0\]
+\end{defn}
+
+\begin{defn}
+A function \(f\)~is \emph{continuous} at a point~\(z_0\) if \(\lim_{z\to z_0}f(z)=f(z_0)\).
+\end{defn}
+
+\begin{defn}
+A function \(f\)~is \emph{differentiable} at a point~\(z_0\) if
+\[\lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0}\]
+exists. This limit is called the \emph{derivative} of~\(f\) at~\(z_0\), and is denoted \(f'(z_0)\).
+
+This induces a function~\(f'\), the first derivative of~\(f\). This can be continued with \(f''\), \(f'''\), etc. In general, \(f^{(n)}\)~denotes the \(n\)-th derivative of~\(f\).
+\end{defn}
+
+\begin{defn}
+A function is \emph{analytic} (or \emph{holomorphic}) at a point~\(z_0\) if it is differentiable throughout some neighborhood of~\(z_0\). It is \emph{entire} if it is analytic everywhere.
+\end{defn}
+
+\begin{defn}
+A real function \(f(x,y)\) of real variables is \emph{harmonic} in a domain if it has continuous first and second partial derivatives and
+\[\frac{\partial^2 f}{\partial x^2}+\frac{\partial^2 f}{\partial y^2}=0\]
+in the domain.
+\end{defn}
+
+\begin{defn}
+Let \(u(x,y)\) and \(v(x,y)\) be real functions of real variables. Then \(v\)~is a \emph{harmonic conjugate} of~\(u\) in a domain if \(u\)~and~\(v\) are harmonic and satisfy the Cauchy-Riemann equations in the domain.
+\end{defn}
+
+\subsection*{Theorems}
+\begin{thm}[Limits]
+Let \(f=u+iv\), \(z=x+iy\), \(z_0=x_0+iy_0\), and \(w_0=u_0+iv_0\). Then
+\[\lim_{z\to z_0}f(z)=w_0\iff\lim_{(x,y)\to(x_0,y_0)}u(x,y)=u_0\quad\text{and}\quad\lim_{(x,y)\to(x_0,y_0)}v(x,y)=v_0\]
+\end{thm}
+\begin{proof}[Proof idea]
+By the triangle inequality and definition of absolute value.
+\end{proof}
+\begin{app}
+Transferring properties of limits [continuity, etc.] in~\(\R\) to properties of limits [continuity, etc.] in~\(\C\).
+\end{app}
+\begin{cor}[Limits and field operations]
+If \(f\)~and~\(g\) have limits at~\(z_0\), then
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\lim_{z\to z_0}(f+g)(z)=\lim_{z\to z_0}f(z)+\lim_{z\to z_0}g(z)\).
+\item[(b)] \(\lim_{z\to z_0}(fg)(z)=\lim_{z\to z_0}f(z)\lim_{z\to z_0}g(z)\).
+\item[(c)] \(\lim_{z\to z_0}(f/g)(z)=\lim_{z\to z_0}f(z)/\lim_{z\to z_0}g(z)\) if \(\lim_{z\to z_0}g(z)\ne0\).
+\end{enumerate}
+\end{cor}
+
+\begin{cor}[Continuity]
+Let \(f=u+iv\) be defined in a neighborhood of \(z_0=x_0+iy_0\). Then \(f\)~is continuous at~\(z_0\) iff \(u\)~and~\(v\) are continuous at~\((x_0,y_0)\).
+\end{cor}
+
+\begin{cor}[Continuity and field operations]
+If \(f\)~and~\(g\) are continuous at~\(z_0\), then
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(f+g\)~is continuous at~\(z_0\).
+\item[(b)] \(fg\)~is continuous at~\(z_0\).
+\item[(c)] \(f/g\)~is continuous at~\(z_0\) if \(g(z_0)\ne0\).
+\end{enumerate}
+\end{cor}
+
+\begin{thm}[Continuity and composition]
+If \(f\)~is continuous at~\(z_0\) and \(g\)~is continuous at~\(f(z_0)\), then \(g\circ f\)~is continuous at~\(z_0\).
+\end{thm}
+\begin{proof}[Proof idea]
+Nested epsilons.
+\end{proof}
+
+\noindent Since the definition of complex differentiability is \emph{formally} identical to that of real differentiability, the following few theorems are proved just as for real functions.
+
+\begin{thm}[Differentiability implies continuity]
+If \(f\)~is differentiable at~\(z_0\), then \(f\)~is continuous at~\(z_0\).
+\end{thm}
+
+\begin{thm}[Derivatives and field operations]
+If \(f\)~and~\(g\) are differentiable at~\(z_0\), then
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \((f+g)'(z_0)=f'(z_0)+g'(z_0)\).
+\item[(b)] \((fg)'(z_0)=f'(z_0)g(z_0)+f(z_0)g'(z_0)\).
+\item[(c)] \((f/g)'(z_0)=\displaystyle\frac{f'(z_0)g(z_0)-f(z_0)g'(z_0)}{[g(z_0)]^2}\text{ if }g(z_0)\ne0\).
+\end{enumerate}
+\end{thm}
+
+\begin{thm}[Chain rule]
+If \(f\)~is differentiable at~\(z_0\) and \(g\)~is differentiable at~\(f(z_0)\), then
+\[(g\circ f)'(z_0)=g'(f(z_0))f'(z_0)\]
+\end{thm}
+
+\begin{thm}[Cauchy-Riemann equations]
+If \(f=u+iv\) is differentiable at \(z_0=x_0+iy_0\), then \(u\)~and~\(v\) have first partial derivatives at~\((x_0,y_0)\) satisfying
+\[\frac{\partial u}{\partial x}(x_0,y_0)=\frac{\partial v}{\partial y}(x_0,y_0)\qquad\frac{\partial u}{\partial y}(x_0,y_0)=-\frac{\partial v}{\partial x}(x_0,y_0)\]
+and
+\[f'(z_0)=\frac{\partial u}{\partial x}(x_0,y_0)+i\frac{\partial v}{\partial x}(x_0,y_0)\]
+\end{thm}
+\begin{proof}[Proof idea]
+Look at the limit of the difference quotient, letting \(z\to z_0\) two ways, first horizontally then vertically.
+\end{proof}
+\begin{cor}
+If \(z_0=r_0e^{i\theta_0}\), equivalently
+\[r\frac{\partial u}{\partial r}(r_0,\theta_0)=\frac{\partial v}{\partial\theta}(r_0,\theta_0)\qquad\frac{\partial u}{\partial\theta}(r_0,\theta_0)=-r\frac{\partial v}{\partial r}(r_0,\theta_0)\]
+and
+\[f'(z_0)=e^{-i\theta_0}\Bigl[\frac{\partial u}{\partial r}(r_0,\theta_0)+i\frac{\partial v}{\partial r}(r_0,\theta_0)\Bigr]\]
+\end{cor}
+\begin{proof}[Proof idea]
+Multivariable chain rule, with \(x=r\cos\theta\) and \(y=r\sin\theta\).
+\end{proof}
+\begin{app}
+Proving properties of differentiability, proving non-differentiability.
+\end{app}
+\begin{rmk}
+\emph{The converse is false!} For \(f\)~to be complex differentiable at a point, \(u\)~and~\(v\) must be real differentiable there (see~\cite[\S II.5]{sarason94}). This can be summarized as:
+\begin{center}
+\emph{complex differentiability = real differentiability + Cauchy-Riemann equations}
+\end{center}
+\end{rmk}
+\begin{rmk}
+Compare that complex limits [continuity] can be fully characterized in terms of real limits [continuity] of components, whereas complex differentiability cannot be analogously characterized. Complex differentiability is stronger than (even multivariable) real differentiability of components, owing ultimately to the complex division present in the definition of the complex derivative.
+\end{rmk}
+
+\begin{cor}
+If \(f'=0\) in a domain~\(D\), then \(f\)~is constant on~\(D\).
+\end{cor}
+\begin{proof}[Proof idea]
+By the Cauchy-Riemann equations, and then the mean value theorem applied to the components of~\(f\).
+\end{proof}
+
+\begin{thm}[Sufficient condition for differentiability]
+If \(f=u+iv\) and \(u\)~and~\(v\) have first partial derivatives which are continuous at~\(z_0\) and satisfy the Cauchy-Riemann equations at~\(z_0\) (in rectangular or polar form), then \(f\)~is differentiable at~\(z_0\).
+\end{thm}
+\begin{proof}[Proof idea]
+Recall from multivariable analysis that continuity of the partials implies real differentiability of \(u\)~and~\(v\). This together with the Cauchy-Riemann equations implies that the difference quotient of~\(f\) has a limit.
+\end{proof}
+\begin{app}
+Proving differentiability.
+\end{app}
+
+\begin{thm}[Characterizations of analyticity]
+Let \(f=u+iv\) be defined on a domain~\(D\). The following are equivalent:\footnote{Another important characterization of analyticity involves \emph{conformality}, that is, the preservation of angles between intersecting curves. See~\cite[\S II.11--12]{sarason94}.}
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(f\)~is analytic on~\(D\).
+\item[(b)] \(u\)~and~\(v\) have continuous partial derivatives of all orders on~\(D\), and satisfy the Cauchy-Riemann equations on~\(D\).
+\item[(c)] \(v\)~is a harmonic conjugate of~\(u\) on~\(D\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For (a)\(\implies\)(b), we know about the Cauchy-Riemann equations and prove the rest later.
+
+For (b)\(\implies\)(c), recall from multivariable analysis that the mixed second partials of \(u\)~and~\(v\) are equal, so
+\[\frac{\partial^2u}{\partial x^2}=\frac{\partial}{\partial x}\Bigl(\frac{\partial u}{\partial x}\Bigr)=\frac{\partial}{\partial x}\Bigl(\frac{\partial v}{\partial y}\Bigr)=\frac{\partial}{\partial y}\Bigl(\frac{\partial v}{\partial x}\Bigr)=\frac{\partial}{\partial y}\Bigl(-\frac{\partial u}{\partial y}\Bigr)=-\frac{\partial^2 u}{\partial y^2}\]
+So \(u\)~is harmonic, and similarly for~\(v\).
+
+For (c)\(\implies\)(a), by the sufficient condition for differentiability.
+\end{proof}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Reducing limits and continuity of complex-valued functions to that of real-valued component functions.
+\item Proving differentiability (or non-differentiability) and calculating derivatives:
+\begin{itemize}[itemsep=0pt]
+\item Limit of difference quotient.
+\item Closure (composites, sums, products, etc.).
+\item Cauchy-Riemann equations + real differentiability.
+\item Harmonic conjugates.
+\end{itemize}
+\item Using the Cauchy-Riemann equations to help apply results from real analysis to component functions.
+\end{itemize}

@@ -1,0 +1,273 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Analysis
+% Real Analysis
+% Integrability
+%
+\section{Integrability}
+\subsection*{Definitions}
+\begin{defn}
+A \emph{partition} of the interval~\([a,b]\) is a set \(P=\{x_0,\ldots,x_n\}\) with
+\[a=x_0\le x_1\le\cdots\le x_n=b\]
+For~\(P\), \(\Delta x_i=x_i-x_{i-1}\) for \(1\le i\le n\).
+\end{defn}
+
+\begin{defn}
+Let \(P,Q,R\) be partitions of an interval. If \(P\subseteq R\), then \(R\)~is a \emph{refinement} of~\(P\). If \(P\union Q\subseteq R\), then \(R\)~is a \emph{common refinement} of \(P\)~and~\(Q\).
+\end{defn}
+
+\begin{defn}
+Let \(f:[a,b]\to\R\) be bounded, \(\alpha:[a,b]\to\R\) monotonically increasing. Let \(P=\{x_0,\ldots,x_n\}\) be a partition of~\([a,b]\). Define
+\begin{align*}
+m_i&=\inf\{\,f(x)\mid x\in[x_{i-1},x_i]\,\}\\
+M_i&=\sup\{\,f(x)\mid x\in[x_{i-1},x_i]\,\}\qquad\qquad(1\le i\le n)\\
+\Delta\alpha_i&=\alpha(x_i)-\alpha(x_{i-1})
+\end{align*}
+Now define
+\[L(P,f,\alpha)=\sum_{i=1}^n m_i\Delta\alpha_i\qquad U(P,f,\alpha)=\sum_{i=1}^n M_i\Delta\alpha_i\]
+These are the \emph{lower} and \emph{upper} \emph{Riemann-Stieltjes sums} of~\(f\) with respect to~\(\alpha\) over~\(P\).
+
+Now define
+\[\lowerint{a}{b}f\,d\alpha=\sup L(P,f,\alpha)\qquad\upperint{a}{b}f\,d\alpha=\inf U(P,f,\alpha)\]
+where the limits are taken over all partitions~\(P\) of~\([a,b]\). These are the \emph{lower} and \emph{upper} \emph{Riemann-Stieltjes integrals} of~\(f\) with respect to~\(\alpha\) over~\([a,b]\). In this context, \(f\)~is called an \emph{integrand} and \(\alpha\)~an \emph{integrator}.
+
+If the upper and lower integrals are equal, denote their common value by
+\[\int_a^b f\,d\alpha\]
+the \emph{Riemann-Stieltjes integral} of~\(f\) with respect to~\(\alpha\) over~\([a,b]\). In this case, say \(f\)~is \emph{integrable (in the Riemann-Stieltjes sense)} with respect to~\(\alpha\) over~\([a,b]\), and write \(f\in\RI(\alpha)\) (on~\([a,b]\)).
+
+If \(\alpha=x\), omit~\(\alpha\) from the notation and speak merely of Riemann sums, integrals, integrability, etc. Write \(f\in\RI\) if \(f\in\RI(x)\).
+\end{defn}
+
+\begin{defn}
+Let \(\vec{f}:[a,b]\to\R^k\) be bounded, \(\alpha:[a,b]\to\R\) monotonically increasing. If \(\vec{f}=(f_1,\ldots,f_k)\), write \(\vec{f}\in\RI(\alpha)\) if \(f_i\in\RI(\alpha)\) for \(1\le i\le k\), and in this case define
+\[\int_a^b\vec{f}\,d\alpha=\Bigl(\int_a^b f_1\,d\alpha,\ldots,\int_a^b f_k\,d\alpha\Bigr)\]
+\end{defn}
+
+\subsection*{Theorems}
+\begin{thm}[Ordering of sums in~\(\R\)]
+Let \(f:[a,b]\to\R\) be bounded and \(\alpha:[a,b]\to\R\) monotonically increasing. For any partition~\(P\) of~\([a,b]\) and refinement~\(P^*\) of~\(P\),
+\[L(P,f,\alpha)\le L(P^*,f,\alpha)\le\lowerint{a}{b}f\,d\alpha\le\upperint{a}{b}f\,d\alpha\le U(P^*,f,\alpha)\le U(P,f,\alpha)\]
+\end{thm}
+\begin{proof}[Proof idea]
+The outer four inequalities are immediate from definitions.
+
+For the inner inequality, note by taking a common refinement that for partitions \(Q\)~and~\(R\), \(L(Q,f,\alpha)\le U(R,f,\alpha)\). Keeping~\(R\) fixed and letting~\(Q\) vary shows \(\lowerint{a}{b}f\,d\alpha\le U(R,f,\alpha)\). Now letting \(R\)~vary shows \(\lowerint{a}{b}f\,d\alpha\le\upperint{a}{b}f\,d\alpha\).
+\end{proof}
+
+\begin{thm}[Cauchy criterion for integrability in~\(\R\)]
+Let \(f:[a,b]\to\R\) be bounded and \(\alpha:[a,b]\to\R\) monotonically increasing. Then \(f\in\RI(\alpha)\) iff for every \(\epsilon>0\) there exists a partition~\(P\) of~\([a,b]\) such that
+\[U(P,f,\alpha)-L(P,f,\alpha)<\epsilon\]
+\end{thm}
+\begin{proof}[Proof idea]
+By ordering of sums.
+\end{proof}
+\begin{app}
+Proving functions integrable.
+\end{app}
+
+\begin{thm}[Sample points in~\(\R\)]
+Let \(f:[a,b]\to\R\) be bounded and \(\alpha:[a,b]\to\R\) monotonically increasing. Suppose \(\epsilon>0\) and \(P=\{x_0,\ldots,x_n\}\) is a partition of~\([a,b]\) with
+\[U(P,f,\alpha)-L(P,f,\alpha)<\epsilon\]
+Let \(s_i,t_i\in[x_{i-1},x_i]\) for \(1\le i\le n\). Then
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\displaystyle\sum_{i=1}^n\abs{f(s_i)-f(t_i)}\Delta\alpha_i<\epsilon\)
+\item[(b)] \(\displaystyle\abs{\sum_{i=1}^n f(s_i)\Delta\alpha_i-\int_a^b f\,d\alpha}<\epsilon\quad\text{if }f\in\RI(\alpha)\)
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea] By ordering of sums since \(m_i\le f(s_i),f(t_i)\le M_i\) for \(1\le i\le n\).
+\end{proof}
+\begin{app}
+Integration arguments requiring the use of sample points, like those involving application of the mean value theorem (change of variable, fundamental theorem of calculus). Partially illustrating the relationship between our definition of integrability and a definition in terms of limits of sums using sample points.
+\end{app}
+
+\begin{thm}[Continuity implies integrability in~\(\R^k\)]
+Let \(\vec{f}:[a,b]\to\R^k\) be bounded and \(\alpha:[a,b]\to\R\) monotonically increasing.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(\vec{f}\)~is continuous, then \(\vec{f}\in\RI(\alpha)\).
+\item[(c)] If \(\vec{f}\)~is discontinuous at only finitely many points and \(\alpha\)~is continuous at these points, then \(\vec{f}\in\RI(\alpha)\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+Assume without loss of generality that \(k=1\), by the characterization of continuity in~\(\R^k\) and definition of the integral in~\(\R^k\).
+
+For~(a), use uniform continuity of~\(\vec{f}\) to bound~\(\Delta\vec{f}\) across intervals of a partition. In detail, since \(\vec{f}\)~is continuous on a compact set, \(\vec{f}\)~is uniformly continuous. Given \(\epsilon>0\), set \(M=\alpha(b)-\alpha(a)\) and choose \(\delta>0\) such that \(\norm{\vec{f}(s)-\vec{f}(t)}<\epsilon/(M+1)\) when \(s,t\in[a,b]\) and \(\abs{s-t}<\delta\). Now choosing a partition~\(P\) with intervals of length \(<\delta\), \(U(P,\vec{f},\alpha)-L(P,\vec{f},\alpha)<\epsilon\). It follows that \(\vec{f}\in\RI(\alpha)\) by the Cauchy criterion.
+
+For~(b), divide and conquer. Use uniform continuity of~\(\alpha\) on intervals around points of discontinuity of~\(\vec{f}\) to bound~\(\Delta\alpha\) there, and use uniform continuity of~\(\vec{f}\) elsewhere to bound~\(\Delta\vec{f}\).
+\end{proof}
+\begin{rmk}
+\emph{The converse is false!} Also, compare that continuity implies integrability but does \emph{not} imply differentiability.
+\end{rmk}
+
+\begin{thm}[Monotonicity and integrability in~\(\R\)]
+If \(f:[a,b]\to\R\) is monotonic and \(\alpha:[a,b]\to\R\) monotonically increasing and continuous, then \(f\in\RI(\alpha)\).
+\end{thm}
+\begin{proof}[Proof idea]
+Swap \(f\)~and~\(\alpha\) in the proof that continuity implies integrability (inverting signs appropriately if \(f\)~is monotonically decreasing).
+\end{proof}
+
+\begin{thm}[Integrability of composites in~\(\R\)]
+Let \(f:[a,b]\to\R\) and \(\alpha:[a,b]\to\R\) with \(f\in\RI(\alpha)\). If \(A\le f\le B\) and \(g\)~is continuous on~\([A,B]\), then \(h=g\circ f\in\RI(\alpha)\).
+\end{thm}
+\begin{proof}[Proof idea]
+Divide and conquer, using uniform continuity of~\(g\) to bound~\(\Delta h\) where possible, and integrability of~\(f\) to bound~\(\Delta\alpha\) elsewhere.
+
+In detail, given \(\epsilon>0\), set \(M=\alpha(b)-\alpha(a)\) and choose \(\delta>0\) such that \(\abs{g(s)-g(t)}<\epsilon/2(M+1)\) whenever \(s,t\in[A,B]\) and \(\abs{s-t}<\delta\). Now fix~\(N\) with \(\abs{g}<N\) and choose a partition \(P=\{x_0,\ldots,x_n\}\) of~\([a,b]\) such that
+\[U(P,f,\alpha)-L(P,f,\alpha)=\sum_{i=1}^n[M_i-m_i]\Delta\alpha_i<\frac{\delta\epsilon}{4N}\]
+Let~\(I\) be the set of indices~\(i\) with \(M_i-m_i<\delta\), and \(J\)~the remainder. Then
+\begin{align*}
+U(P,h,\alpha)-L(P,h,\alpha)&\le\frac{\epsilon}{2(M+1)}\sum_{i\in I}\Delta\alpha_i+2N\sum_{i\in J}\Delta\alpha_i\\
+	&\le\frac{\epsilon}{2(M+1)}M+2N\frac{\epsilon}{4N}\\
+	&<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon
+\end{align*}
+It follows that \(h\in\RI(\alpha)\) by the Cauchy criterion.
+\end{proof}
+
+\begin{thm}[Properties of the integral]
+Let \(\vec{f}:[a,b]\to\R^k\) and \(\vec{g}:[a,b]\to\R^k\) be bounded, \(\alpha:[a,b]\to\R\) and \(\beta:[a,b]\to\R\) monotonically increasing, and \(c\in\R\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] (Linearity in integrand in~\(\R^k\)) If \(\vec{f}\in\RI(\alpha)\) and \(\vec{g}\in\RI(\alpha)\), then
+\begin{align*}
+\int_a^b(\vec{f}+\vec{g})\,d\alpha&=\int_a^b\vec{f}\,d\alpha+\int_a^b\vec{g}\,d\alpha\\
+\int_a^b(c\vec{f})\,d\alpha&=c\int_a^b\vec{f}\,d\alpha
+\end{align*}
+\item[(b)] (Linearity in integrator in~\(\R^k\)) If \(\vec{f}\in\RI(\alpha)\) and \(\vec{f}\in\RI(\beta)\) and \(c\ge0\), then
+\begin{align*}
+\int_a^b\vec{f}\,d(\alpha+\beta)&=\int_a^b\vec{f}\,d\alpha+\int_a^b\vec{f}\,d\beta\\
+\int_a^b\vec{f}\,d(c\alpha)&=c\int_a^b\vec{f}\,d\alpha
+\end{align*}
+\item[(c)] (Additivity in endpoints in~\(\R^k\))
+If \(\vec{f}\in\RI(\alpha)\) and \(a<c<b\), then
+\[\int_a^b\vec{f}\,d\alpha=\int_a^c\vec{f}\,d\alpha+\int_c^b\vec{f}\,d\alpha\]
+\item[(d)] (Preservation of order in~\(\R\)) If \(k=1\), \(\vec{f}\le\vec{g}\), and \(\vec{f},\vec{g}\in\RI(\alpha)\), then
+\[\int_a^b\vec{f}\,d\alpha\le\int_a^b\vec{g}\,d\alpha\]
+\item[(e)] (Boundedness in~\(\R\)) If \(k=1\), \(m\le\vec{f}\le M\), and \(\vec{f}\in\RI(\alpha)\), then
+\[m[\alpha(b)-\alpha(a)]\le\int_a^b\vec{f}\,d\alpha\le M[\alpha(b)-\alpha(a)]\]
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+Assume without loss of generality that \(k=1\).
+
+For the first part of~(a), note for any partition~\(P\) that
+\[L(P,\vec{f},\alpha)+L(P,\vec{g},\alpha)\le L(P,\vec{f}+\vec{g},\alpha)\le U(P,\vec{f}+\vec{g},\alpha)\le U(P,\vec{f},\alpha)+U(P,\vec{g},\alpha)\]
+Since \(\vec{f}\)~and~\(\vec{g}\) are integrable, there are partitions making the upper and lower sums for \(\vec{f}\)~and~\(\vec{g}\) arbitrarily close, and hence making the upper and lower sums for \(\vec{f}+\vec{g}\) arbitrarily close, so \(\vec{f}+\vec{g}\) is integrable. Moreover, this inequality and the ordering of sums together show that \(\int(\vec{f}+\vec{g})\) and \(\int\vec{f}+\int\vec{g}\) are arbitrarily close, hence equal.
+
+The second part of~(a), as well as (b)~and~(c), are similar.
+
+For~(d), any lower sum for~\(\vec{f}\) is bounded above by the corresponding lower sum for~\(\vec{g}\), so also by~\(\int\vec{g}\). Since \(\int\vec{f}\)~is the least upper bound of lower sums for~\(\vec{f}\), \(\int\vec{f}\le\int\vec{g}\).
+
+Now (e)~follows from~(d) and integration of constants.
+\end{proof}
+
+\begin{cor}
+Let \(\alpha:[a,b]\to\R\) be monotonically increasing.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(f:[a,b]\to\R\), \(g:[a,b]\to\R\), and \(f,g\in\RI(\alpha)\), then \(fg\in\RI(\alpha)\).
+\item[(b)] If \(\vec{f}:[a,b]\to\R^k\) and \(\vec{f}\in\RI(\alpha)\), then \(\norm{\vec{f}}\in\RI(\alpha)\) and
+\[\abs{\int_a^b\vec{f}\,d\alpha}\le\int_a^b\abs{\vec{f}}\,d\alpha\]
+\end{enumerate}
+\end{cor}
+\begin{proof}[Proof idea]
+For~(a), note \(fg=[(f+g)^2-(f-g)^2]/4\), so integrability follows from linearity and integrability of composites (with~\(t^2\)).
+
+For~(b), similarly if \(\vec{f}=(f_1,\ldots,f_k)\), then \(\norm{\vec{f}}=\bigl(f_1^2+\cdots+f_k^2\bigr)^{1/2}\in\RI(\alpha)\). For the bound, expand into component integrals, massage, and apply Cauchy-Schwarz. In detail, by linearity in integrands,
+\[\textstyle\norm{\int\vec{f}}^2
+=(\int\vec{f})\dotprod(\int\vec{f})
+=\sum(\int f_i)(\int f_i)
+=\sum\int(\int f_i)f_i
+=\int\,\sum(\int f_i)f_i\]
+By Cauchy-Schwarz,
+\[\textstyle\sum(\int f_i)f_i=(\int\vec{f})\dotprod\vec{f}\le\norm{\int\vec{f}}\norm{\vec{f}}\]
+By order preservation then,
+\[\textstyle\int\,\sum(\int f_i)f_i\le\int\norm{\int\vec{f}}\norm{\vec{f}}=\norm{\int\vec{f}}\,\int\norm{\vec{f}}\]
+Therefore \(\norm{\int\vec{f}}\le\int\norm{\vec{f}}\).
+\end{proof}
+
+\begin{thm}[Change of variable in~\(\R^k\)]
+Let \(\vec{f}:[a,b]\to\R^k\) be bounded and \(\alpha:[a,b]\to\R\) monotonically increasing.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(\alpha'\in\RI\), then \(\vec{f}\in\RI(\alpha)\) iff \(\vec{f}\alpha'\in\RI\), in which case
+\[\int_a^b\vec{f}\,d\alpha=\int_a^b\vec{f}\alpha'\,dx\]
+\item[(b)] If \(\varphi:[A,B]\to[a,b]\) is a strictly increasing bijection, \(\beta=\alpha\circ\varphi\), and \(\vec{g}=\vec{f}\circ\varphi\), then \(\vec{f}\in\RI(\alpha)\) iff \(\vec{g}\in\RI(\beta)\), in which case
+\[\int_A^B\vec{g}\,d\beta=\int_a^b\vec{f}\,d\alpha\]
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+Assume without loss of generality that \(k=1\).
+
+For~(a), use the mean value theorem to relate sums for the two integrals. In detail, given \(\epsilon>0\), fix~\(M\) with \(\abs{\vec{f}}<M\) and choose~\(P\) with \(U(P,\alpha')-L(P,\alpha')<\epsilon/M\), so for all sample points \(s_i,t_i\in[x_{i-1},x_i]\),
+\[\sum_{i=1}^n\abs{\alpha'(s_i)-\alpha'(t_i)}\Delta x_i<\frac{\epsilon}{M}\]
+By the mean value theorem, fix \(s_i\in[x_{i-1},x_i]\) with \(\Delta\alpha_i=\alpha'(s_i)\Delta x_i\). From the above it follows that for any \(t_i\in[x_{i-1},x_i]\),
+\[\abs{\sum_{i=1}^n\vec{f}(t_i)\Delta\alpha_i-\sum_{i=1}^n\vec{f}(t_i)\alpha'(t_i)\Delta x_i}<\epsilon\]
+From this it follows that
+\[\abs{L(P,\vec{f},\alpha)-L(P,\vec{f}\alpha')}\le\epsilon\qquad\text{and}\qquad\abs{U(P,\vec{f},\alpha)-U(P,\vec{f}\alpha')}\le\epsilon\]
+Finally, taking refinements of~\(P\), it follows that
+\[\abs{\lowerint{a}{b}\vec{f}\,d\alpha-\lowerint{a}{b}\vec{f}\alpha'\,dx}\le\epsilon
+\qquad\text{and}\qquad
+\abs{\upperint{a}{b}\vec{f}\,d\alpha-\upperint{a}{b}\vec{f}\alpha'\,dx}\le\epsilon\]
+Since \(\epsilon\)~was arbitrary, these corresponding upper and lower integrals must be equal, from which the result follows.
+
+For~(b), note partitions of \([A,B]\)~and~\([a,b]\) correspond naturally under~\(\varphi\), and corresponding sums for \(\vec{g}\)~with~\(\beta\) and \(\vec{f}\)~with~\(\alpha\) are equal.
+\end{proof}
+\begin{app}
+Computing integrals by making variable substititions.
+\end{app}
+
+\noindent The remaining results apply only to the Riemann integral.
+
+\begin{thm}[Fundamental theorem of calculus in~\(\R^k\)]
+Let \(\vec{f}:[a,b]\to\R^k\) with \(\vec{f}\in\RI\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] Define \(\vec{F}:[a,b]\to\R^k\) by
+\[\vec{F}(x)=\int_a^x\vec{f}(t)\,dt\]
+Then \(\vec{F}\)~is continuous, and if \(\vec{f}\)~is continuous at~\(x_0\), \(\vec{F}'(x_0)=\vec{f}(x_0)\).
+\item[(b)] If \(\vec{F}:[a,b]\to\R^k\) and \(\vec{F}'=\vec{f}\), then
+\[\int_a^b\vec{f}(t)\,dt=\vec{F}(b)-\vec{F}(a)\]
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+Assume without loss of generality that \(k=1\), by the characterizations of continuity and differentiability in~\(\R^k\) and the definition of the integral in~\(\R^k\).
+
+For~(a), bound integrals. In detail, fix~\(M\) with \(\abs{\vec{f}}<M\) and note for \(a\le x\le y\le b\),
+\[\abs{\vec{F}(y)-\vec{F}(x)}=\abs{\int_x^y\vec{f}\,dt}<M(y-x)\]
+Therefore \(\Delta\vec{F}\)~is small when \(\Delta x\)~is small, so \(\vec{F}\)~is uniformly continuous. Now note if \(a\le x\le x_0\le y\le b\) with \(x<y\), then
+\[\abs{\frac{\vec{F}(y)-\vec{F}(x)}{y-x}-\vec{f}(x_0)}=\frac{1}{y-x}\abs{\int_x^y[\vec{f}(t)-\vec{f}(x_0)]\,dt}\]
+By continuity of~\(\vec{f}\) at~\(x_0\), the quantity on the right can be made arbitrarily small by taking \(x,y\) arbitrarily close to~\(x_0\), so \(\vec{F}'(x_0)=\vec{f}(x_0)\).
+
+For~(b), use the mean value theorem. In detail, given \(\epsilon>0\), choose a partition~\(P\) such that \(U(P,\vec{F}')-L(P,\vec{F}')<\epsilon\), so for any sample points \(s_i\in[x_{i-1},x_i]\),
+\[\abs{\sum_{i=1}^n\vec{F}'(s_i)\Delta x_i-\int_a^b\vec{f}}<\epsilon\]
+By the mean value theorem, fix \(s_i\in[x_{i-1},x_i]\) with \(\vec{F'}(s_i)\Delta x_i=\vec{F}(x_i)-\vec{F}(x_{i-1})\). Then \(\sum\vec{F}'(s_i)\Delta x_i=\sum[\vec{F}(x_i)-\vec{F}(x_{i-1})]=\vec{F}(b)-\vec{F}(a)\), so
+\[\abs{\vec{F}(b)-\vec{F}(a)-\int_a^b\vec{f}}<\epsilon\]
+Since \(\epsilon\)~was arbitrary, equality holds.
+\end{proof}
+\begin{app}
+Showing that differentiation and integration are inverse processes, computing derivatives using integrands, computing integrals using antiderivatives, translating results between the languages of differentiation and integration, etc.
+\end{app}
+
+\begin{cor}[Integration by parts in~\(\R\)]
+Let \(f:[a,b]\to\R\), \(g:[a,b]\to\R\) be differentiable with \(f',g'\in\RI\). Then
+\[\int_a^b fg'=(fg)(b)-(fg)(a)-\int_a^b f'g\]
+\end{cor}
+\begin{proof}[Proof idea]
+By the product rule for differentiation and the fundamental theorem of calculus, both applied to~\(fg\).
+\end{proof}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Proving integrability and calculating integrals:
+\begin{itemize}[itemsep=0pt]
+\item Cauchy criterion.
+\item Continuity.
+\item Monotonicity.
+\item Closure properties (continuous composites, sums, products, etc.).
+\item Fundamental theorem.
+\item Integration by parts.
+\item Change of variable.
+\end{itemize}
+\item Uniform continuity to bound change in a function across a set.
+\item Divide and conquer.
+\item Mean value theorem to relate values of functions to values of their derivatives.
+\item Fundamental theorem of calculus to relate differentiation and integration.
+\item Reducing \(\R^k\)-valued functions to \(\R\)-valued (component) functions.
+\end{itemize}

@@ -1,0 +1,213 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Analysis
+% Real Analysis
+% Basic Topology
+%
+\section{Basic Topology}
+\subsection*{Definitions}
+\begin{defn}
+A \emph{metric space} is a pair \((X,d)\) where \(X\)~is a set and \(d:X\times X\to\R\) is a distance function satisfying positive definiteness, symmetry, and triangle inequality.
+\end{defn}
+
+\begin{defn}
+Assume a background metric space.
+\begin{enumerate}[itemsep=0pt,label=(\alph{*})]
+\item A \emph{neighborhood} of~\(p\) is a set \(N_{\delta}(p)=\{\,q\mid d(p,q)<\delta\,\}\) for some \(\delta>0\).
+\item A point~\(p\) is a \emph{limit point} of a set~\(E\) if every neighborhood of~\(p\) contains some point of~\(E\) other than~\(p\).
+\item A set~\(E\) is \emph{open} if every point in~\(E\) has some neighborhood contained in~\(E\).
+\item A set~\(E\) is \emph{closed} if every limit point of~\(E\) is in~\(E\).
+\item A set~\(E\) is \emph{bounded} if there is some \(\delta>0\) such that \(d(p,q)<\delta\) for all points \(p,q\in E\).
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+A set~\(E\) in a metric space is \emph{compact} if every open covering of~\(E\) has a finite subcovering.
+\end{defn}
+
+\begin{defn}
+A set in a metric space is \emph{connected} if it is not the union of two nonempty \emph{separated} sets, that is, sets each of whose closure is disjoint from the other set.
+\end{defn}
+
+\subsection*{Theorems}
+\begin{thm}[Basics of infinite cardinality]
+\ 
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] Infinite subsets of countable sets are countable.
+\item[(b)] Countable unions of countable sets are countable.
+\item[(c)] Finite products of countable sets are countable.
+\item[(d)] \(\Q\)~is countable.
+\item[(e)] \(\R\)~is uncountable.
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), given a sequence for the set, recursively define a subsequence for the subset.
+
+For~(b), draw arrows.
+
+For~(c), draw arrows then use induction.
+
+For~(d), note that rationals can be represented by pairs of integers.
+
+For~(e), diagonalize on decimal expansions.
+\end{proof}
+
+\begin{thm}
+If \(X\)~is a metric space, \(E\subseteq X\), and \(p\in X\) a limit point of~\(E\), then every neighborhood of~\(p\) contains infinitely many points of~\(E\).
+\end{thm}
+\begin{proof}[Proof idea]
+If not, take a neighborhood of~\(p\) containing only finitely many points of~\(E\). Then the neighborhood of~\(p\) whose radius is the minimum disance between these points and~\(p\) contains no points of~\(E\) other than possibly~\(p\)---a contradiction.
+\end{proof}
+
+\begin{thm}[Basics of open and closed sets]
+Assume a background metric space.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] A set is open [closed] iff its complement is closed [open].
+\item[(b)] A union of open sets is open, and a finite intersection of open sets is open.
+\item[(c)] An intersection of closed sets is closed, and a finite union of closed sets is closed.
+\item[(d)] Every set has a closure.
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+Note (a)~follows from definitions.
+
+For~(b), let \(S\)~be a collection of open sets. To see that \(\bigunion S\)~is open, note if \(p\in\bigunion S\), then \(p\in E\) for some \(E\in S\), so \(p\)~is interior to~\(E\subseteq\bigunion S\), that is, \(p\)~is interior to~\(\bigunion S\). If \(S\)~is finite, say \(S=\{E_1,\ldots,E_k\}\), then if \(p\in\bigsect S\) there exist neighborhoods \(N_1,\ldots,N_k\) of~\(p\) with \(N_i\subseteq E_i\) for \(1\le i\le k\). Now \(N=\bigsect N_i\) is a neighborhood of~\(p\), and \(N\subseteq\bigsect S\). This shows \(\bigsect S\)~is open.
+
+Now~(c) follows from (a)~and~(b).
+
+For~(d), given~\(E\), let \(\close{E}\)~be the intersection of all closed sets containing~\(E\). It is easy to verify that \(\close{E}=E\union E'\) where \(E'\)~is the set of limit points of~\(E\).
+\end{proof}
+
+\begin{thm}[Invariance of compactness]
+Let \(X\)~be a metric space and \(E\subseteq Y\subseteq X\). Then \(E\)~is compact relative to~\(Y\) iff \(E\)~is compact relative to~\(X\).
+\end{thm}
+\begin{proof}[Proof idea]
+Note a set~\(F\) is open relative to~\(Y\) iff \(F=G\sect Y\) with \(G\)~open relative to~\(X\).
+
+Now suppose \(E\)~is compact relative to~\(Y\). If \(\{F_{\alpha}\}\)~is a covering of~\(E\) open relative to~\(X\), then \(\{F_{\alpha}\sect Y\}\) is a covering of~\(E\) open relative to~\(Y\). The latter contains a finite subcovering of~\(E\), and hence so does the former.
+
+The converse is similar.
+\end{proof}
+\begin{app}
+Showing that compactness is not an embedding property, allowing us to speak meaningfully of a compact metric space.
+\end{app}
+
+\begin{thm}
+A set~\(E\) is compact iff every infinite subset of~\(E\) has a limit point in~\(E\).
+\end{thm}
+\begin{proof}[Proof idea]
+If \(F\subseteq E\) is infinite with no limit point in~\(E\), then for each \(p\in E\) there is a neighobrhood~\(N_p\) of~\(p\) containing at most one point of~\(F\). But then \(\{N_p\}\)~is an open covering of~\(E\) with no finite subcovering, so \(E\)~is not compact.
+
+Suppose towards a contradiction that every infinite subset of~\(E\) has a limit point in~\(E\) but \(E\)~is not compact. Fix an open covering~\(\{E_{\alpha}\}\) with no finite subcovering. Note \(E\)~must be infinite and bounded. Recursively define a descending chain of subsets. First fix \(\delta>0\) and \(p_1\in E\) with \(N_1=N_{\delta}(p_1)\supseteq E\). Now assume a point~\(p_k\) and neighborhood~\(N_k\) of~\(p_k\) with radius~\(\delta/2^{k-1}\) has been defined such that
+\begin{enumerate}[itemsep=0pt]
+\item[(i)] \(p_k\ne p_1,\ldots,p_{k-1}\).
+\item[(ii)] \(p_k\in\bigsect_{i=1}^k N_i\).
+\item[(iii)] \(\bigsect_{i=1}^k N_i\)~has no finite subcovering.
+\end{enumerate}
+Write \(P_k=\bigsect_{i=1}^k N_i\).
+
+To define~\(N_{k+1}\), set \(r=\delta/2^k\) and proceed as follows: choose \(q_1\in P_k-\{p_1,\ldots,p_k\}\) and consider~\(N_r(q_1)\). If \(N_r(q_1)\sect P_k\) has no finite subcovering, set \(q=q_1\) and stop. Otherwise, there must be \(q_2\in P_k-(N_r(q_1)\union\{p_1,\ldots,p_k\})\). Now repeat this process with~\(q_2\)... Eventually there must be some \(q\in P_k-\{p_1,\ldots,p_k\}\) such that \(N_r(q)\sect P_k\) has no finite subcovering, lest \(P_k\)~will be covered by finitely many \(r\)-neighborhoods each of whose restrictions to~\(P_k\) has finite subcovering, so \(P_k\)~has finite subcovering---contradicting~(iii). Set \(p_{k+1}=q\) and \(N_{k+1}=N_r(q)\). Then (i), (ii), (iii) hold at \(k+1\).
+
+By recursion, this yields a descending chain
+\[P_1\supseteq P_2\supseteq\cdots\supseteq P_k\supseteq\cdots\]
+where for all~\(k\), \(P_k\subseteq N_k\) and \(P_k\)~has no finite subcovering. Also, \(\{p_i\}\)~is an infinite sequence with \(p_k\in P_k\) for all~\(k\). Let \(p\)~be a limit point for~\(\{p_i\}\). Then \(p\)~lies in some~\(E_{\alpha}\). But then by choosing~\(k\) large enough, we have \(P_k\subseteq N_k\subseteq E_{\alpha}\)---contradicting that \(P_k\)~has no finite subcovering.
+\end{proof}
+\begin{app}
+Showing `finiteness' of compactness, Bolzano-Weierstrass theorem.
+\end{app}
+
+\begin{thm}
+If \(E\)~is compact, then \(E\)~is closed and bounded.
+\end{thm}
+\begin{proof}[Proof idea]
+To see that \(E\)~is bounded, fix a radius \(r>0\) and for each \(p\in E\) let \(N_p\)~be a neighborhood of~\(p\) with radius~\(r\). Then \(\{N_p\}\)~is an open covering of~\(E\), and has a finite subcovering \(\{N_{p_1},\ldots,N_{p_k}\}\). Let \(d\)~be the maximum distance between pairs of the points \(p_1,\ldots,p_k\). Then it is immediate that the distance between any two points in~\(E\) is bounded by \(M=d+2r\), so \(E\)~is bounded.
+
+To see that \(E\)~is closed, observe that \(E^c\)~is open. Given \(q\in E^c\), choose for each \(p\in E\) a neighborhood~\(N_p\) of~\(p\) and a neighborhood~\(M_p\) of~\(q\) such that \(N_p\)~and~\(M_p\) are disjoint. Again, \(\{N_p\}\)~is an open covering of~\(E\) with a finite subcovering \(\{N_{p_1},\ldots,N_{p_k}\}\). Now \(M=\bigsect M_{p_i}\) is a neighborhood of~\(q\) disjoint from~\(E\), so \(q\)~is interior to~\(E^c\).
+\end{proof}
+\begin{app}
+Showing `finiteness' of compactness, Heine-Borel theorem, extreme value theorem.
+\end{app}
+
+\begin{rmk}
+\emph{The converse is false!} But it is true in~\(\R^k\) (see the Heine-Borel theorem).
+\end{rmk}
+
+\begin{thm}
+Closed subsets of compact sets are compact.
+\end{thm}
+\begin{proof}[Proof idea]
+Add the complement of the subset to any open covering.
+\end{proof}
+
+\begin{thm}[Descending chains of compact sets]
+Let \(\{K_i\}\)~be a sequence of nonempty compact sets with \(K_i\supseteq K_{i+1}\) for all \(i\ge 1\). Then \(\bigsect K_i\)~is nonempty.
+\end{thm}
+\begin{proof}[Proof idea]
+Recursively construct an infinite sequence of points and take a limit.
+
+Suppose \(\bigsect K_i\)~is empty. Fix an arbitrary point \(p_1\in K_1\). Now assuming that \(p_k\)~is defined, observe that there must exist some~\(K_i\) with \(p_k\not\in K_i\). Choose \(p_{k+1}\in K_i\). By recursion, \(\{p_k\}\)~is an infinite sequence of points in~\(K_1\). By compactness of~\(K_1\), there exists a limit point~\(p\) of~\(\{p_k\}\) in~\(K_1\). Claim that \(p\in\bigsect K_i\). Indeed, if not, there is some~\(K_i\) with \(p\not\in K_i\). But then \(p\)~is not a limit point of~\(K_i\), so \(p\)~cannot be a limit point of~\(\{p_k\}\), almost all of whose members are in~\(K_i\)---a contradiction.
+\end{proof}
+
+\noindent The remaining results concern the topology of~\(\R^k\).
+
+\begin{thm}[Descending chains of \(k\)-cells in~\(\R^k\)]
+Let \(\{I_i\}\)~be a sequence of \(k\)-cells in~\(\R^k\) with \(I_i\supseteq I_{i+1}\) for all \(i\ge 1\). Then \(\bigsect I_i\)~is nonempty.
+\end{thm}
+\begin{proof}[Proof idea]
+By the least upper bound property.
+
+First prove case \(k=1\), taking the least upper bound of the left endpoints of the intervals. Then reduce case \(k>1\) to case \(k=1\) on each coordinate.
+\end{proof}
+\begin{app}
+The previous two results are useful in arguments where descending chains are constructed (for example, by subdivision), often to derive a contradiction with a limit element. Heine-Borel theorem, Bolzano-Weierstrass theorem, etc.
+\end{app}
+
+\begin{thm}[Compactness of \(k\)-cells in~\(\R^k\)]
+In~\(\R^k\), \(k\)-cells are compact.
+\end{thm}
+\begin{proof}[Proof idea]
+If not, choose a witness \(k\)-cell and covering, and recursively subdivide the \(k\)-cell to generate an infinite descending chain of \(k\)-cells none of which has a finite subcovering. By the previous theorem, there is a point in the intersection, which is covered by some open set. But then sufficiently small \(k\)-cells in the chain are also covered by the set---a contradiction.
+\end{proof}
+
+\begin{rmk}
+By the above, this theorem is actually equivalent to the previous theorem. The proof technique of recursive subdivision is very powerful and reusable.
+\end{rmk}
+
+\begin{cor}[Heine-Borel]
+In~\(\R^k\), a set is compact iff it is closed and bounded.
+\end{cor}
+\begin{proof}[Proof idea]
+The forward direction is known. For the reverse direction, note such a set is contained in a compact \(k\)-cell, hence is compact.
+\end{proof}
+\begin{app}
+Extreme value theorem.
+\end{app}
+
+\begin{cor}[Bolzano-Weierstrass]
+Every bounded infinite subset of~\(\R^k\) has a limit point in~\(\R^k\).
+\end{cor}
+\begin{proof}[Proof idea]
+Such a set is contained in a compact \(k\)-cell, hence has a limit point.
+\end{proof}
+
+\begin{thm}[Connectedness in~\(\R\)]
+\(E\subseteq\R\) is connected iff for every \(x,y\in E\) and \(z\in\R\), if \(x<z<y\) then \(z\in E\).
+\end{thm}
+\begin{proof}[Proof idea]
+If \(x,y\in E\) and \(z\in\R\) with \(x<z<y\) but \(z\not\in E\), then
+\[E=((-\infty,z)\sect E)\union(E\sect(z,\infty))\]
+is a union of nonempty separated sets, so \(E\)~is not connected.
+
+Conversely, if \(E=X\union Y\) with \(X\)~and~\(Y\) nonempty and separated, take \(x\in X\) and \(y\in Y\) and, assuming \(x<y\), consider \(z=\sup(X\sect[x,y])\).
+\end{proof}
+\begin{app}
+Intermediate value theorem.
+\end{app}
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Diagonalization.
+\item Covering compact sets with finitely many neighborhoods.
+\item Subdivision to construct descending chains and take limit points.
+\end{itemize}

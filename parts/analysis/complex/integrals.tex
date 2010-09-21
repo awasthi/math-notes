@@ -1,0 +1,219 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Analysis
+% Complex Analysis
+% Integrals
+%
+\section{Integrals}
+\subsection*{Definitions}
+\begin{defn}
+An \emph{arc} (or \emph{curve} or \emph{path}) is a continuous function \(\gamma:[a,b]\to\C\).
+\end{defn}
+\begin{defn}
+An arc is \emph{simple} if it does not cross itself, \emph{closed} if its endpoints meet, and \emph{simple closed} if only its endpoints meet.
+\end{defn}
+\begin{defn}
+An arc is \emph{smooth} if it is continuously differentiable everywhere and its derivative is nonzero everywhere except possibly at its endpoints.
+\end{defn}
+\begin{defn}
+A \emph{contour} is a piecewise smooth arc.
+\end{defn}
+\begin{defn}
+A simple closed contour is \emph{positively oriented} if it is parametrized in the counterclockwise direction, and \emph{negatively oriented} if it is parametrized in the clockwise direction.
+\end{defn}
+\begin{defn}
+A domain is \emph{simply connected} if every simple closed contour lying in the domain encloses only points in the domain. Otherwise it is \emph{multiply connected}.
+\end{defn}
+\begin{rmk}
+Intuitively, a domain is simply connected if it has no holes.
+\end{rmk}
+
+\subsection*{Theorems}
+\begin{thm}[Properties of contour integrals]
+\ 
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] (Linearity) If \(f\)~and~\(g\) are piecewise continuous on the contour~\(C\) and \(z_0\in\C\), then
+\[\int_C f+g=\int_C f+\int_C g\qquad\int_C z_0 f=z_0\int_C f\]
+\item[(b)] (Additivity) If \(f\)~is piecewise continuous on the contour \(C_1+C_2\), then
+\[\int_{C_1+C_2}f=\int_{C_1}f+\int_{C_2}f\]
+\item[(c)] (Boundedness) If \(f\)~is piecewise continuous on the contour~\(C\) and \(\abs{f}\le M\) on~\(C\), then
+\[\abs{\int_C f}\le ML\]
+where \(L\)~is the length of~\(C\). Such an~\(M\) always exists, and if \(C\)~is parametrized by~\(z(t)\) on~\([a,b]\), then \(L=\int_a^b\abs{z'(t)}\,dt\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+By definition of the contour integral and results from real analysis.
+\end{proof}
+
+\begin{thm}[Fundamental theorem of calculus]
+Let \(f\)~be continuous on a domain~\(D\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If integrals of~\(f\) are independent of path in~\(D\) and \(z_0\in D\), then
+\[F(z)=\int_{z_0}^z f\qquad(z\in D)\]
+is analytic in~\(D\), and \(F'=f\) in~\(D\).
+\item[(b)] If \(F'=f\) in~\(D\), then integrals of~\(f\) are independent of path in~\(D\). In particular, if \(z_0,z_1\in D\) and \(C\)~is any contour in~\(D\) from~\(z_0\) to~\(z_1\), then
+\[\int_C f=F(z_1)-F(z_0)\]
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), use a line segment from~\(z_0\) to~\(z\) and the proof from real analysis.
+
+For~(b), use the definition of the contour integral and the fundamental theorem of calculus from real analysis. In detail, assume without loss of generality that \(C\)~is a smooth arc parametrized by~\(z(t)\) on~\([a,b]\). Then
+\[\frac{d}{dt}F(z(t))=F'(z(t))z'(t)=f(z(t))z'(t)\]
+Therefore
+\begin{equation*}
+\int_C f=\int_a^b f(z(t))z'(t)\,dt=F(z(b))-F(z(a))=F(z_1)-F(z_0)\qedhere
+\end{equation*}
+\end{proof}
+\begin{app}
+Showing that integration and differentiation are inverse processes, calculating integrals and derivatives, etc.
+\end{app}
+
+\begin{cor}
+Let \(f\)~be continuous on a domain~\(D\). Then the following are equivalent:
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(f\)~has an antiderivative in~\(D\)
+\item[(b)] Integrals of~\(f\) are independent of path in~\(D\).
+\item[(c)] Integrals of~\(f\) along closed contours in~\(D\) vanish.
+\end{enumerate}
+\end{cor}
+
+\begin{thm}[Jordan]
+Let \(C\)~be a simple closed contour. Then \(C\)~is the boundary of two distinct domains, an interior which is bounded and an exterior which is unbounded.\footnote{Not proved in~\cite{brown04}.}
+\end{thm}
+\begin{app}
+Cauchy-Goursat, etc.
+\end{app}
+
+\begin{thm}[Cauchy-Goursat]
+If \(f\)~is analytic on and inside a simple closed contour~\(C\), then
+\[\int_C f=0\]
+\end{thm}
+\begin{proof}[Proof idea]
+Let \(R\)~be the region consisting of \(C\)~and its interior. Break the integral over~\(C\) up into a sum of integrals over adjacent squares covering~\(R\). Approximate these integrals by choosing inside each square a sample point at which the derivative of~\(f\) well approximates difference quotients, and thus relates to values of~\(f\) on the square. Show that these integrals can be made arbitrarily small by taking arbitrarily small squares, and hence vanish.
+
+To show that suitable squares and sample points can always be chosen, use the analyticity of~\(f\) in a subdivision argument. By the Jordan curve theorem, \(R\)~can be covered with a single square. If no sample point exists in this square, subdivide it into four smaller squares; if sample points do not exist in each of these squares, subdivide the ones without a sample point; and so on. This process generates a descending tree of squares. If the process never ends, take a limit point in some descending chain. Since \(f\)~is analytic at this point, difference quotients are well approximated nearby. But this includes small enough squares in the chain, so the process must end after all.
+\end{proof}
+\begin{cor}[Contours inside a contour]
+Let \(C\)~be a simple closed contour. Let \(C_0,\ldots,C_k\) be simple closed contours inside~\(C\), of the same orientation as~\(C\), which are pairwise disjoint and whose interiors are pairwise disjoint. Then if \(f\)~is analytic on all these contours and between \(C\)~and the \(C_0,\ldots,C_k\), then
+\[\int_C f=\sum_{i=0}^k\int_{C_i}f\]
+\end{cor}
+\begin{proof}[Proof idea]
+Draw polygonal lines connecting the contours \(C,C_0,\ldots,C_k\) in order to express \(\int_C f+\sum\int_{-C_i}f\) as a sum of integrals about simple closed contours.
+\end{proof}
+\begin{app}
+Calculating integrals, deformation of path, Cauchy's residue theorem.
+\end{app}
+\begin{cor}[Deformation of path]
+Let \(C\)~be a simple closed contour, and let \(C_0\)~be a simple closed contour inside~\(C\) of the same orientation. If \(f\)~is analytic on and between \(C\)~and~\(C_0\), then
+\[\int_C f=\int_{C_0}f\]
+\end{cor}
+\begin{app}
+Simplifying integrals, Cauchy's integral formula, Laurent series.
+\end{app}
+\begin{cor}[Analyticity implies antiderivative]
+If \(f\)~is analytic on a simply connected domain~\(D\), \(f\)~has an antiderivative on~\(D\).
+\end{cor}
+\begin{proof}[Proof idea]
+Use a stronger version of Cauchy-Goursat which states that whenever \(f\)~is analytic on a simply connected domain, integrals of~\(f\) around \emph{arbitrary} closed contours inside the domain vanish.\footnote{Not proved in~\cite{brown04}.} Then apply the fundamental theorem.
+\end{proof}
+
+\begin{thm}[Cauchy integral formula]
+If \(f\)~is analytic on and inside a positively oriented simple closed contour~\(C\) and \(z_0\)~is inside~\(C\), then
+\[f^{(n)}(z_0)=\frac{n!}{2\pi i}\int_C\frac{f(z)}{(z-z_0)^{n+1}}\,dz\qquad(n\ge0)\]
+\end{thm}
+\begin{proof}[Proof idea]
+Prove case \(n=0\), leaving the general case unproved.\footnote{Not proved in~\cite{brown04} for \(n>2\).}
+
+Use deformation of path to simplify the integral. Let \(C_{\rho}\)~be a positively oriented circle of radius~\(\rho\) about~\(z_0\), inside~\(C\). Then
+\begin{align*}
+\int_C\frac{f(z)}{z-z_0}\,dz-2\pi if(z_0)&=\int_{C_{\rho}}\frac{f(z)}{z-z_0}\,dz-\int_{C_{\rho}}\frac{f(z_0)}{z-z_0}\,dz\\
+	&=\int_{C_{\rho}}\frac{f(z)-f(z_0)}{z-z_0}\,dz
+\end{align*}
+By continuity of~\(f\) at~\(z_0\), the last integral can be made arbitrarily small by letting \(\rho\to0\), so it vanishes.
+\end{proof}
+\begin{app}
+Relating local behavior of analytic functions and their derivatives at points to global behavior along contours, calculating function and derivative values, calculating integrals, calculating residues, Taylor series, Laurent series, etc.
+\end{app}
+
+\begin{cor}[Cauchy inequality]
+If \(f\)~is analytic on and inside a positively oriented circle~\(C\) of radius~\(R\) about~\(z_0\), and \(\abs{f}\le M\) on~\(C\), then
+\[\abs{f^{(n)}(z_0)}\le\frac{n!M}{R^n}\qquad(n\ge0)\]
+\end{cor}
+
+\begin{cor}
+If \(f\)~is analytic at a point, then \(f\)~is infinitely analytic at the point.
+\end{cor}
+
+\begin{cor}
+If \(f=u+iv\) is analytic at a point, then \(u\)~and~\(v\) have continuous partial derivatives of all orders at the point.
+\end{cor}
+
+\begin{rmk}
+By the above, if \(f\)~is analytic at a point, local behavior of~\(f\) at the point is related to global behavior of~\(f\). Moreover, \(f\)~can be infinitely differentiated and antidifferentiated at the point. In this way, analytic functions are like power series. This is confirmed by the fact that \(f\)~is analytic at a point iff it has a Taylor series expansion there.
+\end{rmk}
+
+\begin{thm}[Morera]
+Let \(f\)~be continuous on a domain~\(D\). If \(\int_C f=0\) for every closed contour~\(C\) inside~\(D\), then \(f\)~is analytic on~\(D\).
+\end{thm}
+\begin{proof}[Proof idea]
+By the fundamental theorem, \(f\)~has an antiderivative on~\(D\). So \(f\)~is the derivative of an analytic function on~\(D\), hence is analytic on~\(D\).
+\end{proof}
+\begin{app}
+A converse to Cauchy-Goursat (for continuous functions, on simply connected domains).
+\end{app}
+
+\begin{thm}[Liouville]
+If \(f\)~is bounded and entire, then \(f\)~is constant.
+\end{thm}
+\begin{proof}[Proof idea]
+By Cauchy's inequality, show that \(f'=0\) by letting \(R\to\infty\).
+\end{proof}
+\begin{app}
+Fundamental theorem of algebra.
+\end{app}
+
+\begin{thm}[Fundamental theorem of algebra]
+If \(P\)~is a nonconstant polynomial, then \(P\)~has a root.
+\end{thm}
+\begin{proof}[Proof idea]
+By Liouville's theorem. If \(P\)~has no root, then \(1/P\)~is bounded and entire, hence constant. But then \(P\)~is constant, which is false.
+\end{proof}
+\begin{app}
+Algebraic closure of~\(\C\), factoring polynomials into linear factors, etc.
+\end{app}
+
+\begin{thm}[Maximum modulus principle]
+If \(f\)~is nonconstant and analytic on a domain~\(D\), and then \(\abs{f}\)~has no maximum value on~\(D\).
+\end{thm}
+\begin{proof}[Proof idea]
+Use Cauchy's integral formula and integral bounds to argue that the value of~\(\abs{f}\) at a point in~\(D\) is the arithmetic mean of the values of~\(\abs{f}\) on any circle in~\(D\) surrounding the point. So if \(\abs{f}\)~has a local maximum in~\(D\), \(f\)~is constant nearby.
+
+Now if \(\abs{f}\)~has a maximum value on~\(D\), any two points in~\(D\) are connected by a sequence of overlapping neighborhoods on each of which \(f\)~is constant, so \(f\)~is constant on~\(D\).
+\end{proof}
+
+\begin{cor}
+If \(f\)~is nonconstant and continuous on a closed and bounded region~\(R\), and analytic interior to~\(R\), then \(\abs{f}\)~attains a maximum value on the boundary of~\(R\) but not interior to~\(R\).
+\end{cor}
+\begin{proof}[Proof idea]
+By the extreme value theorem from real analysis, \(\abs{f}\)~attains a maximum value on~\(R\). By the maximum modulus principle, it must occur on the boundary.
+\end{proof}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Evaluating contour integrals:
+\begin{itemize}[itemsep=0pt]
+\item Definition (and results from real analysis).
+\item Properties of integrals (linearity, additivity, etc.).
+\item Fundamental theorem of calculus.
+\item Cauchy-Goursat.
+\item Deformation of path.
+\item Cauchy's integral formula (and Cauchy's inequality).
+\end{itemize}
+\item Using subdivision to construct descending chains and take limit points.
+\item Relating differentiation and integration using the fundamental theorem of calculus.
+\item Relating local properties of functions and their derivatives to global properties using Cauchy's integral formula, Cauchy's inequality, etc.
+\item Transferring local properties of functions to global properties using a sequence of overlapping neighborhoods in a connected domain.
+\end{itemize}

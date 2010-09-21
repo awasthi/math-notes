@@ -1,0 +1,80 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Logic
+% Compactness and Lowenheim-Skolem
+%
+\section{Compactness and L\"owenheim-Skolem}
+\subsection*{Theorems}
+\begin{thm}[Compactness]
+\(\Phi\)~is satisfiable iff every finite \(\Phi_0\subseteq\Phi\) is satisfiable.
+\end{thm}
+\begin{proof}[Proof idea]
+Correctness, completeness, and finiteness (of proofs).
+\end{proof}
+\begin{app}
+Demonstrating expressive limitations of first-order logic. Proving that certain classes of structures are not axiomatizable in first-order logic (i.e., are not elementary or \(\Delta\)-elementary). Proving that certain axioms cannot be formulated in first-order logic. Constructing non-standard models.
+\end{app}
+\begin{rmk}
+Compactness shows that first-order formulas cannot in general express that a property holds for \emph{some unspecified finite number} of objects in a model (where \emph{finite} is meant in the sense external to the model). For example, it is not possible with first-order formulas to express the properties \emph{being a finite structure}, \emph{being a torsion group}, \emph{being a connected graph}, etc., all of which involve finiteness in this way. It is also generally not possible to express properties regarding all subsets (etc.) of a structure. These limitations open the door to non-standard models.
+
+One way to `circumvent' these limitations is to consider first-order models of set theory (ZFC), thereby bringing notions of \emph{finite}, \emph{subset}, etc. into the model itself. Note however this changes the meanings of the terms; the meanings \emph{internal} to the model do not correspond to the meanings \emph{external} to the model. Another approach is to consider more expressive logical systems.
+\end{rmk}
+
+\begin{cor}
+If \(\Phi\)~has arbitrarily large finite models, then \(\Phi\)~has an infinite model.
+\end{cor}
+\begin{proof}[Proof idea]
+Set \(\Psi=\Phi\union\{\,\varphi_{\ge n}\mid n\ge 2\,\}\), where \(\varphi_{\ge n}\)~is a sentence stating that there exist at least \(n\)~elements. Then \(\Psi\)~is finitely satisfiable by hypothesis, so \(\Psi\)~is satisfiable by compactness. Any model of~\(\Psi\) is an infinite model of~\(\Phi\).
+\end{proof}
+
+\begin{thm}[``Downward'' L\"owenheim-Skolem]
+If \(\Phi\subseteq L^S\) is satisfiable, then \(\Phi\)~has a model of cardinality \(\le|L^S|\).
+\end{thm}
+\begin{proof}[Proof idea]
+By the proof of completeness (and the term interpretation in Henkin's theorem).
+\end{proof}
+\begin{app}
+Generating smaller models which are easier to manipulate.
+\end{app}
+\begin{cor}
+If \(\Phi\)~is satisfiable and at most countable, then \(\Phi\)~has a model that is at most countable.
+\end{cor}
+
+\begin{thm}[``Upward'' L\"owenheim-Skolem]
+If \(\Phi\)~has an infinite model, then \(\Phi\)~has arbitrarily large infinite models.
+\end{thm}
+\begin{proof}[Proof idea]
+Introduce new constants and formulas stating the constants are distinct. Show finite satisfiability, and hence satisfiability by compactness.
+\end{proof}
+
+\begin{thm}[L\"owenheim, Skolem, Tarski]
+If \(\Phi\)~has an infinite model, then \(\Phi\)~has a model of cardinality~\(\kappa\) for any infinite cardinal \(\kappa\ge|\Phi|\).
+\end{thm}
+\begin{proof}[Proof idea]
+Assume \(\Phi\subseteq L^S\) with \(|S|\le\kappa\). As in the previous proof, introduce new constants and formulas stating they are distinct, with the resulting language having cardinality~\(\le\kappa\). By downward L\"owenheim-Skolem, the set of formulas has a model of cardinality~\(\le\kappa\). But this model must have cardinality~\(\ge\kappa\) by construction, so it has cardinality~\(\kappa\).
+\end{proof}
+
+\begin{app}
+Generating large models. Proving first-order non-axiomatizability (e.g. of isomorphism for infinite structures).
+\end{app}
+
+\begin{thm}
+\ 
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] The isomorphism class of an infinite structure is not first-order axiomatizable.
+\item[(b)] The elementary equivalence class of a structure is first-order axiomatizable, and is the smallest first-order axiomatizable class containing the structure.
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), use upward L\"owenheim-Skolem; for~(b), let the axioms be the theory of the structure.
+\end{proof}
+\begin{cor}
+Any infinite structure has a non-isomorphic but elementarily equivalent structure. (In particular, isomorphism is stronger than elementary equivalence.)
+\end{cor}
+
+\begin{rmk}
+Compactness and its consequences are far less useful within \emph{finite} model theory, since they usually involve infinite models. When working with finite models, other techniques such as the Ehrenfeucht-Fra\"iss\'e methods are required.
+\end{rmk}

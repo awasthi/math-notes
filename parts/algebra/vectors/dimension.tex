@@ -1,0 +1,171 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Algebra
+% Vector Spaces
+% Basis and Dimension
+%
+\section{Basis and Dimension}
+\subsection*{Definitions}
+\begin{defn}
+A \emph{linear combination} of vectors \((v_1,\ldots,v_n)\) is a vector of the form
+\[v=a_1v_1+\cdots+a_nv_n\]
+where \(a_1,\ldots,a_n\in\F\).
+\end{defn}
+
+\begin{defn}
+The \emph{span} of \((v_1,\ldots,v_n)\) is the set of all linear combinations of \((v_1,\ldots,v_n)\), denoted~\(\spn(v_1,\ldots,v_n)\).
+\end{defn}
+
+\begin{defn}
+A vector space is \emph{finite-dimensional} if it equals the span of finitely many vectors, otherwise it is \emph{infinite-dimensional}.
+\end{defn}
+
+\begin{defn}
+A list \((v_1,\ldots,v_n)\) is \emph{linearly independent} if when \(a_1,\ldots,a_n\in\F\) and
+\[a_1v_1+\cdots+a_nv_n=0\]
+then \(a_1=\cdots=a_n=0\); otherwise the list is \emph{linearly dependent}.
+\end{defn}
+
+\begin{defn}
+A \emph{basis} of a vector space is a linearly independent list which spans the space.
+\end{defn}
+
+\begin{defn}
+The \emph{dimension} of a finite-dimensional vector space~\(V\) is the length of a basis in~\(V\), and is denoted~\(\dim V\).
+\end{defn}
+
+\subsection*{Theorems}
+\begin{thm}[Linear dependence]
+If \((v_1,\ldots,v_n)\) is linearly dependent and \(v_1\ne0\), there exists \(i\in\{2,\ldots,n\}\) such that
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(v_i\in\spn(v_1,\ldots,v_{i-1})\)
+\item[(b)] \(\spn(v_1,\ldots,v_{i-1},v_{i+1},\ldots,v_n)=\spn(v_1,\ldots,v_n)\)
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+By definition of linear dependence, choose \(a_1,\ldots,a_n\in\F\) with
+\[a_1v_1+\cdots+a_nv_n=0\]
+Since \(v_1\ne0\), there is maximum \(i\in\{2,\ldots,n\}\) with \(a_i\ne0\). Then
+\[v_i=-\frac{a_1}{a_i}v_1-\cdots-\frac{a_{i-1}}{a_i}v_{i-1}\in\spn(v_1,\ldots,v_{i-1})\]
+Now in any linear combination of \(v_1,\ldots,v_n\), \(v_i\)~can be eliminated.
+\end{proof}
+\begin{app}
+Throwing out redundant vectors in linearly dependent lists, lengths, dimension.
+\end{app}
+\begin{rmk}
+Intuitively, a list is linearly dependent iff one of the vectors in the list can be written in terms of the others.
+\end{rmk}
+
+\begin{thm}[Lengths]
+In a finite-dimensional vector space,
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] The length of any linearly independent list is less than or equal to the length of any spanning list.
+\item[(b)] Any linearly independent list can be extended to a basis.
+\item[(c)] Any spanning list can be reduced to a basis.
+\item[(d)] Any two bases have the same length.
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), by right shifting the spanning list. In detail, prepend the first linearly independent vector to the spanning list. By linear dependence, one of the original spanning vectors can be thrown out while preserving the span. Since this process can be repeated for the rest of the linearly independent vectors, the lengths of the lists must have been as stated.
+
+For~(b), by extending to a maximal linearly independent list (using~(a)).
+
+For~(c), by throwing out redundant vectors.
+
+For~(d), by using~(a) twice.
+\end{proof}
+\begin{app}
+Bases, dimension.
+\end{app}
+
+\begin{cor}[Existence of basis]
+Every finite-dimensional vector space has a basis.
+\end{cor}
+\begin{proof}[Proof idea]
+By extending the empty list, or reducing a spanning list.
+\end{proof}
+
+\begin{cor}[Length criteria for basis]
+In a vector space of dimension~\(n\),
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] Any linearly independent list of length~\(n\) is a basis.
+\item[(b)] Any spanning list of length~\(n\) is a basis.
+\end{enumerate}
+\end{cor}
+\begin{proof}[Proof idea]
+By trivial expansion or reduction.
+\end{proof}
+
+\begin{thm}[Characterization of basis]
+If \((v_1,\ldots,v_n)\) is a basis of~\(V\), then for every \(v\in V\) there exist unique \(a_1,\ldots,a_n\in\F\) such that
+\[v=a_1v_1+\cdots+a_nv_n\]
+\end{thm}
+\begin{proof}[Proof idea]
+Existence by spanning, and uniqueness by linear independence.
+\end{proof}
+
+\begin{thm}[Dimension of a subspace]
+If \(V\)~is finite-dimensional and \(U\)~is a subspace of~\(V\), then \(U\)~is finite-dimensional and \(\dim U\le\dim V\).
+\end{thm}
+\begin{proof}[Proof idea]
+Since \(V\)~is finite-dimensional, so is~\(U\), lest we could build arbitrarily long linearly independent lists in~\(U\), and hence in~\(V\). So \(U\)~has a basis, which is linearly independent in~\(V\), and hence whose length is at most the length of a basis in~\(V\).
+\end{proof}
+
+\begin{thm}[Dimension of a sum]
+If \(U_1,U_2\) are finite-dimensional subspaces,
+\[\dim(U_1+U_2)=\dim U_1+\dim U_2-\dim(U_1\sect U_2)\]
+\end{thm}
+\begin{proof}[Proof idea]
+Fix a basis \((u_1,\ldots,u_k)\) of \(U_1\sect U_2\). Extend it to a basis \((u_1,\ldots,u_k,v_1,\ldots,v_l)\) of~\(U_1\), and to a basis \((u_1,\ldots,u_k,w_1,\ldots,w_m)\) of~\(U_2\). Argue directly that
+\[(u_1,\ldots,u_k,v_1,\ldots,v_l,w_1,\ldots,w_m)\]
+is a basis of \(U_1+U_2\), so
+\begin{align*}
+\dim(U_1+U_2)&=k+l+m\\
+	&=(k+l)+(k+m)-k\\
+	&=\dim U_1+\dim U_2-\dim(U_1\sect U_2)\qedhere
+\end{align*}
+\end{proof}
+
+\begin{cor}[Dimension of a direct sum]
+If \(U_1,\ldots,U_n\) are finite-dimensional subspaces,
+\[U_1+\cdots+U_n=U_1\directsum\cdots\directsum U_n\iff \dim(U_1+\cdots+U_n)=\dim U_1+\cdots+\dim U_n\]
+\end{cor}
+\begin{proof}[Proof idea]
+By induction on~\(n\).
+
+For \(n=1\), the result is trivial.
+
+For \(n>1\), by the characterization of direct sums with two summands, dimension of sums, and induction hypothesis,
+\begin{align*}
+\dim(U_1\directsum\cdots\directsum U_n)&=\dim(U_1\directsum\cdots\directsum U_{n-1})+\dim U_n\\
+	&=(\dim U_1+\cdots+\dim U_{n-1})+\dim U_n\\
+	&=\dim U_1+\cdots+\dim U_n
+\end{align*}
+Conversely, suppose
+\[\dim(U_1+\cdots+U_n)=\dim U_1+\cdots+\dim U_n\]
+By dimension of sums, we know for \(U=(U_1+\cdots+U_{n-1})\sect U_n\) that
+\[\dim(U_1+\cdots+U_n)=\dim(U_1+\cdots+U_{n-1})+\dim U_n-\dim U\]
+So
+\[\dim(U_1+\cdots+U_{n-1})=\dim U_1+\cdots+\dim U_{n-1}+\dim U\]
+But
+\[\dim(U_1+\cdots+U_{n-1})\le\dim U_1+\cdots+\dim U_{n-1}\]
+So \(\dim U=0\). By the induction hypothesis then, \(U_1+\cdots+U_{n-1}=U_1\directsum\cdots\directsum U_{n-1}\), and
+\[\dim((U_1\directsum\cdots\directsum U_{n-1})+U_n)=\dim(U_1\directsum\cdots\directsum U_{n-1})+\dim U_n\]
+Now by the dimension of sums and the characterization of direct sums with two summands, \(U_1+\cdots+U_n=U_1\directsum\cdots\directsum U_n\) as desired.
+\end{proof}
+
+\begin{thm}[Existence of direct sum]
+If \(V\)~is finite-dimensional and \(U\)~is a subspace of~\(V\), there exists a subspace~\(W\) of~\(V\) such that \(V=U\directsum W\).
+\end{thm}
+\begin{proof}[Proof idea]
+Extend a basis \((u_1,\ldots,u_m)\) of~\(U\) to a basis \((u_1,\ldots,u_m,w_1,\ldots,w_n)\) of~\(V\), then set \(W=\spn(w_1,\ldots,w_n)\).
+\end{proof}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Translating between equality and nullity.
+\item Choosing a basis for manipulation, computation, etc.
+\item Induction on dimension.
+\end{itemize}

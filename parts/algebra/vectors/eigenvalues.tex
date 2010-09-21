@@ -1,0 +1,209 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Algebra
+% Vector Spaces
+% Eigenvalues and Eigenvectors
+%
+\section{Eigenvalues and Eigenvectors}
+\subsection*{Definitions}
+\begin{defn}
+If \(T\in\Hom(V)\), a subspace~\(U\) of~\(V\) is \emph{invariant} under~\(T\) if \(Tu\in U\) for all \(u\in U\).
+\end{defn}
+
+\begin{defn}
+If \(T\in\Hom(V)\), \(v\in V\), and \(\lambda\in\F\), \(v\)~is an \emph{eigenvector} of~\(T\) corresponding to~\(\lambda\) if \(Tv=\lambda v\). If there is a nonzero eigenvector of~\(T\) corresponding to~\(\lambda\), then \(\lambda\)~is called an \emph{eigenvalue} of~\(T\).
+\end{defn}
+\begin{rmk}
+Note eigenvalues and eigenvectors can be zero, but corresponding to an eigenvalue there must always be a nonzero eigenvector.
+\end{rmk}
+
+\begin{defn}
+If \(T\in\Hom(V)\) and \(p(z)\)~is a polynomial over~\(\F\) of the form
+\[p(z)=a_0+a_1z+\cdots+a_nz^n\]
+where \(a_1,\ldots,a_n\in\F\), then the \emph{polynomial operator}~\(p(T)\) is
+\[p(T)=a_0I+a_1T+\cdots+a_nT^n\]
+\end{defn}
+
+\begin{defn}
+Let \(M\)~be a square matrix. \(M\)~is \emph{diagonal} if \(M_{ij}=0\) whenever \(i\ne j\). \(M\)~is \emph{upper-triangular} if \(M_{ij}=0\) whenever \(i>j\). \(M\)~is \emph{block upper-triangular} if
+\[M=\left[\begin{matrix}
+M_1&&*\\
+&\ddots&\\
+0&&M_n
+\end{matrix}\right]\]
+where each~\(M_i\) is a square matrix called a \emph{block}.
+\end{defn}
+
+\subsection*{Theorems}
+\begin{thm}[Characterizations of eigenvalue]
+If \(T\in\Hom(V)\) and \(\lambda\in\F\), the following are equivalent:
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\lambda\)~is an eigenvalue of~\(T\)
+\item[(b)] \(\ker(T-\lambda I)\) is nonzero
+\item[(c)] \(T-\lambda I\) is not injective
+\item[(d)] \(T-\lambda I\) is not surjective
+\item[(e)] \(T-\lambda I\) is not invertible
+\end{enumerate}
+\end{thm}
+
+\begin{thm}[Eigenvalues and invariant subspaces]
+A linear operator on a vector space has an eigenvalue iff it has a one-dimensional invariant subspace.
+\end{thm}
+
+\begin{thm}[Linear independence of eigenvectors]
+Nonzero eigenvectors of a linear operator corresponding to distinct eigenvalues are linearly independent.
+\end{thm}
+\begin{proof}[Proof idea]
+By contradiction, looking at a redundant vector.
+
+Let \(T\in\Hom(V)\), \(\lambda_1,\ldots,\lambda_n\) distinct eigenvalues of~\(T\), and \(v_1,\ldots,v_n\) corresponding nonzero eigenvectors. If \((v_1,\ldots,v_n)\) is linearly dependent, fix \(k>1\) least such that \(v_k\in\spn(v_1,\ldots,v_{k-1})\). So \((v_1,\ldots,v_{k-1})\) is linearly independent but 
+\[v_k=a_1v_1+\cdots+a_{k-1}v_{k-1}\]
+for some \(a_1,\ldots,a_{k-1}\in\F\) not all zero. Applying~\(T\) to both sides gives
+\[\lambda_kv_k=a_1\lambda_1v_1+\cdots+a_{k-1}\lambda_{k-1}v_{k-1}\]
+But \(\lambda_kv_k=a_1\lambda_kv_1+\cdots+a_{k-1}\lambda_kv_k\), so
+\[0=a_1(\lambda_1-\lambda_k)v_1+\cdots+a_{k-1}(\lambda_{k-1}-\lambda_k)v_{k-1}\]
+Therefore \(\lambda_i=\lambda_k\) for some \(i\in\{1,\ldots,k-1\}\), contradicting distinctness.
+\end{proof}
+
+\begin{cor}
+\(T\)~has at most~\(\dim V\) distinct eigenvalues.
+\end{cor}
+
+\begin{cor}
+If \(T\)~has \(\dim V\)~distinct eigenvalues, then \(T\)~has a diagonal matrix with respect to a basis of eigenvectors.
+\end{cor}
+
+\begin{thm}[Polynomial operators]
+If \(p,q\in\F[x]\), \(T\)~is a linear operator, and \(c\in\F\),
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \((p+q)(T)=p(T)+q(T)\)
+\item[(b)] \((cp)(T)=cp(T)\)
+\item[(c)] \((pq)(T)=p(T)q(T)\)
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For (a)~and~(b), by substitution.
+
+For~(c), by substition and induction on~\(n=\deg q\). If \(n\le0\), the result is trivial. If \(n>0\), let \(c\)~be the leading coefficient of~\(q(z)\). Then
+\[(pq)(z)=p(z)q(z)=p(z)[q(z)-cz^n]+cp(z)z^n\]
+Now \(\deg[q(z)-cz^n]<n\), so by linearity and induction we have
+\begin{align*}
+(pq)(T)&=[p(z)[q(z)-cz^n]](T)+[cp(z)z^n](T)\\
+	&=p(T)[q(T)-cT^n]+c[p(z)z^n](T)\\
+	&=p(T)q(T)-c[p(T)T^n-[p(z)z^n](T)]
+\end{align*}
+It is easy to verify \(p(T)T^n=[p(z)z^n](T)\), so \((pq)(T)=p(T)q(T)\).
+\end{proof}
+\begin{cor}
+Polynomial operator substitution \(p\to p(T)\) is linear.
+\end{cor}
+\begin{cor}
+Polynomial operators over~\(T\) commute.
+\end{cor}
+
+\begin{thm}[Eigenvalues over~\(\C\)]
+Every linear operator on a nonzero, finite-dimensional complex vector space has an eigenvalue.
+\end{thm}
+\begin{proof}[Proof idea]
+By factoring a complex polynomial operator.
+
+Let \(V\)~be such a vector space and \(T\in\Hom(V)\). Set \(n=\dim V\) and fix \(v\in V\), \(v\ne0\). Then the list \((v,Tv,\ldots,T^nv)\) is linearly dependent, so there exist \(a_0,\ldots,a_n\in\C\) such that
+\[a_0v+a_1Tv+\cdots+a_nT^nv=0\]
+Set \(p(z)=a_0+a_1z+\cdots+a_nz^n\). By polynomial factorization over~\(\C\), there exist values \(c,\lambda_1,\ldots,\lambda_m\in\C\) with \(c\ne0\) and \(m\ge1\) such that \(p(z)=c(z-\lambda_1)\cdots(z-\lambda_m)\). So
+\begin{align*}
+0&=a_0v+a_1Tv+\cdots+a_nT^nv\\
+	&=(a_0I+a_1T+\cdots+a_nT^n)v\\
+	&=c(T-\lambda_1I)\cdots(T-\lambda_mI)v
+\end{align*}
+Therefore some \((T-\lambda_iI)\) is not injective, and \(\lambda_i\)~is an eigenvalue of~\(T\).
+\end{proof}
+\begin{app}
+Simplifying matrices.
+\end{app}
+
+\begin{cor}[Upper-triangular matrices over~\(\C\)]
+Every linear operator on a nonzero, finite-dimensional complex vector space has an upper-triangular matrix with respect to some basis.
+\end{cor}
+\begin{proof}[Proof idea]
+By induction on the dimension of the space, using an eigenvalue in the induction step.
+
+Let \(V\)~be such a space and \(T\in\Hom(V)\). Fix an eigenvalue~\(\lambda\) of~\(T\). Then \(U=\range(T-\lambda I)\) is invariant under~\(T\) and \(\dim U<\dim V\), so there is a basis of~\(U\) with respect to which \(T|_U\)~has an upper-triangular matrix. Extend this to a basis of~\(V\) with respect to which \(T\)~has an upper-triangular matrix.
+\end{proof}
+
+\begin{thm}[Upper-triangular matrices]
+If a linear operator has an upper-triangular matrix with respect to some basis, then the operator is invertible iff there are no zeros along the diagonal of the matrix.
+\end{thm}
+\begin{proof}[Proof idea]
+By rank nullity.
+
+Let \(T\in\Hom(V)\) and suppose \((v_1,\ldots,v_n)\) is a basis of~\(V\) such that \(\mat(T,(v_1,\ldots,v_n))\) is upper-triangular. If the \(k\)-th value along the diagonal is zero, \(T\)~maps \(\spn(v_1,\ldots,v_k)\) into \(\spn(v_1,\ldots,v_{k-1})\) of smaller dimension, so \(T\)~is not injective and not invertible. Conversely, if \(T\)~is not invertible, then \(T\)~is not surjective so there exists \(k\)~least such that \(v_k\not\in\range T|_{\spn(v_1,\ldots,v_k)}\). It is easy to see that the \(k\)-th value along the diagonal must be zero.
+\end{proof}
+
+\begin{cor}
+The eigenvalues of the operator are the values along the diagonal.
+\end{cor}
+\begin{proof}[Proof idea]
+Since for any \(\lambda\in\F\),
+\begin{equation*}
+\mat(T-\lambda I,(v_1,\ldots,v_n))=\left[\begin{matrix}
+\lambda_1-\lambda&&*\\
+&\ddots&\\
+0&&\lambda_n-\lambda
+\end{matrix}\right]\qedhere
+\end{equation*}
+\end{proof}
+
+\begin{thm}[Eigenvalues over~\(\R\)]
+Every linear operator on a nonzero, finite-dimensional real vector space has an invariant subspace of dimension \(1\)~or~\(2\).
+\end{thm}
+\begin{proof}[Proof idea]
+By factoring a real polynomial operator.
+
+Note an invariant subspace of dimension~\(1\) corresponds to a linear factor, and an invariant subspace of dimension~\(2\) to an irreducible quadratic factor.
+\end{proof}
+\begin{app}
+Simplifying matrices.
+\end{app}
+
+\begin{rmk}
+The differences between complex and real operators stem largely from the differences between complex and real polynomial factorization.
+\end{rmk}
+
+\begin{cor}
+Every linear operator on a real vector space of odd dimension has an eigenvalue.
+\end{cor}
+\begin{proof}[Proof idea]
+By induction on the dimension of the space, using an invariant subspace of dimension \(1\)~or~\(2\) in the induction step.
+
+Let \(V\)~be such a vector space and \(T\in\Hom(V)\). Let \(U\)~be an invariant subspace of dimension \(1\)~or~\(2\). If \(U\)~has dimension~\(1\), \(T\)~has an eigenvalue. If \(U\)~has dimension~\(2\), write \(V=U\directsum W\). Then \(W\)~has odd dimension and is invariant under~\(P_{W,U}T|_W\), so by induction \(P_{W,U}T|_W\)~has an eigenvalue, which is also an eigenvalue of~\(T\).
+\end{proof}
+
+\begin{cor}[Block upper-triangular matrices over~\(\R\)]
+Every linear operator on a nonzero, finite-dimensional real vector space has a block upper-trianguar matrix with respect to some basis whose blocks are either \(1\)-by-\(1\) or \(2\)-by-\(2\) with no eigenvalues.
+\end{cor}
+\begin{proof}[Proof idea]
+By induction on the dimension of the space, using an invariant subspace of dimension \(1\)~or~\(2\) in the induction step.
+\end{proof}
+
+\begin{thm}[Diagonalization]
+Let \(V\)~be finite-dimensional, \(T\in\Hom(V)\), and \(\lambda_1,\ldots,\lambda_m\) the distinct eigenvalues of~\(T\). The following are equivalent:
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(T\)~has a diagonal matrix with respect to some basis of~\(V\)
+\item[(b)] \(V\)~has a basis consisting of eigenvectors of~\(T\)
+\item[(c)] \(T\)~has one-dimensional invariant subspaces \(U_1,\ldots,U_n\) such that
+\[V=U_1\directsum\cdots\directsum U_n\]
+\item[(d)] \(V=\ker(T-\lambda_1I)\directsum\cdots\directsum\ker(T-\lambda_m I)\)
+\item[(e)] \(\dim V=\dim\ker(T-\lambda_1I)+\cdots+\dim\ker(T-\lambda_m I)\)
+\end{enumerate}
+\end{thm}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Applying polynomial theory to polynomial operators.
+\item Induction on dimension.
+\item Simplifying matrices of operators for ease of analysis and computation.
+\item Using rank nullity to analyze the behavior of operators.
+\item Translating between equality and nullity.
+\end{itemize}

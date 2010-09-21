@@ -1,0 +1,73 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Algebra
+% Groups
+% Nilpotence, Solvability, Simplicity, and Freeness
+%
+\section{Nilpotence, Solvability, Simplicity, and Freeness}
+\subsection*{Theorems}
+\begin{thm}[Finite nilpotence]
+If \(G\)~is a finite group, the following are equivalent:
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(G\)~is nilpotent
+\item[(b)] Normalizers grow in~\(G\) (that is, if \(H<G\), then \(H<N_G(H)\))
+\item[(c)] Every Sylow subgroup of~\(G\) is normal
+\item[(d)] \(G\)~is a direct product of Sylow subgroups
+\item[(e)] Every maximal subgroup of~\(G\) is normal
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For (a)\(\implies\)(b), by induction (on the nilpotence class of~\(G\)). If \(Z(G)\subgroupeq H\), then \(\res{H}<\res{G}=G/Z(G)\), so by induction \(\res{H}<N_{\res{G}}(\res{H})=\res{N_G(H)}\), and hence by the lattice theorem \(H<N_G(H)\). If \(Z(G)\not\subgroupeq H\), then \(H<\groupclosure{H,Z(G)}\subgroupeq N_G(H)\).
+
+For (b)\(\implies\)(c), by taking normalizers. If \(P\)~is a nonnormal Sylow subgroup of~\(G\), then \(P\normsubgroupeq N_G(P)<G\). But then \(P\)~is characteristic in~\(N_G(P)\), so \(P\normsubgroupeq N_G(N_G(P))\), so \(N_G(P)=N_G(N_G(P))\), contradicting that normalizers grow.
+
+For (c)\(\implies\)(d), by internal direct product recognition.
+
+For (d)\(\implies\)(a), by induction, since \(G/Z(G)\)~is also a product of Sylow subgroups.
+
+Note (b)\(\implies\)(e) is immediate. 
+
+For (e)\(\implies\)(c), use Frattini's argument. If \(P\)~is a nonnormal Sylow subgroup of~\(G\), then \(P\normsubgroupeq N_G(P)<M\normsubgroup G\) for some maximal subgroup~\(M\) of~\(G\). But by Frattini's argument, \(G=MN_G(P)=M\), a contradiction.
+\end{proof}
+\begin{app}
+Finding large normalizers (for example, when proving non-simplicity), classifying nilpotent groups, taking quotients by maximal subgroups, etc.
+\end{app}
+
+\begin{cor}[\(p\)-groups]
+\(p\)-groups are nilpotent.
+\end{cor}
+\begin{app}
+Applying techniques for nilpotent groups to \(p\)-groups, and arbitrary finite groups via Sylow \(p\)-subgroups.
+\end{app}
+
+\begin{thm}[Universal property of free groups]
+If \(S\)~is a set, \(G\)~is a group, and \(f:S\to G\) is any set map, there exists a unique homomorphism \(\varphi:F(S)\to G\) extending~\(f\).
+
+Moreover, this property characterizes~\(F(S)\) up to a unique isomorphism which is the identity on~\(S\).
+\end{thm}
+\begin{proof}[Proof idea]
+To satisfy the desired properties, \(\varphi\)~must be defined by
+\[\varphi(\prod s_i^{\alpha_i})=\prod f(s_i)^{\alpha_i}\qquad(s_i\in S,\alpha_i\in\{-1,0,1\})\]
+And since \(F(S)\)~is free of relations in~\(S\), \(\varphi\)~is well defined. This establishes existence and uniqueness of~\(\varphi\).
+
+If \(F(S)\)~and~\(F^*(S)\) both satisfy the universal property, then there exist two unique homomorphisms \(\varphi:F(S)\to F^*(S)\) and \(\varphi^*:F^*(S)\to F(S)\) extending the identity map on~\(S\). Then by the universal property again, \(\varphi\varphi^*\)~and~\(\varphi^*\varphi\) are the identity, so \(\varphi\)~and~\(\varphi^*\) are inverses and \(F(S)\iso F^*(S)\).
+\end{proof}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Factoring nilpotent groups into parts using upper [lower] central series, and using induction on nilpotence class.
+\item Factoring solvable groups into parts using commutator series, and using induction on solvable length.
+\item In inductive arguments involving finite nilpotent groups, taking quotients by maximal subgroups and leveraging the simple structure of the quotients.
+\item Proving a finite group is not simple:
+\begin{itemize}[itemsep=0pt]
+\item Counting elements using Sylow's theorem and showing that some proper Sylow subgroup must be normal.
+\item Permutation representations on cosets. In particular, exploiting a lower bound on possible indices for proper subgroups of the simple group, working directly inside \(S_n\)~and~\(A_n\), etc.
+\item Finding large normalizers of Sylow subgroups by working with multiple primes.
+\item Finding large normalizers of intersections of Sylow subgroups.
+\end{itemize}
+\item Defining group actions on algebraic (and induced geometric) structures to prove existence and uniqueness of simple groups.
+\item Taking quotients to impose relations.
+\item Defining homomorphisms using free groups and presentations.
+\end{itemize}

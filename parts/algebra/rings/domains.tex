@@ -1,0 +1,135 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Algebra
+% Rings
+% Domains
+%
+\section[EDs, PIDs, UFDs, and IDs]{Euclidean Domains, Principal Ideal Domains, Unique Factorization Domains, and Integral Domains}
+\subsection*{Theorems}
+\begin{thm}[Ideals and greatest common divisors]
+If \(R\)~is a ring and \(a,b\in R\), then \(d\in R\)~is a greatest common divisor of \(a\)~and~\(b\) iff \((d)\)~is the smallest principal ideal containing~\((a,b)\). 
+\end{thm}
+\begin{app}
+Translating between arithmetic properties and properties of ideals.
+\end{app}
+\begin{cor}
+Greatest common divisors are unique up to units (i.e., they are associates).
+\end{cor}
+
+\begin{thm}[Euclidean algorithm]
+If \(R\)~is a euclidean domain and \(a,b\in R\) are nonzero with division \(a=bq+r\) (where \(q,r\in R\) with \(r=0\) or \(N(r)<N(b)\)), then
+\[(a,b)=(b,r)\]
+In particular, if \(r_n\)~is the last nonzero remainder in the euclidean algorithm with \(a\)~and~\(b\) (where \(r_0=b\)), then \((a,b)=(r_n)\), so
+\begin{enumerate}[itemsep=0pt]
+\item[(i)] \(r_n\)~is a greatest common divisor of \(a\)~and~\(b\), and
+\item[(ii)] \(r_n=ax+by\) for some \(x,y\in R\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+By induction,
+\[(a,b)=(b,r_1)=(r_1,r_2)=\cdots=(r_n,r_{n+1})=(r_n)\]
+where the last equality holds since \(r_{n+1}=0\). Now (i)~and~(ii) are immediate.
+\end{proof}
+\begin{app}
+Computing greatest common divisors (efficiently), computing multiplicative inverses of coprime elements, etc.
+\end{app}
+
+\begin{thm}[EDs are PIDs]
+Euclidean domains are principal ideal domains.
+\end{thm}
+\begin{proof}[Proof idea]
+By division with remainder.
+
+If \(R\)~is a euclidean domain and \(I\subseteq R\) is a nonzero ideal, fix \(b\in I\) nonzero with minimum norm~\(N(b)\). Then for any \(a\in I\), there exist \(q,r\in R\) with \(a=bq+r\) where \(r=0\) or \(N(r)<N(b)\). Now \(r\in I\), so by minimality of~\(N(b)\), \(r=0\) and \(a=bq\in(b)\). Thus \(I=(b)\) is principal.
+\end{proof}
+
+\begin{thm}[Prime and maximal ideals]
+\ 
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] In an integral domain, maximal ideals are prime.
+\item[(b)] In a principal ideal domain, an ideal is prime iff it is maximal. 
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), by previous results.
+
+For~(b), by direct computation.
+\end{proof}
+
+\begin{thm}[Primes and irreducibles]
+\ 
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] In an integral domain, primes are irreducible.
+\item[(b)] In a principal ideal domain, an element is prime iff it is irreducible.
+\item[(c)] In a unique factorization domain, an element is prime iff it is irreducible.
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), by direct computation.
+
+For~(b), if \(p\)~is irreducible, argue that \((p)\)~is maximal.
+
+For~(c), if \(p\)~is irreducible and \(p|ab\), factor both sides and argue that \(p\)~must divide one of the irreducible factors in \(a\)~or~\(b\).
+\end{proof}
+
+\begin{thm}[PIDs are UFDs]
+Principal ideal domans are unique factorization domains.
+\end{thm}
+\begin{proof}[Proof idea]
+For existence of factorizations, by a subdivision argument.
+
+If \(R\)~is a principal ideal domain and \(a\in R\) cannot be factored into finitely many irreducibles, then a factorization tree for~\(a\) can be arbitrarily extended in height. By recursion and the axiom of choice, there exists an infinite descending sequence of proper divisors
+\[\cdots\ |\ a_k\ |\ \cdots\ |\ a_2\ |\ a_1\ |\ a\]
+This means there is an infinite properly ascending chain of ideals
+\[(a)\subset(a_1)\subset(a_2)\subset\cdots\subset(a_k)\subset\cdots\]
+But this chain must eventually collapse since \(I=\bigunion_{i=1}^{\infty}(a_i)\) is a principal ideal of form \(I=(b)\), so \(b\in(a_i)\) for some~\(i\) and
+\[I=(b)\subseteq(a_i)\subseteq(a_{i+1})\subseteq\cdots\subseteq I\]
+---a contradiction. Therefore factorizations exist.
+
+For uniqueness of factorizations, use the primality of irreducibles to argue that the irreducibles in any two factorizations of an element must be associates.
+\end{proof}
+
+\begin{thm}[GCDs in UFDs]
+If \(R\)~is a unique factorization domain and \(a,b\in R\) with
+\[a=u\prod_{i=1}^k p_i^{e_i}\qquad b=v\prod_{i=1}^k p_i^{f_i}\]
+where \(u,v\in R\) are units, \(p_1,\ldots,p_k\in R\) are primes, and \(e_i,f_j\ge0\), then
+\[d=\prod_{i=1}^k p_i^{\min(e_i,f_i)}\]
+is a greatest common divisor of \(a\)~and~\(b\).
+\end{thm}
+\begin{proof}[Proof idea]
+By unique factorization.
+\end{proof}
+\begin{app}
+Computing greatest common divisors from factorizations.
+\end{app}
+
+\begin{thm}[Fundamental theorem of arithmetic]
+\(\Z\)~is a euclidean domain, hence a princpal ideal domain and unique factorization domain. In particular, every integer can be factored uniquely as a product of primes.
+\end{thm}
+\begin{proof}[Proof idea]
+By induction.
+\end{proof}
+\begin{app}
+Arithmetic with the integers.
+\end{app}
+
+\begin{rmk}
+By definitions and results,
+\begin{multline*}
+\text{fields}\subseteq\text{euclidean domains (EDs)}\\
+\subseteq\text{principal ideal domains (PIDs)}\subseteq\text{unique factorization domains (UFDs)}\\
+\subseteq\text{integral domains (IDs)}\subseteq\text{commutative rings}
+\end{multline*}
+Each of these inclusions is proper.
+\end{rmk}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Translating between arithmetic and ideal properties.
+\item Computing with the euclidean algorithm.
+\item Computing with principal ideals.
+\item Factoring complex elements into simpler pieces.
+\item Subdivision to construct ascending chains of ideals and take limits.
+\end{itemize}

@@ -1,0 +1,233 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Analysis
+% Real Analysis
+% Differentiability
+%
+\section{Differentiability}
+
+\subsection*{Definitions}
+\begin{defn}
+Let \(\vec{f}:[a,b]\to\R^k\) and \(x\in[a,b]\). If the limit
+\[\lim_{t\to x}\frac{\vec{f}(t)-\vec{f}(x)}{t-x}\]
+exists, \(\vec{f}\)~is \emph{differentiable at~\(x\)}, and the limit is denoted~\(\vec{f}'(x)\).
+
+The function~\(\vec{f}'\) induced is called the \emph{derivative} of~\(\vec{f}\). If \(\vec{f}'\)~is defined on \(E\subseteq[a,b]\), \(\vec{f}\)~is \emph{differentiable on~\(E\)}.
+
+This is continued with \(\vec{f}'',\vec{f}'''\), etc. and more generally~\(\vec{f}^{(n)}\) for \(n\ge 0\).
+\end{defn}
+
+\begin{defn}
+Let \(X\)~be a metric space, \(f:X\to\R\), and \(p\in X\). Then \(f(p)\)~is a \emph{local maximum} of~\(f\) at~\(p\) if there exists \(\delta>0\) such that \(f(q)\le f(p)\) for all \(q\in X\) with \(d(p,q)<\delta\). Analogously for \emph{local minimum}.
+\end{defn}
+
+\subsection*{Theorems}
+\begin{thm}[Differentiability implies continuity in~\(\R^k\)]
+Let \(\vec{f}:[a,b]\to\R^k\). If \(x\in[a,b]\) and \(\vec{f}\)~is differentiable at~\(x\), then \(\vec{f}\)~is continuous at~\(x\).
+\end{thm}
+\begin{proof}[Proof idea]
+Note for \(t\ne x\),
+\begin{equation*}
+\vec{f}(t)-\vec{f}(x)=\frac{\vec{f}(t)-\vec{f}(x)}{t-x}\cdot(t-x)\to 0\quad\text{as}\quad t\to x\qedhere
+\end{equation*}
+\end{proof}
+\begin{rmk}
+\emph{The converse is false!} For an extreme counterexample, see the Weierstrass everywhere continuous but nowhere differentiable function.
+\end{rmk}
+
+\begin{thm}[Chain rule in~\(\R\)]
+Let \(f:[a,b]\to[c,d]\) and \(g:[c,d]\to\R\). If \(x\in[a,b]\) and \(f\)~is differentiable at~\(x\) and \(g\)~is differentiable at~\(f(x)\), then
+\[(g\circ f)'(x)=g'(f(x))f'(x)\]
+\end{thm}
+\begin{proof}[Proof idea]
+By differentiability of~\(f\) at~\(x\), there exists a function~\(\delta(t)\) such that
+\[f(t)-f(x)=[f'(x)+\delta(t)](t-x)\]
+where \(\delta(t)\to0\) as \(t\to x\) and \(\delta(x)=0\). Similarly, by differentiability of~\(g\) at \(y=f(x)\), there exists a function~\(\epsilon(u)\) such that
+\[g(u)-g(y)=[g'(y)+\epsilon(u)](u-y)\]
+where \(\epsilon(u)\to0\) as \(u\to y\) and \(\epsilon(y)=0\). (Note \(\epsilon\)~is continuous at~\(y\)!)
+
+Now write \(h=g\circ f\). Then
+\begin{align*}
+h(t)-h(x)&=g(f(t))-g(f(x))\\
+	&=[g'(f(x))+\epsilon(f(t))][f(t)-f(x)]\\
+	&=[g'(f(x))+\epsilon(f(t))][f'(x)+\delta(t)](t-x)
+\end{align*}
+Now divide by \(t-x\) and let \(t\to x\). (Note this relies on continuity of~\(\epsilon\) at~\(y\) since it might be that \(f(t)=y\) infinitely often as \(t\to x\).)
+\end{proof}
+
+\begin{thm}[Derivatives and field operations in~\(\C\)]
+Let \(f:[a,b]\to\C\) and \(g:[a,b]\to\C\) be differentiable at \(x\in[a,b]\). Then
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \((f+g)'(x)=f'(x)+g'(x)\)
+\item[(b)] \((fg)'(x)=f'(x)g(x)+f(x)g'(x)\)
+\item[(c)] \((f/g)'(x)=\displaystyle\frac{f'(x)g(x)-f(x)g'(x)}{[g(x)]^2}\quad(g(x)\ne0)\)
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+Express difference quotients of the new functions in terms of difference quotients of the given functions, then take limits.
+
+For~(a), this is trivial.
+
+For~(b), similarly to sequence products note
+\begin{multline*}
+f(t)g(t)-f(x)g(x)=[f(t)-f(x)][g(t)-g(x)]\\
+	+[f(t)-f(x)]g(x)+[g(t)-g(x)]f(x)
+\end{multline*}
+Now divide by \(t-x\) and let \(t\to x\).
+
+For~(c), note
+\[\frac{f(t)}{g(t)}-\frac{f(x)}{g(x)}=\frac{[f(t)-f(x)]g(x)-[g(t)-g(x)]f(x)}{g(t)g(x)}\]
+Now divide by \(t-x\) and let \(t\to x\).
+\end{proof}
+
+\begin{thm}[Derivatives in~\(\R^k\)]
+Let \(\vec{f}:[a,b]\to\R^k\) and \(\vec{g}:[a,b]\to\R^k\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(\vec{f}=(f_1,\ldots,f_k)\), \(\vec{f}\)~is differentiable at \(x\in[a,b]\) iff \(f_i\)~is differentiable at~\(x\) for \(1\le i\le k\), in which case
+\[\vec{f}'(x)=(f_1'(x),\ldots,f_k'(x))\]
+\item[(b)] If \(\vec{f}\)~and~\(\vec{g}\) are differentiable at \(x\in[a,b]\) and \(\alpha\in\R\), then
+\begin{enumerate}[itemsep=0pt]
+\item[(i)] \((\alpha\vec{f})'(x)=\alpha\vec{f}'(x)\)
+\item[(ii)] \((\vec{f}+\vec{g})'(x)=\vec{f}'(x)+\vec{g}'(x)\)
+\item[(iii)] \((\vec{f}\dotprod\vec{g})'(x)=\vec{f}'(x)\dotprod\vec{g}(x)+\vec{f}(x)\dotprod\vec{g}'(x)\)
+\end{enumerate}
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), use the characterization of limits (of sequences) in~\(\R^k\).
+
+For~(b), use~(a) and properties of derivatives in~\(\R\).
+\end{proof}
+
+\begin{thm}[Fermat]
+Let \(f:[a,b]\to\R\). If \(f\)~has a local maximum or local minimum at \(x\in(a,b)\), and \(f\)~is differentiable at~\(x\), then \(f'(x)=0\).
+\end{thm}
+\begin{proof}[Proof idea]
+Look at left-hand and right-hand limits separately.
+\end{proof}
+\begin{thm}[Rolle]
+Let \(f:[a,b]\to\R\). If \(f(a)=f(b)\) and \(f\)~is continuous on~\([a,b]\) and differentiable on~\((a,b)\), there exists \(x\in(a,b)\) with \(f'(x)=0\).
+\end{thm}
+\begin{proof}[Proof idea]
+By the extreme value theorem, there exists \(x\in(a,b)\) such that \(f(x)\)~is maximum or minimum for~\(f\), so \(f'(x)=0\).
+\end{proof}
+
+\begin{thm}[Mean value theorems in~\(\R\)]
+Let \(f:[a,b]\to\R\) and \(g:[a,b]\to\R\) be continuous on~\([a,b]\) and differentiable on~\((a,b)\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] (Cauchy) There exists \(x\in(a,b)\) with
+\[f'(x)[g(b)-g(a)]=g'(x)[f(b)-f(a)]\]
+\item[(b)] There exists \(x\in(a,b)\) with
+\[f'(x)=\frac{f(b)-f(a)}{b-a}\]
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), set
+\[h(x)=f(x)[g(b)-g(a)]-g(x)[f(b)-f(a)]\]
+so \(h'(x)=0\) for \(x\in(a,b)\) iff (a)~holds. Now apply Rolle's theorem to~\(h\).
+
+Now (b)~follows from~(a) with \(g(x)=x\).
+\end{proof}
+\begin{app}
+Relating values of functions to values of derivatives, Taylor's theorem, L'Hospital's rule, change of variable for Riemann-Stieltjes integration, fundamental theorem of calculus for Riemann integration, etc.
+\end{app}
+\begin{rmk}
+Note the mean value theorem asserts the existence of a point where the instantaneous rate of change of a differentiable function equals its average rate of change (on an interval).
+\end{rmk}
+\begin{rmk}
+\emph{The mean value theorem fails in~\(\R^k\)!} But see the mean value inequality.
+\end{rmk}
+
+\begin{cor}[Monotonicity in~\(\R\)]
+Let \(f:(a,b)\to\R\) be differentiable.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(f\)~is monotonically increasing iff \(f'(x)\ge0\) for all \(x\in(a,b)\).
+\item[(b)] \(f\)~is constant iff \(f'(x)=0\) for all \(x\in(a,b)\).
+\item[(c)] \(f\)~is monotonically decreasing iff \(f'(x)\le0\) for all \(x\in(a,b)\).
+\end{enumerate}
+\end{cor}
+\begin{proof}[Proof idea]
+By the mean value theorem.
+\end{proof}
+
+\begin{thm}[Taylor]
+Let \(f:[a,b]\to\R\). Suppose \(n>0\) and \(f^{(n-1)}\)~is continuous on~\([a,b]\) and differentiable on~\((a,b)\). If \(\alpha,\beta\in(a,b)\) and \(\alpha\ne\beta\), there exists~\(x\) between \(\alpha,\beta\) such that
+\[f(\beta)=P(\beta)+\frac{f^{(n)}(x)}{n!}(\beta-\alpha)^n\]
+where
+\[P(x)=\sum_{k=0}^{n-1}\frac{f^{(k)}(\alpha)}{k!}(x-\alpha)^k\]
+is the Taylor polynomial of degree~\((n-1)\) for~\(f\) at~\(\alpha\).
+\end{thm}
+\begin{proof}[Proof idea]
+By repeated application of Rolle's theorem.
+
+Define~\(C\) using \(f(\beta)=P(\beta)+C(\beta-\alpha)^n\), so \(x\)~between~\(\alpha,\beta\) is desired satisfying \(f^{(n)}(x)=n!C\). Define
+\[h(x)=f(x)-P(x)-C(x-\alpha)^n\]
+so the result holds for~\(x\) iff \(h^{(n)}(x)=0\).
+
+Note \(h^{(k)}(\alpha)=0\) for \(0\le k\le n-1\) and \(h(\beta)=0\). By Rolle's theorem, there exists~\(x_1\) between~\(\alpha,\beta\) with \(h^{(1)}(x_1)=0\); then there exists~\(x_2\) between~\(\alpha,x_1\) with \(h^{(2)}(x_2)=0\); etc. Finally, there exists~\(x_n\) with \(h^{(n)}(x_n)=0\), so the result holds with \(x=x_n\).
+\end{proof}
+\begin{app}
+Approximating differentiable functions with error bound.
+\end{app}
+\begin{rmk}
+Taylor's theorem generalizes the mean value theorem, which is just case \(n=1\) of Taylor's theorem.
+\end{rmk}
+
+\begin{thm}[L'Hospital]
+Let \(f:(a,b)\to\R\) and \(g:(a,b)\to\R\) be differentiable with \(-\infty\le a<b\le+\infty\), where \(g'(x)\ne0\) in~\((a,b)\). Let \(a\le c\le b\). If \(f(x),g(x)\to0\) as \(x\to c\), or \(g(x)\to\pm\infty\) as \(x\to c\), and if
+\[\frac{f'(x)}{g'(x)}\to A\quad\text{as}\quad x\to c\qquad(-\infty\le A\le+\infty)\]
+Then \(f(x)/g(x)\to A\) as \(x\to c\).
+\end{thm}
+\begin{proof}[Proof idea]
+By Cauchy's mean value theorem.
+
+If \(A<+\infty\), use the theorem to relate values of the derivative quotient to values of the function quotient and show that for all~\(r\) with \(A<r\), there is some neighborhood of~\(c\) in which \(f(x)/g(x)<r\).
+
+If \(A>-\infty\), do the inverse.
+\end{proof}
+\begin{app}
+Evaluating limits yielding indeterminate forms such as \(\frac{0}{0}\), \(\frac{\infty}{\infty}\), etc.
+\end{app}
+\begin{rmk}
+\emph{L'Hospital's rule fails in~\(\R^k\)!}
+\end{rmk}
+
+\begin{thm}[Intermediate value theorem for derivatives in~\(\R\)]
+Let \(f:[a,b]\to\R\) be differentiable. If \(\min\{f'(a),f'(b)\}<y<\max\{f'(a),f'(b)\}\), there exists \(x\in(a,b)\) with \(f'(x)=y\).
+\end{thm}
+\begin{proof}[Proof idea]
+Set \(h(x)=f(x)-yx\). Then \(h'(a)\)~and~\(h'(b)\) differ in sign, so by the extreme value theorem \(h\)~has a maximum or minimum at some \(x\in(a,b)\) where \(h'(x)=0\), that is, \(f'(x)=y\).
+\end{proof}
+
+\begin{thm}[Mean value inequality in~\(\R^k\)]
+Let \(\vec{f}:[a,b]\to\R^k\) be continuous on~\([a,b]\) and differentiable on~\((a,b)\). Then there exists \(x\in(a,b)\) with
+\[\norm{\vec{f}'(x)}\ge\frac{\norm{\vec{f}(b)-\vec{f}(a)}}{b-a}\]
+\end{thm}
+\begin{proof}[Proof idea]
+Construct an \(\R\)-valued function from~\(\vec{f}\) using the dot product and apply the mean value theorem in~\(\R\), then use Cauchy-Schwarz.
+
+In detail, set \(\vec{z}=\vec{f}(b)-\vec{f}(a)\), and define \(\varphi(t)=(\vec{z}\dotprod\vec{f})(t)\). By the mean value theorem applied to~\(\varphi\), there exists \(x\in(a,b)\) with
+\[\vec{z}\dotprod\vec{f}'(x)=\frac{\vec{z}\dotprod\vec{f}(b)-\vec{z}\dotprod\vec{f}(a)}{b-a}=\frac{\vec{z}\dotprod\vec{z}}{b-a}=\frac{\norm{\vec{z}}^2}{b-a}\]
+By Cauchy-Schwarz, \(\norm{\vec{z}\vphantom{\vec{f}'(x)}}\norm{\vec{f}'(x)}\ge\vec{z}\dotprod\vec{f}'(x)\), so
+\begin{equation*}
+\norm{\vec{f}'(x)}\ge\frac{\norm{z}}{b-a}=\frac{\norm{\vec{f}(b)-\vec{f}(a)}}{b-a}\qedhere
+\end{equation*}
+\end{proof}
+\begin{app}
+Bounding change in a function by values of its derivative, as in the proof of the theorem on uniform convergence and differentiation.
+\end{app}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Proving differentiability and calculating derivatives:
+\begin{itemize}[itemsep=0pt]
+\item Limit of difference quotient.
+\item Closure properties (composites, sums, products, etc.).
+\end{itemize}
+\item Relating values of functions to values of their derivatives using mean value theorems.
+\item Translating problems about arbitrary values of derivatives into problems about zeros of derivatives, then using extrema or mean value theorems to find zeros.
+\item Approximating functions using Taylor series expansions.
+\item Reducing \(\R^k\)-valued functions to \(\R\)-valued functions.
+\end{itemize}

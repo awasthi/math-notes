@@ -1,0 +1,106 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Analysis
+% Complex Analysis
+% Residues and Poles
+%
+\section{Residues and Poles}
+\subsection*{Definition}
+\begin{defn}
+If \(f\)~is not analytic at~\(z_0\) but is analytic at a point in every neighborhood of~\(z_0\), then \(z_0\)~is a \emph{singularity} of~\(f\). If \(f\)~is also analytic in some deleted neighborhood of~\(z_0\), then \(z_0\)~is an \emph{isolated singularity} of~\(f\).
+\end{defn}
+\begin{defn}
+If \(f\)~has an isolated singularity at~\(z_0\), the \emph{residue} of~\(f\) at~\(z_0\), denoted~\(\displaystyle\Res_{z=z_0}f(z)\), is the coefficient of \((z-z_0)^{-1}\) in the Laurent series expansion of~\(f\) about~\(z_0\), that is, \((1/2\pi i)\int_C f\) where \(C\)~is any positively oriented simple closed contour about~\(z_0\) lying in a deleted neighborhood of~\(z_0\) in which \(f\)~is analytic.
+\end{defn}
+\begin{defn}
+Let \(f\)~have an isolated singularity at~\(z_0\), with Laurent series expansion
+\[f(z)=\sum_{n=0}^\infty a_n(z-z_0)^n+\sum_{n=1}^\infty b_n(z-z_0)^{-n}\]
+If \(m\ge0\) is least such that \(b_n=0\) for all \(n>m\), then \(z_0\)~is a \emph{pole of order~\(m\)} of~\(f\). Otherwise, if \(b_n\ne0\) for arbitrarily large~\(n\), then \(z_0\)~is an \emph{essential singularity} of~\(f\). A pole of order~\(0\) is a \emph{removable singularity}, and a pole of order~\(1\) is a \emph{simple pole}.
+\end{defn}
+\begin{defn}
+If \(f\)~is analytic at~\(z_0\) and there exists \(m>0\) such that \(f^{(n)}(z_0)=0\) for \(0\le n<m\) and \(f^{(m)}(z_0)\ne0\), then \(z_0\)~is a \emph{zero of order~\(m\)} of~\(f\).
+\end{defn}
+\subsection*{Theorems}
+
+\begin{thm}[Cauchy residue theorem]
+If \(f\)~is analytic at every point on and inside a positively oriented simple closed contour~\(C\) except for a finite number of points \(z_0,\ldots,z_n\) inside~\(C\), then
+\[\int_C f=2\pi i\sum_{k=0}^n\Res_{z=z_k}f(z)\]
+\end{thm}
+\begin{proof}[Proof idea]
+By Cauchy-Goursat and Laurent series expansions.
+\end{proof}
+\begin{app}
+Calculating integrals.
+\end{app}
+
+\begin{thm}[Characterization of poles]
+The function~\(f\) has a pole of order \(m>0\) at~\(z_0\) iff
+\[f(z)=\frac{\phi(z)}{(z-z_0)^m}\]
+where \(\phi\)~is analytic and nonzero at~\(z_0\). In this case,
+\[\Res_{z=z_0}f(z)=\frac{\phi^{(m-1)}(z_0)}{(m-1)!}\]
+\end{thm}
+\begin{proof}[Proof idea]
+Since \(\phi\)~is analytic at~\(z_0\) iff \(\phi\)~has a Taylor series expansion about~\(z_0\).
+\end{proof}
+\begin{app}
+Calculating residues at poles.
+\end{app}
+
+\begin{thm}[Characterization of zeros]
+If \(f\)~is analytic at~\(z_0\), \(f\) has a zero of order \(m>0\) at~\(z_0\) iff
+\[f(z)=(z-z_0)^m g(z)\]
+where \(g\)~is analytic and nonzero at~\(z_0\).
+\end{thm}
+\begin{proof}[Proof idea]
+By the Taylor series expansion.
+\end{proof}
+\begin{app}
+Relating local to global behavior, calculating residues at poles.
+\end{app}
+
+\begin{cor}[Isolation of zeros]
+If \(f\)~is analytic and zero at~\(z_0\), \(f\)~is zero throughout some neighborhood of~\(z_0\) or \(f\)~is nonzero throughout some deleted neighborhood of~\(z_0\). 
+\end{cor}
+\begin{proof}[Proof idea]
+By the Taylor series expansion.
+
+In detail, if it is not true that \(f\)~is zero throughout some neighborhood of~\(z_0\), then the coefficients in its Taylor series expansion about~\(z_0\) cannot all vanish. So \(f\)~has a zero of some order \(m>0\) at~\(z_0\). But then by the theorem, and continuity, \(f\)~is nonzero throughout some deleted neighrobhood of~\(z_0\).
+\end{proof}
+
+\begin{cor}[Uniqueness of analytic functions]
+Let \(f\)~and~\(g\) be analytic on some domain~\(D\). If \(f\)~and~\(g\) are equal on some line segment or subdomain in~\(D\), then \(f\)~and~\(g\) are equal on~\(D\).
+\end{cor}
+\begin{proof}[Proof idea]
+Assume without loss of generality that \(g=0\) and use isolation of zeros. If \(f\)~is analytic at~\(z_0\) and zero on some line segment or subdomain containing~\(z_0\), then \(f\)~is zero throughout some neighborhood of~\(z_0\). Now use connectedness of~\(D\).
+\end{proof}
+
+\begin{thm}[Zeros and poles]
+If \(f\)~and~\(g\) are analytic at~\(z_0\), \(f\)~is nonzero at~\(z_0\), and \(g\)~has a zero of order \(m>0\) at~\(z_0\), then \(f/g\)~has a pole of order~\(m\) at~\(z_0\).
+\end{thm}
+\begin{proof}[Proof idea]
+By the characterization of zeros and characterization of poles.
+\end{proof}
+\begin{app}
+Calculating residues at poles.
+\end{app}
+
+\begin{cor}[Simple poles]
+If \(f\)~and~\(g\) are analytic at~\(z_0\), \(f\)~is nonzero at~\(z_0\), and \(g\)~has a zero of order~\(1\) at~\(z_0\), then \(f/g\)~has a simple pole at~\(z_0\) and
+\[\Res_{z=z_0}\frac{f(z)}{g(z)}=\frac{f(z_0)}{g'(z_0)}\]
+\end{cor}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Evaluating contour integrals using Cauchy's residue theorem.
+\item Calculating residues:
+\begin{itemize}[itemsep=0pt]
+\item Cauchy's integral formula.
+\item Laurent series coefficients.
+\item Poles.
+\end{itemize}
+\item Relating local properties of functions and their derivatives to global properties using Taylor [Laurent] series expansions.
+\item Translating problems about uniqueness of power series into problems about zeros, and using isolation of zeros.
+\item Transferring local properties of functions to global properties using a sequence of overlapping neighborhoods in a connected domain.
+\end{itemize}

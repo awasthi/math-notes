@@ -1,0 +1,2193 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Sets
+%
+\chapter{Sets (Lectures)}
+This chapter contains notes from Leo Harrington's set theory course at UC~Berkeley in Spring 2007, with supplementary information from \cite{enderton77}.
+
+\begin{lecture}{January~16, 2007}
+We draw a distinction between \emph{naive set theory} and \emph{axiomatic set theory}. In naive set theory, we intuitively understand a \emph{set} to be a collection of objects, and we do things with sets that seem obviously to be justified. We also use freely objects that are familiar in mathematics (such as numbers, relations, functions, etc.) without explicitly specifying their ontology.
+
+In axiomatic set theory, on the other hand, we explicitly specify all of the axioms (or assumptions) of our theory. We also reduce all of our mathematical objects to sets by constructing appropriate sets to serve as these objects. Interestingly we do not define what a `set' is in our axiomatic treatment; any objects that satisfy the axioms of our theory are acceptable. We also do not define the relation~`\(\in\)' of membership among sets. These constitute the two primitive notions of our theory, and we use them to construct other definitions:
+\begin{defn}
+Let \(a,b\) be sets. Then we write \(a\subseteq b\) and say that \emph{\(a\)~is a subset of~\(b\)} iff for all sets~\(x\), if \(x\in a\), then \(x\in b\). In other words, \(a\subseteq b\) iff
+\[\forall x(x\in a\implies x\in b)\]
+\end{defn}
+
+We assume as understood the notion of a \emph{property}. Given a property~\(P(x)\), it will be convenient to be able to refer to the collection of objects in our theory satisfying~\(P\).
+\begin{defn}
+Let \(P(x)\)~be a property. We define the \emph{class}
+\[\CC=\{\,x\mid P(x)\,\}\]
+of all objects (sets) satisfying~\(P\). For an object~\(a\), we write \(a\in\CC\) iff \(P(a)\)~holds. If \(\D\)~is another class, we write \(\CC\subseteq\D\) iff for all objects~\(a\), if \(a\in\CC\), then \(a\in\D\). We write \(\CC=\D\) iff \(\CC\subseteq\D\) and \(\D\subseteq\CC\).
+\end{defn}
+Intuitively, a class~\(\CC\) itself forms a set, but we do not require this in our definition. In fact, we cannot, for this would lead us quickly to contradiction.
+
+Frege had an `axiom' to this effect: for all properties~\(P(x)\), the class \(\CC=\{\,x\mid P(x)\,\}\) is a set. On this theory, sets are simply a `manner of speaking' about properties; all statements about sets can be translated into statements about properties, and vice versa. But this assumption is problematic, as Russell demonstrated. For let
+\[R=\{\,x\mid x\not\in x\,\}\]
+By definition \(R\)~is the class of all sets~\(a\) such that \(a\not\in a\). In other words, for all sets~\(a\), \(a\in R\) iff \(a\not\in a\). Now if \(R\)~is a set, then \(R\in R\) iff \(R\not\in R\)---a contradiction. Hence \(R\)~cannot be a set. In other words, Frege was wrong.
+
+This result is called the \emph{Russell paradox}, and it motivates the development of a more subtle axiomatic set theory. We must specify axioms that allow us to work with certain sets, while at the same time preventing us from encountering contradictions.
+
+It should be noted that \emph{classes} in our treatment do remain simply a `manner of speaking'. Every statement about classes can be translated into a statement about properties, and vice versa. We do not encounter the Russell paradox at the level of classes, however, because the properties used in defining classes can only refer to sets. That is, when we form the class
+\[\CC=\{\,x\mid P(x)\,\}\]
+the objects~\(x\) satisfying~\(P(x)\) must be sets. Note also that the notation~`\(\in\)' for set membership is being abused slightly for use with classes. The set membership relation is undefined, while we have defined the `\(\in\)'~notation for classes above.
+
+Most of our axioms will state that certain classes do indeed form sets. These axioms can be seen as telling us how we may legitimately construct objects in our model. But what does it mean for a class to `form' a set? Intuitively, this just means that there exists some set whose elements are precisely the objects satisfying the property associated with the class. We formalize this:
+\begin{defn} Let \(a\)~be a set. Then \(a\)~determines a class
+\[\CC(a)=\{\,x\mid x\in a\,\}\]
+which we call the \emph{class determined by~\(a\)}. For a class~\(\D\), we write \(\D\subseteq a\) iff \(\D\subseteq\CC(a)\), we write \(a\subseteq\D\) iff \(\CC(a)\subseteq\D\), and we write \(\D\equiv a\) iff \(\D\subseteq a\) and \(a\subseteq\D\).
+
+Now let \(\CC\)~be a class. Then we say that \emph{\(\CC\)~forms a set} (or \emph{\(\CC\)~is a set}) iff there exists a set~\(a\) such that \(\CC\equiv a\).
+\end{defn}
+\noindent Note that for a class~\(\CC\) and a set~\(a\), even if \(\CC\equiv a\), technically we cannot write \(\CC=a\), for classes are not objects in our theory. But since~\(\CC(a)\) intuitively `captures'~\(a\) completely, we adopt the following axiom:
+
+\begin{axm}[Extension]
+Let \(a,b\) be sets. If \(\CC(a)=\CC(b)\), then \(a=b\). Equivalently, if
+\[\forall x(x\in a\iff x\in b)\]
+then \(a=b\).
+\end{axm}
+\noindent We obtain the converse of the axiom of extensionality from logic. That is, if \(a=b\), then \(\CC(a)=\CC(b)\). Hence \(a=b\) iff \(\CC(a)=\CC(b)\). \emph{Therefore we adopt the convention of identifying a set~\(a\) with the class~\(\CC(a)\) that it determines.} In particular we may now write \(\CC(a)=a\), understanding this as a convention.
+
+We obtain our first theorem:
+\begin{thm}
+Let \(\CC\)~be a class. Then \(\CC\)~forms at most one set.
+\end{thm}
+\begin{proof}
+Suppose \(\CC\equiv a\) and \(\CC\equiv b\). Then \(\CC(a)=\CC=\CC(b)\). Hence \(a=b\) by the axiom of extensionality.
+\end{proof}
+\noindent Based on this theorem, we adopt the convention that \emph{if a class~\(\CC\) forms a set, then we identify~\(\CC\) with the set it forms}. In other words, if \(\CC\equiv a\), then we simply write \(\CC=a\), again understanding this as a convention. It is important to emphasize that this convention only applies to classes forming sets. If a class does not form a set, we do not identify it with any set.
+\end{lecture}
+\begin{lecture}{January~18, 2007}
+We reiterate that most of our axioms will assert that a given class~\(\CC\) forms a set. Our guiding intuition here is that if we can somehow `see' all of the elements of a class~\(\CC\) (for example in a natural way using sets that already exist), then \(\CC\)~should form a set.
+
+\begin{axm}[Subset (schema)]
+Let \(\CC\)~be a class and let \(a\)~be a set. If \(\CC\subseteq a\), then \(\CC\)~is a set. Equivalently, if \(P(x)\)~is a property and \(a\)~is a set, then the class
+\[\D=\{\,x\mid x\in a\land P(x)\,\}\]
+is a set. This set is unique by the axiom of extensionality, and we refer to it as \emph{the subset of~\(a\) determined by~\(P\)}.
+\end{axm}
+
+\begin{rmk}
+Formally we define properties~\(P(x)\) using first-order logic. Let \(S=\{\in\}\) be our symbol set and consider the first order language~\(\L_S\). Then a property is by definition a formula \(\varphi(x,y_1,\ldots,y_n)\in\L_S\) (where free variables \(y_1,\ldots,y_n\) are used for parameters). With this formalization, the subset axiom schema reads as follows:
+\begin{quote}
+For all formulas \(\varphi(x,y_1,\ldots,y_n)\in\L_S\), the sentence
+\[\forall a_1\cdots\forall a_n\forall a\exists b\forall x(x\in b\iff(x\in a\land\varphi(x,a_1,\ldots,a_n)))\]
+is an axiom in our theory.
+\end{quote}
+Note that this defines infinitely many axioms, hence it is technically an axiom schema. We will, however, often be imprecise and refer to this simply as the `subset axiom'.
+\end{rmk}
+
+\begin{cor}
+For all classes~\(\CC\), \(\CC\)~is a set iff \(\CC\subseteq a\) for some set~\(a\).
+\end{cor}
+\begin{proof}
+Immediate from definitions and the subset axiom.
+\end{proof}
+
+We now introduce some axioms for forming sets. The following is the simplest:
+\begin{axm}[Pairing]
+Let \(a,b\) be sets. Then the class
+\[\CC=\{\,x\mid x=a\lor x=b\,\}\]
+is a set. This set is unique by the axiom of extensionality. We denote it by~\(\{a,b\}\), and refer to it as \emph{the (unordered) pair of \(a,b\).}
+\end{axm}
+\noindent Note that \(\{a,b\}=\{b,a\}\), which conforms to our intuitive expectation that sets, at least intrinsically, are not distingiushed by any ordering of their elements.
+
+Given sets \(a,b\), we intuitively want to be able to talk about the collection of all objects that are in \(a\)~or~\(b\) (here and in the future we use the \emph{inclusive} sense of `or', to refer to objects in either~\(a\) or~\(b\) or both). In fact, for any finite number of sets \(a_1,\ldots,a_n\), we want to be able to talk about the collection of all objects that reside in any one of the sets~\(a_i\)---that is, the collection of all objects~\(x\) such that there exists some \(1\le i\le n\) with \(x\in a_i\). But we do not want to restrict ourselves to even finitely many sets. We adopt the following axiom:
+\begin{axm}[Union]
+Let \(b\)~be a set. Then the class
+\[\CC=\{\,x\mid\exists a(a\in b\land x\in a)\,\}\]
+is a set. This set is unique by the axiom of extensionality. We denote it by~\(\bigunion b\) and refer to it as \emph{the union over~\(b\)}.
+\end{axm}
+\noindent Using this and the pairing axiom, we define for sets \(a,b\) the (unique) set
+\[a\union b=\bigunion\{a,b\}\]
+to be the union of \(a\)~and~\(b\). A similar procedure could be done for any finite number of sets.
+
+Intuitively, if we can `see' a set~\(a\), then we should be able to `see' all of the subsets of~\(a\). It is useful to have an axiom that guarantees ahead of time that there exists a set containing as elements all such subsets in which we might be interested.
+\begin{axm}[Powerset]
+Let \(a\)~be a set. Then the class
+\[\CC=\{\,x\mid x\subseteq a\,\}\]
+is a set. This set is unique by the axiom of extensionality. We denote it by~\(\PS(a)\) and refer to it as \emph{the powerset of~\(a\)}.
+\end{axm}
+\noindent Note that for a set~\(a\), \(x\subseteq a\) iff \(x\in\PS(a)\) by definition.
+
+Next we motivate the axiom of replacement. For any property~\(P(x,y)\), note that we have the following potential operation: for each set~\(a\), construct the class
+\[\O(a)=\{\,x\mid P(x,a)\,\}\]
+We make a definition:
+\begin{defn}
+Let \(b\)~be a set and \(P(x,y)\)~a property. If for all \(a\in b\), the class
+\[\O(a)=\{\,x\mid P(x,a)\,\}\]
+forms a set, then we say that \emph{\(\O\)~is a definable operation on~\(b\)}.
+\end{defn}
+\noindent Intuitively, we want to guarantee the existence of the `image set' of any set under a definable operation. We adopt the following axiom:
+\begin{axm}[Replacement (schema)]
+Let \(b\)~be a set and \(\O\)~be a definable operation on~\(b\). Then the class
+\[\CC=\{\,x\mid(\exists a\in b)(x=\O(a))\,\}\]
+is a set.
+\end{axm}
+
+We note finally a rough form of the axiom of infinity, which asserts the existence of the set of natural numbers, and hence in particular the existence of an infinite set:
+\begin{axm}[Infinity]
+The class~\(\omega\) of natural numbers is a set.
+\end{axm}
+\noindent We will return to this axiom in greater detail later on.
+\end{lecture}
+\begin{lecture}{January~23, 2007}
+Let \(A,B\) be sets. Define
+\[C=\bigl(\bigunion A\bigr)\union\bigl(\bigunion B\bigr)\]
+Intuitively, \(C\)~can be viewed as the set containing the `background' objects out of which \(A\)~and~\(B\) are built. Note that for all \(a\in A\) and \(b\in B\),
+\[a\subseteq\bigunion A\subseteq C\quad\text{and}\quad b\subseteq\bigunion B\subseteq C\]
+or equivalently \(a,b\in\PS(C)\). Hence \(A\subseteq\PS(C)\) and \(B\subseteq\PS(C)\), or \(A,B\in\PS(\PS(C))\). Therefore we have recovered a hierarchy of sets using the pairing, union, and powerset axioms. This type of procedure can be carried out to prove that a given class is a set. More specifically, if we can prove that all of the elements in a given class belong to some set, then the class must be a set (by the subset axiom). We illustrate this in the following example:
+\begin{example}
+Let \(A\)~be a set and consider the class
+\[\CC=\{\,\PS(a)\mid a\in A\,\}=\{\,x\mid(\exists a\in A)(x=\PS(a))\,\}\]
+Note that \(\CC\)~is guaranteed to be a set by the axiom of replacement. Nevertheless, we can prove directly that \(\CC\)~is a set by finding a set in which all of the elements of~\(\CC\) live, and then applying the subset axiom.
+
+If \(x\in\CC\), then \(x=\PS(a)\) for some \(a\in A\). That is, \(x\)~is a set of (all) subsets of the element~\(a\). Recall however that \(a\subseteq\bigunion A\), so \(x\)~is a set of subsets of~\(\bigunion A\). This implies that \(x\subseteq\PS(\bigunion A)\), or \(x\in\PS(\PS(\bigunion A))\). Since \(x\)~was arbitrary, we have \(\CC\subseteq\PS(\PS(\bigunion A))\). Hence by the subset axiom, \(\CC\)~is a set. In fact,
+\[\CC=\{\,x\mid x\in\PS(\PS(\bigunion A))\land(\exists a\in A)(x=\PS(a))\,\}\]
+\end{example}
+
+We will examine in greater detail the hierarchical nature of set theory later on. As a rough preview, we will define the `hierarchy of sets' by iterating the powerset operation:
+\begin{align*}
+V_0&=\emptyset\\
+V_1&=\PS(\emptyset)=\{\emptyset\}\\
+	&\vdots\\
+V_{n+1}&=\PS(V_n)\\
+	&\vdots\\
+V_{\omega}&=\bigunion\{\,V_n\mid n\in\omega\,\}\\
+V_{\omega+1}&=\PS(V_{\omega})\\
+	&\vdots
+\end{align*}
+The objects of our theory will live in the hierarchy.
+
+For now we return to simpler things. First let us note that we need the existence of the empty set. In fact, this follows from the existence of \emph{any} set by the subset axiom, for if \(a\)~is a set, then we define
+\[\emptyset=\{\,x\mid x\in a\land x\ne x\,\}\]
+In any case, we simply state the empty set axiom:
+\begin{axm}[Empty set]
+The class
+\[\CC=\{\,x\mid x\ne x\,\}\]
+is a set. This set is unique by the axiom of extensionality. We denote it by~\(\emptyset\), and call it \emph{the empty set}. A set~\(a\) is said to be \emph{empty} iff \(a=\emptyset\), and \emph{nonempty} iff it is not empty.
+\end{axm}
+
+We now define the intersection:
+\begin{thm}
+Let \(b\)~be a nonempty set. Then the class
+\[\CC=\{\,x\mid (\forall a\in b)(x\in a)\,\}\]
+is a set. This set is unique by the axiom of extensionality. We denote it by~\(\bigsect b\), and refer to it as \emph{the intersection over~\(b\)}.
+\end{thm}
+\begin{proof}
+Since \(b\)~is nonempty, we may choose \(a\in b\). Now by the subset axiom, the class
+\begin{align*}
+\D&=\{\,x\mid x\in a\land(\forall c\in b)(c\ne a\implies x\in c)\,\}\\
+&=\{\,x\mid(\forall c\in b)(x\in c)\,\}=\CC
+\end{align*}
+is a set as desired.
+\end{proof}
+\noindent The hypothesis that \(b\)~be nonempty is necessary. If \(b=\emptyset\), then
+\[\CC=\{\,x\mid(\forall a)(a\in\emptyset\implies x\in a)\,\}\]
+But \(a\in\emptyset\) is always false, so the implication \(a\in\emptyset\implies x\in a\) is vacuously true for all~\(a\), no matter what \(x\)~is. Hence \(\CC\)~is the class of all sets in this case, which is not a set (if it were, we could form the subset of all sets that are not members of themselves, and arrive at the Russell paradox).
+
+In light of this `glitch', we introduce the notation
+\[\bigsect\nolimits_A B=A\sect\bigl(\bigsect B\bigr)=\{\,x\in A\mid(\forall b\in B)(x\in b)\,\}\]
+which is always guaranteed to be a set by the subset axiom.
+\end{lecture}
+
+\begin{lecture}{January~25, 2007}
+It is instructive to note at this point that we have a decent amount of expressive power already. To demonstrate this, we introduce a definition:
+\begin{defn}
+Let \(a\)~be a set and \(A\subseteq\PS(a)\). Then a set \(m\in A\) is called \emph{the smallest element in~\(A\)} iff for all \(x\in A\), \(m\subseteq x\).
+\end{defn}
+\noindent Note that a smallest element need not exist, but if it does exist it is unique, for if \(m,m'\) are both smallest elements in~\(A\), then \(m\subseteq m'\) and \(m'\subseteq m\) by the definition, hence \(m=m'\) by the axiom of extensionality. We obtain a characterization:
+\begin{prop}
+Let \(a\)~be a set and \(A\subseteq\PS(a)\). If \(A\)~has a smallest element~\(m\), then
+\[m=\bigsect\nolimits_a A=\{\,x\in a\mid (\forall b\in A)(x\in b)\,\}\]
+Conversely, if \(m=\bigsect_a A\in A\), then \(m\)~is the smallest element of~\(A\).
+\end{prop}
+\begin{proof}
+Suppose \(m\)~is the smallest element in~\(A\). We claim \(m=\bigsect_a A\). First note \(m\subseteq a\). Now note that \(m\subseteq\bigsect_a A\), for if \(x\in m\) and \(y\in A\), then since \(m\)~is the smallest element in~\(A\), \(m\subseteq y\) and thus \(x\in y\). Since \(y\)~was arbitrary, \(x\in\bigsect_a A\). Since \(m\in A\), trivially \(\bigsect_a A\subseteq m\). Hence \(m=\bigsect_a A\) by the axiom of extensionality.
+
+The second claim of the proposition is trivial.
+\end{proof}
+
+We introduce additional termonology:
+\begin{defn}
+Let \(a\)~be a set and \(A\subseteq\PS(a)\). We say that \emph{\(A\)~is closed under arbitrary intersections (over~\(a\))} iff for all \(B\subseteq A\), \(\bigsect_a B\in A\).
+\end{defn}
+\noindent The following is then a corollary of the previous proposition:
+\begin{cor}
+Let \(a\)~be a set, \(A\subseteq\PS(a)\), and suppose \(A\)~is closed under arbitrary intersections. Then there exists a smallest element in~\(A\), namely
+\[m=\bigsect\nolimits_a A\]
+More generally, for any \(x\subseteq a\), there exists a smallest \(m_x\subseteq a\) with the properties that \(x\subseteq m_x\) and \(m_x\in A\), namely
+\[m_x=\bigsect\nolimits_a\{\,y\in A\mid x\subseteq y\,\}\]
+\end{cor}
+
+We can generalize the notion of closure to arbitrary definable operations:
+\begin{defn}
+Let \(A\)~be a set and \(\O\)~be a definable operation such that for all \(X\subseteq A\), \(\O(X)\subseteq A\). Then for \(B\subseteq A\), we say that \emph{\(B\)~is closed under~\(\O\)} iff for all \(X\subseteq B\), \(\O(X)\subseteq B\).
+\end{defn}
+\begin{example}
+In this example we use script letters \(\A,\B\) to refer to sets so that the notation is easier to follow. Let \(A\)~and~\(\O\) be as in the above definition and define
+\[\A=\{\,S\subseteq A\mid S\text{ is closed under }\O\,\}\]
+Note that \(\A\subseteq\PS(A)\). We claim that \(\A\)~is closed under arbitrary intersections (over~\(A\)). To verify this, let \(\B\subseteq\A\). We must show that \(\bigsect_A\B\in\A\), or equivalently that \(\bigsect_A\B\)~is closed under~\(\O\).
+
+To verify the latter fact, let \(X\subseteq\bigsect_A\B\). This implies that for all \(S\in\B\), \(X\subseteq S\), and hence since \(S\)~is closed under~\(\O\) by hypothesis, \(\O(X)\subseteq S\). Hence \(\O(X)\subseteq\bigsect_A\B\). But since \(X\)~was arbitrary, this just means that \(\bigsect_A\B\)~is closed under~\(\O\) as desired.
+
+Hence \(\bigsect_A\B\in\A\) and, since \(\B\)~was arbitrary, \(\A\)~is closed under arbitrary intersections.
+\end{example}
+
+We can apply the more general notion of a closure to define the concept of a \emph{finite} set. Intuitively we know what a finite set is, but we must define it formally from the axioms of set theory. Later on we will do this in a different way after we construct the natural numbers, but for now we take another route. Our guiding intuition is as follows: any finite set should be obtainable by starting with the empty set and repeatedly adjoining one element.
+
+Let \(A\) be a set. For \(x\subseteq A\) and \(a\in A\), we produce the set
+\[x\union\{a\}\]
+which is intuitively obtained from~\(x\) by adjoining the element~\(a\). Now for a given set \(X\subseteq\PS(A)\), we consider the definable operation
+\[\O_A(X)=\{\,x\union\{a\}\mid x\in X\land a\in A\,\}\]
+where \(\O_A(X)\)~consists of all subsets of~\(A\) obtainable by adjoining a single element \(a\in A\) to a subset of~\(A\) in~\(X\). Define
+\[\fin_A=\bigsect\nolimits_{\PS(A)}\{\,X\subseteq\PS(A)\mid\emptyset\in X\land X\text{ closed under }\O_A\,\}\]
+to be the smallest \(M\subseteq\PS(A)\) such that \(\emptyset\in M\) and \(M\)~is closed under~\(\O_A\). Intuitively, it is clear that \(\fin_A\)~consists of all of the finite subsets of~\(A\). In fact, we will temporarily say that a set \(A\)~is \emph{finite} iff \(A\in\fin_A\), and a set \(A\)~is infinite iff \(A\)~is not finite. The reader may verify in the following exercise that this definition yields expected results.
+\begin{exercise}
+We assume the preceding definitions.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(A\subseteq A'\), then \(A\)~is finite iff \(A\in\fin_{A'}\).
+\item[(b)] If \(A\subseteq A'\) and \(A'\)~is finite, then \(A\)~is finite.
+\item[(c)] If \(A\)~is finite, and for all \(a\in A\), \(a\)~is finite, then \(\bigunion A\)~is finite.
+\end{enumerate}
+Intuitively, these results state respectively: a subset is finite iff it is a finite subset, any subset of a finite set is finite, and a finite union of finite sets is finite.
+\end{exercise}
+
+It should be noted that without the axiom of infinity, there is no guarantee that there exist any infinite sets. In fact, the other axioms of set theory are consistent with the existence of only finite sets.
+\end{lecture}
+\begin{lecture}{February~1, 2007}
+We desire to implement a pairing operation that will capture the ordering of the two elements in the pair:
+\begin{defn}
+We call \(\O\)~a \emph{pairing operation} iff for all sets \(x,y\), \(\O(x,y)\)~is a set and
+\[\O(x,y)=\O(u,v)\implies x=u\text{ and }y=v\]
+\end{defn}
+\noindent The standard pairing operation is the simplest. Note that
+\[\PS(\{x,y\})=\{\emptyset,\{x\},\{y\},\{x,y\}\}\]
+There are four definable operations determining this set, none of which are pairing operations. On the other hand, there are sixteen operations determining the set \(\PS(\PS(\{x,y\}))\), the following four of which are pairing operations:
+\begin{align*}
+&\{\{x\},\{x,y\}\}\\
+&\{\{y\},\{x,y\}\}\\
+&\{\emptyset,\{x\},\{x,y\}\}\\
+&\{\emptyset,\{y\},\{x,y\}\}
+\end{align*}
+We choose the first one, known as the \emph{Kuratowski pair}:
+\begin{defn}
+Let \(x,y\) be sets. Then the \emph{ordered pair of x and y} is defined to be
+\[\pair{x}{y}=\O_K(x,y)=\{\{x\},\{x,y\}\}\]
+More generally, \(z\) is an \emph{ordered pair} iff there exist sets \(x,y\) with \(z=\pair{x}{y}\).
+\end{defn}
+\noindent Note that \(\pair{x}{y}\)~is a (unique) set by the subset axiom since \(\pair{x}{y}\in\PS(\PS(\{x,y\}))\). We must verify that \(\pair{x}{y}\)~is indeed a pairing operation. In doing so, we first construct operations with which we may recover \(x\)~and~\(y\) from~\(\pair{x}{y}\).
+
+Let \(z=\pair{x}{y}\). Note that \(\bigunion z=\{x,y\}\) and \(\bigsect z=\{x\}\). It is immediate then that \(x=\bigunion\bigsect z\). Now if \(\bigunion z=\bigsect z\), then \(y=x\). On the other hand, if \(\bigunion z\ne\bigsect z\), then \(y=\bigunion(\bigunion z-\bigsect z)\). In either case we have recovered \(x\)~and~\(y\) from~\(z\) using the following operations:
+\begin{align*}
+\X(z)&=\bigunion\bigsect z\\
+\Y(z)&=
+\begin{cases}
+\bigunion\bigsect z&\text{if }\bigunion z=\bigsect z\\
+\bigunion(\bigunion z-\bigsect z)&\text{otherwise}
+\end{cases}
+\end{align*}
+This allows us to prove that the ordered pair is indeed a pairing operation. For if \(z=\pair{x}{y}=\pair{u}{v}\), then \(x=\X(z)=u\) and \(y=\Y(z)=v\).
+
+\begin{defn}
+Let \(A\)~and~\(B\) be sets. Then we define the \emph{cartesian product of \(A\)~and~\(B\)} as
+\[A\times B=\{\,\pair{x}{y}\mid x\in A\land y\in B\,\}\]
+\end{defn}
+\noindent Note that \(A\times B\) is indeed a set since if \(\pair{x}{y}\in A\times B\), we have \(\{x,y\}\subseteq A\union B\), hence
+\[\pair{x}{y}\in\PS(\PS(\{x,y\}))\subseteq\PS(\PS(A\union B))\]
+Therefore \(A\times B\subseteq\PS(\PS(A\union B))\), so \(A\times B\) is a set by the subset axiom. We may also verify that \(A\times B\)~is a set using the replacement axiom a few times. To this end, fix \(a\in A\) and construct
+\[\{a\}\times B=\{\,\pair{a}{y}\mid y\in B\,\}\]
+This is a set by the replacement axiom with \(\O_1(y)=\pair{a}{y}\). Now define for \(x\in A\) the operation~\(\O_2\) given by \(\O_2(x)=\{x\}\times B\). Applying the replacement axiom again, we obtain that
+\[\{\,\{x\}\times B\mid x\in A\,\}\]
+is a set. Then we note that
+\[A\times B=\bigunion\{\,\{x\}\times B\mid x\in A\,\}\]
+
+\begin{defn}
+A \emph{relation}~\(R\) is a set of ordered pairs. We write \(xRy\) iff \(\pair{x}{y}\in R\). In addition we define the classes
+\begin{align*}
+\domain(R)&=\{\,x\mid(\exists y)(\pair{x}{y}\in R)\,\}\\
+\range(R)&=\{\,y\mid(\exists x)(\pair{x}{y}\in R)\,\}\\
+\field(R)&=\domain(R)\union\range(R)
+\end{align*}
+called the \emph{domain}, \emph{range}, and \emph{field} of~\(R\), respectively.
+\end{defn}
+\noindent Note that the domain and range of a relation are sets. This can be seen using the replacement axioms and the operations \(\X\)~and~\(\Y\) introduced earlier, or using the subset axioms. Hence the field is also a set by the union axiom.
+
+Relations can be used to define equivalence relations, graphs, functions, and other mathematical objects. We first make some preliminary definitions:
+\begin{defn}
+Let \(A\)~be a set. Then we define the \emph{relation~\(R_A\) induced by~\(A\)} to be
+\[R_A=\{\,z\mid z\in A\land(\exists x)(\exists y)(z=\pair{x}{y})\,\}\]
+We may then extend our previous definitions of domain and range to arbitrary sets by writing \(\domain(A)=\domain(R_A)\) and \(\range(A)=\range(R_A)\).
+\end{defn}
+\begin{defn}
+Let \(R,S\) be relations. We define the \emph{composite of \(R\)~and~\(S\)} by
+\[S\circ R=\{\,\pair{x}{z}\mid(\exists y)(\pair{x}{y}\in R\land\pair{y}{z}\in S)\,\}\]
+\end{defn}
+\noindent We note that composition of relations satisfies associativity:
+\begin{prop}
+Let \(R,S,T\) be relations. Then
+\[(R\circ S)\circ T=R\circ(S\circ T)\]
+\end{prop}
+\begin{proof}
+Suppose \(\pair{x}{z}\in(R\circ S)\circ T\). This means that there exists~\(y\) such that \(\pair{x}{y}\in T\) and \(\pair{y}{z}\in R\circ S\). But the last statement means that there exists~\(y'\) such that \(\pair{y}{y'}\in S\) and \(\pair{y'}{z}\in R\). It follows from \(\pair{x}{y}\in T\) and \(\pair{y}{y'}\in S\) that \(\pair{x}{y'}\in S\circ T\). Finally it follows from this result and \(\pair{y'}{z}\in R\) that \(\pair{x}{z}\in R\circ(S\circ T)\). Hence
+\[(R\circ S)\circ T\subseteq R\circ(S\circ T)\]
+The reverse inclusion is similar.
+\end{proof}
+We now define a function:
+\begin{defn}
+We say that a relation~\(R\) is a \emph{function} iff
+\[(\pair{x}{y}\in R\land\pair{x}{z}\in R)\implies y=z\]
+For \(x\in\domain(R)\), we denote by~\(R(x)\) the unique \(y\in\range(R)\) with \(\pair{x}{y}\in R\).
+\end{defn}
+\end{lecture}
+
+\begin{lecture}{February~6, 2007}
+We introduce some additional notation. Our definitions are as general as possible, though we are primarily interested in using them with relations.
+\begin{defn}
+Let \(R\)~and~\(A\) be sets. Then we define \emph{the image of~\(A\) under~\(R\)} to be
+\[R[A]=\{\,y\mid(\exists x\in A)(\pair{x}{y}\in R)\,\}\]
+\end{defn}
+\begin{defn}
+Let \(R\)~be a set. Then we define the \emph{inverse of~\(R\)} to be
+\[R^{-1}=\{\,\pair{y}{x}\mid\pair{x}{y}\in R\,\}\]
+\end{defn}
+\noindent Note that \(R^{-1}\)~is always a relation, even if \(R\)~is not a relation. Note also that for any set~\(A\), \(R=A\times A\) is a relation and \(R^{-1}=R\). If \(A\)~has at least two distinct elements, then neither~\(R\) nor~\(R^{-1}\) is a function.
+
+Let \(R\)~be a set. We examine \(R\circ R^{-1}\). Note that \(\pair{x}{z}\in R\circ R^{-1}\) iff there exists~\(y\) such that \(\pair{x}{y}\in R^{-1}\) and \(\pair{y}{z}\in R\), or equivalently \(\pair{y}{x}\in R\) and \(\pair{y}{z}\in R\). Now the latter holds iff \(x,z\in R[\{y\}]\), or equivalently \(\pair{x}{z}\in R[\{y\}]\times R[\{y\}]\). Hence we obtain the following identity:
+\begin{prop}
+For any set~\(R\),
+\[R\circ R^{-1}=\bigunion\{\,R[\{x\}]\times R[\{x\}]\mid x\in\domain(R)\,\}\]
+If \(R\)~is a function, then \(R\circ R^{-1}=I_{\range(R)}\), where \(I_{\range(R)}\)~denotes the identity function on~\(\range(R)\).
+\end{prop}
+\begin{proof}
+To prove the second claim, suppose \(R\)~is a function. Then for any \(x\in\domain(R)\), \(R[\{x\}]=\{R(x)\}\). Hence we have
+\begin{align*}
+R\circ R^{-1}&=\bigunion\{\,\{\pair{R(x)}{R(x)}\}\mid x\in\domain(R)\,\}\\
+	&=\{\,\pair{R(x)}{R(x)}\mid x\in\domain(R)\,\}\\
+	&=\{\,\pair{y}{y}\mid y\in\range(R)\,\}\\
+	&=I_{\range(R)}
+\end{align*}
+\end{proof}
+\noindent Note that the second part of the above proposition is not in general true for arbitrary relations.
+
+We wish to examine properties of the image set operator~\(R[-]\). Before doing so, we introduce a preliminary definition:
+\begin{defn}
+A set~\(R\) is said to be \emph{single rooted} iff
+\[(\pair{x}{y}\in R\land\pair{x'}{y}\in R)\implies x=x'\]
+\end{defn}
+\begin{prop}
+A set \(R\)~is single rooted iff \(R^{-1}\)~is a function.
+\end{prop}
+\noindent Now we obtain a theorem:
+\begin{thm}
+Let \(R\)~be a set. Let \(\A\)~be a set (of sets) and \(A\)~and~\(B\) be sets. Then
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(R[\bigunion\A]=\bigunion\{\,R[X]\mid X\in\A\,\}\)
+\item[(b)] \(R[\bigsect\A]\subseteq\bigsect\{\,R[X]\mid X\in\A\,\}\) (where \(\A\ne\emptyset\))
+\item[(c)] \(R[A-B]\supseteq R[A]-R[B]\)
+\end{enumerate}
+If \(R\)~is single rooted, then equality holds in (b)~and~(c).
+\end{thm}
+\begin{proof}
+We prove~(b). Suppose that \(y\in R[\bigsect\A]\). Then there exists \(x\in\bigsect\A\) such that \(\pair{x}{y}\in R\). Now if \(X\in\A\), then \(x\in X\), hence \(y\in R[X]\) since \(\pair{x}{y}\in R\). But since \(X\)~was arbitrary, this means \(y\in\bigsect\{\,R[X]\mid X\in\A\,\}\). Hence (b)~holds.
+
+Suppose \(R\)~is single rooted and \(y\in\bigsect\{\,R[X]\mid X\in\A\,\}\). Then since \(\A\ne\emptyset\), we may choose \(X\in\A\) with \(x\in X\) such that \(\pair{x}{y}\in R\). Now if \(X'\in\A\), then there exists \(x'\in X'\) such that \(\pair{x'}{y}\in R\). But \(x=x'\) since \(R\)~is single rooted, hence \(x\in X'\). Since \(X'\)~was arbitrary, we have \(x\in\bigsect\A\), so \(y\in R[\bigsect\A]\) and the reverse inclusion holds.
+\end{proof}
+
+We introduce some notation and termonology to work with functions:
+\begin{defn}
+If \(F\)~is a function, we write \(F:A\to B\) iff \(\domain(F)=A\) and \(\range(F)\subseteq B\). We write \(a\mapsto b\) iff \(a\in\domain(F)\) and \(F(a)=b\). We also write \(F=\fdef{F(a)}{a\in A}\).
+
+We say that \(F\)~is \emph{injective} (or \emph{one-to-one}) iff \(F\)~is single rooted. If \(F:A\to B\), we say that \(F\)~is \emph{surjective} (or \emph{onto}) iff \(\range(F)=B\). We say that \(F\)~is \emph{bijective} (or that \(F\)~is a \emph{one-to-one correspondence}) iff \(F\)~is injective and surjective.
+\end{defn}
+\begin{rmk}
+Note that `surjective' is not really well-defined here. Surjectivity depends on the set into which we regard a function as mapping, and it is not determined in advance just which set this is. If \(F:A\to B\) and \(B\subseteq B'\), then \(F:A\to B'\) also. More generally, if \(\range(F)\subseteq B'\), then \(F:A\to B'\). Hence when we say that a function is surjective, we must understand this \emph{relative to some specified target set}. (For example, a function is always surjective on its range.) When we write `\(F:A\to B\)', we will generally understand~\(B\) to be our working target set.
+\end{rmk}
+
+We may obtain a function from a relation in a natural way:
+\begin{defn}
+Let \(R\subseteq A\times B\) be a relation. Define the function
+\begin{align*}
+F_R:A&\to\PS(B)\\
+	a&\mapsto R[\{a\}]
+\end{align*}
+mapping \(a\in A\) to its image set under~\(R\). We call~\(F_R\) \emph{the function induced by~\(R\)}.
+\end{defn}
+\noindent In the following theorem, we see that this definition actually provides us with an alternate way to speak about relations. More specifically, for given sets \(A\)~and~\(B\), we may naturally identify relations from~\(A\) to~\(B\) and functions from~\(A\) to~\(\PS(B)\).
+\begin{thm}
+Let \(A\)~and~\(B\) be sets. Define
+\[\A=\{\,R\mid R\subseteq A\times B\,\}\qquad\B=\{\,F\mid F:A\to\PS(B)\,\}\]
+Then the function
+\begin{align*}
+\FF:\A&\to\B\\
+	R&\mapsto F_R
+\end{align*}
+is a bijection from~\(\A\) to~\(\B\).
+\end{thm}
+\begin{proof}
+We construct an inverse function \(\G:\B\to\A\) directly. For \(F\in\B\), define
+\[\G(F)=R_F=\{\,\pair{a}{b}\mid a\in A\land b\in F(a)\,\}\]
+We claim that for \(R\in\A\), \(R_{(F_R)}=R\) and for \(F\in\B\), \(F_{(R_F)}=F\). From this injectivity and surjectivity of~\(\FF\) follow, for if \(F_R=F_{R'}\), then
+\[R=R_{(F_R)}=R_{(F_{R'})}=R'\]
+and if \(F\in\B\), then for \(R=R_F\) we have \(F_R=F\).
+
+To prove that \(R_{(F_R)}=R\) for \(R\in\A\), note that \(\pair{a}{b}\in R_{(F_R)}\) iff \(a\in A\) and \(b\in F_R(a)\), that is, iff \(b\in R[\{a\}]\), or equivalently \(\pair{a}{b}\in R\). Similarly for \(F\in\B\), \(F_{(R_F)}(a)=X\) iff \(R_F[\{a\}]=X\), or equivalently \(F(a)=X\).
+\end{proof}
+\end{lecture}
+\begin{lecture}{February~8, 2007}
+Previously we constructed a natural bijection
+\[\FF:\{\,R\mid R\subseteq A\times B\,\}\to\{\,F\mid F:A\to\PS(B)\,\}\]
+for fixed sets \(A\)~and~\(B\). If \(f:A\to B\) is a bijection, we can construct natural bijections between other sets constructed from \(A\)~and~\(B\). For example, define
+\begin{align*}
+F:\PS(A)&\to\PS(B)\\
+	X&\mapsto f[X]=\{\,f(x)\mid x\in X\,\}
+\end{align*}
+This is easily seen to be a bijection. To verify injectivity, note that if \(f[X]=f[X']\) and \(x\in X\), then \(f(x)\in f[X]\subseteq f[X']\). Hence there exists \(x'\in X'\) with \(f(x)=f(x')\). But since \(f\)~is injective, \(x=x'\), so \(x\in X'\). Hence \(X\subseteq X'\), and similarly \(X'\subseteq X\), so \(X=X'\). To verify surjectivity, note that if \(Y\subseteq B\), then we may set
+\[X=f^{-1}[Y]=\{\,x\in A\mid f(x)\in Y\,\}\subseteq A\]
+and trivially \(f[X]\subseteq Y\). But \(Y\subseteq f[X]\) by the surjectivity of~\(f\), hence \(F(X)=f[X]=Y\).
+
+Similarly we may define
+\begin{align*}
+F:A\times A&\to B\times B\\
+	(a,a')&\mapsto (f(a),f(a'))
+\end{align*}
+We leave it to the reader to verify that \(F\)~is a bijection.
+
+We now introduce some termonology and results for working with bijections.
+\begin{defn}
+Let \(f:A\to B\). Then \(g:B\to A\) is called a \emph{left inverse of~\(f\)} iff \(g\circ f=I_A\).
+\end{defn}
+\noindent Note that for \(f:A\to B\) and \(b\in B\), if \(g:B\to A\) is a left inverse of~\(f\), then we must have, for each \(a\in A\) with \(f(a)=b\), \(g(b)=g(f(a))=a\). But \(g\)~is a function, hence there is at most one \(a\in A\) with \(f(a)=b\). But this just means that \(f\)~is injective, or equivalently \(f^{-1}\)~is a function. We have, for \(b\in\range(f)\), \(g(b)=f^{-1}(b)\). More generally, set \(C=B-\range(f)\). Then any left inverse~\(g\) of~\(f\) will be of the form \(g=f^{-1}\union h\) where \(h:C\to A\) is arbitrary.
+
+We have shown that if a function~\(f:A\to B\) has a left inverse, then it is injective. Does the converse hold? Almost. We encounter a small glitch if \(A=\emptyset\) but \(B\ne\emptyset\), in which case \(f=\emptyset\) is injective, but \(f\)~has no left inverses (since there are no functions from \(B\)~into~\(A\)). If \(A\ne\emptyset\) and \(f\)~is injective, however, then we may choose \(a\in A\) and define \(g:B\to A\) by
+\[g=f^{-1}\union((B-\range(f))\times\{a\})\]
+It is immediate that \(g\circ f=I_A\). Hence we have a theorem:
+\begin{thm}
+Let \(f:A\to B\). If \(f\)~has a left inverse, then \(f\)~is injective. If \(A\ne\emptyset\), then the converse holds too.
+\end{thm}
+We may similarly characterize surjectivity:
+\begin{defn}
+Let \(f:A\to B\). Then \(g:B\to A\) is called a \emph{right inverse of~\(f\)} iff \(f\circ g=I_B\).
+\end{defn}
+\noindent It is immediate that the existence of a right inverse implies surjectivity, for if \(f:A\to B\), and \(g:B\to A\) is a right inverse of~\(f\), then for all \(b\in B\), \(f(g(b))=b\).
+
+The converse claim is less trivial. If \(f:A\to B\) is surjective, then for each \(b\in B\), the preimage set
+\[f^{-1}[\{b\}]=\{\,x\in A\mid f(x)=b\,\}\]
+is nonempty. We can define a relation \(R\subseteq B\times A\) by
+\[R=\{\,\pair{y}{x}\mid y\in B\land x\in A\land f(x)=y\,\}\]
+relating each \(b\in B=\domain(R)\) to its preimages in~\(A\) under~\(f\). What we desire is a function \(g:B\to A\) such that \(g\subseteq R\). For then we have, for all \(b\in B\), \(g(b)\in f^{-1}[\{b\}]\), so \(f(g(b))=b\). Hence in this case \(g\)~is a right inverse for~\(f\).
+
+Unfortunately \emph{the existence of such a function~\(g\) does not follow from our current axioms}. We must adopt a version of the \emph{axiom of choice}:
+\begin{axm}[Choice]
+Let \(C,D\) be sets and \(R\subseteq C\times D\) with \(\domain(R)=C\). Then there exists a function \(g:C\to D\) such that \(g\subseteq R\).
+\end{axm}
+\noindent This axiom is called the `axiom of choice' because \emph{it allows us to make, possibly infinitely many, arbitrary choices}. In our present case, we know that there exists for each \(b\in B\) at least one preimage \(a\in A\) under~\(f\). The axiom of choice allows us then to actually choose, for each \(b\in B\), an arbitrary preimage \(a_b\in A\). Formally, this means the axiom gives us a function \(g:B\to A\) mapping \(b\mapsto a_b\) where \(f(a_b)=b\)---in other words, a right inverse for~\(f\). Hence we can complete our desired characterization of surjectivity:
+\begin{thm}
+Let \(f:A\to B\). Then \(f\)~has a right inverse iff \(f\)~is surjective.
+\end{thm}
+\begin{rmk}
+It is important to note that the axiom of choice is \emph{not} required to choose an element from a single nonempty set. Nor is it required to choose an element from each of an arbitrary finite number of nonempty sets. Nor is it required to choose an element from each of possibly infinitely many nonempty sets when it is possible to \emph{define} (using a first-order formula) the element we are choosing from each nonempty set. For example, we will see later that the set~\(\omega\) of natural numbers is \emph{well ordered}, meaning that every nonempty subset has a least element. We can define a choice function for~\(\omega\), without appealing to the axiom of choice, by selecting the least element from each nonempty subset. The axiom of choice is really necessary only when we must make infinitely many arbitrary choices.
+\end{rmk}
+The following proposition uses the axiom of choice:
+\begin{prop}
+Let \(\A\)~be a nonempty set (of sets). Then
+\[\bigsect_{A\in\A}\bigl(\bigunion A\bigr)=\bigunion\{\,\bigsect_{A\in\A} G(A)\mid G\text{ a function }\land\domain(G)=\A\land(\forall A\in\A)(G(A)\in A)\,\}\]
+\end{prop}
+\begin{proof}
+One direction is easy. If \(x\)~is in the set on the right hand side, then there exists some function~\(G\) satisfying the specified properties such that \(x\in\bigsect_{A\in\A} G(A)\). Fix \(A\in\A\). Then we know \(x\in G(A)\). But \(G(A)\in A\), hence \(x\in\bigunion A\). Since \(A\)~was arbitrary, we have \(x\in\bigsect_{A\in\A}(\bigunion A)\).
+
+To prove the converse inclusion, suppose \(x\in\bigsect_{A\in\A}(\bigunion A)\). Then for each \(A\in\A\), there exists at least one set \(a\in A\) with \(x\in a\). Define the relation
+\[R=\{\,\pair{A}{a}\mid A\in\A\land a\in A\land x\in a\,\}\]
+Note that \(R\subseteq\A\times\bigunion\A\) and \(\domain(R)=\A\). Hence by the axiom of choice there exists a function \(G:\A\to\bigunion\A\) such that, for all \(A\in\A\), \(G(A)\in A\) and \(x\in G(A)\). Hence \(x\in\bigsect_{A\in\A} G(A)\). But then \(x\)~is in the set on the right hand side above, so the reverse inclusion holds as desired.
+\end{proof}
+\noindent This result is known as the \emph{general distributivity law for union and intersection}.
+\end{lecture}
+
+\begin{lecture}{February~13, 2007}
+Let \(A\)~be a set. It is sometimes useful to `index' the elements of~\(A\) by constructing some `indexing function' \(f:I\to A\) such that
+\[A=\{\,f(i)\mid i\in I\,\}=\range\fdef{f(i)}{i\in I}\]
+A trivial way to do this, of course, is to set \(I=A\) and \(f=I_A\). But other indexing sets will be more useful in most circumstances.
+
+We introduce a generalized cartesian product:
+\begin{defn}
+Let \(\FF=\fdef{A_i}{i\in I}\) be given. Then the \emph{cartesian product (over~\(\FF\))} is
+\[\prod\FF=\prod_{i\in I}A_i=\{\,f\mid f\text{ a function}\land\domain(f)=I\land(\forall i\in I)(f(i)\in A_i)\,\}\]
+\end{defn}
+\noindent Note that if \(f\in\prod_{i\in I}A_i\), then \(f:I\to\bigunion_{i\in I}A_i\), so \(f\in\PS(I\times \bigunion_{i\in I}A_i)\). Hence \(\prod_{i\in I}A_i\subseteq\PS(I\times\bigunion_{i\in I}A_i)\), and so \(\prod_{i\in I}A_i\) is a set by the subset axiom.
+
+Intuitively, \(f\in\prod_{i\in I}A_i\) may be viewed as an `\(I\)-tuple' of values over~\(\bigunion_{i\in I}A_i\), where for \(i\in I\), the `\(i\)-th coordinate'~\(f(i)\) of~\(f\) is an element of~\(A_i\).
+
+Note that we encounter a slight `glitch' with the above definition: if there exists some \(i\in I\) with \(A_i=\emptyset\), then \(\prod_{i\in I}A_i=\emptyset\). Hence we typically assume that \(A_i\ne\emptyset\) for all \(i\in I\). By the axiom of choice, we are then guaranteed that \(\prod_{i\in I}A_i\ne\emptyset\). For we may construct the relation
+\[R=\{\,\pair{i}{a}\mid i\in I\land a\in A_i\,\}\]
+Now \(\domain(R)=I\) by hypothesis. Hence by the axiom of choice, there exists a function~\(f\) with \(\domain(f)=I\) and \(f(i)\in A_i\) for all \(i\in I\). But then \(f\in\prod_{i\in I}A_i\).
+
+We now define some properties that may be satisfied by relations. Again, we make our definitions here as general as possible, though we expect them to be used primarily with relations.
+\begin{defn}
+Let \(R\)~be a set and \(A\)~be a set.
+\begin{enumerate}[itemsep=0pt]
+\item \(R\)~is \emph{reflexive on~\(A\)} iff \(\pair{a}{a}\in R\) for all \(a\in A\).
+\item \(R\)~is \emph{irreflexive on~\(A\)} iff \(\pair{a}{a}\not\in R\) for all \(a\in A\).
+\item \(R\)~is \emph{symmetric} iff \(\pair{a}{b}\in R\) implies \(\pair{b}{a}\in R\).
+\item \(R\)~is \emph{asymmetric} iff \(\pair{a}{b}\in R\) implies \(\pair{b}{a}\not\in R\).
+\item \(R\)~is \emph{antisymmetric} iff for \(a\ne b\), \(\pair{a}{b}\in R\) implies \(\pair{b}{a}\not\in R\).
+\item \(R\)~is \emph{transitive} iff (\(\pair{a}{b}\in R\) and \(\pair{b}{c}\in R\)) implies \(\pair{a}{c}\in R\).
+\item \(R\)~is \emph{connected on~\(A\)} iff for \(a,b\in A\), \(\pair{a}{b}\in R\) or \(\pair{b}{a}\in R\).
+\end{enumerate}
+\end{defn}
+\noindent These properties may be characterized set theoretically. For a set~\(A\), define
+\[{=}_A\ =\{\,\pair{x}{y}\in A\times A\mid x=y\,\}=\{\,\pair{x}{x}\mid x\in A\,\}\]
+\begin{thm}
+Let \(R\)~be a set and \(A\)~be a set.
+\begin{enumerate}[itemsep=0pt]
+\item \(R\)~is reflexive on~\(A\) iff \(R\supseteq{=}_A\). For any~\(S\), \(S\union{=}_A\) is reflexive on~\(A\).
+\item \(R\)~is irreflexive on~\(A\) iff \(R\sect{=}_A=\emptyset\). For any~\(S\), \(S-{=}_A\) is irreflexive on~\(A\).
+\item \(R\)~is symmetric iff \(R^{-1}\subseteq R\). For any~\(S\), \(S\union S^{-1}\) is symmetric.
+\item \(R\)~is asymmetric iff \(R^{-1}\sect R=\emptyset\). For any~\(S\), \(S-S^{-1}\) is asymmetric.
+\item \(R\)~is transitive iff \(R\circ R\subseteq R\). For any~\(S\), the set
+\[S\union(S\circ S)\union(S\circ S\circ S)\union\cdots\]
+is transitive.
+\end{enumerate}
+\end{thm}
+
+We may now define equivalence relations:
+\begin{defn}
+Let \(R\)~be a relation on~\(A\). We say that \(R\)~is an \emph{equivalence relation on~\(A\)} iff \(R\)~is reflexive on~\(A\), symmetric, and transitive. For \(a\in A\), we call the set
+\[[a]_R=R[\{a\}]=\{\,b\in A\mid \pair{a}{b}\in R\,\}\]
+the \emph{equivalence class of~\(a\) under~\(R\)}.
+\end{defn}
+\noindent The following proposition is immediate from definitions:
+\begin{prop}
+Let \(R\)~be an equivalence relation on~\(A\) and \(a,b\in A\). Then
+\[[a]_R\sect[b]_R\ne\emptyset\implies [a]_R=[b]_R\]
+\end{prop}
+\noindent Note that for \(a\in A\), \(a\in[a]_R\). For \(C=[a]_R\), we see that \(C\times C\subseteq R\). Also, if \(\pair{a}{b}\in R\), then \(\pair{a}{b}\in C\times C\). Hence we have a set \(\CC=\{\,[a]_R\mid a\in A\,\}\) of nonempty pairwise disjoint sets with \(A=\bigunion\CC\) and \(R=\bigunion\{\,C\times C\mid C\in\CC\,\}\).
+\begin{defn}
+Let \(R\)~be an equivalence relation on~\(A\). We define \(A/R=\{\,[a]_R\mid a\in A\,\}\) and define the \emph{projection} map
+\begin{align*}
+\pi_R:A&\to A/R\\
+		a&\mapsto[a]_R
+\end{align*}
+\end{defn}
+\begin{example}
+As an example of an equivalence relation, let \(f:A\to B\) and define
+\[E_f=\{\,\pair{a_1}{a_2}\in A\times A\mid f(a_1)=f(a_2)\,\}\]
+It is trivially verified that \(E_f\)~is an equivalence relation. For \(b\in\range(f)\), define
+\[C_b=\{\,a\in A\mid f(a)=b\,\}\]
+Since \(b\in\range(f)\), there exists \(a_b\in A\) with \(f(a_b)=b\). We see that \(C_b=[a_b]_{E_f}\). Hence we have \(A/E_f=\{\,C_b\mid b\in\range(f)\,\}\).
+\end{example}
+\noindent The previous example leads us to a general theorem:
+\begin{thm}
+Let \(f:A\to B\). Then there exists an equivalence relation \(E\subseteq A\times A\), a set \(\widehat{B}\subseteq B\), and a bijection \(\widehat{f}:A/E\to\widehat{B}\) mapping \([a]_E\mapsto f(a)\) and satisfying \(f=\widehat{f}\circ\pi_E\).
+\end{thm}
+
+We now introduce the notions of partial and linear orderings:
+\begin{defn}
+Let \(R\)~be a relation on~\(A\). We say that \(R\)~is a \emph{partial ordering on~\(A\)} iff \(R\)~is reflexive on~\(A\), antisymmetric, and transitive. We say that \(R\)~is a \emph{linear ordering on~\(A\)} iff \(R\)~is a partial ordering on~\(A\) and \(R\)~is connected on~\(A\).
+\end{defn}
+\begin{example}
+Let \(A\)~be a set. Then \(\PS(A)\)~is partially ordered under the relation
+\[\subseteq_{\PS(A)}=\{\,\pair{X}{Y}\in\PS(A)\times\PS(A)\mid X\subseteq Y\,\}\]
+This example is actually totally typical in the sense that any arbitrary partial ordering naturally induces a partial ordering under set inclusion. To see this, let \(\pair{A}{\preceq}\) be an arbitrary partial ordering. For \(a\in A\), define the \emph{segment of~\(a\)} by
+\[S_a=\{\,x\in A\mid x\preceq a\,\}\]
+and set \(\A=\{\,S_a\mid a\in A\,\}\). Define \(\FF:A\to\A\) by \(a\mapsto S_a\). Then \(\FF\)~is a bijection and \(a\preceq b\) iff \(\FF(a)=S_a\subseteq S_b=\FF(b)\).
+\end{example}
+\begin{example}
+As another example of a partial ordering, let \(R\)~be an arbitrary transitive relation on~\(A\). Define the equivalence relation
+\[E_R=\{\,\pair{a}{b}\mid a=b\lor(\pair{a}{b}\in R\land \pair{b}{a}\in R)\,\}\]
+Then \(R\)~induces a relation~\(\widehat{R}\) on \(A/E_R\) defined by
+\[\pair{[a]_R}{[b]_R}\in\widehat{R}\iff \pair{a}{b}\in R\]
+The reader may verify that \(\widehat{R}\)~is a well defined partial ordering on~\(A/E_R\).
+
+This example actually illustrates a very general principle regarding equivalence relations. Defining an equivalence relation and then moving into the set of equivalence classes allows us in effect to `identify' any two objects related by the relation. The resulting objects (the equivalence classes) will in general satisfy new, desired, properties as a result of this identification process. Above, \(E_R\)~can be seen as identifying objects that are already equal or else related to each other in both directions under~\(R\). This has the effect of imposing reflexivity and antisymmetry among the resulting objects under (an appropriate redefinition of)~\(R\). Since \(R\)~was already transitive, we obtain a partial ordering.
+\end{example}
+\end{lecture}
+\begin{lecture}{February~15, 2007}
+In our definitions of orderings above, we have required reflexivity. Intuitively our definitions model a `less than or equal to' relation~\(\le\). One may instead model a `strictly less than' relation~\(<\) and require irreflexivity. (Of course, one may alternately require neither.) We make this distinction formally:
+\begin{defn}
+Let \(R\)~be an ordering relation on~\(A\). Then the relation \(R-{=}_A\) is called the \emph{strict ordering induced by~\(R\)}. The relation \(R\union{=}_A\) is called the \emph{nonstrict ordering induced by~\(R\)}.
+\end{defn}
+\noindent Note that in our treatment, an ordering~\(R\) is always nonstrict.
+
+We now work more with partial orderings.
+\begin{defn}
+Let \(P\)~be partially ordered under~\(R\). Then \(C\subseteq P\) is called a \emph{chain} iff \(R\)~induces a linear ordering on~\(C\), that is, iff \(C\)~is linearly ordered under \(R\sect(C\times C)\).
+\end{defn}
+\noindent Note that for any partial ordering~\(P\), \(\emptyset\subseteq P\), and \(\emptyset\)~is a chain by the above definition. Partial orderings and chains arise in many areas of mathematics. We give two simple examples from algebra:
+\begin{example}
+Let \(G\)~be a group and set
+\[\SSS=\{\,H\mid H\text{ is a subgroup of }G\,\}\]
+Then \(P\)~is partially ordered under inclusion. Note that if \(\CC\subseteq\SSS\) is a nonempty chain, then \(\bigunion\CC\in\SSS\). Indeed, if \(x,y\in\bigunion\CC\), then there exist \(H_1,H_2\in\CC\) with \(x\in H_1\) and \(y\in H_2\). But \(H_1\subseteq H_2\) or \(H_2\subseteq H_1\) since \(\CC\)~is a chain. If \(H_1\subseteq H_2\), then \(x,y\in H_2\), hence \(xy\in H_2\subseteq\bigunion\CC\) since \(H_2\)~is a subgroup. Similarly if \(H_2\subseteq H_1\). Hence \(\bigunion\CC\)~is closed under the group operation. Now \(e\in\bigunion\CC\) since \(e\in H\) for some \(H\in\CC\) (\(\CC\)~nonempty). Finally, if \(x\in\bigunion\CC\), then \(x\in H\) for some \(H\in\CC\), hence \(x^{-1}\in H\subseteq\bigunion\CC\). Thus \(\bigunion\CC\)~is closed under inverses. We have established that \(\bigunion\CC\)~is a subgroup of~\(G\), that is, \(\bigunion\CC\in\SSS\). In the language of closures, we may say that \(\SSS\)~is closed under the taking of unions over nonempty chains.
+\end{example}
+\begin{example}
+Let \(R\)~be a commutative ring and set
+\[\SSS=\{\,I\mid I\text{ is a proper ideal of }R\,\}\]
+Then the reader may verify that \(\SSS\)~is closed under unions over nonempty chains.
+\end{example}
+\begin{defn}
+Let \(P\)~be partially ordered under~\(R\). Then \(M\in P\) is called a \emph{maximal element} iff there does not exist \(X\in P\) with \(M\ne X\) such that \(\pair{M}{X}\in R\). The element \(M\in P\) is called a \emph{maximum element} iff for all \(X\in P\), \(\pair{X}{M}\in R\).
+
+We similarly define \emph{minimal} and \emph{minimum} elements.
+\end{defn}
+\noindent Note that there may exist multiple maximal [minimal] elements, but a maximum [minimum] element is unique whenever it exists (by antisymmetry). Also the concepts of maximal [minimal] and maximum [minimum] concide for linear orderings.
+
+We may now state a key result for partial orderings:
+\begin{thm}[Zorn]
+Let \(P\)~be partially ordered under inclusion and suppose that for all chains \(C\subseteq P\), \(\bigunion C\in P\) (in other words, \(P\)~is closed under unions over arbitrary chains). Then there exists a maximal element \(M\in P\).
+\end{thm}
+\noindent This result is called `Zorn's lemma' for historical reasons. It is extremely useful in many areas in mathematics. For example, in linear algebra it is used to prove that every vector space has a basis (a basis is simply a maximal linearly independent set of vectors). We give a simpler example:
+\begin{example}
+Let \(G\)~be a group, \(g\in G\), \(g\ne e\). Then there exists a maximal subgroup~\(H\) of~\(G\) such that \(g\not\in H\). In other words, there exists a maximal element in
+\[\SSS=\{\,H\mid H=\emptyset\lor(H\text{ is a subgroup of }G\land g\not\in H)\,\}\]
+Indeed, this follows quickly from the results of the first example above and Zorn's lemma. Note that we include \(\emptyset\in\SSS\) in order to account for the empty chain.
+\end{example}
+
+Often we are interested in working with the smallest set with a given property:
+\begin{defn}
+Let \(A\)~be a set, \(\A\subseteq\PS(A)\), and \(P(x)\)~be a property. (Note that \(\A\)~is partially ordered under inclusion.) We say that \(S\in\A\) is \emph{the smallest set satisfying~\(P\)} iff \(S\)~is the minimum element under inclusion in
+\[\B=\{\,X\mid X\in\A\land P(X)\,\}\]
+or equivalently iff for all \(X\in\A\), \(P(X)\)~implies \(S\subseteq X\).
+\end{defn}
+\noindent Note that in order to show that \(\A\)~has a smallest element satisfying~\(P\), it is sufficient to show that \(\bigsect\B\in\B\). We give an example from real analysis:
+\begin{example}
+Recall that a sequence \(\fdef{a_n}{n\in\omega}\) in~\(\R\) is said to \emph{converge} to \(a\in\R\) iff for all \(\epsilon>0\), there exists \(N\ge0\) such that for all \(n\ge N\), \(|a_n-a|<\epsilon\). A subset \(X\subseteq\R\) is \emph{closed} iff all convergent sequences in~\(X\) converge to values in~\(X\)---that is, iff for all \(\fdef{a_n}{n\in\omega}\) in~\(X\), if \(\fdef{a_n}{n\in\omega}\) converges to \(a\in\R\), then \(a\in X\).
+
+Let \(G\)~be a group over~\(\R\). For \(X\subseteq\R\), there exists a smallest subgroup~\(B\) of~\(G\) such that \(X\subseteq B\) and \(B\)~is closed. Simply set
+\[\B=\{\,H\mid H\text{ a subgroup of }G, X\subseteq H, H\text{ closed}\,\}\]
+and take \(B=\bigsect\B\).
+\end{example}
+
+Finally, we prove a result about finite linear orderings using our alternative definition of finite given in a previous lecture:
+\begin{thm}
+Let \(\pair{A}{\preceq}\) be a linear ordering with \(A\)~finite. Then for any nonempty \(X\subseteq A\), \(X\)~has a least element and a greatest element.
+\end{thm}
+\begin{proof}
+We prove the theorem for least elements.
+
+Note that \(\PS(A)=\fin_A\) by a previous exercise. Hence it suffices to show that the claim holds for nonempty sets in~\(\fin_A\). Define
+\[\A=\{\,X\in\fin_A\mid X\ne\emptyset\implies X\text{ has a least element}\,\}\]
+We claim that \(\emptyset\in\A\) and that \(\A\)~is closed under the operation of adjoining a single element of~\(A\) to any one of its members. Then, since \(\fin_A\)~is the smallest set satisfying these conditions by construction, we have \(\fin_A\subseteq\A\) and hence \(\A=\fin_A\). This establishes our desired claim.
+
+Vacuously, \(\emptyset\in\A\). Suppose now \(X\in\A\) and \(a\in A\). Consider the set \(X\union\{a\}\). If \(a\le x\) for all \(x\in X\), then \(a\)~is the least element in \(X\union\{a\}\) and so in particular \(X\union\{a\}\) has a least element. If \(a\)~is not the least element, there exists \(x\in X\) such that \(x<a\). In particular, \(X\ne\emptyset\), hence there exists a least element \(x'\in X\) since \(X\in\A\). Now \(x'\le x<a\), hence \(x'\)~is also the least element of \(X\union\{a\}\), and so again \(X\union\{a\}\) has a least element. This shows \(X\union\{a\}\in\A\), so \(\A\)~is closed as desired.
+\end{proof}
+\end{lecture}
+\begin{lecture}{February~20, 2007}
+We continue our treatment of finite linear orderings. Previously we proved that every nonempty subset of a finite linear ordering has a least and greatest element. In fact this property characterizes finite linear orderings.
+
+To prove this, we need a version of induction. Let \(\pair{A}{\preceq}\) be a nonempty linear ordering such that every nonempty subset of~\(A\) has a least and greatest element. Then in particular \(A\)~has a least (or \emph{bottom}) element~\(\beta\) and a greatest (or \emph{top}) element~\(\tau\). In addition, if \(a\in A\) and \(a\prec\tau\), then \(A-S_a\)~is a nonempty subset of~\(A\) and hence it has a (unique) least element. (Recall that for \(a\in A\), \(S_a=\{\,x\in A\mid x\preceq a\,\}\).) For \(a\prec\tau\), we denote the least element of \(A-S_a\) by~\(\sigma(a)\) and refer to it as the \emph{successor of~\(a\)}. Then \(\sigma:(A-\{\tau\})\to A\) is called the \emph{successor function on~\(A\)}.
+\begin{thm}[Induction on finite linear orderings]
+Let \(\pair{A}{\preceq}\) be a nonempty linear ordering such that every nonempty subset of~\(A\) has a least and greatest element. Let \(\beta\)~and~\(\tau\) be the least and greatest elements of~\(A\), respectively, and let \(\sigma\)~be the successor function on~\(A\). Suppose \(S\subseteq A\) satisfies
+\begin{enumerate}[itemsep=0pt]
+\item[(i)] \(\beta\in S\)
+\item[(ii)] If \(a\in S\) and \(a\prec\tau\), then \(\sigma(a)\in S\)
+\end{enumerate}
+Then \(\tau\in S\), or equivalently \(S=A\).
+\end{thm}
+\begin{proof}
+Suppose \(\tau\not\in S\). Then \(A-S\) is nonempty, so it has a least element~\(\lambda\). Now \(\lambda\ne\beta\) since \(\beta\in S\) by~(i). Hence there exists \(\gamma\in A\) such that \(\sigma(\gamma)=\lambda\) (let \(\gamma\)~be the greatest element of the nonempty subset \(S_{\lambda}-\{\lambda\}\)). Now \(\gamma\prec\lambda\prec\tau\), hence \(\gamma\not\in S\) by~(ii). But then \(\gamma\in A-S\), contradicting that \(\lambda\)~is least in \(A-S\). Hence our original supposition is false and \(\tau\in S\).
+
+To see that this result implies \(S=A\), set \(S'=\{\,a\in A\mid S_a\subseteq S\,\}\). Then it is immediate that \(S'\)~satisfies (i)~and~(ii), hence \(\tau\in S'\). But \(A=S_{\tau}\), so \(S=A\). The converse is trivial (if \(S=A\), then \(\tau\in S\)).
+\end{proof}
+\noindent We can now state our theorem:
+\begin{thm}
+Let \(\pair{A}{\preceq}\) be a linear ordering such that every nonempty subset has a least and greatest element. Then \(A\)~is finite.
+\begin{proof}
+If \(A\)~is empty, then we are done. Otherwise let \(\beta,\tau,\sigma\) be as above. Define
+\[S=\{\,a\in A\mid S_a\text{ is finite}\,\}\]
+Trivially \(\beta\in S\). If \(a\in S\) and \(a\prec\tau\), then \(\sigma(a)\in S\) since \(S_{\sigma(a)}=S_a\union\{\sigma(a)\}\) is finite. Hence \(\tau\in A\) by induction, so \(A=S_{\tau}\) is finite.
+\end{proof}
+\end{thm}
+
+We now introduce the idea of a (finite) recursion. Intuitively, it is clear that a (finite) sequence of values can be constructed by specifying the initial element in the sequence in conjunction with an operation used to obtain the next element in the sequence from any given element. For example, to define the sequence~\(2^n\) of powers of~\(2\), we can specify
+\[2^0=1\qquad\text{and}\qquad 2^{n+1}=2^n\cdot 2\quad(n\ge0)\]
+where our initial element is \(m=1\) and our successor operation is \(m\mapsto m\cdot2\).
+
+While this treatment is acceptable as it stands in naive set theory, in axiomatic set theory we must specify what a recursion is and prove that recursions exist---that is, prove that the sequence intuitively determined by a given recursive setup actually forms a set (a recursive function). We do this now for finite recursions.
+\begin{defn}
+Let \(\pair{A}{\preceq}\) be a nonempty finite linear ordering and let \(\beta,\tau,\sigma\) be as above. Let \(b\)~be a set and let \(\O\)~be a definable operation (on the class of all sets). Then if \(f\)~is a function on~\(A\) such that \(f(\beta)=b\) and for all \(a\in A\), \(a\prec\tau\) implies \(f(\sigma(a))=\O(f(a))\), \(f\)~is called a \emph{finite recursion (on~\(A\))}.
+\end{defn}
+\begin{thm}[Recursion on finite linear orderings (schema)]
+Let \(\pair{A}{\preceq}\) be a nonempty finite linear ordering with \(\beta,\tau,\sigma\) as above. Let \(b\)~be a set and \(\O\)~be a definable operation. Then there exists a unique finite recursion on~\(A\) determined by \(b\)~and~\(\O\).
+\end{thm}
+\begin{proof}
+We proceed by induction on~\(A\). Define
+\begin{multline*}
+S=\{\,a\in A\mid(\exists f)[f\text{ a function }\land \domain(f)=S_a\land f(\beta)=b\\
+	\land(\forall x\in A)(x\prec a\implies f(\sigma(x))=\O(f(x)))]\,\}
+\end{multline*}
+Note that \(\beta\in S\) since \(f=\{\pair{\beta}{b}\}\) is an appropriate recursion on~\(S_{\beta}\). Suppose \(a\in S\) and \(a\prec\tau\). Choose \(f\)~an appropriate recursion on~\(S_a\). Set
+\[f'=f\union\{\pair{\sigma(a)}{\O(f(a))}\}\]
+Then it is immediate that \(f'\)~is a well defined appropriate recursion on~\(S_{\sigma(a)}\), so \(\sigma(a)\in S\). By induction it follows that \(\tau\in S\), and since \(A=S_{\tau}\), this establishes the existence of the desired recursion on~\(A\).
+
+Uniqueness of the recursion also follows by induction. Suppose \(f\)~and~\(g\) are two recursions on~\(A\) determined by \(b\)~and~\(\O\). Set
+\[S'=\{\,a\in A\mid f(a)=g(a)\,\}\]
+Then \(f(\beta)=b=g(\beta)\), so \(\beta\in S'\). If \(a\in S'\) and \(a\prec\tau\), then \(f(a)=g(a)\) and
+\[f(\sigma(a))=\O(f(a))=\O(g(a))=g(\sigma(a))\]
+so \(\sigma(a)\in S'\). By induction, \(S'=A\), so \(f=g\).
+\end{proof}
+
+We use the notion of a finite recursion to construct the set of natural numbers in axiomatic set theory. In naive mathematics, of course, we have an intuitive notion of a set \(\N=\{0,1,2,\ldots\}\) of natural numbers.\footnote{We denote by~\(\N\) the set of natural numbers used in naive mathematics. In our axiomatic treatment, we denote by~\(\omega\) our constructed set of naturals.} We can implement, for each \(n\in\N\), a set~\(S_n\) such that
+\[m\ne n\implies S_m\ne S_n\]
+Here we wish to define~\(S_n\) to contain exactly \(n\)~elements. This forces us to set \(S_0=\emptyset\). Given \(S_0,\ldots,S_n\), a natural definition for~\(S_{n+1}\) is
+\[S_{n+1}=\{S_0,\ldots,S_n\}\]
+Note that \(S_n\)~is defined for all \(n\in\N\) by naive recursion on~\(\N\), and \(S_{n+1}=S_n\union\{S_n\}\) by naive induction on~\(\N\). Intuitively then, we can simply define \(\omega=\{\,S_n\mid n\in\N\,\}\).
+
+Of course, this is unsatisfactory for a rigorous axiomatic development, since it relies on the set of naturals used in naive mathematics! Nevertheless, we can use it as a guide for our set theoretic construction of the naturals.
+\begin{defn}
+Let \(x\)~be a set. Then the \emph{(ordinal) successor of~\(x\)} is defined to be the set
+\[x^+=x\union\{x\}\]
+\end{defn}
+\noindent We define~\(\omega\) to consist of of all of the terminal values of appropriately constructed recursions on finite linear orderings:
+\begin{defn}
+The class~\(\omega\) of \emph{natural numbers} is defined as
+\begin{multline*}
+\omega=\{\,f(\tau)\mid f\text{ a recursion on a nonempty finite linear ordering }\pair{A}{\preceq}\text{ with }\beta,\tau,\sigma\\
+	\land f(\beta)=\emptyset\land(\forall a\in A)(a\prec\tau\implies f(\sigma(a))=f(a)^+)\,\}
+\end{multline*}
+\end{defn}
+\noindent Recall that the axiom of infinity states that \(\omega\)~is a set. We prove a simple fact about~\(\omega\) that will be required later on:
+\begin{thm}
+The empty set is in~\(\omega\). If \(n\in\omega\), then \(n^+\in\omega\).
+\end{thm}
+\begin{proof}
+The empty set is the terminal value of any finite recursion constructed on a linear ordering with only one element. If \(n\in\omega\), then there exists a nonempty finite linear ordering \(\pair{A}{\preceq}\) with \(\beta,\tau,\sigma\) and a recursion~\(f\) constructed on \(\pair{A}{\preceq}\) starting at~\(\emptyset\) using the ordinal successor operation such that \(f(\tau)=n\). Let \(\tau'\)~be any set not in~\(A\). Define \(A'=A\union\{\tau'\}\) and set
+\[{\preceq}'={\preceq}\union\{\,\pair{x}{\tau'}\mid x\in A\,\}\union\{\pair{\tau'}{\tau'}\}\]
+Then \(\pair{A'}{\preceq'}\) is a finite linear ordering extending \(\pair{A}{\preceq}\) by one element, with greatest element~\(\tau'\). Define \(f'=f\union\{\pair{\tau'}{n^+}\}\). Then it is clear that \(f'\)~is a function on~\(A'\) satisfying the appropriate recursive properties for \(\pair{A'}{\preceq'}\). For suppose \(a'\in A'\). If \(a'=\beta\), then \(f'(a')=f(\beta)=\emptyset\). If \(a'\prec\tau\prec\tau'\), then \(f'(\sigma'(a'))=f(\sigma(a'))=f(a')^+=f'(a')^+\). Finally, if \(\tau\preceq a'\prec\tau'\), then \(a'=\tau\), so \(\sigma'(a')=\tau'\) and hence
+\[f'(\sigma'(a'))=f'(\tau')=n^+=f(\tau)^+=f'(a')^+\]
+Hence \(f'\)~is the unique appropriate recursion constructed on \(\pair{A'}{\preceq'}\). Since \(n^+=f'(\tau')\), it follows that \(n^+\in\omega\) by construction of~\(\omega\).
+\end{proof}
+\noindent In the language of closures, this theorem tells us that \(\emptyset\in\omega\) and \(\omega\)~is closed under the successor operation.
+\end{lecture}
+\begin{lecture}{February~22, 2007}
+For a partial ordering \(\pair{A}{\preceq}\), we define
+\[A_a=\{\,x\in A\mid x\preceq a\,\}\]
+to be the segment of~\(a\) in~\(A\). (Previously we used the notation~\(S_a\), but when working with multiple partial orderings we will need to distinguish the base sets.)
+\begin{defn}
+Let \(\pair{A}{\preceq}\) be a partial ordering. Let \(a\in A\) and set \({\preceq_a}={\preceq}\sect(A_a\times A_a)\). Then \(\pair{A_a}{\preceq_a}\) is called an \emph{initial segment of \(\pair{A}{\preceq}\)}.
+\end{defn}
+\noindent Note that \(\pair{A_a}{\preceq_a}\) is a partial ordering, and it is a [finite] linear ordering if \(\pair{A}{\preceq}\) is a [finite] linear ordering.
+\begin{defn}
+Let \(\pair{A}{\preceq}\) and \(\pair{A'}{\preceq'}\) be partial orderings. We write
+\[\pair{A}{\preceq}\iso\pair{A'}{\preceq'}\]
+and say that \(\pair{A}{\preceq}\) is \emph{isomorphic} to \(\pair{A'}{\preceq'}\) iff there exists a bijection \(\pi:A\to A'\) that is \emph{order preserving}---that is, such that for all \(a_1,a_2\in A\)
+\[a_1\preceq a_2\iff\pi(a_1)\preceq'\pi(a_2)\]
+We call \(\pi\)~an \emph{isomorphism} from \(\pair{A}{\preceq}\) to \(\pair{A'}{\preceq'}\).
+\end{defn}
+
+We prove a theorem for finite linear orderings:
+\begin{thm}
+Let \(\pair{A}{\preceq}\) and \(\pair{A'}{\preceq'}\) be finite linear orderings. Then \(\pair{A}{\preceq}\) is isomorphic to an initial segment of~\(\pair{A'}{\preceq'}\) or vice versa (or both).
+\end{thm}
+\begin{proof}
+If either linear ordering is empty, then we are done, so suppose both are nonempty. Let \(\beta,\tau,\sigma\) be associated with \(\pair{A}{\preceq}\) and \(\beta',\tau',\sigma'\) with \(\pair{A'}{\preceq'}\).
+
+We proceed by induction on \(\pair{A}{\preceq}\). Set
+\[S=\{\,a\in A\mid (\exists a'\in A')(\exists g)(g:A_a\to A'_{a'}\text{ is an isomorphism})\,\}\]
+Then \(\beta\in S\) since \(g=\{\pair{\beta}{\beta'}\}\) is an isomorphism from~\(A_{\beta}\) to~\(A'_{\beta'}\).
+
+Now if for all \(a\in S\), \(a\prec\tau\) implies \(\sigma(a)\in S\), then by induction \(\tau\in S\) and hence there exists an isomorphism from \(A_{\tau}=A\) onto an initial segment of~\(\pair{A'}{\preceq'}\). If this does not hold, then there exists \(a\in S\) such that \(a\prec\tau\) and \(\sigma(a)\not\in S\). Choose \(a'\in A'\) and an isomorphism \(g:A_a\to A'_{a'}\). Note \(g(a)=a'\). We claim that \(a'=\tau'\). For if not, then \(a'\prec'\tau'\), so we can construct
+\[g'=g\union\{\pair{\sigma(a),\sigma'(a')}\}\]
+But then \(g'\)~is an isomorphism from~\(A_{\sigma(a)}\) onto~\(A'_{\sigma'(a')}\), so \(\sigma(a)\in S\)---a contradiction. Hence \(a'=\tau'\) and \(g^{-1}\)~is an isomorphism from \(A'_{\tau'}=A'\) onto an initial segment of \(\pair{A}{\preceq}\). This establishes our theorem.
+\end{proof}
+
+Suppose that \(\pi\)~is an isomorphism from \(\pair{A}{\preceq}\) to \(\pair{A'}{\preceq'}\), and further suppose that we have constructed a finite recursion~\(f'\) on \(\pair{A'}{\preceq'}\) starting with a set~\(b'\) and using a definable operation~\(\O'\)---that is, \(f'(\beta')=b'\) and for all \(a'\in A'\), \(a'\prec'\tau'\) implies \(f'(\sigma'(a'))=\O'(f'(a'))\). Then we can construct a finite recursion on \(\pair{A}{\preceq}\) by `pullback' along~\(\pi\). More specifically, set \(f=f'\circ\pi\). Then
+\[f(\beta)=f'(\pi(\beta))=f'(\beta')=b'\]
+Moreover if \(a\in A\) and \(a\prec\tau\), then \(\pi(a)\prec'\pi(\tau)=\tau'\), and
+\begin{align*}
+f(\sigma(a))&=f'(\pi(\sigma(a)))\\
+	&=f'(\sigma'(\pi(a)))\\
+	&=\O'(f'(\pi(a)))\\
+	&=\O'(f(a))
+\end{align*}
+Hence \(f\)~must be the unique recursion on~\(\pair{A}{\preceq}\) determined by \(b'\)~and~\(\O'\).
+
+We now return to our study of the natural numbers.
+\begin{thm}[Induction on~\(\omega\)]
+Let \(P(x)\)~be a property and suppose
+\begin{enumerate}[itemsep=0pt]
+\item[(i)] \(P(\emptyset)\)
+\item[(ii)] For all \(n\in\omega\), \(P(n)\)~implies~\(P(n^+)\)
+\end{enumerate}
+Then \(P(n)\)~holds for all \(n\in\omega\).
+\end{thm}
+\begin{proof}
+Recall that \(\omega\)~consists of terminal values of specific finite recursions. Hence we can proceed by induction on finite linear orderings.
+
+Let \(\pair{A}{\preceq}\) be an arbitrary nonempty finite linear ordering with \(\beta,\tau,\sigma\), and suppose that \(f\)~is constructed by recursion on \(\pair{A}{\preceq}\) starting at~\(\emptyset\) using the successor operation. We claim that~\(P(f(\tau))\) holds. Set
+\[S=\{\,a\in A\mid P(f(a))\,\}\]
+Then \(\beta\in S\) since \(f(\beta)=\emptyset\) and \(P(\emptyset)\)~holds by~(i). If \(a\in S\) and \(a\prec\tau\), then \(P(f(a))\)~holds by hypothesis and \(f(\sigma(a))=f(a)^+\) by construction of~\(f\). But then \(P(f(\sigma(a)))\)~holds since \(P(f(a)^+)\)~holds by~(ii), so \(\sigma(a)\in S\). By finite induction, \(\tau\in S\), so \(P(f(\tau))\)~holds as desired.
+
+Since \(f(\tau)\)~was an arbitrary element of~\(\omega\), \(P(n)\)~holds for all \(n\in\omega\).
+\end{proof}
+\noindent Previously we proved that \(\emptyset\in\omega\) and \(\omega\)~is closed under the successor operation. We can now prove that \(\omega\)~is the smallest such set.
+\begin{cor}
+The set~\(\omega\) is the smallest set containing~\(\emptyset\) and closed under the successor operation.
+\end{cor}
+\begin{proof}
+Suppose \(\emptyset\in A\) and \(A\)~is closed under the successor operation. We claim that \(\omega\subseteq A\). Define
+\[S=\{\,n\in\omega\mid n\in A\,\}=\omega\sect A\]
+Then \(\emptyset\in S\), and if \(n\in S\), then \(n^+\in S\). Hence by induction on~\(\omega\) (with \(P(x)\)~defined as `\(x\in S\)') we have \(S=\omega\), so \(\omega\subseteq A\) as desired.
+\end{proof}
+
+Our construction of the naturals has a convenient property which we discuss presently. Note that the transitivity of a relation~\(R\) on a set~\(A\) can be redefined in terms the elements of~\(A\):
+\begin{defn}
+Let \(A\)~be a set and \(R\subseteq A\times A\). Then we say \(a\in A\) is \emph{transitive for~\(R\)} iff
+\[(\pair{c}{b}\in R\land\pair{b}{a}\in R)\implies \pair{c}{a}\in R\]
+for all \(b,c\in A\).
+\end{defn}
+\noindent It is immediate that \(R\)~is transitive on~\(A\) iff for all \(a\in A\), \(a\)~is transitive for~\(R\).
+
+We extend this notion of transitivity to the class of all sets under the set membership relation:
+\begin{defn}
+Let \(a\)~be a set. Then \(a\)~is \emph{transitive (for~\(\in\))} iff for all sets \(b\)~and~\(c\),
+\[c\in b\in a\implies c\in a\]
+\end{defn}
+\noindent Note that \(a\)~is transitive iff \(b\in a\) implies \(b\subseteq a\).
+
+Transitive sets are convenient because we know what their elements look like \emph{as sets}. If \(a\)~is transitive and \(b\in a\), then we know what the elements of~\(b\) look like---they are simply other elements of~\(a\)! In other words, the elements of a transitive set are simply built from other elements of the set.
+
+The elements of~\(\omega\), as well as~\(\omega\) itself, satisfy this property:
+\begin{thm}
+The set~\(\omega\) of natural numbers is transitive. Every \(n\in\omega\) is transitive.
+\end{thm}
+\begin{proof}
+Both claims are proved by induction on~\(\omega\). For the first claim, define
+\[S=\{\,n\in\omega\mid n\subseteq\omega\,\}\]
+Note \(\emptyset\in S\) trivially. If \(n\in S\), then \(n\union\{n\}\subseteq\omega\) since \(n\in\omega\) and \(n\subseteq\omega\) by hypothesis. Hence \(n^+\in S\). By induction on~\(\omega\), \(S=\omega\), so \(\omega\)~is transitive.
+
+To prove the second claim, set
+\[S'=\{\,n\in\omega\mid n\text{ is transitive}\,\}\]
+Trivially \(\emptyset\in S\). We leave it to the reader to verify that if \(n\)~is transitive, then \(n^+\)~is transitive. From this it follows that \(S'=\omega\), so every \(n\in\omega\) is transitive.
+\end{proof}
+
+We can define the successor function \(\sigma:\omega\to\omega\) mapping \(n\mapsto n^+\) (this is simply the successor operation restricted to~\(\omega\)). Note that \(\sigma\)~is not surjective since \(\emptyset\not\in\sigma[\omega]\) (this is verified by induction). We claim however that \(\sigma\)~is injective. Indeed, note that for any transitive set~\(a\), we have
+\[\bigunion a^+=\bigunion(a\union\{a\})=a\]
+Hence if \(m^+=\sigma(m)=\sigma(n)=n^+\), then \(m=\bigunion m^+=\bigunion n^+=n\).
+
+This leads us to a generalization of the natural numbers and induction. Suppose that \(S:A\to A\) is an injective function that is not surjective, and choose \(e\in A-S[A]\). Now choose the smallest \(B\subseteq A\) such that \(e\in B\) and \(S[B]\subseteq B\). (This can be done by defining
+\[\B=\{\,X\subseteq A\mid e\in X\land S[X]\subseteq X\,\}\]
+and noting that \(\bigsect\B\in\B\). Set \(B=\bigsect\B\).) Intuitively we can view~\(B\) as a smallest set containing an initial element~\(e\) and closed under a `successor' operation~\(S\). It seems plausible that a version of induction will hold for~\(B\), and indeed this is true.
+
+Let \(P(x)\)~be a property such that \(P(e)\)~holds and such that \(P(a)\)~implies~\(P(S(a))\) for all \(a\in B\). Define
+\[\CC=\{\,a\in B\mid P(a)\,\}\]
+Then \(e\in\CC\) by hypothesis. If \(a\in\CC\), then \(P(a)\)~holds, so \(P(S(a))\)~holds by hypothesis, and hence \(S(a)\in\CC\). Thus \(S[\CC]\subseteq\CC\). Since \(B\)~is the smallest subset of~\(A\) satisfying these conditions, we have \(B\subseteq\CC\) and hence \(\CC=B\), so \(P(a)\)~holds for all \(a\in B\).
+
+We record this general phenomenon:
+\begin{defn}
+Let \(B\)~be a set, \(e\in B\), and \(S:B\to B\) be an injective function with \(e\not\in S[B]\) such that the following condition holds:
+\begin{quote}
+For all \(C\subseteq B\), if \(e\in C\) and \(S[C]\subseteq C\), then \(C=B\). (In other words, \(B\)~is the only subset of~\(B\) containing~\(e\) and closed under~\(S\).)
+\end{quote}
+Then we call \(\triple{B}{e}{S}\) a \emph{Peano system}.
+\end{defn}
+\begin{thm}[Induction on peano systems]
+Let \(\triple{B}{e}{S}\) be a Peano system and let \(P(x)\)~be a property such that \(P(e)\)~holds and such that \(P(b)\)~implies~\(P(S(b))\) for all \(b\in B\). Then \(P(b)\)~holds for all \(b\in B\).
+\end{thm}
+\noindent We use induction to prove an easy result:
+\begin{cor}
+Let \(\triple{B}{e}{S}\) be a Peano system. Then \(S(b)\ne b\) for all \(b\in B\).
+\end{cor}
+\begin{proof}
+Define
+\[C=\{\,x\in B\mid S(x)\ne x\,\}\]
+Then \(e\in C\) since \(e\not\in S[B]\). If \(x\in C\), then \(S(x)\ne x\), hence \(S(S(x))\ne S(x)\) by injectivity of~\(S\). Thus \(S(x)\in C\). But then \(e\in C\) and \(C\)~is closed under~\(S\), so \(C=B\).
+\end{proof}
+\end{lecture}
+\begin{lecture}{February~27, 2007}
+We wish to define a natural linear ordering for Peano systems. In the following lemma, we show that we can naturally define a finite linear ordering on any `initial segment' of a Peano system:
+\begin{lem}
+Let \(\triple{A}{S}{e}\) be a Peano system and let \(a\in A\). Then there exists a unique finite linear ordering~\(\preceq_a\) on a subset~\(A'\) of~\(A\) having bottom element~\(e\) and top element~\(a\), and such that for all \(x,y\in A\), \(x\prec_a y\) iff \(S(x)\preceq_a y\).
+\end{lem}
+\begin{proof}
+We prove existence by induction on~\(A\).
+
+Let \(C\)~be the set of \(a\in A\) for which there exists a finite linear ordering satisfying the required properties. Clearly \(e\in C\), since the ordering \({\preceq_e}=\{\pair{e}{e}\}\) works on~\(\{e\}\) (for the successor ordering property, recall that \(e\not\in S[A]\)). Suppose now \(a\in C\), and denote by~\(\preceq_a\) an appropriate finite linear ordering for~\(a\) on~\(A'\). Note that \(S(a)\not\in A'\), for otherwise \(S(a)\preceq_a a\) since \(a\)~is the top element in~\(A'\), so \(a\prec_a a\) by the successor ordering property---a contradiction. Set \(A''=A'\union\{S(a)\}\). Then \(A''\)~is finite since \(A'\)~is finite by hypothesis. Define
+\[\preceq_{S(a)}=\preceq_a\union\{\,\pair{x}{S(a)}\mid x\in A'\,\}\union\{\pair{S(a)}{S(a)}\}\subseteq A''\times A''\]
+We claim \(\preceq_{S(a)}\)~is an appropriate ordering for~\(S(a)\) on~\(A''\). Indeed, reflexivity, antisymmetry, transitivity, and connectedness are easily verified. To illustrate, we prove antisymmetry: suppose \(x,y\in A''\), \(x\preceq_{S(a)} y\) and \(y\preceq_{S(a)} x\). If \(x,y\in A'\), then \(x=y\) by antisymmetry of~\(\preceq_a\). If, say, \(x\not\in A'\), then \(x=S(a)\). But since \(S(a)\not\in A'\), \(S(a)\)~relates forward only to itself under~\(\preceq_{S(a)}\), hence \(y=S(a)\). Similarly if \(y\not\in A'\).
+
+Thus we have that \(\preceq_{S(a)}\)~is a finite linear ordering on~\(A''\). It is clear that \(e\)~is the bottom element and \(S(a)\)~is the top element under this ordering. We have only to verify the successor ordering property.
+
+Suppose \(x,y\in A\) and \(x\prec_{S(a)} y\). We must have \(x\in A'\). If \(y\in A'\) then we are done, so suppose \(y\not\in A'\), that is, \(y=S(a)\). If \(x=a\), then \(S(x)=S(a)\preceq_{S(a)} y\). Otherwise \(x\prec_a a\), hence \(S(x)\preceq_a a\) by the successor property on~\(\preceq_a\), so in this case too we have \(S(x)\preceq_{S(a)} y\). Conversely, suppose \(S(x)\preceq_{S(a)} y\) for arbitrary \(x,y\in A\). Consider the case \(S(x)\in A'\). If \(y\in A'\), then we are done by the successor property on~\(\preceq_a\). If \(y=S(a)\), then note that \(S(x)\preceq_a a\), hence \(x\prec_a a\preceq_{S(a)} y\), so \(x\prec_{S(a)} y\) as desired. In the case \(S(x)\not\in A'\), we have \(S(x)=S(a)\), hence \(y=S(a)\) (since \(S(a)\)~relates forward only to itself), and \(x=a\) by the injectivity of~\(S\). But \(a\preceq_{S(a)} S(a)\), and \(a\ne S(a)\) by a previous corollary, so \(x\prec_{S(a)} y\) as desired.
+
+This establishes the successor ordering property for~\(\preceq_{S(a)}\), completing the proof that \(S(a)\in C\). It follows by induction on~\(A\) that there exists an appropriate finite linear ordering for every \(a\in A\).
+
+We now prove uniqueness, also by induction on~\(A\). Let \(D\)~be the set of \(a\in A\) such that there is a unique appropriate finite linear ordering for~\(a\). Clearly \(e\in D\). Suppose \(a\in D\) and let \(\preceq_a\)~denote the unique appropriate linear ordering for~\(a\), on subset~\(A'\). Let \(\preceq_{S(a)}^1\)~and~\(\preceq_{S(a)}^2\) be appropriate linear orderings for~\(S(a)\), on subsets \(A^1\)~and~\(A^2\) respectively. We claim that \({\preceq_{S(a)}^1}={\preceq_{S(a)}^2}\).
+
+Note that \(S(a)\preceq_{S(a)}^1 S(a)\) by reflexivity, hence by successor ordering we have \(a\prec_{S(a)}^1 S(a)\). In particular, \(a\in A^1\), and similarly \(a\in A^2\). We thus define for \(i=1,2\)
+\[A_a^i=\{\,x\in A^i\mid x\preceq_{S(a)}^i a\,\}\]
+and \(\preceq_a^i={\preceq_{S(a)}^i}\sect(A_a^i\times A_a^i)\). We claim that \(\pair{A_a^i}{\preceq_a^i}\) are both appropriate finite linear orderings for~\(a\). Indeed, they are clearly both finite linear orderings with bottom element~\(e\) and top element~\(a\). We need only verify successor ordering.
+
+Fix \(i\in\{1,2\}\). Let \(x,y\in A\) and suppose \(x\prec_a^i y\). Then \(x\prec_{S(a)}^i y\preceq_{S(a)}^i a\), hence \(S(x)\preceq_{S(a)}^i y\preceq_{S(a)}^i a\), so \(S(x)\preceq_a^i y\). The converse follows similarly. Hence successor ordering holds for~\(\preceq_a^i\).
+
+By the induction hypothesis, then, \(A_a^i=A'\) and \({\preceq_a^i}={\preceq_a}\) for \(i=1,2\). We claim that both \(\preceq_{S(a)}^1\)~and~\(\preceq_{S(a)}^2\) are obtained by adjoining the single element~\(S(a)\) to the end of \(\pair{A'}{\preceq_a}\). From this it follows that \({\preceq_{S(a)}^1}={\preceq_{S(a)}^2}\) as desired.
+
+Fix \(i\in\{1,2\}\). We saw that \(a\prec_{S(a)}^i S(a)\). But note that if \(a\prec_{S(a)}^i b\) for \(b\in A^i\), then by the successor ordering property we have \(S(a)\preceq_{S(a)}^i b\). On the other hand \(b\preceq_{S(a)}^i S(a)\) since \(S(a)\)~is the top element under this ordering. Hence \(b=S(a)\) by antisymmetry. Thus \(S(a)\)~is the only element greater than~\(a\) under~\(\preceq_{S(a)}^i\), so \(A^i=A'\union\{S(a)\}\), and \(\preceq_{S(a)}^i\)~is the claimed extension of~\(\preceq_a\).
+
+This establishes the lemma.
+\end{proof}
+\noindent We can now define a linear ordering on an entire Peano system:
+\begin{thm}[Ordering on peano systems]
+Let \(\triple{A}{S}{e}\) be a Peano system. Then there exists a unique linear ordering \(\pair{A}{\preceq}\) such that \(e\preceq a\) for all \(a\in A\), and such that for all \(a,b\in A\), \(a\prec b\iff S(a)\preceq b\).
+\end{thm}
+\begin{proof}
+For \(a,b\in A\), say
+\[a\preceq b\iff a\preceq_b b\]
+We verify that this defines a linear ordering on~\(A\). Reflexivity is clear. To verify antisymmetry, suppose \(a\preceq b\) and \(b\preceq a\). Then \(a\preceq_b b\) and \(b\preceq_a a\). Note that \(\preceq_b\) induces an appropriate finite linear ordering for~\(a\) (see the uniqueness proof of the above lemma), hence this induced ordering equals~\(\preceq_a\) by the previous lemma. But then \(b\preceq_b a\preceq_b b\), so \(a=b\) as desired. The proof of transitivity is similar. If \(a\preceq b\) and \(b\preceq c\), then \(a\preceq_b b\) and \(b\preceq_c c\). Now \(\preceq_c\)~induces an appropriate finite linear ordering for~\(b\), which equals~\(\preceq_b\), so \(a\preceq_c b\preceq_c c\), and hence \(a\preceq_c c\). But then \(a\preceq c\) as desired.
+
+We verify connectedness by induction on~\(A\). Define
+\[T=\{\,a\in A\mid (\forall b\in A)(a\preceq b\lor b\preceq a)\,\}\]
+Clearly \(e\in T\). In fact, \(e\preceq a\) for all \(a\in A\). Suppose \(a\in T\), and let \(b\in A\) be arbitrary. We claim that \(S(a)\preceq b\) or \(b\preceq S(a)\). If \(S(a)\not\preceq b\), then \(S(a)\not\preceq_b b\), so \(a\not\prec_b b\) by the successor ordering property on~\(\prec_b\). If \(a=b\), then \(b\prec_{S(a)} S(a)\), so \(b\preceq S(a)\). If \(a\ne b\), then \(b\prec a\) since \(a\in S\). Hence \(b\prec_a a\), so \(b\prec_{S(a)} a\prec_{S(a)} S(a)\), and thus \(b\preceq S(a)\). But this shows that \(S(a)\in T\), hence by induction we have \(T=A\) and connectedness holds.
+
+The successor property is immediate from the same property for each~\(\preceq_b\). Hence we have proven existence of a linear ordering.
+
+To verify uniqueness, suppose \(\preceq\)~and~\(\preceq'\) are both linear orderings on~\(A\) satisfying the stated properties. Define
+\[T'=\{\,a\in A\mid (\forall b\in A)(a\preceq b\iff a\preceq' b)\,\}\]
+Clearly \(e\in T'\). Suppose \(a\in T'\) and let \(b\in A\). We claim \(S(a)\preceq b\) iff \(S(a)\preceq' b\). Indeed,
+we have
+\begin{center}
+\begin{tabular}{rcll}
+\(S(a)\preceq b\)&\(\iff\)&\(a\prec b\)&by successor property of~\(\preceq\)\\
+				&\(\iff\)&\(a\prec' b\)&since \(a\in T'\)\\
+				&\(\iff\)&\(S(a)\preceq' b\)&by successor property of~\(\preceq'\)
+\end{tabular}
+\end{center}
+Hence \(S(a)\in T'\), so \(T'=A\) by induction on~\(A\). But then for arbitrary \(a,b\in A\), we have \(a\preceq b\) iff \(a\preceq' b\), so \({\preceq}={\preceq'}\) as desired.
+\end{proof}
+\begin{defn}
+Let \(\triple{A}{S}{e}\) be a Peano system and let \(\preceq\)~be the unique linear ordering defined on~\(A\) in the previous theorem. For \(a\in A\), we denote by
+\[A_a=\{\,b\in A\mid b\preceq a\,\}\]
+the \emph{initial segment} of~\(A\) determined by~\(a\).
+\end{defn}
+\noindent Note that by the proof of the previous theorem, the set \(A_a\)~is finite for all \(a\in A\). This allows us to use finite recursion on initial segments to establish recursion for an entire Peano system:
+\begin{thm}[Recursion on peano systems (schema)]
+Let \(\triple{A}{S}{e}\) be a Peano system, \(b\)~be an arbitrary set, and \(\O\)~be a definable operation (on the class of all sets). Then there exists a unique function~\(H\) on~\(A\) satisfying
+\begin{align*}
+H(e)&=b\\
+H(S(a))&=\O(H(a))
+\end{align*}
+for all \(a\in A\).
+\end{thm}
+\begin{proof}
+For each \(a\in A\), the set~\(A_a\) (on the unique ordering~\(\preceq\) for~\(A\) from the previous theorem) is finite, hence by recursion on finite linear orderings there exists a unique function~\(H_a\) on~\(A_a\) such that \(H_a(e)=b\) and \(H_a(S(x))=\O(H_a(x))\) for all \(x\prec a\). (Note that since \(H_a\)~is uniquely defined for each \(a\in A\), we do not require the axiom of choice to choose these.)
+
+Set \(H=\bigunion_{a\in A}H_a\). We claim that \(H\)~satisfies the required properties.
+
+First, we verify that \(H\)~is a function. Suppose \(\pair{x}{y},\pair{x}{y'}\in H\). Then there exist \(a,b\in A\) such that \(\pair{x}{y}\in H_a\) and \(\pair{x}{y'}\in H_b\). Now \(a\preceq b\) or \(b\preceq a\). Suppose the former case holds. Then \(A_a\subseteq A_b\), and the restriction of~\(H_b\) to~\(A_a\) is equal to~\(H_a\) by the uniqueness of finite recursions. But then \(\pair{x}{y},\pair{x}{y'}\in H_b\), and hence \(y=y'\) since \(H_b\)~is a function. Similar reasoning (using \(H_a\)~and~\(A_b\)) applies if \(b\preceq a\). Thus \(H\)~is a function as desired.
+
+Clearly \(\domain(H)=A\), and \(H(e)=b\). If \(a\in A\), then \(a\prec S(a)\), hence
+\[H(S(a))=H_{S(a)}(S(a))=\O(H_{S(a)}(a))=\O(H(a))\]
+as desired. Hence \(H\)~satisfies the required properties as claimed.
+
+Uniqueness is immediate by induction on~\(A\).
+\end{proof}
+\noindent We note an easy corollary:
+\begin{cor}
+Any two Peano systems are isomorphic.
+\end{cor}
+\end{lecture}
+\begin{lecture}{March~1, 2007}
+Previously we saw that if \(\triple{A}{S}{e}\) is a Peano system with ordering~\(\preceq\), and \(a\in A\), then the initial segment~\(A_a\) is finite. This allows us to give an alternate characterization of finite sets, namely as those sets in bijective correspondence with an initial segment of a Peano system:
+\begin{thm}
+Let \(\triple{B}{S}{e}\) be a Peano system with ordering~\(\preceq\). Let \(A\)~be a set. Then
+\[\fin_A=\bigl\{\,X\subseteq A\mid X=\emptyset\lor (\exists b\in B)(\exists f)(\,f:B_b\to X\text{ is a bijection}\,)\,\bigr\}\]
+\end{thm}
+\begin{proof}
+Call the set on the right~\(C\).
+
+First suppose \(X\in C\). If \(X=\emptyset\), then \(X\in\fin_A\). Assume \(X\)~is nonempty. Choose \(b\in B\) and \(f:B_b\to X\) is a bijection. We verify by induction on~\(B\) that if \(c\preceq b\), then \(f[B_c]\in\fin_A\). Define
+\[T=\{\,c\in B\mid c\preceq b\implies f[B_c]\in\fin_A\,\}\]
+Clearly \(e\in T\). Suppose \(c\in T\). If \(c\prec b\), then \(B_{S(c)}=B_c\union\{S(c)\}\subseteq B_b\), hence
+\[f[B_{S(c)}]=f[B_c]\union\{f(S(c))\}\in\fin_A\]
+since \(f[B_c]\in\fin_A\) by hypothesis. If \(c\not\prec b\), then \(b\preceq c\prec S(c)\), hence \(S(c)\not\preceq b\), so trivially \(S(c)\in T\). In either case \(S(c)\in T\). Hence \(T=B\) by induction on~\(B\), so in particular \(f[B_b]=X\in\fin_A\). Thus \(C\subseteq\fin_A\).
+
+To show \(\fin_A\subseteq C\), note that \(\emptyset\in C\) by construction. Also for \(a\in A\), \(\{a\}\in C\) since \(g=\{\pair{e}{a}\}\) is a bijection on~\(B_e\). Let \(X\in C\) be nonempty and choose an element \(b\in B\) with \(f:B_b\to X\) a bijection. If \(a\in B\), \(a\not\in X\), then
+\[g=f\union\{\pair{S(b)}{a}\}\]
+witnesses a bijection from~\(B_{S(b)}\) to \(X\union\{a\}\). Hence \(X\union\{a\}\in C\). But then \(C\)~contains the empty set and is closed under the adjoining of single elements of~\(B\). Since \(\fin_A\)~is the smallest set satisfying these conditions, \(\fin_A\subseteq C\). Thus \(\fin_A=C\).
+\end{proof}
+
+We return to our study of the axiom of infinity.
+\begin{thm}
+The following are equivalent:
+\begin{enumerate}[itemsep=0pt]
+\item[(1)] There exists an infinite set.
+\item[(2)] There exists a Peano system.
+\item[(3)] The class~\(\omega\) is a set.
+\end{enumerate}
+\end{thm}
+\begin{proof}
+We provide a sketchy proof.
+
+(1)\(\implies\)(2): Let \(A\)~be infinite and set \(C=\fin_A\). Note \(A\not\in C\) by hypothesis. Define a relation \(E\subseteq C\times C\) by
+\[E=\{\,\pair{x}{y}\in C\times C\mid (\exists f)(f:x\to y\text{ is a bijection})\,\}\]
+Note that \(E\)~is an equivalence relation on~\(C\). Set \(B=C/E\) and define \(S:B\to B\) by
+\[S=\{\,\pair{[x]}{[x\union\{a\}]}\mid x\in C\land a\in A-x\,\}\]
+where \([x]\)~denotes the equivalence class of~\(x\). Note that \(\domain(S)=C\) since if \(x\in C\), then \(A\ne x\) (\(A\)~infinite) hence \(A-x\) is nonempty. It is easily verified that \(S\)~is an injective function, and \([\emptyset]\ne S([x])\) for all \(x\in C\). Hence \(\triple{C}{S}{e}\) is a Peano system.
+
+(2)\(\implies\)(3): If \(\triple{C}{S}{e}\) is a Peano system, we do a recursion on~\(C\) starting with~\(\emptyset\) and using ordinal successor. We obtain a function~\(H\) with \(H(e)=\emptyset\) and \(H(S(c))=S(c)^+\) for all \(c\in C\). By induction on~\(C\), \(H(c)\in\omega\) for all \(c\in C\). Hence \(H[B]\subseteq\omega\). By induction on~\(\omega\), \(\omega\subseteq H[B]\). Hence \(H[B]=\omega\) is a set.
+
+(3)\(\implies\)(1): If \(\omega\)~is a set, then \(\omega\)~is a Peano system, and hence has a linear ordering with no greatest element. It follows that \(\omega\)~is infinite.
+\end{proof}
+
+We implement arithmetical operations on the natural numbers using recursion. For addition, we desire for each \(m\in\omega\) a function satisfying
+\begin{align*}
+A_m:\omega&\to\omega\\
+		n&\mapsto m+n
+\end{align*}
+\noindent where `\(+\)'~here represents our naive addition operation. Under this naive definition, we have \(A_m(0)=m+0=m\) and for all \(n\in\omega\), if \(A_m(n)\)~is defined, then
+\[A_m(n+1)=m+(n+1)=(m+n)+1=A_m(n)+1\]
+Using this as a motivation, we formally define \(A_m\)~by recursion on~\(\omega\) by setting \(A_m(0)=m\) and \(A_m(n^+)=A_m(n)^+\) for all \(n\in\omega\). Recall that \(A_m\)~is unique for each \(m\in\omega\), so we have a function \(\fdef{A_m}{m\in\omega}\). We define addition on~\(\omega\) by
+\begin{align*}
+A:\omega\times\omega&\to\omega\\
+	\pair{m}{n}&\mapsto A_m(n)
+\end{align*}
+By the uniqueness of each~\(A_m\), it follows that \(A\)~is the unique function on \(\omega\times\omega\) such that for all \(m\in\omega\), \(A(m,0)=m\), and for all \(m,n\in\omega\), \(A(m,n^+)=A(m,n)^+\). From now on we will denote~\(A(m,n)\) by \(m+n\).
+
+In similar manner we can define multiplication on~\(\omega\). Intuitively, for fixed \(m\in\omega\), we want \(m\cdot 0=0\) and, for all \(n\in\omega\), we want \(m\cdot(n+1)=m\cdot n+m\). Formally, for \(m\in\omega\), define \(M_m\)~by recurson with \(M_m(0)=0\) and \(M_m(n^+)=M_m(n)+m=A(M_m(n),m)\) for all \(n\in\omega\). Then define
+\begin{align*}
+M:\omega\times\omega&\to\omega\\
+	\pair{m}{n}&\mapsto M_m(n)
+\end{align*}
+We will denote~\(M(m,n)\) by \(m\cdot n\).
+\end{lecture}
+
+\begin{lecture}{March~6, 2007}
+Previously we defined addition and multiplication on~\(\omega\) using recursion. We can prove using induction on~\(\omega\) that these operations satisfy all of the normal properties we expect. We prove a few of these for illustration:
+\begin{thm}
+Let \(a,b,c\in\omega\). Then
+\begin{enumerate}[itemsep=0pt]
+\item[(i)] [Associativity of addition] \((a+b)+c=a+(b+c)\)
+\item[(ii)] [Commutativity of addition] \(a+b=b+a\)
+\item[(iii)] [Associativity of multiplication] \((a\cdot b)\cdot c=a\cdot(b\cdot c)\)
+\item[(iv)] [Commutativity of multiplication] \(a\cdot b=b\cdot a\)
+\item[(v)] [Distributivity of multiplication over addition] \(a\cdot(b+c)=a\cdot b+a\cdot c\)
+\end{enumerate}
+\end{thm}
+\begin{proof}
+We prove (i)~and~(v) and leave the rest to the reader.
+
+(i) Note that
+\[(a+b)+0=a+b=a+(b+0)\]
+So the result holds for \(c=0\). Suppose the result holds for~\(c\). Then
+\begin{align*}
+(a+b)+c^+&=((a+b)+c)^+&&\text{by definition}\\
+	&=(a+(b+c))^+&&\text{by induction hypothesis}\\
+	&=a+(b+c)^+&&\text{by definition}\\
+	&=a+(b+c^+)&&\text{by definition}
+\end{align*}
+Hence the result holds for~\(c^+\). By induction the result holds for all~\(c\).
+
+(v) We have
+\[a\cdot(b+0)=a\cdot b=a\cdot b+0=a\cdot b+a\cdot 0\]
+so the result holds for \(c=0\). If the result holds for~\(c\), then
+\begin{align*}
+a\cdot(b+c^+)&=a\cdot(b+c)^+&&\text{by definition of addition}\\
+	&=a\cdot(b+c)+a&&\text{by definition of multiplication}\\
+	&=(a\cdot b+a\cdot c)+a&&\text{by induction hypothesis}\\
+	&=a\cdot b+(a\cdot c+a)&&\text{by associativity of addition}\\
+	&=a\cdot b+a\cdot c^+&&\text{by definition of multiplication}
+\end{align*}
+Thus the result holds for~\(c^+\).
+\end{proof}
+
+Note that for all \(n\in\omega\), \(n+0=n=0+n\). It is immediate that \(0\)~is the only number satisfying this property, so we call~\(0\) the \emph{additive identity} element in~\(\omega\). Define \(1=0^+\). Then \(n+1=n^+\) for all \(n\in\omega\). In addition, \(n\cdot 1=n=1\cdot n\) for all \(n\in\omega\), and \(1\)~is the only number satisfying this property. We call~\(1\) the \emph{multiplicative identity} element in~\(\omega\).
+
+Another important result is cancellation for addition and multiplication:
+\begin{thm}
+Let \(a,b,c\in\omega\). Then
+\begin{enumerate}[itemsep=0pt]
+\item[(i)] If \(a+b=a+c\), then \(b=c\).
+\item[(ii)] If \(a\cdot b=a\cdot c\) and \(a\ne0\), then \(b=c\).
+\end{enumerate}
+\end{thm}
+
+In what follows, we will assume as given the usual well ordering~\(<_{\omega}\) on~\(\omega\), with least element~\(0\) and successor corresponding to ordinal successor.\footnote{A detailed construction is given in~\cite{enderton77}.} We will now briefly sketch the constructions of the integers (\(\Z\)) from the naturals, the rationals (\(\Q\)) from the integers, and the reals (\(\R\)) from the rationals. It is assumed that the reader has some familiarity with these sets from naive mathematics.
+
+Intuitively, any integer can be represented using a pair \(a,b\) of naturals in the form \(a-b\). Two integers \(a-b\) and \(c-d\) should be equal iff \(a-b=c-d\), or equivalently, \(a+d=b+c\). Using this as a motivation, we define the following relation on \(\omega\times\omega\):
+\[E=\{\,\pair{\pair{a}{b}}{\pair{c}{d}}\mid a,b,c,d\in\omega\land a+d=b+c\,\}\]
+Then \(E\)~is an equivalence relation on \(\omega\times\omega\). We set \(\Z=(\omega\times\omega)/E\) and define a map \(\omega\to\Z\) by \(n\mapsto[\pair{n}{0}]_E\). This is a natural embedding, hence we adopt the convention of identifying elements of~\(\omega\) with their images in~\(\Z\), so \(\omega\subseteq\Z\).
+
+Note that we can naturally extend the arithmetical operations on~\(\omega\) to~\(\Z\):
+\begin{align*}
+[\pair{a}{b}]_E+[\pair{c}{d}]_E&=[\pair{a+c}{b+d}]_E\\
+[\pair{a}{b}]_E\cdot[\pair{c}{d}]_E&=[\pair{ac+bd}{ad+bc}]_E
+\end{align*}
+The reader may verify that these are well defined extensions. For ordering, since intuitively \(a-b<c-d\) iff \(a+d<b+c\), we define
+\[[\pair{a}{b}]_E<_{\Z}[\pair{c}{d}]_E\iff a+d<_{\omega}b+c\]
+The reader may verify this is a well defined extension of the ordering on~\(\omega\). Note that this is a linear ordering, but not a well ordering, since for example the subset
+\[\Z^-=\{\,[\pair{0}{a}]_E\mid a\in\omega\,\}\]
+of nonnegative integers has no least element.
+
+A similar technique can be used to construct the set of rationals from the set of integers. Intuitively, any rational can be represented using a pair \(a,b\) of integers in the form \(a/b\), where \(b\ne 0\). We should have \(a/b=c/d\) iff \(ad=bc\). Using this as a motivation, we define
+\[D=\{\,\pair{a}{b}\mid a,b\in\Z\land b\ne0\,\}\]
+Now define the following relation on \(D\times D\):
+\[E=\{\,\pair{\pair{a}{b}}{\pair{c}{d}}\mid \pair{a}{b},\pair{c}{d}\in D\land ad=bc\,\}\]
+Then \(E\)~is an equivalence relation on~\(D\). We set \(\Q=(D\times D)/E\) and define the natural embedding \(\Z\to\Q\) by \(a\mapsto[\pair{a}{1}]_E\). We also adopt the convention \(\Z\subseteq\Q\).
+
+We can extend arithmetical operations from~\(\Z\) to~\(\Q\) in the obvious manner:
+\begin{align*}
+[\pair{a}{b}]_E+[\pair{c}{d}]_E&=[\pair{ad+bc}{bd}]_E\\
+[\pair{a}{b}]_E\cdot[\pair{c}{d}]_E&=[\pair{ac}{bd}]_E
+\end{align*}
+Ordering is given by
+\[[\pair{a}{b}]_E<_{\Q}[\pair{c}{d}]_E\iff ad<_{\Z}bc\]
+The reader may verify that these are all well defined extensions.
+
+The construction of the reals from the rationals is not nearly as straightforward. Intuitively, we desire to implement a real number~\(r\) as the set of all rational numbers less than~\(r\). Unfortunately, this will not do as a formal definition unless \(r\)~is a rational number. Instead, we must characterize these sets of rationals \emph{intrinsically}, without reference to an upper bound, and then form the set of all such sets. We require some preliminary definitions:
+\begin{defn}
+Let \(\pair{A}{\preceq}\) be a linear ordering. Then a \emph{cut} in~\(A\) is a set \(C\subseteq A\) satisfying
+\begin{enumerate}[itemsep=0pt]
+\item[(i)] [Nontriviality] \(C\ne\emptyset\) and \(C\ne A\)
+\item[(ii)] [Downward closure] If \(c\in C\), \(a\in A\), and \(a\prec c\), then \(a\in C\).
+\end{enumerate}
+\end{defn}
+\begin{defn}
+A set \(C\subseteq\Q\) is called a \emph{Dedekind cut} iff \(C\)~is a cut of \(\pair{\Q}{\le_{\Q}}\) and \(C\)~has no greatest element, that is, for all \(p\in C\), there exists \(q\in C\) with \(p<_{\Q} q\).
+\end{defn}
+\noindent Now define
+\[\R=\{\,C\subseteq\Q\mid C\text{ is a Dedekind cut}\,\}\]
+and define the natural embedding \(\Q\to\R\) by \(p\mapsto\{\,q\in\Q\mid q<_{\Q} p\,\}\). As before, we will adopt the convention that \(\Q\subseteq\R\).
+
+Ordering in~\(\R\) can be defined easily by
+\[C\le_{\R} D\iff C\subseteq D\]
+The reader may verify this extends the ordering on~\(\Q\). Arithmetical operations on~\(\R\) are more complicated, and we will not detail their definitions here.\footnote{See~\cite{enderton77}.} From now on, however, we will freely use them.
+\begin{example}
+We give a quick example using the axiom of choice in~\(\R\). Recall that for a set \(A\subseteq\R\), a point \(r\in\R\) is called a \emph{limit point} of~\(A\) iff for all \(\epsilon>0\), there exists \(a\in A\) such that \(|a-r|<\epsilon\).
+
+Let \(A\subseteq\R\) and \(r\in\R\) be a limit point of~\(A\). By the axiom of choice, we can choose for each \(n\in\omega\) a point \(a_n\in A\) such that \(|a_n-r|<1/n\). The sequence \(\fdef{a_n}{n\in\omega}\) converges to~\(r\).
+\end{example}
+\end{lecture}
+
+\begin{lecture}{March~8, 2007}
+We continue our study of recursion by noting that certain naively recursive functions are more complicated than those we have considered thus far. For example, naively we can define the factorial operation recursively as follows:
+\[0!=1\qquad\text{and}\qquad (n+1)!=(n+1)\cdot n!\quad (n\in\omega)\]
+Note that this involves \(n+1\) in the definition of \((n+1)!\), so we must `remember' where we are at each step in the recursive construction.
+
+Another example is the sequence of Fibonacci numbers, where we set
+\[F_0=F_1=1\qquad\text{and}\qquad F_{n+2}=F_{n+1}+F_n\quad (n\in\omega)\]
+Here each element in the sequence is defined in terms of the previous two elements.
+
+There is a trick that we can use to handle these cases. For the factorial operation, set \(B=\omega\times\omega\) and define \(F:B\to B\) by \(\pair{m}{n}\mapsto\pair{m+1}{(m+1)\cdot n}\). Then by recursion on~\(\omega\), we obtain a function \(H:\omega\to B\) such that \(H(0)=\pair{0}{1}\) and \(H(n+1)=F(H(n))\) for all \(n\in\omega\). By induction on~\(\omega\), \(H(n)=\pair{n}{n!}\) for all \(n\in\omega\). Here we used pairs of naturals for the recursion, where the first coordinate in each pair keeps track of where we are in the factorial construction.
+
+A similar technique can be applied to the Fibonacci numbers. Define \(F':B\to B\) by \(\pair{m}{n}\mapsto\pair{n}{m+n}\). By recursion on~\(\omega\), there exists \(H':\omega\to B\) with \(H(0)=\pair{1}{1}\) and \(H(n+1)=F(H(n))\) for all \(n\in\omega\). By induction on~\(\omega\), \(H(n)=\pair{F_n}{F_{n+1}}\) for all \(n\in\omega\). Here again we used pairs of naturals in the recursion, this time to keep track of two elements in the sequence at each step.
+
+This trick can be generalized:
+\begin{thm}[General recursion on~\(\omega\)]
+Let \(B\)~be a set and define
+\[\B=\{\,k\mid(\exists n\in\omega)(k:n\to B)\,\}\]
+Then for any \(G:\B\to B\), there exists a unique function \(H:\omega\to B\) such that
+\[H(n)=G(H|_n)\quad\]
+for all \(n\in\omega\).
+\end{thm}
+\begin{proof}
+Define \(F:\B\to\B\) such that if \(k:n\to B\), then
+\[F(k)=k\union\{\pair{n}{G(k)}\}\]
+Let \(b=\emptyset\). By recursion on~\(\omega\), there exists a function \(h:\omega\to\B\) such that \(h(0)=\emptyset\) and \(h(n+1)=F(h(n))\) for all \(n\in\omega\). Write \(h_n=h(n)\). By induction on~\(\omega\), \(h_n:n\to B\) and \(h_{n+1}\supseteq h_n\) for all \(n\in\omega\). Define \(H=\bigunion_{n\in\omega} h_n\).
+
+It is easily verified that \(H\)~is the desired recursion.
+\end{proof}
+
+We move now to the study of cardinal arithmetic. Intuitively, the cardinality of a set~\(A\) is just the `number of elements' in~\(A\). Unfortunately, this intuitive concept gets fuzzy when we consider infinite sets. We must give a precise treatment:
+\begin{defn}
+Let \(A\)~and~\(B\) be sets. We say \(A\)~is \emph{equinumerous} to~\(B\), and we write \(A\equinum B\), iff there exists a bijection \(f:A\to B\).
+\end{defn}
+\noindent Note that we have defined a property \(P(x,y)\), where for sets \(a,b\):
+\[P(a,b)\iff a\equinum b\]
+It is easy to check that if \(P\)~were a set, it would be an equivalence relation. But \(P\)~is too big to be a set (its field is the class of all sets). However, it naturally induces equivalence relations. If \(A\)~is a set, we can define~\(E_A\) on~\(\PS(A)\) as follows:
+\[E_A=\{\,\pair{x}{y}\mid x,y\subseteq A\land P(x,y)\,\}\]
+Then \(E_A\)~is an equivalence relation on~\(\PS(A)\).
+
+We can characterize finite sets in terms of equinumerosity:
+\begin{thm}
+Let \(A\)~be a set. Then
+\[\fin_A=\{\,X\subseteq A\mid(\exists n\in\omega)(n\equinum X)\,\}\]
+In particular, \(A\)~is finite iff \(A\equinum n\) for some \(n\in\omega\).
+\end{thm}
+\begin{proof}
+This follows from the fact that \(\triple{\omega}{\sigma}{0}\) is a Peano system and each \(n\in\omega\) is an initial segment of~\(\omega\).
+\end{proof}
+\begin{defn}
+Let \(A\)~and~\(B\) be sets. We say that \(A\)~is \emph{dominated} by~\(B\), and write \(A\preceq B\), iff there exists an injection \(f:A\to B\).
+\end{defn}
+\noindent Note \(A\preceq B\) iff there exists \(C\subseteq B\) with \(A\equinum C\).
+
+Intuitively, any infinite set~\(A\) should contain at least as many elements as~\(\omega\). In fact, we can naively describe the following procedure for exhibiting a denumerable subset: first choose some initial \(a_0\in A\). Now supposing that \(a_0,\ldots,a_n\) are distinct elements of~\(A\), we know
+\[A-\{a_0,\ldots,a_n\}\ne\emptyset\]
+since \(A\)~is infinite by hypothesis. Hence we may choose \(a_{n+1}\in A-\{a_0,\ldots,a_n\}\). Now \(a_0,\ldots,a_n,a_{n+1}\) are distinct elements of~\(A\). We thus obtain a denumerable subset
+\[\{a_0,\ldots,a_n,\ldots\}\subseteq A\]
+Formally, we must use the axiom of choice and recursion to obtain such a subset:
+\begin{thm}
+Let \(A\)~be an infinite set. Then \(\omega\preceq A\).
+\end{thm}
+\begin{proof}
+Define a relation \(R\subseteq\fin_A\times A\) by
+\[R=\{\,\pair{X}{a}\in \fin_A\times A\mid a\in A-X\,\}\]
+Note for all \(X\in\fin_A\), \(A-X\ne\emptyset\) since \(A\)~is infinite, hence \(\domain(R)=\fin_A\). By the axiom of choice, there exists a function \(f\subseteq R\) with \(\domain(f)=\domain(R)=\fin_A\). (The function~\(f\) chooses for each finite subset \(X\subseteq A\) an element \(a\in A\) outside of~\(X\).)
+
+Define \(F:\fin_A\to\fin_A\) by \(X\mapsto X\union\{f(X)\}\). Then by recursion on~\(\omega\), there exists a function \(H:\omega\to\fin_A\) such that \(H(0)=\emptyset\) and
+\[H(n+1)=F(H(n))=H(n)\union\{f(H(n))\}\]
+for all \(n\in\omega\). Define \(G:\omega\to A\) by \(n\mapsto f(H(n))\). It is easy to verify (using induction on~\(\omega\)) that \(G\)~witnesses the desired injection of~\(\omega\) into~\(A\), so \(\omega\preceq A\).
+\end{proof}
+
+We desire to implement a class of objects in our theory which capture the notion of cardinality for arbitrary sets. This can be motivated by the special case of the natural numbers. We have seen that for finite sets, the natural numbers completely capture the notion of cardinality (if \(A\)~is finite, then \(A\equinum n\) for some \(n\in\omega\), and it turns out that this~\(n\) is unique). Natural numbers are useful in large part because they can be used to describe finite cardinality relationships (without reference to specific sets), and because we can define arithmetical and other operations on them which allow us to conveniently calculate.
+
+In the general case, we seek a definable operation~\(\O\) (over all sets) such that
+\[\O(A)=\O(B)\iff A\equinum B\]
+for all sets \(A,B\). Then \(\O(A)\)~becomes the cardinality of~\(A\). We will obtain such a definable operation later on using the axiom of choice. For now, however, we will use this operation:
+\begin{defn}
+For a set~\(A\), we denote by~\(\card{A}\) the \emph{cardinality} of~\(A\). Our cardinality operation (to be implemented later) is such that for all sets \(A,B\),
+\[\card{A}=\card{B}\iff A\equinum B\]
+A set~\(\kappa\) is called a \emph{cardinal} iff \(\kappa=\card A\) for some set~\(A\).
+\end{defn}
+
+\noindent We may define arithmetical operations on cardinals.
+\begin{defn}
+Let \(\kappa,\lambda\) be cardinals. Then the \emph{sum} \(\kappa+\lambda\) is defined by
+\[\kappa+\lambda=\card(A\union B)\]
+where \(\kappa=\card A\) and \(\lambda=\card B\) and \(A\sect B=\emptyset\).
+\end{defn}
+\noindent We must verify that this operation is well-defined.
+
+Suppose \(\kappa=\card A=\card A'\) and \(\lambda=\card B=\card B'\), where \(A\sect B=\emptyset\) and \(A'\sect B'=\emptyset\). Then \(A\equinum A'\) and \(B\equinum B'\) by definition of cardinality, so we may choose bijections \(f:A\to A'\) and \(g:B\to B'\). Now it is immediate from the two disjointness assumptions that \((f\union g):A\union B\to A'\union B'\) is a bijection. Hence \(A\union B\equinum A'\union B'\), so \(\card(A\union B)=\card(A'\union B')\). Thus the definition of cardinal addition is independent of the representative sets used, so it is well-defined. Note also that the definition of cardinal ensures that there exist sets \(A,B\) with \(\card A=\kappa\) and \(\card B=\lambda\). If \(A\)~and~\(B\) are not already disjoint, we may replace them with the respectively equinumerous disjoint sets \(A\times\{0\}\) and \(B\times\{1\}\).
+
+We verify associativity and commutativity:
+\begin{prop}
+Let \(\kappa,\lambda,\mu\) be cardinals. Then
+\begin{enumerate}[itemsep=0pt]
+\item[(i)] \(\kappa+\lambda=\lambda+\kappa\)
+\item[(ii)] \((\kappa+\lambda)+\mu=\kappa+(\lambda+\mu)\)
+\end{enumerate}
+\end{prop}
+\begin{proof}
+Choose pairwise disjoint sets \(A,B,C\) such that \(\kappa=\card A\), \(\lambda=\card B\), and \(\mu=\card C\). Then
+\[\kappa+\lambda=\card(A\union B)=\card(B\union A)=\lambda+\kappa\]
+Note also \(\lambda+\mu=\card(B\union C)\), hence
+\begin{align*}
+(\kappa+\lambda)+\mu&=\card((A\union B)\union C)&&\text{since }(A\union B)\sect C=\emptyset\\
+					&=\card(A\union(B\union C))&&\\
+					&=\kappa+(\lambda+\mu)&&\text{since }A\sect(B\union C)=\emptyset
+\end{align*}
+\end{proof}
+\begin{example}
+Consider the intervals \(I_1=(0,1)\) and \(I_2=(0,1]\) in~\(\R\). Write \(\kappa=\card I_1\). Then by our definitions, \(\kappa+1=\card I_2\). But \(I_1\equinum I_2\), for we may define a bijection \(f:I_2\to I_1\) as follows:
+\[f(x)=\begin{cases}2^{-(n+1)}&\text{if }x=2^{-n}\quad(n\in\omega)\\x&\text{otherwise}\end{cases}\]
+Hence \(\kappa+1=\kappa\).
+\end{example}
+We can also define multiplication for cardinals:
+\begin{defn}
+Let \(\kappa,\lambda\) be cardinals. Then the \emph{product} \(\kappa\cdot\lambda\) is defined by
+\[\kappa\cdot\lambda=\card(A\times B)\]
+where \(\kappa=\card A\) and \(\lambda=\card B\).
+\end{defn}
+\noindent It is easily verified that this operation is well-defined.
+\end{lecture}
+\begin{lecture}{March~13, 2007}
+Previously we defined cardinal addition and multiplication. We may also define cardinal exponentiation, but we require a preliminary definition:
+\begin{defn}
+Let \(A\)~and~\(B\) be sets. Then we define
+\[\funcs{A}{B}=\{\,f\mid f:A\to B\,\}\]
+to be the set of all functions from~\(A\) into~\(B\).
+\end{defn}
+\noindent Suppose \(A\equinum m\) and \(B\equinum n\) for \(m,n\in\omega\). A naive combinatorial argument shows that \(\funcs{A}{B}\equinum n^m\). Indeed, to construct a function \(f:A\to B\), we must make \(m\)~choices of values, and for each choice we have \(n\)~possible values. Hence there are
+\[\underbrace{n\cdots n}_{m\text{ times}}=n^m\]
+possible functions. This motivates the following definition:
+\begin{defn}
+Let \(\kappa,\lambda\) be cardinals. Then we define
+\[\lambda^{\kappa}=\card{\funcs{A}{B}}\]
+where \(\kappa=\card A\) and \(\lambda=\card B\).
+\end{defn}
+\noindent This is well-defined, for if \(A\equinum_g A'\) and \(B\equinum_h B'\), then the mapping \(f\mapsto h\circ f\circ g^{-1}\) witnesses the equinumerosity \(\funcs{A}{B}\equinum\funcs{A'}{B'}\).
+\begin{prop}
+Let \(\kappa,\lambda,\mu\) be cardinals. Then
+\begin{enumerate}[itemsep=0pt]
+\item[(i)] \((\kappa^{\lambda})^{\mu}=\kappa^{\lambda\cdot\mu}\)
+\item[(ii)] \((\kappa\cdot\lambda)^{\mu}=\kappa^{\mu}\cdot\lambda^{\mu}\)
+\end{enumerate}
+\end{prop}
+\begin{proof}
+We prove~(i) and leave~(ii) to the reader.
+
+Let \(A,B,C\) be sets with cardinalities \(\kappa,\lambda,\mu\) respectively. Then
+\[(\kappa^{\lambda})^{\mu}=\card(\funcs{C}{(\funcs{B}{A})})\qquad\text{and}\qquad \kappa^{\lambda\cdot\mu}=\card(\funcs{B\times C}{A})\]
+Write \(S=\funcs{C}{(\funcs{B}{A})}\) and \(T=\funcs{B\times C}{A}\). We must show that \(S\equinum T\). Recall by definition,
+\[S=\{\,f\mid f:C\to \funcs{B}{A}\,\}\qquad T=\{\,g\mid g:B\times C\to A\,\}\]
+Note that for \(f\in S\) and \(c\in C\), \(f(c):B\to A\). For clarity we write \(f(c)=f_c\). Now define \(F:S\to T\) by mapping \(f\mapsto g\) where \(g(b,c)=f_c(b)\). Define \(G:T\to S\) by mapping \(g\mapsto f\), where \(f(c)(b)=g(b,c)\). It is easily verified that \(G\circ F=I_S\) and \(F\circ G=I_T\), hence \(F\)~is a bijection and \(S\equinum T\) as desired.
+\end{proof}
+
+We can define infinitary operations on cardinals as well.
+\begin{defn}
+Let \(\fdef{\kappa_i}{i\in I}\) be a sequence of cardinals and \(\fdef{A_i}{i\in I}\) be a sequence of pairwise disjoint sets such that \(\kappa_i=\card A_i\) for all \(i\in I\). Then we define the sum of the sequence of cardinals~\(\kappa_i\) by
+\[\sum_{i\in I}\kappa_i=\card\bigunion_{i\in I}A_i\]
+\end{defn}
+\noindent Note that the existence of a sequence \(\fdef{A_i}{i\in I}\) satisfying the required properties will follow from later results. (In particular, our usual technique for applying the axiom of choice will not work, since the classes involved are too big to be sets.) However, we can presently verify using the axiom of choice that the definition is independent of any such sequence used.
+
+Let \(\fdef{A_i}{i\in I}\) and \(\fdef{B_i}{i\in I}\) be appropriate sequences. Then for all \(i\in I\),
+\[\card{A_i}=\kappa_i=\card{B_i}\]
+Hence \(A_i\equinum B_i\) for all \(i\in I\). By the axiom of choice, we may thus choose bijections \(f_i:A_i\to B_i\) for all \(i\in I\). Define \(f=\bigunion_{i\in I} f_i\). Then it is immediate that
+\[\bigunion_{i\in I}A_i\equinum_f\bigunion_{i\in I}B_i\]
+as desired.
+
+We may similarly define infinitary multiplication:
+\begin{defn}
+Let \(\fdef{\kappa_i}{i\in I}\) be a sequence of cardinals and \(\fdef{A_i}{i\in I}\) be a sequence of sets such that \(\kappa_i=\card{A_i}\) for all \(i\in I\). Then we define the product
+\[\prod_{i\in I}\kappa_i=\card\prod_{i\in I}A_i\]
+where the product on the right is the generalized cartesian product.
+\end{defn}
+\noindent The reader may verify that this is well-defined.
+
+We define an ordering on cardinals:
+\begin{defn}
+Let \(\kappa,\lambda\) be cardinals. Then we say \(\kappa\le\lambda\) iff \(A\preceq B\), where \(\kappa=\card A\) and \(\lambda=\card B\).
+\end{defn}
+\noindent This is trivially well-defined.
+
+A natural question is whether this ordering on cardinals is antisymmetric. That is, if \(\kappa\le\lambda\) and \(\lambda\le\kappa\), is \(\kappa=\lambda\)? Or equivalently, if \(A\preceq B\) and \(B\preceq A\), is \(A\equinum B\)? This is answered in the affirmative by the following important theorem:
+\begin{thm}[Cantor-Schr\"oder-Bernstein]
+Let \(A\)~and~\(B\) be sets and suppose that \(A\preceq B\) and \(B\preceq A\). Then \(A\equinum B\).
+\end{thm}
+\noindent We will prove this theorem by analyzing the structure of an injection \(h:A\to A\). First we need a preliminary construction.
+
+Let \(h:A\to A\) be an injection. For \(a\in A\), define by recursion the function \(g_a:\omega\to A\) such that \(g_a(0)=a\) and \(g_a(n+1)=h(g_a(n))\) for \(n\in\omega\). Define
+\begin{align*}
+G:A\times\omega&\to A\\
+	\pair{a}{n}&\mapsto g_a(n)
+\end{align*}
+Finally, for \(n\in\omega\), define \(G_n:A\to A\) by \(a\mapsto G(a,n)\). Now \(G_0=I_A\), and \(G_{n+1}=h\circ G_n\) for all \(n\in\omega\). Hence we have
+\[G_n=\underbrace{h\circ\cdots\circ h}_{n\text{ times}}=h^n\]
+\begin{proof}[Proof of theorem]
+Choose \(f:A\to B\) and \(g:B\to A\) injections. Then
+\[h=g\circ f:A\to A\]
+is an injection. Define \(A_0=A-h[A]\), \(A_n=h^n[A_0]\) for \(n\ge 1\), and \(A_{\omega}=A-\bigunion_{n\in\omega}A_n\). Note that for \(n\in\omega\), \(A_n\equinum A_0\) since \(h^n\)~is injective (by induction).
+
+We claim that for distinct \(m,n\in\omega\), \(A_m\sect A_n=\emptyset\). Indeed, define
+\[T=\{\,n\in\omega\mid(\forall m<n)(A_m\sect A_n=\emptyset)\,\}\]
+Trivially \(0\in T\). Suppose \(n\in T\) and \(m<n+1\). If \(m=0\), then \(A_m\sect A_{n+1}=\emptyset\) since \(A_{n+1}=h[A_n]\) and \(A_0\sect h[A]=\emptyset\) by construction. If \(m>0\), then \(A_m=h[A_{m-1}]\), and \(m-1<n\) by hypothesis, so \(A_{m-1}\sect A_n\) is disjoint since \(n\in T\). By the injectivity of~\(h\), it follows that \(h[A_{m-1}]\sect h[A_n]=\emptyset\). Thus \(A_m\sect A_{n+1}=\emptyset\) again, so \(n+1\in T\). By induction, \(T=\omega\), from which our claim follows.
+
+Note also that for \(n\in\omega\), \(A_n\sect A_{\omega}=\emptyset\). Since \(A=(\bigunion_{n\in\omega} A_n)\union A_{\omega}\), we have
+\[\card A=\card A_0\cdot\card\omega+\card A_{\omega}\]
+
+Similarly we use \(k=f\circ g:B\to B\) to define~\(B_n\) (\(n\in\omega\)) and~\(B_{\omega}\) for~\(B\), and obtain
+\[\card B=\card B_0\cdot\card\omega+\card B_{\omega}\]
+We must show \(\card A_0=\card B_0\) and \(\card A_{\omega}=\card B_{\omega}\).
+
+We claim that the latter equinumerosity is witnessed by~\(f|_{A_{\omega}}\). Indeed, to see \(f[A_{\omega}]\subseteq B_{\omega}\), verify the contrapositive by induction: if \(f(a)\in B_n\) for some \(n\in\omega\), then \(a\in A_m\) for some \(m\in\omega\). For case \(n=0\), \(f(a)\in B_0\) implies \(a\not\in g[B]\), which implies \(a\in A_0\). Suppose that the result holds for~\(n\), and that
+\[f(a)\in B_{n+1}=k[B_n]=f[g[B_n]]\]
+Then \(a=g(b_n)\) for some \(b_n\in B_n\) by injectivity of~\(f\). If \(b_n\not\in f[A]\), then \(a\not\in h[A]\) by the injectivity of~\(g\), hence \(a\in A_0\) again. On the other hand, if \(b_n=f(a')\) for some \(a'\in A\), then \(a'\in A_m\) for some \(m\in\omega\) by the induction hypothesis, hence
+\[a=g(f(a'))=(g\circ f)(a')=h(a')\in h[A_m]=A_{m+1}\]
+So \(a\in A_{m+1}\), and the result holds for \(n+1\) as desired.
+
+To verify \(f[A_{\omega}]\supseteq B_{\omega}\), suppose \(b\in B_{\omega}\). Then in particular \(b\not\in B_0\), so \(b\in k[B]=f[g[B]]\). Choose \(b'\in B\) such that \(b=f(g(b'))\). We claim that \(g(b')\in A_{\omega}\), so \(b\in f[A_{\omega}]\) as desired. Indeed, reasoning similar to that above shows that if \(g(b')\in A_n\) for some \(n\in\omega\), then \(b'\in B_m\) for some \(m\in\omega\). But in that case \(b=k(b')\in k[B_m]=B_{m+1}\), contradicting that \(b\in B_{\omega}\). Hence \(g(b')\in A_{\omega}\) as claimed.
+
+Since \(f\)~is injective, we have established \(\card A_{\omega}=\card B_{\omega}\).
+
+To verify \(\card A_0=\card B_0\), note that for \(a\in A_0\), we have \(a\not\in h[A]\), hence either \(a\not\in g[B]\) or \(a=g(b)\) for some (unique) \(b\in B\) but \(b\not\in f[A]\). Define
+\begin{align*}
+A_0^+&=\{\,a\in A\mid a\not\in g[B]\,\}\\
+A_0^-&=\{\,a\in A\mid (\exists b\in B)(a=g(b)\land b\not\in f[A])\,\}
+\end{align*}
+Then \(A_0=A_0^+\union A_0^-\) and \(A_0^+\sect A_0^-=\emptyset\). Similarly define
+\begin{align*}
+B_0^+&=\{\,b\in B\mid b\not\in f[A]\,\}\\
+B_0^-&=\{\,b\in B\mid (\exists a\in A)(b=f(a)\land a\not\in g[B])\,\}
+\end{align*}
+so \(B_0=B_0^+\union B_0^-\) and \(B_0^+\sect B_0^-=\emptyset\). Note now that \(A_0^-=g[B_0^+]\) and \(B_0^-=f[A_0^+]\), hence by the injectivity of \(f\)~and~\(g\) we have \(\card A_0^+=\card B_0^-\) and \(\card A_0^-=\card B_0^+\). By the definition of cardinal addition, we have
+\[\card A_0=\card A_0^+ +\card A_0^-=\card B_0^- +\card B_0^+=\card B_0\]
+as desired. This completes the proof.
+\end{proof}
+\end{lecture}
+\begin{lecture}{March~15, 2007}
+Prevously we proved the Cantor-Schr\"oder-Bernstein theorem. This theorem allows us to establish equinumerosities by exhibiting two injections, which is often easier than exhibiting bijections directly. We give some examples:
+\begin{example}
+Note \((0,1)\preceq [0,1]\) since \((0,1)\subseteq [0,1]\). But also
+\[[0,1]\subseteq (-1,2)\equinum(0,1)\]
+where \(x\mapsto 3x-1\) is a bijection from \((0,1)\to (-1,2)\). Hence \([0,1]\preceq (0,1)\), so by Cantor-Schr\"oder-Bernstein we have \((0,1)\equinum[0,1]\).
+\end{example}
+\begin{example}
+We claim \([0,1]\equinum\R\). Indeed, from the last example we know \([0,1]\equinum(0,1)\), and it can be easily shown (using the inverse tangent function, for example) that \((0,1)\equinum\R\). Hence \([0,1]\equinum\R\) as claimed.
+
+Note that \((0,1)\equinum\R\) is reasonable since
+\[(0,1)=\Bigl(\bigunion_{n\in\omega}(\tfrac{1}{2^{n+1}},\tfrac{1}{2^n})\Bigr)\union\{\,\tfrac{1}{2^n}\mid n\in\omega\,\}\qquad\R=\bigunion_{n\in\Z}(n,n+1)\union\Z\]
+and \(\omega\equinum\Z\) and \((n,n+1)\equinum(1/2^{n+1},1/2^n)\).
+\end{example}
+\begin{example}
+We claim \(\omega\times\omega\equinum\omega\). Clearly \(\omega\preceq\omega\times\omega\) (take the mapping \(n\mapsto\pair{n}{0}\)). But also \(\omega\times\omega\preceq\omega\), for we may define
+\begin{align*}
+\phi:\omega\times\omega&\to\omega\\
+		\pair{m}{n}&\mapsto 2^m\cdot 3^n
+\end{align*}
+By the uniqueness of prime factorizations, \(\phi\)~is injective. Hence our claim follows from Cantor-Schr\"oder-Bernstein.
+\end{example}
+\begin{defn}
+A set~\(A\) is said to be \emph{countably infinite} iff \(A\equinum\omega\). A set~\(A\) is said to be \emph{countable} iff \(A\)~is finite (\(A\equinum n\) for some \(n\in\omega\)) or \(A\)~is countably infinite. A set~\(A\) is said to be \emph{uncountable} iff \(A\)~is not countable.
+\end{defn}
+\noindent We establish two useful theorems:
+\begin{thm}
+A subset of a countable set is countable.
+\end{thm}
+\begin{proof}
+Let \(A\)~be countable and \(B\subseteq A\). If \(B\)~is finite, we are done, so suppose \(B\)~is infinite. Then \(A\)~must be infinite, because any subset of a finite set is finite (this can be verified by induction on the finite cardinals).
+
+In this case \(A\equinum\omega\), hence \(B\preceq\omega\), so we may choose an injection \(f:B\to\omega\). Define \(g:\omega\to f[B]\) by recursion:
+\begin{align*}
+g(0)&=\text{the least }n\in f[B]\\
+g(n+1)&=\text{the least }m>g(n)\text{ such that }m\in f[B]
+\end{align*}
+Note that \(g\)~is well-defined since for any \(n\in\omega\), there must exist \(m>n\) such that \(m\in f[B]\), lest \(f[B]\)~would be finite, contradicting that \(B\)~is infinite and \(f[B]\equinum B\). It is easily verified by induction that \(m<n\) implies \(g(m)<g(n)\), hence \(g\)~is injective. It follows that
+\[f^{-1}\circ g:\omega\to B\]
+is an injection, so \(\omega\preceq B\). By Cantor-Schr\"oder-Bernstein, \(B\equinum\omega\), so \(B\)~is countable in this case as well. This completes the proof.
+\end{proof}
+\begin{cor}
+A set~\(A\) is countable iff \(A\preceq\omega\).
+\end{cor}
+\begin{thm}
+A countable union of countable sets is countable.
+\end{thm}
+\begin{proof}
+Let \(A\)~be a countable set of countable sets. We must prove \(\bigunion A\)~is countable.
+
+By the previous corollary, \(A\preceq\omega\), hence we may choose an injection \(g:A\to\omega\). By the axiom of choice, we may similarly choose a sequence \(\fdef{f_a}{a\in A}\) of injections \(f_a:a\to\omega\) for all \(a\in A\). Set \(B=g[A]\subseteq\omega\). For \(n\in B\), set \(a_n=g^{-1}(n)\) and write \(h_n=f_{a_n}\). Now for \(x\in\bigunion A=\bigunion_{n\in\omega} a_n\), define
+\[n_x=\text{the least }n\text{ such that }x\in a_n\]
+Then it is immediate that
+\begin{align*}
+F:\bigunion A&\to\omega\times\omega\\
+	x&\mapsto\pair{n_x}{h_{n_x}(x)}
+\end{align*}
+is an injection, so \(\bigunion A\preceq\omega\times\omega\). But we have seen that \(\omega\times\omega\equinum\omega\). Hence \(\bigunion A\preceq\omega\), so \(\bigunion A\)~is countable by the previous corollary as desired.
+\end{proof}
+
+We conclude by stating some equivalent versions of the axiom of choice:
+\begin{thm}[Axiom of choice]
+The following are equivalent:
+\begin{enumerate}[itemsep=0pt]
+\item[(1)] If \(R\subseteq A\times B\) and \(\domain(R)=A\), then there exists a function \(f:A\to B\) such that \(f\subseteq R\).
+\item[(2)] If \(\fdef{A_i}{i\in I}\) is a sequence of nonempty sets, then the product
+\[\prod_{i\in I}A_i=\{\,f\mid f:I\to\bigunion_{i\in I}A_i\land(\forall i\in I)(f(i)\in A_i)\,\}\]
+is nonempty.
+\item[(3)] If \(A\)~is a set, there exists a function~\(F\) on \(P=\PS(A)-\{\emptyset\}\) such that for all \(a\in P\), \(F(a)\in a\).
+\item[(4)] If \(A\)~is a set (of sets) with \(\emptyset\not\in A\), then there exists a function \(F:A\to\bigunion A\) such that for all \(a\in A\), \(F(a)\in a\).
+\item[(5)] If \(\CC\)~is a collection of nonempty pairwise disjoint sets, then there exists a set \(D\subseteq\bigunion\CC\) such that for all \(C\in\CC\), \(C\sect D\)~contains exactly one element.
+\end{enumerate}
+\end{thm}
+\begin{proof}
+Straightforward and left to the reader.
+\end{proof}
+\end{lecture}
+
+\begin{lecture}{March~20, 2007}
+Later on we will prove that Zorn's lemma is a consequence of the axiom of choice. Presently we will prove the converse.
+
+Suppose Zorn's lemma holds and \(R\subseteq A\times B\) with \(\domain(R)=A\). Define
+\[P=\{\,f\mid f\subseteq R\text{ a function}\,\}\]
+Intuitively, \(P\)~can be viewed as a set of approximations to a choice function for~\(R\). Note that \(P\)~is partially ordered under inclusion. Let \(C\subseteq P\) be a chain. We claim that \(\bigunion C\in P\). Indeed, it is immediate that \(\bigunion C\subseteq R\), and \(\bigunion C\)~is a function since \(C\)~is a chain. By Zorn's lemma then, there exists a maximal \(f\in P\).
+
+We claim that \(\domain(f)=A\). Indeed, if this were not the case, we could choose \(a\in A-\domain(f)\). Now \(a\in\domain(R)\) by hypothesis, hence there exists \(b\in B\) such that \(\pair{a}{b}\in R\). But then
+\[f'=f\union\{\pair{a}{b}\}\]
+is an element of~\(P\) properly extending~\(f\)---a contradiction. Hence \(\domain(f)=A\) and \(f\)~is the desired choice function.
+
+Since \(R\)~was arbitrary, this establishes the axiom of choice from Zorn's lemma.
+
+We now use Zorn's lemma to prove an important theorem:
+\begin{thm}[Cardinal comparability]
+Let \(\kappa,\lambda\) be cardinals. Then \(\kappa\le\lambda\) or \(\lambda\le\kappa\). Equivalently, for arbitrary sets \(A,B\), \(A\preceq B\) or \(B\preceq A\).
+\end{thm}
+Our goal will be to build an injection \(f\subseteq A\times B\) such that one of \(\domain(f)=A\) or \(\range(f)=B\) holds. This will involve, ultimately, choosing an element \(b\in B\) for each \(a\in A\). But we must choose distinct \(b\in B\) for distinct \(a\in A\). This illustrates the difficulty of applying the axiom of choice directly. Zorn's lemma allows us to `structure' our choices in such a way that we can construct an injection.
+\begin{proof}[Proof of theorem]
+Define
+\[P=\{\,f\mid f\subseteq A\times B\text{ an injection}\,\}\]
+Then \(P\)~is partially ordered under inclusion. If \(C\subseteq P\) is a chain, then it is immediate that \(C\subseteq A\times B\), and it can be verified that \(\bigunion C\)~is an injection since \(C\)~is a chain of injections. Hence \(\bigunion C\in P\). By Zorn's lemma, there exists a maximal \(f\in C\).
+
+We claim that \(\domain(f)=A\) or \(\range(f)=B\). Indeed, if neither of these are the case, then we can choose \(a\in A-\domain(f)\) and \(b\in B-\range(f)\). But then
+\[f'=f\union\{\pair{a}{b}\}\]
+is an element of~\(P\) properly extending~\(f\)---a contradiction. Hence the claim holds.
+
+If \(\domain(f)=A\), then \(f:A\to B\) is an injection, so \(A\preceq B\). If \(\range(f)=B\), then \(f^{-1}:B\to A\) is an injection, so \(B\preceq A\). This completes the proof.
+\end{proof}
+\noindent The above proof illustrates a general principle in the application of Zorn's lemma. Intuitively, we `wander' through elements~\(f\) of a partially ordered set~\(P\), and if \(f\)~is not already maximal, we keep going. In general, many choices will be required to construct~\(f\), and one additional choice will be used for a proper extension of~\(f\). The choices are made in an `orderly' manner in order to produce the desired object.
+
+We now establish some other important results in cardinal arithmetic.
+\begin{thm}
+Let \(A\)~be a set. Then \(A\prec\PS(A)\) (that is, \(A\preceq\PS(A)\) but \(A\not\equinum\PS(A)\)).
+\end{thm}
+\begin{proof}
+By cardinal comparability, it is sufficient to show that there is no surjection \(F:A\to\PS(A)\), so \(\PS(A)\not\preceq A\), so \(A\prec\PS(A)\).
+
+Let \(F:A\to\PS(A)\). We wish to exhibit a set \(X\subseteq A\) such that for all \(a\in A\), \(F(a)\ne X\). We do this by constructing~\(X\) so as to disagree with~\(F(a)\) on the element~\(a\). Set
+\[X=\{\,x\in A\mid x\not\in F(x)\,\}\]
+Then \(X\subseteq A\), and for all \(a\in A\), we have \(a\in X\) iff \(a\not\in F(a)\), hence \(F(a)\ne X\). Thus \(X\not\in F[A]\), so \(F\)~is not surjective.
+\end{proof}
+\noindent The above proof uses Cantor's `diagonalization' method. To see why this is called the diagonalization method, note that any \(F:A\to\PS(A)\) can be represented informally with a table of the following sort:
+\begin{center}
+\begin{tabular}{r|cllll}
+\(F\)&\(a_1\)&\(a_2\)&\(a_3\)&\(\cdots\)\\
+\hline
+\(a_1\)&\textbf{Y}&N&N&\(\cdots\)\\
+\(a_2\)&N&\textbf{N}&N&\(\cdots\)\\
+\(a_3\)&N&Y&\textbf{Y}&\(\cdots\)\\
+\(\vdots\)&\(\vdots\)&\(\vdots\)&\(\vdots\)&\(\ddots\)
+\end{tabular}
+\end{center}
+Here row~\(i\) describes the set~\(F(a_i)\). Entry \((i,j)\) is~Y if \(a_j\in F(a_i)\) and is~N if \(a_j\not\in F(a_i)\). Intuitively, we construct~\(X\) in the above proof by moving down the diagonal: say that \(a_j\in X\) if entry \((j,j)\) is~N, and \(a_j\not\in X\) if entry \((j,j)\) is~Y. By construction, \(X\)~is distinct from every~\(F(a_i)\), showing that \(F\)~is not surjective.
+\begin{thm}
+Let \(A\)~be a set. Then \(\PS(A)\equinum\funcs{A}{2}\).
+\end{thm}
+\begin{proof}
+For each \(B\subseteq A\), we define the \emph{characteristic function} \(\chi_B:A\to 2\) by
+\[\chi_B(a)=
+\begin{cases}
+1&\text{if }a\in B\\
+0&\text{otherwise}
+\end{cases}\]
+We claim that the map \(F:\PS(A)\to\funcs{A}{2}\) given by \(B\mapsto\chi_B\) is a bijection.
+
+Indeed, \(F\)~is an injection, for if \(\chi_B=\chi_{B'}\), then \(a\in B\) iff \(\chi_B(a)=1\) iff \(\chi_{B'}(a)=1\) iff \(a\in B'\), hence \(B=B'\). In addition, \(F\)~is surjective, for if \(\chi\in\funcs{A}{2}\), define
+\[B=\{\,a\in A\mid \chi(a)=1\,\}\]
+Then it is immediate that \(\chi_B=\chi\).
+\end{proof}
+\begin{cor}
+For all cardinals~\(\kappa\), \(\kappa<2^{\kappa}\). In particular, there is no greatest cardinal.
+\end{cor}
+\begin{proof}
+If \(\kappa=\card A\), then \(2^{\kappa}=\card\PS(A)\) by the previous theorem, hence \(\kappa<2^{\kappa}\) by the theorem before that.
+\end{proof}
+
+The following proof also uses the diagonalization method:
+\begin{thm}[K\"onig]
+Let \(\fdef{\kappa_i}{i\in I}\) and \(\fdef{\lambda_i}{i\in I}\) be sequences of cardinals such that \(\kappa_i<\lambda_i\) for all \(i\in I\). Then
+\[\sum_{i\in I}\kappa_i<\prod_{i\in I}\lambda_i\]
+\end{thm}
+\begin{proof}
+Choose sequences \(\fdef{A_i}{i\in I}\) and \(\fdef{B_i}{i\in I}\) of pairwise disjoint sets such that \(\card A_i=\kappa_i\) and \(\card B_i=\lambda_i\) for all \(i\in I\). Then
+\[\sum_{i\in I}\kappa_i=\card\bigunion_{i\in I}A_i\quad\text{and}\quad\prod_{i\in I}\lambda_i=\card\prod_{i\in I}B_i\]
+Write \(A=\bigunion_{i\in I}A_i\) and \(B=\prod_{i\in I}B_i\). Note that \(B\)~is nonempty by the axiom of choice since each~\(B_i\) is nonempty. We show that there is no surjection from~\(A\) to~\(B\), so that \(B\not\preceq A\). By cardinal comparability, it follows that \(A\prec B\), establishing the theorem.
+
+Suppose \(F:A\to B\). Note that for each \(i\in I\), \(F[A_i]\subseteq B\). For \(i\in I\), consider
+\[C_i=\{\,f(i)\mid f\in F[A_i]\,\}\]
+Note that \(C_i\preceq A_i\) by the axiom of choice. Thus we have \(C_i\preceq A_i\prec B_i\), so \(C_i\prec B_i\) by Cantor-Schr\"oder-Bernstein. Since \(C_i\subseteq B_i\), this implies \(B_i-C_i\ne\emptyset\) for all \(i\in I\).
+
+Using the axiom of choice, we obtain a function~\(g\) on~\(I\) such that \(g(i)\in B_i-C_i\) for all \(i\in I\). Now \(g\in B\), but
+\[g\not\in\bigunion_{i\in I} F[A_i]\]
+since \(g(i)\not\in C_i\) for all \(i\in I\).
+\end{proof}
+
+We now present some additional cardinality examples.
+\begin{example}
+Note that \(\Z\times\Z\) is a countable union of countable sets:
+\[\Z\times\Z=\bigunion_{m\in\Z}\Z\times\{m\}\]
+Now we can easily define a surjection \(\Z\times\Z\to\Q\) by
+\[\pair{m}{n}\mapsto
+\begin{cases}
+m/n&\text{if }n\ne0\\
+0&\text{otherwise}
+\end{cases}\]
+Hence \(\Q\)~is equinumerous to a subset of a countable set, so is countable.
+\end{example}
+\begin{example}
+Let \(f:\R\to\R\) be a nondecreasing function (\(x\le y\) implies \(f(x)\le f(y)\)). For \(r\in R\), define
+\begin{align*}
+f^-(r)&=\sup\{\,f(x)\mid x<r\,\}\\
+f^+(r)&=\inf\{\,f(x)\mid r<x\,\}
+\end{align*}
+We say that \(f\)~\emph{jumps} at~\(r\) iff \(f^-(r)<f^+(r)\). If \(f\)~does not jump at~\(r\), \(f\)~is continuous at~\(r\). We claim that the set
+\[J=\{\,r\in\R\mid f\text{ jumps at }r\,\}\]
+is countable. Indeed, by the density of~\(\Q\) in~\(\R\), we can use the axiom of choice to choose for each \(r\in J\) a rational \(p_r\in\Q\) such that \(f^-(r)<p_r<f^+(r)\). Now the map \(J\to\Q\) defined by \(r\mapsto p_r\) is an injection, since if \(r,r'\in J\) and \(r<r'\), then
+\[p_r<f^+(r)\le f^-(r')<p_{r'}\]
+Hence \(J\)~is countable as claimed.
+\end{example}
+We will write \(\aleph_0=\card\omega\). We have seen that \(\aleph_0\cdot\aleph_0=\aleph_0\).
+\begin{example}
+Any \(r\in R\) is a limit of a sequence \(\fdef{q_n}{n\in\omega}\) of rationals \(q_n\in\Q\). Define
+\[C=\{\,\fdef{q_n}{n\in\omega}\mid (\forall n\in\omega)(q_n\in\Q)\land\lim_{n\to\infty}q_n\text{ exists}\,\}\]
+Then \(C\subseteq\funcs{\omega}{\Q}\), so
+\[\card C\le\aleph_0^{\aleph_0}\le(2^{\aleph_0})^{\aleph_0}=2^{\aleph_0\cdot\aleph_0}=2^{\aleph_0}\]
+With the axiom of choice, this shows that \(\card\R\le 2^{\aleph_0}\).
+
+On the other hand, \(2^{\aleph_0}\le\card\R\), since for any \(S\subseteq\omega\), we can define
+\[r_S=\sum_{n\in S}\frac{1}{10^{n+1}}\]
+and \(S\mapsto r_S\) is an injection from~\(\PS(\omega)\) to~\(\R\).
+
+By Cantor-Schr\"oder-Bernstein, \(\card\R=2^{\aleph_0}\). In particular, \(\aleph_0<\card\R\).
+\end{example}
+\end{lecture}
+
+\begin{lecture}{April~3, 2007}
+We continue our study of cardinal arithmetic by examining how infinite cardinal arithmetic (specifically addition and multiplication) `collapses' under the axiom of choice. We will see that for an infinite cardinal~\(\kappa\),
+\[\kappa+\kappa=\kappa\cdot\kappa=\kappa\]
+From this result it follows that if \(\kappa,\mu\) are cardinals, at least one of which is infinite and neither of which is zero, then
+\[\kappa+\mu=\kappa\cdot\mu=\max\{\kappa,\mu\}\]
+First we prove a preliminary result as a `warmup'. The techniques used in the proof will be generalized to prove the above results.
+\begin{thm}
+Let \(\kappa\)~be infinite. Then \(\kappa\cdot\omega=\kappa\).
+\end{thm}
+\begin{proof}
+Clearly \(\kappa\le\kappa\cdot\omega\). We must show \(\kappa\cdot\omega\le\kappa\).
+
+Let \(\kappa=\card A\). We want to find a set~\(B\) such that \(B\equinum A\) and \(B\times\omega\preceq B\). We will use \(B\subseteq A\). Define
+\[P=\{\,f\mid f:B\times\omega\to B\text{ an injection }\land B\subseteq A\,\}\]
+By Zorn's lemma, there exists a maximal \(f\in P\), say
+\[f:B\times\omega\to B\subseteq A\]
+We claim that \(B\equinum A\). Note that if \(C\subseteq A-B\) is countably infinite, then
+\[C\times\omega\equinum\omega\times\omega\equinum\omega\equinum C\]
+Hence we could choose an injection \(g:C\times\omega\to C\) and define a proper extension \(f\union g\) of~\(f\) in~\(P\)---contradicting the maximality of~\(f\). But then \(A-B\) must be finite, since every infinite set has a countably infinite subset, and \(B\)~must be infinite. Write \(\card(A-B)=n\). Then we have
+\[\card A=\card B+\card(A-B)=\card B+n=\card B\]
+since \(B\)~is infinite. This shows \(B\equinum A\) as claimed.
+
+Thus \(A\preceq A\times\omega\), so \(\kappa\cdot\omega\le\kappa\), and \(\kappa\cdot\omega=\kappa\) as desired.
+\end{proof}
+\begin{cor}
+Let \(\kappa\)~be infinite. Then \(\kappa+\kappa=\kappa\).
+\end{cor}
+\begin{proof}
+\[\kappa\le\kappa+\kappa=\kappa\cdot2\le\kappa\cdot\omega\le\kappa\]
+\end{proof}
+
+We now prove a more general version of the above result:
+\begin{thm}[Cardinal absorption]
+Let \(\kappa\)~be infinite. Then \(\kappa\cdot\kappa=\kappa\).
+\end{thm}
+\begin{proof}
+We clearly have \(\kappa\le\kappa\cdot\kappa\). We prove \(\kappa\cdot\kappa\le\kappa\). Define
+\[P=\{\,f\mid f:B\times B\to B\text{ an injection }\land B\subseteq A\,\}\]
+Using Zorn's lemma, we obtain a maximal \(f:B\times B\to B\subseteq A\) in~\(P\). Define \(\mu=\card B\). Then we have \(\mu\le\mu\cdot\mu\le\mu\), so \(\mu\cdot\mu=\mu\). Also \(\mu+\mu=\mu\). We claim \(\kappa=\mu\), from which the result follows.
+
+Suppose \(C\subseteq A-B\) has cardinality~\(\mu\). Then, since
+\[(B\union C)\times(B\union C)-(B\times B)=(B\times C)\union (C\times B)\union (C\times C)\]
+and since
+\[\mu\cdot\mu+\mu\cdot\mu+\mu\cdot\mu\le\mu\]
+by the above, there exists an injection
+\[g:[(B\union C)\times(B\union C)-(B\times B)]\to C\]
+But then \(f\union g\) properly extends~\(f\) in~\(P\)---contradicting the maximality of~\(f\). Hence there exists no such subset~\(C\), so \(\card(A-B)<\mu\).	Thus
+\[\mu\le\kappa=\card A=\card B+\card(A-B)\le\mu+\mu=\mu\]
+so \(\kappa=\mu\) as claimed.
+\end{proof}
+\noindent Note that the previous theorem is just a special case of this one, since
+\[\kappa\le\kappa\cdot\omega\le\kappa\cdot\kappa=\kappa\]
+
+\begin{rmk}
+We know from previous results that for all cardinals~\(\kappa\), \(\kappa<2^{\kappa}\). Therefore cardinal exponentiation does not collapse in the way addition and multiplication do. Attempts to prove that \(2^{\kappa}\le\kappa\) by a Zorn's lemma argument will, of course, fail. It is instructive to examine why this is so.
+
+Our previous uses of Zorn's lemma hinged on the fact that the entry conditions for the partially ordered set~\(P\) were `finitary' in nature. Specifically, when checking closure under the union over a chain~\(C\), we only needed to work with finitely many elements of~\(C\). If we attempt to prove \(2^{\kappa}\le\kappa\), this is not so. For example, set
+\[P=\{\,f\mid f:\PS(B)\to B\text{ an injection }\land B\subseteq A\,\}\]
+where \(\kappa=\card A\). Let \(C\subseteq P\) be an arbitrary chain. To show \(\bigunion C\in P\), we must show in particular that \(\domain(\bigunion C)=\PS(B)\) for some \(B\subseteq A\). We can show \(\domain(\bigunion C)\subseteq\PS(B)\) for various \(B\subseteq A\), but to establish the reverse inclusion for any such~\(B\), we must show that every subset of~\(B\) (including \(B\)~itself) is in the domain of some \(f\in C\). This is not possible in general since \(B\)~may be infinite.
+
+To state this crudely: the chain in a Zorn's lemma proof is only useful when we are working with finitely many elements.
+\end{rmk}
+
+We denote by~\(\aleph_0\) the least infinite cardinal, that is, \(\aleph_0=\card\omega\). Similarly we denote by~\(\aleph_1\) the least uncountable cardinal. So far then we have
+\[0,1,2,\ldots,n,\ldots,\aleph_0,\aleph_1,\ldots\]
+For each cardinal~\(\mu\), there exists a least cardinal greater than~\(\mu\) (this will be proved later on). We denote this cardinal by~\(\mu^+\). Note that this does \emph{not} correspond to ordinal successor in general. For all \(n\in\omega\), we define \(\aleph_{n+1}=\aleph_n^+\). We also define
+\[\aleph_{\omega}=\aleph_0+\aleph_1+\cdots=\sum_{n\in\omega}\aleph_n\]
+Note that if \(\kappa>\aleph_n\) for all \(n\), then
+\[\kappa=\kappa\cdot\kappa\ge\kappa\cdot\omega=\sum_{n\in\omega}\kappa\ge\sum_{n\in\omega}\aleph_n=\aleph_{\omega}\]
+Thus \(\aleph_{\omega}\)~is the least cardinal greater than every~\(\aleph_n\). Later on we will define \(\aleph_{\omega+1}=\aleph_{\omega}^+\), and so on.
+
+The \emph{continuum hypothesis} states that \(2^{\aleph_0}=\aleph_1\). \emph{This hypothesis (first conjectured by Cantor) turns out to be independent of our axioms}, meaning that both it and its negation are consistent with the axioms, or equivalently that it can be neither proved nor disproved from the axioms.
+
+More generally, our axioms do \emph{not} refute that \(2^{\aleph_0}=\aleph_n\) for some \(n\in\omega\), nor do they refute that \(2^{\aleph_0}=\aleph_{\omega+1}\). Interestingly, they \emph{do} refute that \(2^{\aleph_0}=\aleph_{\omega}\).
+\begin{thm}
+\(2^{\aleph_0}\ne\aleph_{\omega}\)
+\end{thm}
+\begin{proof}
+Since \(\aleph_n<\aleph_{\omega}\) for all \(n\in\omega\), it follows from K\"onig's theorem that
+\[\aleph_{\omega}=\sum_{n\in\omega}\aleph_n<\prod_{n\in\omega}\aleph_{\omega}=\aleph_{\omega}^{\aleph_0}\]
+so \(\aleph_{\omega}\ne\aleph_{\omega}^{\aleph_0}\). But we know
+\[(2^{\aleph_0})^{\aleph_0}=2^{\aleph_0\cdot\aleph_0}=2^{\aleph_0}\]
+Hence \(\aleph_{\omega}\ne 2^{\aleph_0}\).
+\end{proof}
+\end{lecture}
+\begin{lecture}{April~5, 2007}
+We continue with cardinal exponentiation. The following results are easily verified:
+\begin{thm}
+Let \(\kappa,\lambda,\mu\) be cardinals. Then
+\begin{enumerate}[itemsep=0pt]
+\item[(i)] If \(\kappa\le\lambda\), then \(\kappa^{\mu}\le\lambda^{\mu}\).
+\item[(ii)] If \(\kappa\le\lambda\), then \(\mu^{\kappa}\le\mu^{\lambda}\) (except if \(\kappa=\mu=0\) and \(\lambda>0\)).
+\end{enumerate}
+\end{thm}
+\noindent Note that if \(\kappa=\nu^{\delta}\), then by absorption
+\[\kappa^{\lambda}=(\nu^{\delta})^{\lambda}=\nu^{\delta\cdot\lambda}=\nu^{\max\{\delta,\lambda\}}\]
+provided one of \(\delta,\lambda\) is infinite and neither is zero.
+
+We prove a simple proposition:
+\begin{prop}
+Let \(\kappa\)~be infinite. Then \(\kappa^{\kappa}=2^{\kappa}\).
+\end{prop}
+\begin{proof}
+We have
+\[2^{\kappa}\le\kappa^{\kappa}\le(2^{\kappa})^{\kappa}=2^{\kappa\cdot\kappa}=2^{\kappa}\]
+\end{proof}
+\noindent An alternate proof uses sets more explicitly. Choose~\(K\) with \(\kappa=\card K\). Then
+\begin{align*}
+\kappa^{\kappa}=\card\funcs{K}{K}&=\card\{\,f\mid f:K\to K\,\}\\
+	&\le\card\{\,f\mid f\subseteq K\times K\,\}\\
+	&=\card\PS(K\times K)\\
+	&=\card\PS(K)=2^{\kappa}
+\end{align*}
+Note that the cardinal arithmetic is describing the same thing, but it allows us to avoid getting our hands dirty working with specific sets.
+
+If \(\omega\le\lambda<\kappa\), the above proposition does not tell us about~\(\kappa^{\lambda}\) (unless we already know \(\kappa=\nu^{\delta}\) for some \(\delta\ge\lambda\), in which case \(\kappa^{\lambda}=\kappa\)).
+
+In a previous lecture we proved the axiom of choice from Zorn's lemma. Presently we desire to prove Zorn's lemma as well as illustrate the general principle behind it. We will first sketch an \emph{intuitive outline of a proof}.
+
+Let \(P\)~be partially ordered under inclusion and suppose \(P\)~is closed under unions over arbitrary chains. We desire to prove that \(P\)~contains a maximal element. Note that for each \(p\in P\), either \(p\)~is already maximal, or else there exists some \(q\in P\) with \(p\subseteq q\), \(p\ne q\) (we will write \(p\prec q\)). Define
+\[R=\{\,\pair{p}{q}\mid (p\text{ maximal}\land q=p)\lor p\prec q\,\}\]
+By the axiom of choice, there exists a function \(F\subseteq R\) with \(\domain(F)=P\). Note that \(p\preceq F(p)\) for all \(p\in P\), and if \(p\)~is not maximal, then \(p\prec F(p)\).
+
+Now do a recursion to obtain a function \(\fdef{p_n}{n\in\omega}\) where \(p_{n+1}=F(p_n)\). Either \(p_n\)~is maximal for some \(n\in\omega\), or else we have
+\[p_0\prec p_1\prec p_2\prec\cdots\]
+Note that \(C=\{\,p_n\mid n\in\omega\,\}\) is a chain, hence by hypothesis \(\bigunion C\in P\). Write \(p_{\omega}=\bigunion C\). Then \(p_n\prec p_{\omega}\) for all \(n\in\omega\), so we have
+\[p_0\prec p_1\prec p_2\prec\cdots\prec p_{\omega}\]
+We can repeat the above process, starting with~\(p_{\omega}\), to obtain a maximal element or else an extended chain
+\[p_0\prec p_1\prec p_2\prec\cdots\prec p_{\omega}\prec p_{\omega+1}\prec p_{\omega+2}\prec\cdots\]
+Intuitively, we are getting closer to a maximal element in~\(P\). It seems that if we were able to continue repeating the above procedure for as long as necessary, we would eventually reach a maximal element.
+
+In order to accomplish this, we must make precise the notion of `continuing' the procedure. The idea is to transfer our notions of induction and recursion from~\(\omega\) to `larger' orderings. We will define these orderings more generally, and in such a way that induction and recursion work for them. Notice that for these orderings (unlike~\(\omega\)), there is more than can be reached from an initial element using a successor operation (consider~\(p_{\omega}\) above). We must therefore define these orderings without reference to a successor operation. Instead we note the fact that every nonempty subset of~\(\omega\) has a least element, and generalize this notion:
+\begin{defn}
+Let \(\pair{A}{\preceq}\) be a linear ordering. Then \(\pair{A}{\preceq}\) is a \emph{well ordering} iff every nonempty subset of~\(A\) has a least element. (Equivalently, if \(\emptyset\ne X\subseteq A\), then there exists \(a\in X\) such that for all \(b\in A\), \(b\prec a\) implies \(b\not\in X\).)
+\end{defn}
+The following version of induction is immediate:
+\begin{thm}[Induction on well orderings]
+Let \(\pair{A}{\preceq}\) be a well ordering. Suppose \(P(x)\)~is a property satisfying:
+\begin{quote}
+For all \(a\in A\), if \(P(b)\)~holds for all \(b\prec a\), then \(P(a)\)~holds.
+\end{quote}
+Then \(P(a)\)~holds for all \(a\in A\).
+\end{thm}
+\begin{proof}
+Suppose the claim is false. Define
+\[B=\{\,a\in A\mid P(a)\text{ does not hold}\,\}\]
+Then \(B\)~is nonempty, so there exists a least element \(a\in B\). But then \(P(b)\)~must hold for all \(b\prec a\), so \(P(a)\)~holds by hypothesis---contradicting that \(a\in B\).
+\end{proof}
+\noindent Note that \emph{strong induction} on~\(\omega\) is just a special case of this theorem.
+
+We also state recursion (to be proved later):
+\begin{thm}[Recursion on well orderings (schema)]
+Let \(\pair{A}{\preceq}\) be a well ordering and \(\O\)~be a definable operation (on the class of all sets). Then there exists a unique function~\(H\) with \(\domain(H)=A\) such that for all \(a\in A\),
+\[H(a)=\O(H|_{\{\,b\mid b\prec a\,\}})\]
+\end{thm}
+\end{lecture}
+
+\begin{lecture}{April~10, 2007}
+Note that if \(\pair{A}{\preceq}\) is a well ordering and \(A\)~is nonempty, then \(A\)~has a least element. In addition, if \(a\in A\) and there exists \(b\in A\) such that \(a\prec b\), then there exists a least \(c\in A\) such that \(a\prec c\).
+\begin{defn}
+Let \(\pair{A}{\preceq}\) be a well ordering. If \(A\)~is nonempty, denote by~\(\beta\) the least (or \emph{bottom}) element of~\(A\). If \(a\in A\) and there exists \(b\in A\) such that \(a\prec b\), then denote by~\(\sigma(a)\) the least such element, called the \emph{(immediate) successor} of~\(a\).
+\end{defn}
+\noindent In general, there are more elements in well orderings than can be reached from the bottom element using the successor operation.
+\begin{defn}
+Let \(\pair{A}{\preceq}\) be a well ordering with \(\beta,\sigma\) as above. Then \(a\in A\) is called a \emph{limit element} iff \(a\ne\beta\) and for all \(b\in A\), \(\sigma(b)\ne a\).
+\end{defn}
+\noindent Note that if \(a\)~is an element of a well ordering, then the following cases are mutually exclusive and exhaustive: either \(a\)~is the bottom element, \(a\)~is a successor element, or \(a\)~is a limit element.
+
+If \(A\)~is well ordered, \(a\in A\), and there exist at least~\(n\) distinct elements in~\(A\) greater than~\(a\), then we recursively define
+\[\sigma^n(a)=\underbrace{(\sigma\circ\cdots\circ\sigma)}_{n\text{ times}}(a)=\text{the }n\text{-th successor of }a\]
+Specifically, set \(\sigma^0(a)=a\) and \(\sigma^{m+1}(a)=\sigma(\sigma^m(a))\) for \(m<n\).
+
+With limit elements, we can completely describe the structure of a well ordering:
+\begin{thm}
+Let \(\pair{A}{\preceq}\) be a well ordering with \(\beta,\sigma\). For all \(a\in A\), either \(a=\sigma^n(\beta)\) for some \(n\in\omega\), or \(a=\sigma^n(b)\) for some \(n\in\omega\) and some limit element \(b\in A\).
+\end{thm}
+\begin{proof}
+We use a minimal criminal argument. Define
+\[X=\{\,x\in A\mid x\text{ satisfies neither condition}\,\}\]
+If \(X\)~is empty, then we are done, so suppose \(X\)~is nonempty. Choose the least element \(a\in X\). We know either \(a=\beta\), \(a\)~is a successor element, or \(a\)~is a limit element.
+
+Case \(a=\beta\) is impossible, since \(\beta=\sigma^0(\beta)\) satisfies the first condition. 
+
+If \(a=\sigma(c)\) for some \(c\in A\), then since \(c\prec a\) we must have \(c=\sigma^n(b)\) for some \(n\in\omega\) and some \(b\in A\), where either \(b=\beta\) or \(b\)~is a limit element. But then
+\[a=\sigma(\sigma^n(b))=\sigma^{n+1}(b)\]
+contradicting that \(a\in X\).
+
+Finally, if \(a\)~is a limit element, then \(a=\sigma^0(a)\), again contradicting \(a\in X\).
+
+Thus \(X\)~must be empty, establishing the theorem.
+\end{proof}
+
+We desire to prove the recursion theorem. We first establish a lemma:
+\begin{lem}
+Let \(\O\)~be a definable operation and suppose \(\pair{A}{\preceq}\) is a well ordering such that for all \(a\in A\), there exists a unique function~\(h\) such that (i) \(\domain(h)=\seg a\) and (ii) for all \(b\prec a\), \(h(b)=\O(h|_{\seg b})\).
+
+Then there exists a unique function~\(H\) such that \(\domain(H)=A\) and for all \(a\in A\)
+\[H(a)=\O(H|_{\seg a})\]
+\end{lem}
+\begin{proof}
+We first prove existence.
+
+If \(A=\emptyset\), set \(H=\emptyset\). If \(A\)~has a greatest element~\(\tau\), then by hypothesis there exists a function~\(h\) satisfying (i)~and~(ii) for~\(\tau\). Define
+\[H=h\union\{\pair{\tau}{\O(h)}\}\]
+Then \(H\)~is a function, \(\domain(H)=A\), and \(H\)~is \(\O\)-constructed as desired.
+
+If \(A\)~has no greatest element, then for each \(a\in A\) let \(h_a\)~denote the unique function satisfying (i)~and~(ii) for~\(a\) (note that the axiom of choice is not required here, but by replacement we have a function \(\fdef{h_a}{a\in A}\)). If \(a,b\in A\) and \(a\prec b\), then by uniqueness \(h_b|_{\seg a}=h_a\). Thus \(C=\{\,h_a\mid a\in A\,\}\) is a chain. Define
+\[H=\bigunion C=\bigunion_{a\in A}h_a\]
+Then \(H\)~is a function, and \(\domain(H)=A\) since for \(a\in A\), \(a\in\domain(h_{\sigma(a)})\subseteq\domain(H)\). Also, \(H\)~is \(\O\)-constructed, since for all \(a\in A\),
+\[H(a)=h_{\sigma(a)}(a)=\O(h_{\sigma(a)}|_{\seg a})=\O(H|_{\seg a})\]
+
+We prove uniqueness by induction on~\(A\). Suppose that \(H\)~and~\(K\) both satisfy the above property. Define
+\[S=\{\,a\in A\mid H(a)=K(a)\,\}\]
+For \(a\in A\), if \(\seg a\subseteq S\), then \(H|_{\seg a}=K|_{\seg a}\), hence
+\[H(a)=\O(H|_{\seg a})=\O(K|_{\seg a})=K(a)\]
+so \(a\in S\). By induction, \(S=A\), so \(H=K\) as desired.
+\end{proof}
+
+\noindent Now we can prove the recursion theorem:
+\begin{proof}[Proof of recursion theorem for well orderings]
+Let \(\O\)~and \(\pair{A}{\preceq}\) be given as in the statement of the theorem.
+
+It is easily proved by induction on~\(A\) using the preceding lemma that for all \(a\in A\) there exists a unique \(\O\)-constructed function~\(h\) on~\(\seg a\) (the lemma provides the induction step). But then the hypotheses of the lemma are satisfied for \(\pair{A}{\preceq}\). Hence there exists a unique \(\O\)-constructed function~\(H\) on~\(A\) as desired.
+\end{proof}
+\end{lecture}
+
+\begin{lecture}{April~17, 2007}
+We informally discuss operations on order types.
+
+For two linear orderings \(A\)~and~\(B\), we denote by \(A+B\) a linear ordering obtained by placing a (disjoint) copy of~\(B\) after a copy of~\(A\). We denote by \(A\cdot B\) a linear ordering obtained by placing disjoint copies of~\(A\) one after another, the copies indexed by the elements of~\(B\). If \(A\)~and~\(B\) are well orderings, it can be proven that \(A+B\) and \(A\cdot B\) will be well orderings.
+
+If \(A\)~is a well ordering, \(A\)~might be finite. If \(A\)~is infinite, then we can find an initial segment which looks like~\(\omega\). If there is stuff left, we can keep going. We have either \(A=\omega\cdot m+k\) for \(m,k\in\omega\), or else \(A=\omega\cdot\omega+B\) where \(B\)~is a well ordering.
+
+Note that if \(\omega\cdot m+k\) and \(\omega\cdot m'+k'\) are given, and \(m'<m\), then
+\[\omega\cdot m+k=(\omega\cdot m'+k')+\omega+\omega\cdot((m-1)-m)+k\]
+Similarly if \(m'=m\) and \(k'<k\), then
+\[\omega\cdot m+k=(\omega\cdot m'+k')+(k-k')\]
+This suggests that if one well ordering is smaller than another, it will be isomorphic to an initial segment of the other. We formalize this presently:
+\begin{defn}
+Let \(\pair{A}{\preceq}\) be a linear ordering. Then \(B\subseteq A\) is an \emph{initial segment} of~\(A\) iff \(B\)~is downward closed, that is, iff
+\[(\forall b\in B)(\forall a\in A)(a\prec b\implies a\in B)\]
+\end{defn}
+\begin{defn}
+Let \(\pair{A}{\preceq_A}\) and \(\pair{B}{\preceq_B}\) be linear orderings. Then a map \(H:A\to B\) is said to be \emph{order preserving} iff
+\[a\prec_A a'\iff H(a)\prec_B H(a')\]
+We say \(H\)~is \emph{onto an initial segment} of~\(B\) iff \(H[A]\)~is an initial segment of~\(B\).
+\end{defn}
+\begin{thm}[Comparability of well orderings]
+Let \(\pair{A}{\preceq_A}\) and \(\pair{B}{\preceq_B}\) be given well orderings. Then at least one of the following holds:
+\begin{enumerate}[itemsep=0pt]
+\item[(i)] There exists \(h:A\to B\) order preserving and onto an initial segment of~\(B\).
+\item[(ii)] There exists \(k:B\to A\) order preserving and onto an initial segment of~\(A\).
+\end{enumerate}
+\end{thm}
+\begin{proof}
+Fix \(e\not\in B\). Define an operation~\(\O\) as follows: if \(f\)~is a function with \(\domain(f)=\seg a\) for \(a\in A\), then set
+\[\O(f)=
+\begin{cases}
+\text{the least }b\in B-\range(f)&\text{if }B-\range(f)\ne\emptyset\\
+e&\text{otherwise}
+\end{cases}\]
+Otherwise set \(\O(f)=e\). By recursion we obtain a function~\(H\) with \(\domain(H)=A\) such that for all \(a\in A\),
+\[H(a)=\O(H|_{\seg a})\]
+We claim that if \(X\subseteq A\) is an initial segment of~\(A\) and \(H[X]\subseteq B\), then \(H[X]\)~is an initial segment of~\(B\). Indeed, suppose \(b\in H[X]\) and \(b'\prec_B b\). Then \(b=H(a)\) for some \(a\in X\), and since \(b\in B\), we know that \(b\)~is the least element in \(B-H[\seg a]\). But then \(b'\in H[\seg a]\). Since \(X\)~is an initial segment of~\(A\), \(\seg a\subseteq X\), so \(b'\in H[X]\). This establishes our claim.
+
+Write \(A'=H^{-1}[B]\). We claim that \(A'\)~is an initial segment of~\(A\). Indeed, suppose \(a'\in A'\) and \(a\prec_A a'\). Then \(H(a')=b\) for \(b\in B-H[\seg a']\subseteq B-H[\seg a]\). Hence \(B-H[\seg a]\ne\emptyset\), so \(H(a)\in B\) by construction, and thus \(a\in A'\). This shows that \(A'\)~is an initial segment of~\(A\), so by the above, \(H[A']\)~is an initial segment of~\(B\).
+
+Now if \(a\prec_A a'\), then \(H(a)\in H[\seg a']\) but \(H(a')\not\in H[\seg a']\) by construction. Thus if \(H(a')\in B\), then since \(H[\seg a']\) is an initial segment of~\(B\) by the above, we cannot have \(H(a')\preceq_B H(a)\), so \(H(a)\prec_B H(a')\). This shows that \(H\)~is order preserving on~\(A'\).
+
+If \(A'=A\), then we are done, since (i)~holds with \(h=H\).
+
+If \(A'\ne A\), let \(a\in A\) be least such that \(H(a)=e\). Then \(A'=\seg a\) and \(H[\seg a]\subseteq B\). We claim that \(H[\seg a]=B\). Indeed, if this is not the case, then there exists \(b\in B-H[\seg a]\). But then we would have \(H(a)\in B\)---a contradiction. Thus \(H[\seg a]=B\), so (ii)~holds with \(k=(H|_{\seg a})^{-1}\).
+\end{proof}
+\end{lecture}
+\begin{lecture}{April~19, 2007}
+We continue our study of well orderings.
+\begin{thm}
+Let \(\pair{A}{\preceq_A}\) and \(\pair{B}{\preceq_B}\) be isomorphic well orderings. Then there exists a unique isomorphism \(\pi:A\to B\).
+\end{thm}
+\begin{proof}
+By hypothesis there exists at least one isomorphism. Suppose that \(f\)~and~\(g\) are both isomorphisms from~\(A\) to~\(B\). We claim \(f=g\). Define
+\[X=\{\,x\in A\mid f(x)\ne g(x)\,\}\]
+If \(X\ne\emptyset\), choose the least \(a\in X\). If \(f(a)\prec_B g(a)\), then since \(g\)~is an isomorphism we have \(g^{-1}(f(a))\prec_A a\). Since \(a\)~is least in~\(X\), we must have
+\[f(a)=g(g^{-1}(f(a)))=f(g^{-1}(f(a)))\]
+But then \(a=g^{-1}(f(a))\), so \(g(a)=f(a)\), contradicting that \(a\in X\). And similarly if \(g(a)\prec_B f(a)\). Thus \(X\)~must be empty, so \(f=g\).
+\end{proof}
+
+Recall that for any given finite set~\(A\), there is only one linear ordering on~\(A\), up to isomorphism. Hence for a finite linear ordering \(\pair{A}{\preceq}\), there exists a unique \(n\in\omega\) such that \(\pair{A}{\preceq}\iso\pair{n}{\le}\). This~\(n\) can be seen as capturing the `length' of \(\pair{A}{\preceq}\).
+
+We desire to implement such objects for arbitrary well orderings. That is, we desire a class~\(\CC\) of objects such that for all well orderings \(\pair{A}{\preceq}\), there exists a unique \(\alpha\in\CC\) such that \(\pair{A}{\preceq}\iso\alpha\). Our guiding idea is to use transfinite recursion on a given well ordering \(\pair{A}{\preceq}\) in order to construct an isomorphism whose image elements look like the elements in~\(\omega\). The image of this isomorphism will be the desired object for \(\pair{A}{\preceq}\). We formalize this procedure now.
+
+Fix a well ordering \(\pair{A}{\preceq}\) with \(\beta,\sigma\). Define~\(F\) on~\(A\) by recursion using
+\[F(a)=
+\begin{cases}
+\emptyset&\text{if }a=\beta\\
+F(b)\union\{F(b)\}&\text{if }a=\sigma(b)\text{ for }b\in A\\
+\{\,F(b)\mid b\prec a\,\}&\text{if }a\text{ is a limit element}
+\end{cases}\]
+(To obtain this recursion, define the following operation~\(\O\) on the class of all sets: if \(f\)~is a function with \(\domain(f)=\seg a\) for some \(a\in A\), then set
+\[\O(f)=
+\begin{cases}
+\emptyset&\text{if }a=\beta\\
+f(b)\union\{f(b)\}&\text{if }a=\sigma(b)\text{ for }b\in\seg a\\
+\range(f)&\text{if }a\text{ is a limit element}
+\end{cases}\]
+and set \(\O(f)=\emptyset\) if \(f\)~is not such a function. Then by recursion on~\(A\) we obtain a function~\(H\) with \(\domain(H)=A\) such that \(H(a)=\O(H|_{\seg a})\) for all \(a\in A\). It is then immediate that \(F=H\).)
+
+In fact the above construction is unnecessarily complicated. We can verify by induction that for all \(a\in A\), \(F(a)=\range(F|_{\seg a})=\{\,F(b)\mid b\prec a\,\}\). For \(a=\beta\) this is trivial. If \(a=\sigma(b)\), then by induction we have
+\[F(a)=F(b)\union\{F(b)\}=\{\,F(c)\mid c\prec b\,\}\union\{F(b)\}=\{\,F(c)\mid c\prec a\,\}\]
+Finally, if \(a\)~is a limit element, then this holds by construction. Note that \(F\)~is the unique map satisfying this condition, by the recursion theorem.
+
+Write \(\alpha=F[A]\). Note then that \(\alpha\)~is transitive, for
+\begin{align*}
+\beta\in\alpha&\implies \beta=F(a)\text{ for }a\in A\\
+	&\implies \beta=\{\,F(b)\mid b\prec a\,\}\\
+	&\implies \beta\subseteq\alpha
+\end{align*}
+We claim \(F\)~is an isomorphism from \(\pair{A}{\prec}\) onto \(\pair{\alpha}{\in_{\alpha}}\). Indeed, if \(a\prec b\), then we have \(F(a)\in F(b)\). Thus \(F\)~is (strictly) order preserving. It is verified by induction that \(F(a)\not\in F(a)\) for all \(a\in A\), hence \(F\)~is also injective. And \(F\)~is surjective by construction. It follows that \(F\)~is an isomorphism, so in particular \(\alpha\)~is (strictly) well ordered by the relation~\(\in_{\alpha}\).
+
+We call \(\alpha\)~the \emph{epsilon image} of \(\pair{A}{\preceq}\), and we call \(F\)~the \emph{epsilon image map}. We single out the properties that characterize~\(\alpha\):
+\begin{defn}
+A set~\(\alpha\) is called an \emph{ordinal} iff \(\alpha\)~is transitive (for~\(\in\)) and \emph{well ordered by epsilon}, that is, strictly well ordered by the relation
+\[\in_{\alpha}=\{\,\pair{\beta}{\gamma}\in\alpha\times\alpha\mid \beta\in\gamma\,\}\]
+We define the class
+\[\ords=\{\,\alpha\mid \alpha\text{ is an ordinal}\,\}\]
+\end{defn}
+Thus we have established the following theorem:
+\begin{thm}
+Let \(\pair{A}{\preceq}\) be a well ordering. Then there exists \(\alpha\in\ords\) such that
+\[\pair{A}{\preceq}\iso\pair{\alpha}{\in_{\alpha}}\]
+\end{thm}
+\end{lecture}
+
+\begin{lecture}{April~24, 2007}
+We continue our study of ordinals by proving a uniqueness result:
+\begin{thm}
+Let \(\pair{A}{\preceq_A}\) and \(\pair{B}{\preceq_B}\) be well orderings and suppose \(\pair{A}{\preceq_A}\iso\pair{B}{\preceq_B}\). Then \(\pair{A}{\preceq_A}\) and \(\pair{B}{\preceq_B}\) have the same epsilon image.
+\end{thm}
+\begin{proof}
+Let \(f:\pair{A}{\preceq_A}\iso\pair{B}{\preceq_B}\) be an isomorphism, and let \(g\)~be the epsilon image map from \(\pair{B}{\preceq_B}\) onto its epsilon image~\(\beta\). Then
+\[g\circ f:\pair{A}{\preceq_A}\to\beta\]
+is defined, and for \(a\in A\),
+\begin{align*}
+(g\circ f)(a)=g(f(a))&=\{\,g(b)\mid b\prec_B f(a)\,\}\\
+	&=\{\,g(f(a'))\mid a'\prec_A a\,\}\\
+	&=\{\,(g\circ f)(a')\mid a'\prec_A a\,\}
+\end{align*}
+since \(f\)~is an isomorphism. By uniqueness of epsilon image maps, \(g\circ f\)~must be the epsilon image map for \(\pair{A}{\preceq_A}\), so in particular \(\pair{A}{\preceq_A}\) has epsilon image~\(\beta\).
+\end{proof}
+
+By our definition above, we know that every epsilon image is an ordinal. We now show that these two concepts are actually equivalent:
+\begin{prop}
+A set~\(\alpha\) is an ordinal iff it is an epsilon image.
+\end{prop}
+\begin{proof}
+If \(\alpha\)~is an epsilon image, we know from above that it is an ordinal.
+
+If \(\alpha\)~is an ordinal, we claim that it is its own epsilon image. Let \(f\)~be its epsilon image map. We prove by induction that \(f(\beta)=\beta\) for all \(\beta\in\alpha\).  Indeed, if this is true for \(\seg\beta\), then since \(\seg\beta=\beta\), we have
+\[f(\beta)=\{\,f(\delta)\mid \delta\in\seg\beta\,\}=\{\,\delta\mid \delta\in\beta\,\}=\beta\]
+Thus it is true for~\(\beta\). By induction, \(f\)~is the identity map.
+\end{proof}
+This proposition and the previous two theorems give us:
+\begin{thm}
+Every well ordering is isomorphic to a unique ordinal.
+\end{thm}
+\noindent This theorem justifies the following definition:
+\begin{defn}
+Let \(\pair{A}{\preceq}\) be a well ordering. Then \(\type\pair{A}{\preceq}\) or \(\type A(\preceq)\) denotes the unique ordinal isomorphic to \(\pair{A}{\preceq}\), and is called the \emph{order type} (or \emph{type}) of \(\pair{A}{\preceq}\).
+\end{defn}
+
+Using the above proposition, it is straightforward to see that any element of an ordinal is an ordinal. Also any initial segment of an ordinal is an ordinal. More specifically, let \(\alpha\)~be an ordinal and suppose \(\CC\subseteq\alpha\) is an initial segment. If \(\CC\ne\alpha\), then \(\CC=\seg\beta\) for some \(\beta\in\alpha\). But \(\seg\beta=\beta\), so \(\CC\in\alpha\). Thus \(\CC\)~is an ordinal in~\(\alpha\).
+
+Note also that for any ordinal~\(\alpha\), \(\alpha\not\in\alpha\). Indeed, if \(\alpha\in\alpha\) for some ordinal~\(\alpha\), then \(\{\alpha\}\)~would be a nonempty subset of~\(\alpha\) with no least element (under~\(\in_{\alpha}\)), contradicting that \(\alpha\)~is (strictly) well ordered by epsilon. This shows that if we view~\(\in\) as an ordering on the class of ordinals, then \(\in\)~is irreflexive. It is also transitive, since \(\alpha\in\beta\in\gamma\) implies \(\alpha\in\gamma\) by transitivity of~\(\gamma\). We now prove that it is trichotomous:
+\begin{thm}[Comparability of ordinals]
+Let \(\alpha,\beta\) be ordinals. Then exactly one of the following holds:
+\[\alpha\in\beta\quad\text{or}\quad \alpha=\beta\quad\text{or}\quad \beta\in\alpha\]
+\end{thm}
+\begin{proof}
+It is clear (from irreflexivity and transitivity) that at most one holds.
+
+Define \(\CC=\alpha\sect\beta\). Then \(\CC\)~is an initial segment of both \(\alpha\)~and~\(\beta\). We consider the following exclusive and exhaustive cases:
+\begin{enumerate}[itemsep=0pt]
+\item[(i)] If \(\alpha=\CC=\beta\), then \(\alpha=\beta\).
+\item[(ii)] If \(\alpha=\CC\ne\beta\), then \(\alpha\in\beta\) by the above remarks.
+\item[(iii)] If \(\alpha\ne\CC=\beta\), then \(\beta\in\alpha\) by the above remarks.
+\item[(iv)] If \(\alpha\ne\CC\ne\beta\), then we must have \(\CC\in\alpha\sect\beta\). But this is impossible by the above remarks since \(\CC=\alpha\sect\beta\) and \(\CC\)~is an ordinal.
+\end{enumerate}
+Thus in all cases, at least one of the above holds. This establishes the result.
+\end{proof}
+\noindent This theorem, together with the above remarks, shows that \(\in\)~forms a linear ordering on the class of all ordinals. We claim it forms a well ordering. Indeed, let \(\CC\)~be a nonempty set of ordinals. Choose \(\alpha\in\CC\). If there is no \(\beta\in\CC\) such that \(\beta\in\alpha\), then \(\alpha\)~is least in~\(\CC\) under~\(\in\). On the other hand, if such an element exists, then since \(\alpha\)~is well ordered by~\(\in\), there exists a least element \(\beta\in\alpha\sect\CC\) under~\(\in\). This \(\beta\)~is least in~\(\CC\).
+
+We mentioned above that any element of an ordinal is an ordinal, so the class~\(\ords\) of all ordinals is transitive and (strictly) well ordered by~\(\in\). Thus if \(\ords\)~were a set, then it would itself be an ordinal, so we would have \(\ords\in\ords\)---a contradiction. Thus \(\ords\)~must be a proper class. This result is known as the \emph{Burali-Forti paradox}.
+
+We leave the proofs of the following facts to the reader:
+\begin{prop}\
+\begin{enumerate}[itemsep=0pt]
+\item[(i)] If \(\alpha\)~is an ordinal, then \(\alpha^+\)~is the least ordinal greater than~\(\alpha\).
+\item[(ii)] If \(\CC\)~is a set of ordinals, then \(\bigunion\CC\)~is the least ordinal greater than every element of~\(\CC\) (in other words, \(\bigunion\CC\)~is the least upper bound of~\(\CC\) in~\(\ords\)).
+\end{enumerate}
+\end{prop}
+\end{lecture}
+
+\begin{lecture}{April~26, 2007}
+Let \(\pair{A}{\preceq}\) be a well ordering and \(\alpha=\type A(\preceq)\). If \(e\not\in A\), then it is easy to verify that if we define a new ordering on \(A'=A\union\{e\}\) by
+\[\preceq'{=}\preceq\union\{\,\pair{a}{e}\mid a\in A\,\}\union\{\pair{e}{e}\}\]
+Then \(\pair{A'}{\preceq'}\) is a well ordering and \(\type A'(\preceq')=\alpha^+=\alpha+1\).
+
+More generally, let \(\CC\)~be a set of well orderings. Set
+\[C=\{\,\triple{a}{A}{\preceq_A}\mid \pair{A}{\preceq_A}\in\CC\land a\in A\,\}\]
+and define an equivalence relation~\(E\) on~\(C\) by
+\[\triple{a}{A}{\preceq_A}\mathrel{E}\triple{b}{B}{\preceq_B}\iff\seg_A a\iso\seg_B b\]
+Now well order~\(C/E\) by
+\[[\triple{a}{A}{\preceq_A}]\preceq[\triple{b}{B}{\preceq_B}]\iff(\exists b'\preceq_B b)(\triple{a}{A}{\preceq_A}\mathrel{E}\triple{b'}{B}{\preceq_B})\]
+Then each \(\pair{A}{\preceq_A}\in\CC\) is isomorphic to an initial segment of \(\pair{C/E}{\preceq}\), and
+\[\type C/E(\preceq)=\bigunion\{\,\type A(\preceq_A)\mid\pair{A}{\preceq_A}\in\CC\,\}\]
+
+We present an important theorem:
+\begin{thm}[Hartogs]
+Let \(A\)~be a set. Then there exists an ordinal~\(\alpha\) such that \(\alpha\not\preceq A\).
+\end{thm}
+\begin{proof}
+Define \(B=\{\,\beta\in\ords\mid \beta\preceq A\,\}\). We claim \(B\)~is a set. Indeed, define
+\[\B=\{\,\pair{C}{\preceq_C}\mid C\subseteq A\land\pair{C}{\preceq_C}\text{ a well orderering}\,\}\]
+Then \(\B\)~is a set, and
+\[B=\{\,\beta\mid (\exists\pair{C}{\preceq_C}\in\B)[\beta=\type C(\preceq_C)]\,\}\]
+Therefore \(B\)~is a set by replacement, as claimed.
+
+Set \(\alpha=\bigunion B\). Then \(\alpha\)~is an ordinal, and we claim that \(\alpha\not\preceq A\). Indeed, if \(A\)~is finite this is clear. If \(A\)~is infinite, then \(\beta\in B\) implies \(\beta^+\in B\). Hence if \(\alpha\preceq A\), then \(\alpha\in B\), so \(\alpha\in\alpha^+\in B\). But then \(\alpha\in\alpha\)---a contradiction.
+\end{proof}
+
+Hartogs' theorem is useful for recursions. Given a set~\(A\), choose an ordinal~\(\alpha\) such that \(\alpha\not\preceq A\). Consider any map \(h:\alpha\to A\). Then there must exist a least \(\beta\in\alpha\) such that \(h|_{\beta^+}\)~is noninjective. Intuitively, this means that we will always run out of elements of~\(A\) before we run out of elements of~\(\alpha\). In other words, we are guaranteed at least enough elements in~\(\alpha\) to index all of the elements in~\(A\).
+
+\begin{thm}[Numeration]
+Let \(A\)~be a set. Then there exists an ordinal~\(\alpha\) such that \(\alpha\equinum A\).
+\end{thm}
+\begin{proof}
+By Hartogs' theorem, choose~\(\beta\) such that \(\beta\not\preceq A\). Let \(F\)~be a choice function for~\(A\). Fix \(e\not\in A\) and define a recursion \(H:\beta\to A\union\{e\}\) by
+\[H(\gamma)=
+\begin{cases}
+F(A-\{\,H(\delta)\mid\delta\in\gamma\,\})&\text{if }\{\,H(\delta)\mid\delta\in\gamma\,\}\ne A\\
+e&\text{otherwise}
+\end{cases}\]
+Note that for all \(\gamma\in\beta\), if \(H|_{\gamma}\)~is injective and \(H[\gamma]\ne A\), then \(H|_{\gamma^+}\)~is injective by construction. Let \(\gamma\)~be least such that \(H|_{\gamma}\)~is not injective. Then \(\gamma\ne0\), and also \(\gamma\)~is not a limit ordinal by leastness. Hence \(\gamma=\alpha^+\) for some \(\alpha\in\beta\), and thus we must have \(H|_{\alpha}:\alpha\to A\) a bijection, so \(\alpha\equinum A\).
+\end{proof}
+\noindent With this theorem, one is able to define the cardinal of a set to be the least ordinal equinumerous to that set. It is then verified that this definition satisfies the usual cardinal properties. (We do not go into details.)
+
+Recursion from an ordinal into a set is essentially the heart of Zorn's lemma:
+\begin{thm}[Zorn]
+Let \(\pair{P}{\preceq}\) be a partial ordering such that every chain in~\(P\) has an upper bound. (That is, for all chains \(C\subseteq P\), there exists \(q\in P\) such that for all \(p\in C\), \(p\preceq q\).) Then there exists a maximal element in~\(P\).
+\end{thm}
+\begin{proof}
+Let \(\CC\)~be the set of all chains in~\(P\) and obtain using the axiom of choice a function \(F:\CC\to P\) such that for all \(C\in\CC\), \(F(C)\)~is an upper bound of~\(C\). Similarly, define \(G:P\to P\) such that for all \(q\in P\), \(q\preceq G(q)\), and \(q\prec G(q)\) if \(q\)~is not maximal.
+
+By Hartogs' theorem, choose~\(\alpha\) such that \(\alpha\not\preceq P\). Fix \(e\not\in P\) and recursively define \(H:\alpha\to P\union\{e\}\) by
+\[H(\beta)=
+\begin{cases}
+G(F(\{\,H(\gamma)\mid \gamma\in\beta\,\}))&\text{if }\{\,H(\gamma)\mid\gamma\in\beta\,\}\text{ is a chain}\\
+e&\text{otherwise}
+\end{cases}\]
+By induction, \(H[\alpha]\subseteq P\). Now for all \(\beta\in\alpha\), if \(H|_{\beta}\)~is order preserving and if \(F(H[\beta])\)~is not maximal in~\(P\), then \(H|_{\beta^+}\)~is also order preserving.
+
+Let \(\tau\)~be least such that \(H|_{\tau}\)~is not order preserving. Then \(\tau\ne0\) and \(\tau\)~is not a limit ordinal. Hence \(\tau=\beta^+\) for some~\(\beta\). Then \(H|_{\beta}\)~is order preserving, and we must have \(F(H[\beta])\)~maximal in~\(P\).
+\end{proof}
+\end{lecture}
+
+\begin{lecture}{May~1, 2007}
+We define \(\aleph_0\)~to be the least infinite cardinal, and \(\aleph_1\)~to be the least uncountable cardinal. (Note that the existence of an uncountable cardinal, and hence of a least such cardinal, follows from Hartogs' theorem.) For all ordinals~\(\alpha\), we have
+\begin{align*}
+\alpha<\aleph_0&\iff \alpha\text{ is finite}\\
+\alpha<\aleph_1&\iff \alpha\text{ is countable}
+\end{align*}
+
+Cantor used uncountable ordinals to analyze isolated points in the reals (this type of analysis is called \emph{Cantor-Bendixson analysis}). We present this as an example of the use of countable ordinals.
+\begin{defn}
+Let \(X\subseteq\R\). Then \(X\)~is \emph{closed} iff for all sequences \(\fdef{x_n}{n\in\omega}\) in~\(X\), if \(x_n\to r\) as \(n\to\infty\), then \(r\in X\).
+\end{defn}
+\begin{defn}
+Let \(X\subseteq\R\). Then \(x\in X\) is called an \emph{isolated point} of~\(X\) iff there exist \(r,s\in\R\) such that \(r<x<s\) and \((r,s)\sect X=\{x\}\).
+\end{defn}
+\noindent Note that by the density of the rationals in the reals, we may assume that the \(r,s\) in the above definition are rational numbers, that is, \(r,s\in\Q\).
+
+Let \(X\subseteq\R\) be a closed set. We desire to implement an operation which removes at most countably many elements from~\(X\), producing a closed subset \(X'\subseteq X\) with no isolated points. We recursively define the following operation (on the class of all ordinals) which produces successive sets of isolated points:
+\begin{align*}
+A_0&=\emptyset\\
+A_{\alpha^+}&=A_{\alpha}\union\{\,x\mid x\text{ an isolated point of }X-A_{\alpha}\}\\
+A_{\lambda}&=\bigunion_{\alpha<\lambda}A_{\alpha}
+\end{align*}
+Note that \(X-A_{\alpha}\) is closed for all~\(\alpha\). Because the class of ordinals is unbounded (and \(X\)~is not), there must exist a least ordinal~\(\alpha\) such that \(A_{\alpha}=A_{\beta}\) for all \(\beta\ge\alpha\). Then \(X-A_{\alpha}\) has no isolated points.
+
+We claim that \(\alpha\)~is countable. Indeed, for all \(\beta<\alpha\), we have \(A_{\beta^+}\ne A_{\beta}\) by leastness of~\(\alpha\). Hence there exists \(a_{\beta}\in A_{\beta^+}-A_{\beta}\). Now \(a_{\beta}\in X-A_{\beta}\) is isolated. Choose \(r_{\beta},s_{\beta}\in\Q\) such that
+\[(r_{\beta},s_{\beta})\sect(X-A_{\beta})=\{a_{\beta}\}\]
+Note that \(\beta^+\)~is least such that \((r_{\beta},s_{\beta})\sect(X-A_{\beta^+})=\emptyset\), so \(\beta^+\)~and hence~\(\beta\) is uniquely determined by \(\pair{r_{\beta}}{s_{\beta}}\). But then the map \(\beta\mapsto\pair{r_{\beta}}{s_{\beta}}\) is injective, so \(\alpha\)~is countable.
+
+It can now be verified by induction that \(A_{\beta}\)~is countable for all \(\beta\le\alpha\). Thus in particular \(A_{\alpha}\)~is countable, and we have established the following:
+\begin{thm}[Cantor-Bendixon]
+Let \(X\subseteq\R\) be closed. Then there exists a countable set \(A\subseteq X\) such that \(X-A\) is closed and has no isolated points.
+\end{thm}
+
+Another useful application of countable ordinals is the \emph{Borel sets}. We define the set of Borel sets to be the smallest collection of subsets of~\(\R\) containing the open subsets of~\(\R\) and closed under countable union and intersection.
+
+Formally, we can define the Borel sets from the top down as follows. Define
+\begin{align*}
+\A&=\{\,X\subseteq\R\mid X\text{ is open}\,\}\\
+\CC&=\{\,\X\subseteq\PS(\R)\mid \A\subseteq\X\land \X\text{ closed under } \omega\text{-union and }\omega\text{-intersection}\,\}
+\end{align*}
+Then it is easy to verify that \(\B=\bigsect\CC\in\CC\). Thus \(\B\)~is the smallest set satisfying the desired properties, and we define~\(\B\) to be the Borel sets.
+
+An alternate construction uses recursion on countable ordinals. Define
+\begin{align*}
+\B_0&=\A\\
+\B_{\alpha^+}&=\{\,\bigunion_n X_n\mid X_n\in\B_{\alpha}\,\}\union\{\,\bigsect_n X_n\mid X_n\in\B_{\alpha}\,\}\\
+\B_{\lambda}&=\bigunion_{\alpha<\lambda}\B_{\alpha}
+\end{align*}
+Note that \(\B_{\aleph_1}\)~is closed under countable unions and intersections. Indeed, suppose
+\[X_n\in\B_{\aleph_1}=\bigunion_{\alpha<\aleph_1}\B_{\alpha}\qquad (n\in\omega)\]
+For each \(n\in\omega\), choose the least \(\alpha_n<\aleph_1\) such that \(X_n\in\B_{\alpha_n}\). Set \(\alpha=\sup\{\,\alpha_n\mid n\in\omega\,\}\). Then \(\alpha<\aleph_1\), being a countable union of countable ordinals, and \(X_n\in\B_{\alpha}\) for all \(n\in\omega\). But then
+\[\bigl\{\,\bigunion_n X_n\ ,\ \bigsect_n X_n\,\bigr\}\subseteq\B_{\alpha^+}\subseteq\B_{\aleph_1}\]
+by construction.
+
+We claim \(\B=\B_{\aleph_1}\). Indeed, \(\B_{\aleph_1}\)~contains the open sets, and we just observed that it is closed under countable unions and intersections. Hence since \(\B\)~is the smallest set satisfying this property, \(\B\subseteq\B_{\aleph_1}\). On the other hand, it is easily verified by induction that \(\B_{\alpha}\subseteq\B\) for all~\(\alpha\). In particular, \(\B_{\aleph_1}\subseteq\B\), so \(\B=\B_{\aleph_1}\).
+
+This construction can be generalized. Given \(\CC\subseteq\PS(\R)\), define the operation
+\[F(\CC)=\{\,\bigunion_n X_n\mid X_n\in\CC\,\}\union\{\,\bigsect_n X_n\mid X_n\in\CC\,\}\]
+We can construct the smallest \(\D\subseteq\PS(\R)\) containing~\(\CC\) and closed under~\(F\). In the case of Borel sets, \(\B\)~is the smallest set containing the open sets and closed under~\(F\).
+\end{lecture}
+
+\begin{lecture}{May~3, 2007}
+We calculate the cardinality of the set~\(\B\) of Borel sets. Recall that \(\B_0\)~denotes the set of open subsets of the reals. Then since \(\B_0\subseteq\B\), we have
+\[2^{\aleph_0}=\card\B_0\le\card\B\]
+We show by induction that \(\card\B_{\alpha}\le 2^{\aleph_0}\) for all \(\alpha<\aleph_1\). Indeed, this is true for \(\alpha=0\) since \(\card\B_0=2^{\aleph_0}\). If \(\alpha=\beta^+\), then by the induction hypothesis we have
+\[\card\B_{\alpha}\le 2\cdot\card(\funcs{\omega}{\B_{\beta}})\le(2^{\aleph_0})^{\aleph_0}=2^{\aleph_0}\]
+Finally, if \(\alpha\)~is a countable limit ordinal, then \(\B_{\alpha}=\bigunion_{\beta<\alpha}B_{\beta}\), hence
+\[\card\B_{\alpha}\le\omega\cdot 2^{\aleph_0}=2^{\aleph_0}\]
+by the induction hypothesis. Now
+\[\card\B=\card\B_{\aleph_1}\le\aleph_1\cdot 2^{\aleph_0}=2^{\aleph_0}\]
+since \(\aleph_1\le 2^{\aleph_0}\). Thus by Cantor-Schr\"oder-Bernstein, \(\card\B=2^{\aleph_0}\).
+
+We now consider natural models of set theory. First we consider the \emph{hereditarily countable} sets. Define~\(\HC\) by recursion on the ordinals as follows:
+\begin{align*}
+\HC_0&=\emptyset\\
+\HC_{\alpha^+}&=\{\,X\subseteq \HC_{\alpha}\mid X\text{ countable}\,\}\\
+\HC_{\lambda}&=\bigunion_{\alpha<\lambda}\HC_{\alpha}
+\end{align*}
+By induction, \(\HC_{\alpha}\)~is a transitive set of countable sets for all~\(\alpha\), and \(\alpha<\beta\) implies \(\HC_{\alpha}\subseteq\HC_{\beta}\). We claim that \(\HC_{\aleph_1}=\HC_{\aleph_1+1}\). Indeed, we know \(\HC_{\aleph_1}\subseteq\HC_{\aleph_1+1}\). Now suppose \(X\in\HC_{\aleph_1+1}\). Then \(X\)~is countable and
+\[X\subseteq\HC_{\aleph_1}=\bigunion_{\alpha<\aleph_1}\HC_{\alpha}\]
+For each \(x\in X\), choose \(\alpha_x<\aleph_1\) least such that \(x\in\HC_{\alpha_x}\) Set \(\alpha=\sup\{\,\alpha_x\mid x\in X\,\}\). Then \(X\subseteq\HC_{\alpha}\). But \(\alpha<\aleph_1\), hence \(X\in\HC_{\alpha+1}\subseteq\HC_{\aleph_1}\). This shows \(\HC_{\aleph_1}=\HC_{\aleph_1+1}\).
+
+Define \(\HC=\HC_{\aleph_1}\). Then \(\HC\)~is hereditarily countable. Also \(\HC\)~is the smallest transitive set such that for all \(X\subseteq\HC\) countable, \(X\in\HC\). Indeed, if \(A\)~is another set with this property, then \(\HC_{\alpha}\subseteq A\) for all~\(\alpha\) by induction, so \(\HC\subseteq A\).
+\begin{thm}
+The set~\(\HC\) is a model of all of our axioms except the powerset axiom.
+\end{thm}
+\begin{rmk}
+Formally, this theorem means that the \emph{relativizations} of our axioms (except some replacement axioms) to the set~\(\HC\) are provable from our axioms. If \(\phi\)~is one of our axioms, then the relativization~\(\phi^{\HC}\) of~\(\phi\) is obtained by replacing all quantifiers in~\(\phi\) of the form \((\forall x)\)~and~\((\exists x)\) with \((\forall x\in\HC)\) and \((\exists x\in\HC)\), respectively. We do not go into details on the notions of relativizations and models.
+\end{rmk}
+
+We define the cumulative hierarchy of sets by recursion on the ordinals:
+\begin{align*}
+V_0&=\emptyset\\
+V_{\alpha^+}&=\PS(V_{\alpha})\\
+V_{\lambda}&=\bigunion_{\alpha<\lambda}V_{\alpha}
+\end{align*}
+By induction, \(V_{\alpha}\)~is transitive for all~\(\alpha\), and \(\alpha<\beta\) implies \(V_{\alpha}\subseteq V_{\beta}\). Note that \(V_{\omega}\)~is the set of all hereditarily finite sets.
+\begin{thm}
+The set~\(V_{\omega+\omega}\) is a model of all of our axioms except the replacement axiom.
+\end{thm}
+\begin{defn}
+Let \(\kappa\)~be a cardinal. Then \(\kappa\)~is \emph{strongly inaccessible} iff
+\begin{enumerate}[itemsep=0pt]
+\item[(i)] \(\kappa\)~is uncountable
+\item[(ii)] For all cardinals \(\lambda<\kappa\), \(2^{\lambda}<\kappa\).
+\item[(iii)] For all ordinals \(\alpha<\kappa\), if \(f:\alpha\to\kappa\), then \(\sup\{\,f(\beta)\mid\beta\in\alpha\,\}<\kappa\).
+\end{enumerate}
+\end{defn}
+\begin{thm}
+Let \(\kappa\)~be an inaccessible cardinal. Then \(V_{\kappa}\)~is a model of all of our axioms.
+\end{thm}
+Finally, define
+\[V=\bigunion_{\alpha}V_{\alpha}\]
+\begin{thm}
+The class~\(V\) is a model of all of our axioms.
+\end{thm}
+\end{lecture}

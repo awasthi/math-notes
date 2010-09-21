@@ -1,0 +1,165 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Algebra
+% Rings
+% Polynomials
+\section{Polynomials}
+\subsection*{Theorems}
+Let \(R\)~be a commutative ring with identity \(1\ne0\).
+\begin{thm}[Reduction of coefficients]
+If \(I\)~is an ideal in~\(R\), then
+\[R[x]/I[x]\iso(R/I)[x]\]
+\end{thm}
+\begin{proof}[Proof idea]
+By the first isomorphism theorem.
+\end{proof}
+\begin{app}
+Diophantine equations, irreducibility criteria (e.g. Eisenstein).
+\end{app}
+
+\begin{thm}[Polynomial rings over integral domains]
+\(R\)~is an integral domain iff \(R[x]\)~is an integral domain, in which case
+\[\deg p(x)q(x)=\deg p(x)+\deg q(x)\]
+for all \(p(x),q(x)\in R[x]\).
+\end{thm}
+\begin{proof}[Proof idea]
+By looking at leading terms.
+
+If \(R\)~is an integral domain and \(p(x),q(x)\in R[x]\) are nonzero with leading terms \(a_nx^n\)~and~\(b_m x^m\), respectively, then since \(a_n\)~and~\(b_m\) are nonzero, \(a_nb_m\)~is nonzero and the leading term of~\(p(x)q(x)\) is \(a_nb_m x^{n+m}\).
+\end{proof}
+\begin{app}
+Computation of degree.
+\end{app}
+\begin{cor}
+The units in \(R[x]\)~are just the units in~\(R\).
+\end{cor}
+
+\begin{thm}[Polynomial rings over fields]
+\(R\)~is a field iff \(R[x]\)~is a euclidean domain with norm given by degree, in which case for all \(a(x),b(x)\in R[x]\) with \(b(x)\ne0\), there exist unique \(q(x),r(x)\in R[x]\) with
+\[a(x)=b(x)q(x)+r(x)\qquad\text{where }\deg r(x)<\deg b(x)\]
+\end{thm}
+\begin{proof}[Proof idea]
+For the forward direction, by induction on degree.
+
+Let \(a(x)=a_nx^n+\cdots+a_0\) and \(b(x)=b_mx^m+\cdots+b_0\). If \(n<m\), take \(q(x)=0\) and \(r(x)=a(x)\). Otherwise note \(a(x)-(a_n/b_m)x^{n-m}b(x)\) has degree less than~\(n\), so by induction there exist \(s(x),r(x)\in R[x]\) such that
+\[a(x)-\frac{a_n}{b_m}x^{n-m}b(x)=b(x)s(x)+r(x)\qquad\text{where }\deg r(x)<\deg b(x)\]
+Take \(q(x)=s(x)+(a_n/b_m)x^{n-m}\). To prove uniqueness, compute degrees.
+
+For the reverse direction, note if \(R[x]\)~is a principal ideal domain then \(R\iso R[x]/(x)\) is a field since \((x)\)~is prime and hence maximal in~\(R[x]\).
+\end{proof}
+\begin{app}
+Polynomial division with remainder, equivalence of roots and linear factors, irreducibility criteria, field extensions, etc.
+\end{app}
+\begin{cor}
+If \(F\)~is a field and \(f(x)\in F[x]\), \(F[x]/(f(x))\)~is a field iff \(f(x)\)~is irreducible in~\(F[x]\).
+\end{cor}
+\begin{proof}[Proof idea]
+Because \(F[x]\)~is a principal ideal domain, \(f(x)\)~is irreducible iff \(f(x)\)~is prime iff \((f(x))\)~is maximal.
+\end{proof}
+\begin{app}
+Constructing simple algebraic field extensions.
+\end{app}
+\begin{cor}
+If \(F\)~is a field and \(f(x)\in F[x]\) has unique factorization
+\[f(x)=f_1(x)^{n_1}\cdots f_k(x)^{n_k}\]
+where the~\(f_i(x)\) are pairwise distinct irreducibles, then
+\[F[x]/(f(x))\iso\prod_{i=1}^k F[x]/(f_i(x)^{n_i})\]
+\end{cor}
+\begin{proof}[Proof idea]
+By the chinese remainder theorem.
+\end{proof}
+
+\begin{thm}[Gauss]
+If \(R\)~is a unique factorization domain with fraction field~\(F\) and \(p(x)\in R[x]\) is reducible in~\(F[x]\), then \(p(x)\)~is reducible in~\(R[x]\). More specifically, if \(p(x)=a(x)b(x)\) with \(a(x),b(x)\in F[x]\), there exist \(r,s\in F\) such that \(ra(x),sb(x)\in R[x]\) and \(p(x)=ra(x)sb(x)\).
+
+Conversely, if the greatest common divisor of the coefficients of~\(p(x)\) is~\(1\) and \(p(x)\)~is reducible in~\(R[x]\), then \(p(x)\)~is reducible in~\(F[x]\).
+\end{thm}
+\begin{proof}[Proof idea]
+For the forward direction, by clearing denominators in the factorization and then cancelling out each of the irreducible factors of the common denominator.
+
+Let \(d\)~be a common denominator of all of the coefficients of \(a(x)\)~and~\(b(x)\), so
+\[dp(x)=a'(x)b'(x)\]
+where \(a'(x)\in R[x]\) and \(b'(x)\in R[x]\) are \(R\)-multiples of \(a(x)\)~and~\(b(x)\), respectively. If \(d\)~is not a unit, write \(d=p_1\cdots p_k\) where each~\(p_i\) is irreducible, and hence prime, in~\(R\). For each~\(i\), \(\res{a'(x)b'(x)}=\res{0}\) in the integral domain \((R/(p_i))[x]\), so \(p_i\)~must divide one of \(a'(x)\)~or~\(b'(x)\) in~\(R[x]\). Therefore each~\(p_i\) in the above equation can be cancelled out while keeping the equation in~\(R[x]\). It follows that \(p(x)\)~reduces in~\(R[x]\) into \(F\)-multiples of \(a(x)\)~and~\(b(x)\), as desired.
+
+The reverse direction is trivial.
+\end{proof}
+\begin{app}
+Relating reducibility in \(R[x]\)~and~\(F[x]\), unique factorization in~\(R[x]\), transferring irreducibility criteria from~\(F[x]\) to~\(R[x]\), etc.
+\end{app}
+
+\begin{cor}[Polynomial rings over unique factorization domains]
+\(R\)~is a unique factorization domain iff \(R[x]\)~is a unique factorization domain.
+\end{cor}
+\begin{proof}[Proof idea]
+By Gauss, pulling back unique factorization from~\(F[x]\) to~\(R[x]\).
+\end{proof}
+
+\begin{thm}[Linear factors and roots]
+If \(F\)~is a field, \(f(x)\in F[x]\) has a linear factor \((x-\alpha)\) iff \(f(\alpha)=0\).
+\end{thm}
+\begin{proof}[Proof idea]
+For the forward direction by substitution, and for the reverse direction by division with remainder.
+\end{proof}
+\begin{cor}
+\(f(x)\)~has at most \(\deg f(x)\)~roots, even counting multiplicity.
+\end{cor}
+\begin{cor}
+If \(\deg f(x)\)~is \(2\)~or~\(3\), \(f(x)\)~is irreducible in~\(F[x]\) iff it has no roots in~\(F\).
+\end{cor}
+\begin{app}
+Determining irreducibility of polynomials of low degree.
+\end{app}
+
+\begin{thm}[Rational roots]
+If \(R\)~is a unique factorization domain with fraction field~\(F\) and \(p(x)=a_nx^n+\cdots+a_0\in R[x]\) has a root \(r/s\in F\) where \(r,s\in R\) and \((r,s)=1\), then \(s|a_n\) and \(r|a_0\) in~\(R\).
+\end{thm}
+\begin{proof}[Proof idea]
+By direct computation of~\(p(r/s)\) and clearing denominators.
+\end{proof}
+\begin{app}
+Finding rational roots, determining irreducibility of polynomials of low degree.
+\end{app}
+
+\begin{thm}[Reduction and irreducibility]
+If \(R\)~is an integral domain, \(f(x)\in R[x]\) is nonconstant monic, and \(I\)~is a proper ideal in~\(R\) such that \(\res{f(x)}\)~cannot be properly factored in~\((R/I)[x]\), then \(f(x)\)~is irreducible in~\(R[x]\).
+\end{thm}
+\begin{app}
+Determining irreducibility of polynomials.
+\end{app}
+
+\begin{cor}[Eisenstein]
+If \(R\)~is an integral domain with fraction field~\(F\), \(p(x)=x^n+a_{n-1}x^{n-1}+\cdots+a_0\in R[x]\), and \(P\)~is a prime ideal in~\(R\) such that \(a_{n-1},\ldots,a_0\in P\) and \(a_0\not\in P^2\), then \(p(x)\)~is irreducible in \(R[x]\)~and~\(F[x]\).
+\end{cor}
+\begin{proof}[Proof idea]
+By reducing coefficients mod~\(P\).
+
+If \(p(x)=a(x)b(x)\) in~\(R[x]\), then \(\res{a(x)b(x)}=\res{x}^n\) in the integral domain~\((R/P)[x]\). Therefore the constant terms of \(\res{a(x)}\)~and~\(\res{b(x)}\) must both be~\(\res{0}\), that is, the constant terms of \(a(x)\)~and~\(b(x)\) must both be in~\(P\), so \(a_0\in P^2\)---a contradiction. Irreducibility in~\(F[x]\) follows from Gauss.
+\end{proof}
+\begin{app}
+Determining irreducibility of polynomials.
+\end{app}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Induction on degree of polynomials.
+\item Looking at leading and constant terms of products of polynomials.
+\item Division with remainder of polynomials.
+\item Reducing coefficients of polynomials.
+\item Transferring properties between \(R\)~and~\(R[x]\):
+\begin{itemize}[itemsep=0pt]
+\item \(R\)~commutative \(\iff\) \(R[x]\)~commutative
+\item \(R\)~ID \(\iff\) \(R[x]\)~ID
+\item \(R\)~UFD \(\iff\) \(R[x]\)~UFD
+\item \(R\)~field \(\iff\) \(R[x]\)~PID \(\iff\) \(R[x]\)~ED
+\end{itemize}
+\item Transferring properties between \(R[x]\)~and~\(F[x]\).
+\item Irreducibility criteria:
+\begin{itemize}[itemsep=0pt]
+\item Roots (for polynomials of low degree)
+\item Reducing coefficients
+\item Eisenstein
+\item Substitution
+\end{itemize}
+\end{itemize}

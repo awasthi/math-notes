@@ -1,0 +1,69 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Logic
+% Syntax
+%
+\section{Syntax}
+\subsection*{Theorems}
+
+\begin{thm}
+If the symbol set~\(S\) is at most countable, then the set~\(T^S\) of terms over~\(S\) and the set~\(L^S\) of formulas over~\(S\) are countable.
+\end{thm}
+
+\begin{thm}[Induction on terms and formulas]
+Let \(S\)~be a symbol set.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] Suppose \(T\subseteq T^S\) and
+\begin{enumerate}[itemsep=0pt]
+\item[(1)] Every variable symbol is in~\(T\)
+\item[(2)] Every constant symbol in~\(S\) is in~\(T\)
+\item[(3)] If \(t_1,\ldots,t_n\in T\) and \(f\in S\) is an \(n\)-ary function symbol, then \(ft_1\cdots t_n\in T\)
+\end{enumerate}
+Then \(T=T^S\).
+
+\item[(b)] Suppose \(L\subseteq L^S\) and
+\begin{enumerate}[itemsep=0pt]
+\item[(1)] If \(t_1,t_2\in T^S\), then \(t_1\equiv t_2\in L\)
+\item[(2)] If \(t_1,\ldots,t_n\in T^S\) and \(R\in S\) is an \(n\)-ary relation symbol, then \(Rt_1\cdots t_n\in L\)
+\item[(3)] If \(\varphi\in L\), then \(\lnot\varphi\in L\)
+\item[(4)] If \(\varphi,\psi\in L\), then \((\varphi\land\psi)\), \((\varphi\lor\psi)\), \((\varphi\limp\psi)\), and \((\varphi\liff\psi)\) are in~\(L\)
+\item[(5)] If \(\varphi\in L\) and \(x\)~is a variable symbol, then \(\forall x\varphi\) and \(\exists x\varphi\) are in~\(L\)
+\end{enumerate}
+Then \(L=L^S\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+By induction on the length of derivations, \(T^S\)~and~\(L^S\) are the smallest sets satisfying their respective closure conditions.
+\end{proof}
+\begin{app}
+Inductive proofs on terms and formulas.
+\end{app}
+
+\begin{thm}[Unique readability for terms and formulas]
+Let \(S\)~be a symbol set.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(t\in T^S\), then exactly one of the following holds:
+\begin{enumerate}[itemsep=0pt]
+\item[(1)] \(t=x\) for a unique variable symbol~\(x\)
+\item[(2)] \(t=c\) for a unique constant symbol \(c\in S\)
+\item[(3)] \(t=ft_1\cdots t_n\) for unique \(f\in S\) and unique \(t_1,\ldots,t_n\in T^S\)
+\end{enumerate}
+\item[(b)] If \(\varphi\in L^S\), then exactly one of the following holds:
+\begin{enumerate}[itemsep=0pt]
+\item[(1)] \(\varphi=t_1\equiv t_2\) for unique \(t_1,t_2\in T^S\)
+\item[(2)] \(\varphi=Rt_1\cdots t_n\) for unique \(R\in S\) and unique \(t_1,\ldots,t_n\in T^S\)
+\item[(3)] \(\varphi=\lnot\psi\) for unique~\(\psi\in L^S\)	
+\item[(4)] \(\varphi\)~is exactly one of \((\psi\land\chi)\), \((\psi\lor\chi)\), \((\psi\limp\chi)\), or \((\psi\liff\chi)\) for unique \(\psi,\chi\in L^S\)
+\item[(5)] \(\varphi\)~is exactly one of \(\forall x\psi\) or \(\exists x\psi\) for unique~\(x\) and unique \(\psi\in L^S\)
+\end{enumerate}
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+By induction on terms and formulas.
+\end{proof}
+\begin{app}
+Recursive definitions on terms and formulas.
+\end{app}

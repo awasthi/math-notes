@@ -1,0 +1,54 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Computability
+% Recursion Theorem
+%
+\section{Recursion Theorem}
+\subsection*{Theorems}
+\begin{thm}[Kleene's second recursion theorem]
+Let \(f\)~be a total unary computable function. Then for any \(m\ge 1\), there exists~\(n\) such that \(\phi_{f(n)}^{(m)}=\phi_n^{(m)}\).
+\end{thm}
+\begin{proof}
+Diagonalize effective enumerations of computable functions.
+
+In more detail, consider effective enumerations of the form
+\[\mathbf{E}_k^m:\quad\phi_{\phi_k(0)}^{(m)}\quad\phi_{\phi_k(1)}^{(m)}\quad\cdots\quad\phi_{\phi_k(k)}^{(m)}\quad\cdots\]
+and consider the diagonal enumeration
+\[\mathbf{D}:\quad\phi_{\phi_0(0)}^{(m)}\quad\phi_{\phi_1(1)}^{(m)}\quad\cdots\quad\phi_{\phi_k(k)}^{(m)}\quad\cdots\]
+Note \(\mathbf{D}\)~and~\(\mathbf{E}_k\) have their \((k+1)\)-th functions in common. Transform the diagonal with~\(f\) to obtain a new effective enumeration
+\[\mathbf{D}^*:\quad\phi_{f(\phi_0(0))}^{(m)}\quad\phi_{f(\phi_1(1))}^{(m)}\quad\cdots\quad\phi_{f(\phi_k(k))}^{(m)}\quad\cdots\]
+By the \smn\ theorem, \(\mathbf{D}^*=\mathbf{E}_k^m\) for some total computable function~\(\phi_k\). But then \(\mathbf{D}\)~and~\(\mathbf{E}_k\) have their \((k+1)\)-th functions in common, that is, \(\phi_{f(\phi_k(k))}^{(m)}=\phi_{\phi_k(k)}^{(m)}\), so \(n=\phi_k(k)\) is a fixed point for~\(f\) as desired.
+\end{proof}
+\begin{app}
+Proving existence and computability of a very broad class of recursive functions. Used in conjunction with the \smn\ theorem to establish the existence of programs defined in terms of their own source code.
+\end{app}
+\begin{rmk}
+Note that the second recursion theorem is more general than the first in that it applies not only to extensional functions, but it does not establish existence or computability of a \emph{least} fixed point.
+\end{rmk}
+\begin{cor}
+Let \(f(x,y)\) be any computable function. Then there exists~\(e\) such that
+\[\phi_e(y)\simeq f(e,y)\]
+\end{cor}
+\begin{app}
+Programs which output their own source code, initial segments of their own computations, etc.
+\end{app}
+
+\begin{thm}[Myhill]
+Any creative set is m-complete.
+\end{thm}
+\begin{proof}[Proof idea]
+Given a creative set~\(A\) and an r.e. set~\(B\), reduce~\(B\) to~\(A\) by making use of the productive function for~\(\overline{A}\). This requires carefully crafting `intermediate' r.e. sets.
+
+Let \(p\)~be the productive function for~\(\overline{A}\). Using the \smn\ theorem and the second recursion theorem, construct a total computable function~\(n(y)\) such that
+\[W_{n(y)}=\begin{cases}
+\{p(n(y))\}&\text{if }y\in B\\
+\emptyset&\text{otherwise}
+\end{cases}\]
+Then argue \(y\in B\) iff \(p(n(y))\in A\).
+\end{proof}
+\begin{app}
+Structure of the m-degrees (see notes on Chapter~9 above).
+\end{app}

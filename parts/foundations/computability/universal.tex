@@ -1,0 +1,52 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Computability
+% Universal Programs
+%
+\section{Universal Programs}
+\subsection*{Theorems}
+\begin{thm}[Universal programs]
+For each \(n\ge1\), the universal function~\(\psi_U^{(n)}(e,\vec{x})\) for \(n\)-ary computable functions is computable.
+\end{thm}
+\begin{proof}[Proof idea]
+Program simulation. Construct a program for~\(\psi_U^{(n)}\) which decodes~\(e\) to obtain~\(P_e\) and recursively simulates the computation~\(P_e(\vec{x})\).
+
+In more detail, first prove that the state of a URM computation at any point in time (determined by the register contents and instruction pointer at that time) can be effectively coded as a number. Then prove that the function \(\sigma_n(e,\vec{x},t)\) giving the (coded) state of the computation~\(P_e(\vec{x})\) after~\(t\) steps is primitive recursive since (i)~the initial state at \(t=0\) is known and (ii)~the state at \(t+1\) can be determined from the state at~\(t\) by examining~\(P_e\). Any value of~\(\psi_U^{(n)}\) can then be obtained from~\(\sigma_n\) using minimalization.
+\end{proof}
+\begin{app}
+Simulating programs and computations (including multitasking or multithreading). Effectively diagonalizing on computable functions (etc.). Used in conjunction with the \smn\ theorem to perform effective operations on computable functions in various ways.
+\end{app}
+\begin{cor}
+For each \(n\ge 1\), the following predicates are primitive recursive:
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(S_n(e,\vec{x},y,t)\equiv \text{`}P_e(\vec{x})\text{ converges to }y\text{ in }\le t\text{ steps'}\)
+\item[(b)] \(H_n(e,\vec{x},t)\equiv \text{`}P_e(\vec{x})\text{ converges in }\le t\text{ steps'}\)
+\end{enumerate}
+\end{cor}
+\begin{cor}[Kleene's normal form theorem]
+There is a primitive recursive function~\(U(x)\) and for each \(n\ge1\) a primitive recursive predicate \(T_n(e,\vec{x},z)\) such that for all \(e\)~and~\(\vec{x}\),
+\[\phi_e^{(n)}(\vec{x})\simeq U(\mu z\, T_n(e,\vec{x},z))\]
+\end{cor}
+\begin{proof}[Proof idea]
+Let \(z\)~code a pair \((y,t)\). Set \(T_n(e,\vec{x},z)\equiv S_n(e,\vec{x},y,t)\) and \(U(z)=y\).
+\end{proof}
+\begin{app}
+Obtaining any computable function with at most one \(\mu\)~operation.
+\end{app}
+\begin{rmk}
+In the proof of the normal form theorem, a search for a pair of numbers is facilitated by a single \(\mu\)~operation which makes use of an effective coding of pairs. In general, searches for complex objects (pairs, triples, arbitrary sequences, program instructions, programs, etc.) may be facilitated with a single \(\mu\)~operation provided that the objects can be effectively coded.
+
+In many cases, this technique allows us to avoid the use of nested searches (for example, \(\mu x\mu y\)). This becomes particularly important in contexts where a direct nested search does not work.
+\end{rmk}
+\begin{rmk}
+Universal functions are in a certain sense inversely related to the functions of the \smn\ theorem. To illustrate this, recall that for any computable function \(f(x,y)\), the \smn\ theorem establishes the existence of a recursive function~\(s(x)\) such that for all \(x\)~and~\(y\),
+\[\phi_{s(x)}(y)\simeq f(x,y)\]
+Thus the \smn\ theorem allows us to obtain from a given computable function~\(f\) an effectively indexed family of derived computable functions. Each of the derived functions is just a curried version of~\(f\).
+
+Conversely, given any recursive function~\(s(x)\), the universal function~\(\psi_U\) allows us to define a computable function \(f(x,y)\) by
+\[f(x,y)\simeq\psi_U(s(x),y)\simeq\phi_{s(x)}(y)\]
+Thus from an indexed family of computable functions (here the \(\phi_{s(x)}\)) we can build a single computable function~\(f\). The indexed functions can be obtained from~\(f\) through currying. In this way then, the application of a universal function can be seen as an inverse to the currying process. Note this is similar to differentiation and integration.
+\end{rmk}

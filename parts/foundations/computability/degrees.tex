@@ -1,0 +1,97 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Computability
+% Reducibility and Degrees
+%
+\subsection*{Theorems}
+In our notes on many-one reducibility, we mostly ignore the trivial sets \(\emptyset\)~and~\(\N\) and their corresponding m-degrees \(\dg{o}\)~and~\(\dg{n}\).
+
+\begin{thm}[Many-one reducibility]
+Let \(A\)~and~\(B\) be sets.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\mre\) is reflexive and transitive; \(\me\)~is an equivalence relation.
+\item[(b)] \(A\mre B\) iff \(\overline{A}\mre\overline{B}\).
+\item[(c)] If \(A\)~is recursive and \(B\mre A\), then \(B\)~is recursive.
+\item[(d)] If \(A\)~is recursive, \(A\mre B\) (if \(B\)~is nontrivial).
+\item[(e)] If \(A\)~is r.e. and \(B\mre A\), then \(B\)~is r.e.
+\item[(f)] If \(A\)~is r.e. but not recursive, then \(A\not\mre\overline{A}\) and \(\overline{A}\not\mre A\).
+\item[(g)] \(A\)~is r.e. iff \(A\mre K\) (\(K\)~is m-complete).
+\end{enumerate}
+\end{thm}
+
+\begin{thm}[Many-one degrees]
+\ 
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] There exists one (nontrivial) recursive m-degree, denoted~\(\dg{0}_m\), which consists of all (nontrivial) recursive sets; and \(\dg{0}_m\mre\dg{a}\) for all (nontrivial) m-degrees~\(\dg{a}\).
+\item[(b)] Any r.e. m-degree consists only of r.e. sets.
+\item[(c)] If \(\dg{a}\mre\dg{b}\) and \(\dg{b}\)~is r.e., then \(\dg{a}\)~is r.e.
+\item[(d)] There exists a maximum r.e. m-degree, denoted~\(\dg{0}_m'\) (the m-degree of~\(K\)), and \(\dg{0}_m\mr\dg{0}_m'\).
+\item[(e)] Any two m-degrees have a unique least upper bound.
+\end{enumerate}
+\end{thm}
+\begin{rmk}
+Note the r.e. m-degrees form an initial segment of the m-degrees.
+\end{rmk}
+
+\begin{thm}[Myhill]
+The m-complete sets (those in~\(\dg{0}_m'\)) are precisely the creative sets.
+\end{thm}
+\begin{proof}[Proof idea]
+The forward implication is trivial. The reverse implication requires the second recursion theorem and is discussed in the notes on Chapter~11 below.
+\end{proof}
+
+\begin{cor}
+If \(\dg{a}\)~is the m-degree of a simple set, then \(\dg{0}_m\mr\dg{a}\mr\dg{0}_m'\).
+\end{cor}
+
+\begin{thm}[Turing reducibility]
+Let \(A\)~and~\(B\) be sets.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\tre\)~is reflexive and transitive; \(\te\)~is an equivalence relation.
+\item[(b)] If \(A\mre B\), then \(A\tre B\).
+\item[(c)] \(A\te\overline{A}\)
+\item[(d)] If \(A\)~is recursive, \(A\tre B\).
+\item[(e)] If \(A\)~is recursive and \(B\tre A\), then \(B\)~is recursive.
+\item[(f)] If \(A\)~is r.e., then \(A\tre K\) (\(K\)~is T-complete).
+\end{enumerate}
+\end{thm}
+\begin{rmk}
+Note it is \emph{not} true in general that if \(A\)~is r.e. and \(B\tre A\), then \(B\)~is r.e.
+\end{rmk}
+
+\begin{thm}[Turing degrees]
+\ 
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] There exists one recursive degree, denoted~\(\dg{0}\), which consists of all recursive sets and is the unique minimum degree.
+\item[(b)] There exists a maximum r.e. degree, denoted~\(\dg{0}'\) (the degree of~\(K\)), and \(\dg{0}<\dg{0}'\).
+\item[(c)] Any two degrees have a unique least upper bound.
+\item[(d)] (Friedberg-Muchnik) There exist incomparable r.e. degrees.
+\item[(e)] For any r.e. degree \(\dg{0}<\dg{a}<\dg{0}'\), there exists an incomparable r.e. degree~\(\dg{b}\).
+\item[(f)] (Sacks density theorem) The r.e. degrees are dense.
+\item[(g)] (Sacks splitting theorem) For any r.e. degree \(\dg{a}>\dg{0}\), there exist r.e. degrees \(\dg{b},\dg{c}\) less than~\(\dg{a}\) with least upper bound~\(\dg{a}\).
+\item[(h)] (Lachlan and Yates) There exist r.e. degrees \(\dg{a},\dg{b}>\dg{0}\) with greatest lower bound~\(\dg{0}\).
+\item[(i)] (Lachlan and Yates) There exist r.e. degrees \(\dg{a},\dg{b}\) having no greatest lower bound (either among r.e. degrees or all degrees).
+\item[(j)] (Schoenfield) There exists a non-r.e. degree \(\dg{a}<\dg{0}'\).
+\item[(k)] (Spector) There exists a minimal degree.
+\end{enumerate}
+\end{thm}
+
+\noindent Recall \(K^A=\{\,x\mid x\in W_x^A\,\}\) is the \(A\)-relativized version of~\(K\).
+
+\begin{thm}[Turing jump]
+Let \(A\)~and~\(B\) be sets.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(K^A\) is \(A\)-r.e. and if \(B\)~is \(A\)-r.e. then \(B\tre K^A\) (\(K^A\)~is T-complete among \(A\)-r.e. sets).
+\item[(b)] \(A\tr K^A\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+Relativized versions of the standard arguments.
+\end{proof}
+
+\begin{cor}
+For any degree~\(\dg{a}\), \(\dg{a}<\dg{a}'\) (where \(\dg{a}'\)~is the jump of~\(\dg{a}\), that is, the degree of~\(K^A\) for any \(A\in\dg{a}\)).
+\end{cor}

@@ -1,0 +1,110 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Analysis
+% Complex Analysis
+% Series
+%
+\section{Series}
+\subsection*{Definitions}
+Definitions related to numerical sequences and series assumed.
+\begin{defn}
+A \emph{power series} is a function of the form \(f(z)=\sum_{n=0}^\infty a_n(z-z_0)^n\).
+\end{defn}
+\begin{defn}
+A power series \(f(z)=\sum a_n(z-z_0)^n\) \emph{converges} at a point~\(z_1\) if \(f(z_1)\)~is defined, that is, if \(\sum a_n(z_1-z_0)^n\) converges. Otherwise it \emph{diverges} at~\(z_1\).
+\end{defn}
+
+\begin{defn}
+A power series \(f(z)=\sum a_n(z-z_0)^n\) \emph{converges absolutely} at a point~\(z_1\) if
+\[\sum\abs{a_n(z_1-z_0)^n}\]
+converges.
+\end{defn}
+
+\begin{defn}
+A power series \(f(z)=\sum a_n(z-z_0)^n\) \emph{converges uniformly} on the set~\(S\) if for every \(\epsilon>0\), there exists~\(N\) such that for all \(n\ge N\),
+\[\abs{f(z)-\sum_{k=0}^n a_k(z-z_0)^k}<\epsilon\]
+for all \(z\in S\).
+\end{defn}
+
+\subsection*{Theorems}
+\begin{thm}[Properties of power series]
+Let
+\[f(z)=\sum a_n(z-z_0)^n\]
+be an arbitrary power series about~\(z_0\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] (Radius of convergence) There exists a unique~\(R\) with \(0\le R\le+\infty\) such that \(f\)~converges on \(\abs{z-z_0}<R\) and diverges on \(\abs{z-z_0}>R\).
+\item[(b)] (Absolute convergence) \(f\)~converges absolutely inside its radius of convergence.
+\item[(c)] (Uniform convergence) \(f\)~converges uniformly on any closed set inside its radius of convergence.
+\item[(d)] (Continuity) \(f\)~is continuous inside its radius of convergence.
+\item[(e)] (Integrability) \(f\)~is integrable term by term along any contour~\(C\) inside its radius of convergence, that is,
+\[\int_C\sum a_n(z-z_0)^n=\sum\int_C a_n(z-z_0)^n\]
+\item[(f)] (Differentiability) \(f\)~is analytic inside its radius of convergence. Moreover, \(f\)~is differentiable term by term there, that is,
+\[\frac{d}{dz}\sum_{n=0}^\infty a_n(z-z_0)^n=\sum_{n=1}^\infty a_n n(z-z_0)^{n-1}\]
+\item[(g)] (Uniqueness) \(f\)~has a unique power series expansion about~\(z_0\).
+\item[(h)] (Arithmetic) If \(g(z)=\sum b_n(z-z_0)^n\) is another power series about~\(z_0\), then inside the smaller of the radii of convergence of \(f\)~and~\(g\), power series for the functions \(f+g\), \(fg\), and \(f/g\) (when \(g(z)\)~is never zero) can be obtained by formally adding, multiplying, and dividing the power series for \(f\)~and~\(g\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For (a)--(e), (g), and~(h), use the same proofs from real analysis.
+
+For~(f), use Morera's theorem and Cauchy's integral formula. Note from~(e) and the fact that each term \(a_n(z-z_0)^n\) has an antiderivative that if \(C\)~is a closed contour inside the radius of convergence, \(\int_C f=0\). Thus \(f\)~is analytic by Morera's theorem. Term by term differentiability follows from an extension of (e)~and Cauchy's integral formula.
+\end{proof}
+
+\begin{thm}[Taylor series]
+If \(f\)~is analytic at~\(z_0\), then \(f\)~has a Taylor series expansion about~\(z_0\). That is, there exists \(0<R\le+\infty\) such that
+\[f(z)=\sum a_n(z-z_0)^n\qquad(\abs{z-z_0}<R)\]
+with coefficients
+\[a_n=\frac{f^{(n)}(z_0)}{n!}\qquad(n\ge0)\]
+Moreover, these coefficients are unique.
+\end{thm}
+\begin{proof}[Proof idea]
+For fixed~\(z\), use Cauchy's integral formula to express~\(f(z)\) as an integral. Then split the integrand up into a partial sum of a geometric series plus a remainder term. Use linearity and then Cauchy's integral formula again on the terms of the sum to obtain the Taylor coefficients. Finally, show that the error vanishes.
+
+In detail, assume without loss of generality that \(z_0=0\). Fix~\(z\) with \(\abs{z}<R\), and let \(C\)~be a positively oriented circle about the origin of radius~\(R_0\) where \(\abs{z}<R_0<R\). Then
+\[f(z)=\frac{1}{2\pi i}\int_C\frac{f(s)}{s-z}\,ds\]
+Write
+\[\frac{1}{s-z}
+=\frac{1}{s}\Bigl[\frac{1}{1-(z/s)}\Bigr]
+=\frac{1}{s}\Bigl[\sum_{n=0}^{N-1}\Bigl(\frac{z}{s}\Bigr)^n-\frac{(z/s)^N}{1-(z/s)}\Bigr]
+=\sum_{n=0}^{N-1}\frac{1}{s^{n+1}}z^n+\frac{z^N}{s^N(s-z)}\]
+Then
+\begin{align*}
+f(z)&=\sum_{n=0}^{N-1}\Bigl[\frac{1}{2\pi i}\int_C\frac{f(s)}{s^{n+1}}\,ds\Bigr]z^n+\frac{z^N}{2\pi i}\int_C\frac{1}{s^N(s-z)}\,ds\\
+	&=\sum_{n=0}^{N-1}\frac{f^{(n)}(0)}{n!}z^n+\rho_N(z)
+\end{align*}
+where \(\rho_N(z)\)~is the remainder term, and \(\rho_N(z)\to0\) as \(N\to\infty\).
+
+Uniqueness follows from uniqueness of power series expansions.
+\end{proof}
+\begin{app}
+Manipulation, approximation, relating local and global behavior, calculating integrals, calculating residues, etc.
+\end{app}
+
+\begin{thm}[Laurent series]
+If \(f\)~is analytic in the annular domain \(R_0<\abs{z-z_0}<R_1\) and \(C\)~is any positively oriented simple closed contour about~\(z_0\) inside the domain, then \(f\)~has a Laurent series expansion in the domain that uses~\(C\). That is,
+\[f(z)=\sum_{n=0}^\infty a_n(z-z_0)^n+\sum_{n=1}^\infty b_n(z-z_0)^{-n}\qquad(R_0<\abs{z-z_0}<R_1)\]
+where
+\[a_n=\frac{1}{2\pi i}\int_C\frac{f(z)}{(z-z_0)^{n+1}}\,dz\quad(n\ge0)\qquad b_n=\frac{1}{2\pi i}\int_C\frac{f(z)}{(z-z_0)^{-n+1}}\,dz\quad(n\ge1)\]
+Moreover, these coefficients are unique.
+\end{thm}
+\begin{proof}[Proof idea]
+For fixed~\(z\), draw circles in the annular domain and use Cauchy-Goursat and Cauchy's integral formula to express~\(f(z)\) as a sum of two integrals. As in the proof for Taylor series, break these integrals up into sums and use Cauchy's integral formula again to obtain the desired form. Use deformation of path to express the coefficients in terms of~\(C\).
+
+Again, uniqueness follows from uniqueness of power series expansions.
+\end{proof}
+\begin{app}
+Manipulation, approximation, relating local and global behavior, calculating integrals, calculating residues, Cauchy's residue theorem, etc.
+\end{app}
+
+\begin{rmk}
+The Laurent series is a generalization of the Taylor series.
+\end{rmk}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Obtaining Taylor [Laurent] coefficients using Cauchy's integral formula.
+\item Obtaining Taylor [Laurent] series expansions from existing Taylor [Laurent] series expansions using formal manipulations and uniqueness (and not using definitions!).
+\item Relating local properties of functions and their derivatives to global properties using Taylor [Laurent] series expansions.
+\end{itemize}

@@ -1,0 +1,60 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Analysis
+% Complex Analysis
+% Applications of Residues
+%
+\section{Applications of Residues}
+\subsection*{Definition}
+\begin{defn}
+A function is \emph{meromorphic} in a domain if it is analytic throughout the domain except possibly at poles.
+\end{defn}
+\begin{defn}
+If \(f\)~is continuous and nonzero on a positively oriented simple closed contour~\(C\), and \(K\)~is the closed image contour, and \(\wind{C}{f}\)~denotes the change in argument of an image point~\(f(z)\) after \(z\)~makes one oriented traversal of~\(C\), then the \emph{winding number (with respect to the origin)} of~\(K\) is
+\[\frac{1}{2\pi}\wind{C}{f}\]
+\end{defn}
+\begin{rmk}
+Intuitively, the winding number of a curve is the number of times it winds around the origin.
+\end{rmk}
+\subsection*{Theorems}
+\begin{thm}[Argument principle]
+Let \(C\)~be a positively oriented simple closed contour. If \(f\)~is analytic and nonzero on~\(C\) and meromorphic inside~\(C\), then
+\[\frac{1}{2\pi}\wind{C}{f}=Z-P\]
+where \(Z\)~is the number of zeros of~\(f\) inside~\(C\) and \(P\)~is the number of poles of~\(f\) inside~\(C\), both counting multiplicity (order).
+\end{thm}
+\begin{proof}[Proof idea]
+By evaluating \(\int_C f'/f\) in two ways, once directly using polar form and again using Cauchy's residue theorem.
+\end{proof}
+\begin{app}
+Calculating winding numbers, counting zeros and poles.
+\end{app}
+
+\begin{cor}[Rouch\'e]
+If \(f\)~and~\(g\) are analytic on and inside a simple closed contour~\(C\) and \(\abs{f}>\abs{g}\) on~\(C\), then \(f\)~and \(f+g\) have the same number of zeros inside~\(C\).
+\end{cor}
+\begin{proof}[Proof idea]
+By the argument principle. Note \(f\)~and \(f+g\) are nonzero on~\(C\), so
+\[Z_f=\frac{1}{2\pi}\wind{C}{f}\qquad Z_{f+g}=\frac{1}{2\pi}\wind{C}{(f+g)}\] 
+where \(Z_f\)~and~\(Z_{f+g}\) denote the number of zeros inside~\(C\) of \(f\)~and \(f+g\), respectively. But
+\begin{align*}
+\wind{C}{(f+g)}&=\wind{C}{f[1+g/f]}\\
+	&=\wind{C}{f}+\wind{C}{(1+g/f)}
+\end{align*}
+But \(\abs{g}/\abs{f}<1\) on~\(C\), so \(\wind{C}{(1+g/f)}=0\).
+\end{proof}
+\begin{app}
+Counting zeros.
+\end{app}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Evaluating certain \emph{real} integrals using appropriately constructed contours and Cauchy's residue theorem, including using indented paths for isolated real singularities, etc.
+\item Calculating winding numbers by counting zeros and poles, and conversely (argument principle).
+\item Counting zeros and poles:
+\begin{itemize}[itemsep=0pt]
+\item Winding numbers (argument principle).
+\item Rouch\'e's theorem.
+\end{itemize}
+\end{itemize}

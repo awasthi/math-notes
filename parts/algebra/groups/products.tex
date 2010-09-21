@@ -1,0 +1,82 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Algebra
+% Groups
+% Direct Products and Semidirect Products
+%
+\section{Direct Products and Semidirect Products}
+\subsection*{Theorems}
+\begin{thm}[Fundamental theorem of finite abelian groups]
+If \(G\)~is an abelian group with \(\ord{G}=p_1^{a_1}\cdots p_k^{a_k}\), where \(p_1,\ldots,p_k\) are pairwise distinct primes and \(a_1,\ldots,a_k\ge1\), there exist groups \(A_1,\ldots,A_k\) such that
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(G\iso\prod_{i=1}^k A_i\)
+\item[(b)] For each factor~\(A_i\), \(\ord{A_i}=p_i^{a_i}\) and there exist \(b_1\ge\cdots\ge b_m\ge 1\) with \(a_i=\sum_{j=1}^m b_j\) such that \(A_i\iso\prod_{j=1}^m Z_{p_i^{b_j}}\).
+\end{enumerate}
+Moreover, this factorization is unique in the sense that if \(G\iso\prod_{i=1}^r B_i\) with \(\ord{B_i}=p_i^{a_i}\) for all~\(i\), then \(A_i\iso B_i\) for all~\(i\).
+\end{thm}
+\begin{proof}[Proof idea]
+By the structure theorem for finitely generated modules over principal ideal domains, since finite abelian groups are just finitely generated \(\Z\)-modules.
+
+Alternately, for existence, by induction. Since a finite abelian group is a direct product of Sylow subgroups,\footnote{See characterizations of finite nilpotence below.} assume without loss of generality that \(G\)~is a \(p\)-group. First argue that an elementary abelian \(p\)-group~\(E\) can be factored as \(E=M\times\groupclosure{x}\), where \(M\)~is maximal and \(x\ne1\). Now let \(H\)~be the subgroup of~\(G\) consisting of \(p\)-th powers, and \(K\)~the subgroup consisting of elements of order~\(p\). Note \(H\)~and~\(K\) are just the range and kernel, respectively, of the map \(x\mapsto x^p\), and \(G/H\)~and~\(K\) are both elementary abelian. If possible, pull back a factorization of~\(G/H\) into~\(G\) and appeal to induction on a factor. Otherwise, appeal to the induction hypothesis on \(G/K\iso H\), and then pull back \(p\)-th roots of the generators from the factorization of~\(G/K\). For uniqueness, also use induction.
+\end{proof}
+\begin{app}
+Classifying finite abelian groups.
+\end{app}
+
+\begin{thm}[Commutators]
+Let \(G\)~be a group.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] For all \(x,y\in G\), \(xy=yx[x,y]\). In particular \(xy=yx\) iff \([x,y]=1\).
+\item[(b)] For all \(H\subgroupeq G\), \(H\normsubgroupeq G\) iff \([H,G]\subgroupeq H\).
+\item[(c)] \(G'\charsubgroupeq G\).
+\item[(d)] For all \(N\normsubgroupeq G\), \(G/N\)~is abelian iff \(G'\subgroupeq N\). In particular, \(G/G'\)~is the largest abelian quotient of~\(G\).
+\end{enumerate}
+\end{thm}
+\begin{app}
+Determining when elements commute.
+\end{app}
+
+\begin{thm}[Internal direct products]
+Let \(G\)~be a group. If \(H,K\normsubgroupeq G\) and \(H\sect K=1\), then \(HK\iso H\times K\).
+\end{thm}
+\begin{proof}[Proof idea]
+Each element in~\(HK\) can be written uniquely in the form~\(hk\) for some \(h\in H\) and \(k\in K\). Also, since both \(H\)~and~\(K\) are normal, \([h,k]\in H\sect K=1\) for all \(h\in H\) and \(k\in K\), hence every element of~\(H\) commutes with every element of~\(K\). It follows that the map \(hk\mapsto (h,k)\) is the desired isomorphism.
+\end{proof}
+\begin{app}
+Recognizing direct products.
+\end{app}
+
+\begin{thm}[Internal semidirect products]
+Let \(G\)~be a group. If \(H,K\subgroupeq G\), \(H\normsubgroupeq G\), and \(H\sect K=1\), then \(HK\iso H\rtimes K\), where \(K\)~acts on~\(H\) by conjugation.
+\end{thm}
+\begin{proof}[Proof idea]
+Again, the map \(hk\mapsto (h,k)\) is the desired isomorphism (but for different reasons!).
+\end{proof}
+\begin{app}
+Recognizing semidirect products.
+\end{app}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Classifying finite abelian groups of order~\(n\) using the fundamental theorem:
+\begin{enumerate}[itemsep=0pt]
+\item Factor~\(n\) into its prime factorization \(n=p_1^{a_1}\cdots p_k^{a_k}\).
+\item For each~\(i\), determine all possible abelian groups of order~\(p_i^{a_i}\) by first determining all partitions of the number~\(a_i\) of form \(a_i=b_1+\cdots+b_j\) with \(b_1\ge\cdots\ge b_j\ge1\), then forming corresponding direct products
+\[Z_{p_i^{b_1}}\times\cdots\times Z_{p_i^{b_j}}\]
+\item Determine all possible abelian groups of order~\(n\) by forming all direct products of the form \(A_1\times\cdots\times A_k\) where \(A_i\)~is a group from the previous step with \(\ord{A_i}=p_i^{a_i}\).
+\end{enumerate}
+\item Classifying finite groups of order~\(n\) using semidirect products:
+\begin{enumerate}[itemsep=0pt]
+\item Show that every group~\(G\) of order~\(n\) has proper subgroups \(H\)~and~\(K\) which form an internal semidirect product \(G=HK\) (for example, using Sylow's theorems).
+\item Determine all possible isomorphism types for \(H\)~and~\(K\) (inductively).
+\item For each pair \(H,K\) in the previous step, find all possible automorphism representations~\(\varphi\) of~\(K\) on~\(H\).
+\item For each triple \(H,K,\varphi\) in the previous step, form the semidirect product \(H\rtimes_{\varphi}K\). 
+\item Determine the distinct isomorphism types in the previous step.
+\end{enumerate}
+\item In inductive arguments involving finite abelian (or more generally, nilpotent) groups, taking quotients by maximal subgroups and leveraging the simple structure of the quotients.
+\item Taking quotients to impose relations.
+\item Proving normality using commutator subgroups.
+\item Using direct and semidirect products to construct examples.
+\end{itemize}

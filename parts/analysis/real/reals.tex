@@ -1,0 +1,87 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Analysis
+% Real Analysis
+% Real Numbers
+%
+\section{Real Numbers}
+\subsection*{Definitions}
+Basic order-theoretic and algebraic definitions assumed.
+
+\begin{defn}
+An ordered set~\(S\) has the \emph{least upper bound property} if every nonempty subset of~\(S\) bounded above in~\(S\) has a least upper bound (supremum) in~\(S\).
+\end{defn}
+
+\subsection*{Theorems}
+\begin{thm}[Existence of~\(\R\)]
+There exists an ordered field~\(\R\) (the real numbers) with the least upper bound property and containing~\(\Q\) as a subfield.
+\end{thm}
+\begin{proof}[Proof idea]
+Dedekind cuts or equivalence classes of Cauchy sequences over~\(\Q\).
+\end{proof}
+\begin{app}
+All subsequent theory.
+\end{app}
+
+\begin{thm}[Archimedean property of~\(\R\)]
+For any \(x,y\in\R\) with \(x>0\), there exists an integer \(n>0\) such that \(nx>y\).
+\end{thm}
+\begin{proof}[Proof idea]
+By the least upper bound property.
+
+If not, derive a contradiction from the supremum of the set \(N=\{\,nx\mid n\in\Z\,\}\).
+\end{proof}
+\begin{app}
+Choosing integer bounds for real quantities as required in a variety of arguments, density of the rationals in the reals, etc.
+\end{app}
+
+\begin{thm}[Density of~\(\Q\) in~\(\R\)]
+For any \(x,y\in\R\) with \(x<y\), there exists \(q\in\Q\) with \(x<q<y\).
+\end{thm}
+\begin{proof}[Proof idea]
+By the archimedean property.
+
+Desire \(m,n\in\Z\) with \(n>0\) such that \(x<m/n<y\) or \(nx<m<ny\). Choose~\(n\) by the archimedean property so that \(ny-nx=n(y-x)>1\), to ensure that an integer will appear between \(nx\)~and~\(ny\). Let \(m\)~to be the least integer greater than~\(nx\) (use the archimedean property, again) and argue that \(m/n\) works.
+\end{proof}
+
+\begin{thm}[\(n\)-th roots in~\(\R\)]
+For any \(x\in\R\) with \(x\ge0\), there exists a unique \(y\in\R\) with \(y\ge0\) and \(y^n=x\).
+\end{thm}
+\begin{proof}[Proof idea]
+By the least upper bound property.
+
+Set \(y=\sup\{\,y\mid y^n<x\,\}\). Using a bound for \(b^n-a^n\) in terms of \(a,b\in\R\) with \(a<b\), argue by contradiction that neither \(y^n<x\) nor \(y^n>x\) can hold, lest \(y\)~fails to be a least upper bound.
+\end{proof}
+
+\begin{thm}[Existence of~\(\C\)]
+There exists an algebraically closed field~\(\C\) (the complex numbers) containing~\(\R\) as a subfield.
+\end{thm}
+\begin{proof}[Proof idea]
+Let complex numbers be ordered pairs of real numbers with addition and multiplication defined appropriately. Prove algebraic closure later.
+\end{proof}
+
+\begin{thm}[Cauchy-Schwarz]
+Given complex numbers \(a_1,\ldots,a_n\) and \(b_1,\ldots,b_n\),
+\[\abs{\sum_{k=1}^n a_k\conj{b_k}}^2\le\sum_{k=1}^n\abs{a_k}\cdot\sum_{k=1}^n\abs{b_k}\]
+\end{thm}
+\begin{proof}[Proof idea]
+Use a proof from linear algebra.
+
+Write \(\vec{a}=(a_1,\ldots,a_n)\) and \(\vec{b}=(b_1,\ldots,b_n)\). In the complex inner product space~\(\C^n\) with standard inner product \(\vec{x}\dotprod\vec{y}=\sum_{k=1}^n x_k\conj{y_k}\) and norm \(\norm{\vec{x}}=\sqrt{\vec{x}\dotprod\vec{x}}\), the inequality can be expressed equivalently as
+\[\abs{\vec{a}\dotprod\vec{b}}^2\le\norm{\vec{a}}^2\norm{\vec{b}}^2\]
+To prove this, assume \(\vec{b}\ne\vec{0}\) and orthogonally decompose~\(\vec{a}\) in terms of~\(\vec{b}\) as
+\[\vec{a}=\frac{\vec{a}\dotprod\vec{b}}{\norm{\vec{b}}^2}\,\vec{b}+\vec{w}\]
+Then appeal to the Pythagorean theorem to obtain
+\[\norm{\vec{a}}^2=\frac{(\vec{a}\dotprod\vec{b})^2}{\norm{\vec{b}}^2}+\norm{\vec{w}}^2\ge\frac{(\vec{a}\dotprod\vec{b})^2}{\norm{\vec{b}}^2}\]
+from which the above inequality is immediate.
+\end{proof}
+\begin{app}
+Triangle inequality in~\(\R^k\) (allowing us to treat~\(\R^k\) as a metric space), mean value inequality in~\(\R^k\), integral bounds in~\(\R^k\), etc.
+\end{app}
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Least upper bound property.
+\item Archimedean property.
+\end{itemize}

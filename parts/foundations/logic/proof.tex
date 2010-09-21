@@ -1,0 +1,45 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Logic
+% Proof
+%
+\section{Proof}
+\subsection*{Theorems}
+Fix a symbol set~\(S\).
+\begin{thm}[Correctness]
+If \(\Phi\proves\varphi\), then \(\Phi\models\varphi\).	
+\end{thm}
+\begin{proof}[Proof idea]
+Induction on derivable sequents (in the sequent calculus for~\(S\)).
+\end{proof}
+\begin{app}
+Showing that formal proofs do not yield incorrect results.
+\end{app}
+\begin{cor}[Correctness]
+If \(\Phi\)~is satisfiable, then \(\Phi\)~is consistent.
+\end{cor}
+\begin{proof}[Proof idea]
+If \(\Phi\)~is inconsistent, then \(\Phi\proves\varphi\) and \(\Phi\proves\lnot\varphi\) for some~\(\varphi\). But then \(\Phi\models\varphi\) and \(\Phi\models\lnot\varphi\) by the theorem, so \(\Phi\)~is not satisfiable.
+\end{proof}
+
+\begin{rmk}
+Note the corollary is actually equivalent to the theorem. Indeed, if a set of formulas is consistent whenever it is satisfiable, then if \(\Phi\proves\varphi\), the set \(\Phi\union\{\lnot\varphi\}\) is not consistent and hence not satisfiable, so \(\Phi\models\varphi\).
+\end{rmk}
+
+\begin{thm}[Finiteness]
+\ 
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\Phi\proves\varphi\) iff \(\Phi_0\proves\varphi\) for some finite \(\Phi_0\subseteq\Phi\).
+\item[(b)] \(\Phi\)~is consistent iff \(\Phi_0\)~is consistent for all finite \(\Phi_0\subseteq\Phi\).
+\item[(c)] \(\Phi\)~is inconsistent iff \(\Phi_0\)~is inconsistent for some finite \(\Phi_0\subseteq\Phi\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+By definition of proof.
+\end{proof}
+\begin{app}
+With correctness and completeness, yields compactness.
+\end{app}

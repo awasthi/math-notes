@@ -1,0 +1,60 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Algebra
+% Vector Spaces
+% Vector Spaces and Subspaces
+%
+\section{Vector Spaces and Subspaces}
+\subsection*{Definitions}
+\begin{defn}
+A \emph{vector space} over a field~\(\F\) is a set~\(V\) together with a binary operation \(+:V\times V\to V\) called \emph{addition} and an external binary operation \(\cdot:\F\times V\to V\) called \emph{scalar multiplication}, satisfying the following properties:
+\begin{description}[itemsep=0pt]
+\item[Associativity] \((u+v)+w=u+(v+w)\) for all \(u,v,w\in V\), and \((\alpha\beta)u=\alpha(\beta u)\) for all \(\alpha,\beta\in\F\) and \(u\in V\).
+\item[Commutativity] \(u+v=v+u\) for all \(u,v\in V\).
+\item[Identities] There exists \(0\in V\) such that \(u+0=u\) for all \(u\in V\), and \(1u=u\) for all \(u\in V\) where \(1\)~is the multiplicative identity in~\(\F\).
+\item[Inverses] For all \(u\in V\) there exists \(v\in V\) such that \(u+v=0\).
+\item[Distributivity] \((\alpha+\beta)u=\alpha u+\beta u\) for all \(\alpha,\beta\in\F\) and \(u\in V\), and \(\alpha(u+v)=\alpha u+\alpha v\) for all \(\alpha\in\F\) and \(u,v\in V\).
+\end{description}
+\end{defn}
+
+\begin{defn}
+A subset~\(U\) of~\(V\) is called a \emph{subspace} if it is a vector space with respect to the restrictions of the operations on~\(V\).
+\end{defn}
+
+\begin{defn}
+The \emph{sum} of subspaces \(U_1,\ldots,U_n\) of~\(V\) is
+\[U_1+\cdots+U_n=\{\,u_1+\cdots+u_n\mid u_i\in U_i, i\in\{1,\ldots,n\}\,\}\]
+\end{defn}
+
+\begin{defn}
+If \(U=U_1+\cdots+U_n\) and for each \(u\in U\) there exist unique \(u_i\in U_i\) such that \(u=u_1+\cdots+u_n\), then \(U\)~is called the \emph{direct sum} of~\(U_1,\ldots,U_n\), written \(U=U_1\directsum\cdots\directsum U_n\).
+\end{defn}
+
+\subsection*{Theorems}
+\begin{thm}[Characterization of direct sum]
+If \(U_1,\ldots,U_n\) are subspaces of~\(V\), then
+\[V=U_1\directsum\cdots\directsum U_n\]
+iff
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(V=U_1+\cdots+U_n\)
+\item[(b)] If \(0=u_1+\cdots+u_n\) with \(u_i\in U_i\) for \(i\in\{1,\ldots,n\}\), then \(u_i=0\) for \(i\in\{1,\ldots,n\}\)
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For the forward direction, by definition of direct sum.
+
+For the reverse direction, translate equality to nullity. If
+\[v=u_1+\cdots+u_n=w_1+\cdots+w_n\quad(u_i,w_i\in U_i)\]
+then \(0=(u_1-w_1)+\cdots+(u_n-w_n)\), so \(u_i=w_i\) for all~\(i\).
+\end{proof}
+
+\begin{cor}
+\(V=U_1\directsum U_2\) iff \(V=U_1+U_2\) and \(U_1\sect U_2=\{0\}\).
+\end{cor}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Translating between equality and nullity.
+\end{itemize}

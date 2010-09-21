@@ -1,0 +1,66 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Computability
+% Decidability and Partial Decidability
+%
+\section{Decidability and Partial Decidability}
+\subsection*{Theorems}
+\begin{thm}[Algebra of decidability]
+The class of decidable predicates is closed under negation, conjunction, disjunction, and bounded quantification; it is not closed under unbounded quantification.
+\end{thm}
+
+\begin{thm}[Halting problem]
+The predicate `\(y\in W_x\)' is undecidable.
+\end{thm}
+\begin{proof}[Proof idea]
+Use diagonalization to prove `\(x\in W_x\)' undecidable, then reduce.
+\end{proof}
+\begin{app}
+The halting problem shows that there is no general effective method to decide whether a program halts on a given input. It (or, more commonly, the problem `\(x\in W_x\)') is often used to prove undecidability of other problems through reduction.
+\end{app}
+
+\begin{thm}[Rice]
+If \(\emptyset\subset\A\subset\CC_1\), the problem `\(\phi_x\in\A\)' is undecidable.
+\end{thm}
+\begin{proof}[Proof idea]
+Use the \smn\ theorem to reduce \(x\in W_x\) to \(\phi_x\in\A\).
+\end{proof}
+\begin{app}
+Establishing undecidability of many classes of computable functions.
+\end{app}
+
+\begin{thm}[Partial decidability]
+The following are equivalent:
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(P(\vec{x})\) is partially decidable
+\item[(b)] There exists a computable function~\(f(\vec{x})\) such that \(P(\vec{x})\iff\vec{x}\in\domain(f)\)
+\item[(c)] There exists a primitive recursive predicate \(R(\vec{x},y)\) such that \(P(\vec{x})\iff\exists y R(\vec{x},y)\)
+\item[(d)] (Matiyasevich's theorem) \(P(\vec{x})\) is diophantine
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+Trivially (a)\(\iff\)(b). For (b)\(\implies\)(c), set \(R(\vec{x},y)\equiv H_n(e,\vec{x},y)\) where \(f=\phi_e\), and for (c)\(\implies\)(b) set \(f(\vec{x})=\mu y\,R(\vec{x},y)\).
+\end{proof}
+
+\begin{app}
+Matiyasevich's theorem solves Hilbert's tenth problem (answering in the negative by establishing the existence of undecidable diophantine predicates).
+\end{app}
+
+\begin{thm}[Algebra of partial decidability]\ 
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] The class of partially decidable predicates is closed under conjunction, disjunction, existential quantification, and bounded universal quantification; it is not closed under negation or unbounded universal quantification.
+\item[(b)] \(P(\vec{x})\) is decidable iff both \(P(\vec{x})\) and \(\lnot P(\vec{x})\) are partially decidable.
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For (a), closure under existential quantification follows from part~(c) of the previous theorem and searching for pairs; the rest is straightforward (consult exercises below).
+
+For (b), use multitasking.
+\end{proof}
+
+\begin{thm}
+The function~\(f(\vec{x})\) is computable iff \(f(\vec{x})\simeq y\) is partially decidable.
+\end{thm}

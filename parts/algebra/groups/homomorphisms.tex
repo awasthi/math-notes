@@ -1,0 +1,90 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Algebra
+% Groups
+% Homomorphisms and Quotients
+%
+\section{Homomorphisms and Quotients}
+\subsection*{Theorems}
+\begin{thm}[Normality]
+If \(G\)~is a group and \(N\subgroupeq G\), the following are equivalent:
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(N\normsubgroupeq G\)
+\item[(b)] \(gNg^{-1}\subseteq N\) for all \(g\in G\)
+\item[(c)] \(gN=Ng\) for all \(g\in G\)
+\item[(d)] \(N_G(N)=G\)
+\item[(e)] the coset space \(G/N\) forms a group under the usual operation
+\item[(f)] \(N\)~is the kernel of a homomorphism on~\(G\)
+\end{enumerate}
+\end{thm}
+
+\begin{thm}[Tower law]
+If \(G\)~is a group and \(H\subgroupeq K\subgroupeq G\), then
+\[\idx{H}{G}=\idx{K}{G}\idx{H}{K}\]
+\end{thm}
+\begin{proof}[Proof idea]
+The cosets of~\(K\) partition~\(G\), and the number of \(G\)-cosets of~\(H\) in any coset~\(gK\) of~\(K\) is equal to~\(\idx{H}{K}\), by the map \(kH\mapsto gkH\) (\(k\in K\)).
+\end{proof}
+
+\begin{cor}[Lagrange]
+If \(G\)~is finite, \(\ord{K}\)~divides~\(\ord{G}\) and the number of left [right] cosets of~\(K\) in~\(G\) is \(\ord{G}/\ord{K}\).
+\end{cor}
+\begin{app}
+Getting combinatorial information about subgroups and ruling out possibilities.
+\end{app}
+
+\begin{thm}[Isomorphism theorems]
+Let \(G\)~be a group. 
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(\varphi:G\to H\) is a surjective homomorphism and \(K=\ker\varphi\), then \(G/K\iso H\).
+\item[(b)] If \(H,K\subgroupeq G\) and \(H\subgroupeq N_G(K)\), then \(HK/K\iso H/H\sect K\).
+\item[(c)] If \(H,K\normsubgroupeq G\) and \(H\subgroupeq K\), then \((G/H)/(K/H)\iso G/K\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), by the isomorphism \(gK\mapsto\varphi(g)\).
+
+For~(b), by~(a). Define \(\varphi:H\to HK/K\) by \(h\mapsto hK\). Then \(\varphi\)~is surjective and \(\ker\varphi=H\sect K\), so \(H/H\sect K\iso HK/K\).
+
+For~(c), by~(a). Define \(\varphi:G/H\to G/K\) by \(gH\mapsto gK\). Then \(\varphi\)~is surjective and \(\ker\varphi=K/H\), so \((G/H)/(K/H)\iso G/K\).
+\end{proof}
+
+\begin{thm}[Lattice theorem]
+If \(G\)~is a group and \(N\normsubgroupeq G\), there is a bijection between the subgroups~\(H\) of~\(G\) containing~\(N\) and the subgroups \(\res{H}=H/N\) of \(\res{G}=G/N\) which respects subgroup lattice structure. More specifically, for all \(H,K\subgroupeq G\) with \(N\subgroupeq H,K\),
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(H\subgroupeq K\) iff \(\res{H}\subgroupeq\res{K}\).
+\item[(b)] \(H\normsubgroupeq K\) iff \(\res{H}\normsubgroupeq\res{K}\).
+\item[(c)] \(\res{\groupclosure{H,K}}=\groupclosure{\res{H},\res{K}}\).
+\item[(d)] \(\res{H\sect K}=\res{H}\sect\res{K}\).
+\item[(e)] if \(H\subgroupeq K\), \(\idx{H}{K}=\idx{\res{H}}{\res{K}}\).
+\end{enumerate}
+\end{thm}
+\begin{app}
+Relating the structures of \(G\)~and~\(G/N\), often in inductive arguments; showing that the lattice of~\(G/N\) is the part of the lattice of~\(G\) above~\(N\).
+\end{app}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Determining subgroup lattice structure with the tower law (Lagrange).
+\item Proving normality:
+\begin{itemize}[itemsep=0pt]
+\item Directly (conjugation).
+\item Showing left cosets equal right cosets.
+\item Determining normalizers (with help of the tower law, etc).
+\item Exhibiting kernels.
+\item Special cases (for example, subgroups of the center).
+\end{itemize}
+\item Using induction on the order of a group:
+\begin{itemize}[itemsep=0pt]
+\item Involving subgroups.
+\item Involving quotients, often by subgroups of the center (since these are always normal).
+\end{itemize}
+\item Factoring groups into parts using composition series (Jordan-H\"older).
+\item Classifying finite groups using the Jordan-H\"older program:
+\begin{itemize}[itemsep=0pt]
+\item Classifying all finite simple groups.
+\item Finding all ways to assemble simple groups into larger groups.
+\end{itemize}
+\end{itemize}

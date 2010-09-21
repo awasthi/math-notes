@@ -1,0 +1,179 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Style
+%
+\ProvidesPackage{notes}
+
+%---------- Packages ----------%
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{fourier}
+
+%---------- Formatting ----------%
+\bibliographystyle{plain}
+
+%---------- Commands ----------%
+% Sets
+\newcommand{\N}{\mathbb{N}} % naturals
+\newcommand{\Z}{\mathbb{Z}} % integers
+\newcommand{\Q}{\mathbb{Q}} % rationals
+\newcommand{\R}{\mathbb{R}} % reals
+\newcommand{\C}{\mathbb{C}} % complexes
+\newcommand{\F}{\mathbb{F}} % field
+\newcommand{\RI}{\mathcal{R}} % riemann integrable functions
+\newcommand{\CF}{\mathcal{C}} % continuous bounded functions
+\newcommand{\A}{\mathcal{A}} % sets of sets, complex sets (algebras, logical structures, etc)
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\SSS}{\mathcal{S}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\K}{\mathfrak{K}} % class of logical structures
+\newcommand{\I}{\mathcal{I}} % logical interpretation
+\renewcommand{\L}{\mathcal{L}} % language
+\newcommand{\Lf}{\L_{\mathrm{I}}} % first-order logic
+\newcommand{\Ls}{\L_{\mathrm{II}}} % second-order logic
+\newcommand{\Lq}{\L_Q} % logic with uncountable quantification
+\newcommand{\Lo}{\L_{\omega_1\omega}} % logic with infinite disjunctions and conjunctions
+\newcommand{\LLo}{L_{\omega_1\omega}}
+\newcommand{\fs}{\Phi_{\mathrm{fs}}} % finitely satisfiables
+\newcommand{\fv}{\Phi_{\mathrm{fv}}} % finite validities
+\newcommand{\ZFC}{\mathrm{ZFC}} % zermelo fraenkel axioms
+\newcommand{\PRR}{\mathcal{PR}} % primitive recursive functions
+\newcommand{\MUR}{\mathcal{R}_0} % mu recursive functions
+\newcommand{\PAR}{\mathcal{R}} % partial recursive functions
+\renewcommand{\P}{\mathcal{P}} % programs
+\newcommand{\ords}{\mathrm{Ord}} % ordinals
+\newcommand{\HC}{\mathrm{HC}} % hereditarily countable sets
+
+% Relations
+\newcommand{\iso}{\cong} % isomorphic
+\newcommand{\fiso}{\iso_f} % finitely isomorphic
+\newcommand{\piso}{\iso_p} % partially isomorphic
+\newcommand{\subgroup}{<} % proper subgroup
+\newcommand{\subgroupeq}{\le} % subgroup
+\newcommand{\normsubgroup}{\vartriangleleft} % proper normal subgroup
+\newcommand{\normsubgroupeq}{\trianglelefteq} % normal subgroup
+\newcommand{\charsubgroupeq}{\mathrel{\mathrm{char}}} % characteristic subgroup
+\newcommand{\fourier}{\sim} % fourier coefficients
+\newcommand{\lequ}{\equiv} % logically equals
+\newcommand{\limp}{\rightarrow} % logically implies
+\newcommand{\liff}{\leftrightarrow} % logically equivalent
+\newcommand{\proves}{\vdash} % proves
+\newcommand{\ele}{\le_{\mathrm{eff}}} % effectively reducible to (logical systems)
+\newcommand{\esim}{\sim_{\mathrm{eff}}} % effectively equivalent (logical systems)
+\newcommand{\mre}{\mathrel{\le_{\mathrm{m}}}} % many-one reducible or equivalent
+\newcommand{\mr}{\mathrel{<_{\mathrm{m}}}} % many-one reducible
+\newcommand{\me}{\mathrel{\equiv_{\mathrm{m}}}} % many-one equivalent
+\newcommand{\tre}{\mathrel{\le_{\mathrm{T}}}} % Turing reducible or equivalent
+\newcommand{\tr}{\mathrel{<_{\mathrm{T}}}} % Turing reducible
+\newcommand{\te}{\mathrel{\equiv_{\mathrm{T}}}} % Turing equivalent
+\newcommand{\equinum}{\approx} % cardinally equivalent
+
+% Operations
+\newcommand{\union}{\cup} % union
+\newcommand{\sect}{\cap} % intersection
+\newcommand{\bigunion}{\bigcup} % union
+\newcommand{\bigsect}{\bigcap} % intersection
+\newcommand{\dotprod}{\bullet} % dot product
+\newcommand{\directsum}{\oplus} % direct sum
+\newcommand{\biglor}{\textstyle{\bigvee}} % logical or
+\newcommand{\PS}{\mathop{\mathcal{P}}} % powerset
+\renewcommand{\O}{\mathop{\mathcal{O}}\nolimits} % operation
+
+\renewcommand{\Re}{\operatorname{Re}} % real part
+\renewcommand{\Im}{\operatorname{Im}} % imaginary part
+\DeclareMathOperator{\domain}{domain} % domain
+\DeclareMathOperator{\range}{range} % range
+\DeclareMathOperator{\field}{field} % field
+\DeclareMathOperator{\Hom}{Hom} % homomorphisms
+\DeclareMathOperator{\spn}{span} % span
+\DeclareMathOperator{\mat}{M} % matrix
+\DeclareMathOperator{\Mat}{Mat} % matrices
+\DeclareMathOperator{\trace}{tr} % trace
+\DeclareMathOperator{\perm}{perm} % permutations
+\DeclareMathOperator{\sign}{sign} % sign of permutation
+\DeclareMathOperator{\Arg}{Arg} % principal argument
+\DeclareMathOperator{\Log}{Log} % principal logarithm
+\DeclareMathOperator{\Res}{Res} % residue 
+\DeclareMathOperator{\free}{free} % free variables
+\DeclareMathOperator{\mods}{Mod} % models
+\DeclareMathOperator{\pisos}{Part} % partial isomorphisms
+\DeclareMathOperator{\PNF}{PNF} % prenex normal form
+\DeclareMathOperator{\SNF}{SNF} % skolem normal form
+\DeclareMathOperator{\card}{card} % cardinality
+\DeclareMathOperator{\fin}{FIN} % finite subsets
+\DeclareMathOperator{\type}{type} % isomorphism type
+\DeclareMathOperator{\seg}{seg} % initial segment
+
+\newcommand{\abs}[1]{|{#1}|} % absolute value
+\newcommand{\conj}[1]{\overline{#1}} % complex conjugate
+\newcommand{\res}[1]{\overline{#1}} % residue class
+\renewcommand{\vec}[1]{\boldsymbol{#1}} % vector
+\newcommand{\norm}[1]{\left|\!\left|{#1}\right|\!\right|} % norm
+\newcommand{\supnorm}[1]{\left|\!\left|{#1}\right|\!\right|} % supremum norm
+\newcommand{\lsnorm}[1]{\left|\!\left|{#1}\right|\!\right|_2} % least squares norm
+\newcommand{\innerprod}[2]{\langle{#1},{#2}\rangle} % inner product
+\newcommand{\comp}[1]{{#1}^{\perp}} % orthogonal complement
+\newcommand{\dual}[1]{{#1}^*} % dual
+\newcommand{\ddual}[1]{{#1}^{**}} % double dual
+\newcommand{\transpose}[1]{{#1}^{\mathrm{t}}} % transpose
+\newcommand{\ord}[1]{|{#1}|} % order
+\newcommand{\idx}[2]{|{#2}:{#1}|} % index
+\newcommand{\groupclosure}[1]{\langle{#1}\rangle} % group generated by
+\newcommand{\close}[1]{\overline{#1}} % closure
+\newcommand{\doupperint}[2]{\smash{\int\limits^{\underline{\phantom{x}}}}\mathop{\vphantom{\int}}\nolimits_{\!\!\!\!{#1}}^{\!{#2}}}
+\newcommand{\dolowerint}[2]{\smash{\int\limits_{\overline{\phantom{x}}}}\mathop{\vphantom{\int}}\nolimits_{\!\!\!\!{#1}}^{\!{#2}}}
+\newcommand{\upperint}[2]{\mathchoice{\doupperint{#1}{#2}}{\doupperint{\;#1}{#2}}{}{}} % upper integral
+\newcommand{\lowerint}[2]{\mathchoice{\dolowerint{#1}{#2}}{\dolowerint{\;#1}{#2}}{}{}} % lower integral
+\newcommand{\wind}[2]{\mathop{\Delta_{#1}\arg{#2}}} % winding number
+\newcommand{\code}[2]{\mathbf{{#1}}^{{#2}}} % coding of a formula
+\newcommand{\coding}[1]{\widetilde{{#1}}} % coding of a function
+\newcommand{\dg}[1]{\mathbf{{#1}}} % degree
+\newcommand{\pair}[2]{\langle{#1},{#2}\rangle} % ordered pair
+\newcommand{\triple}[3]{\pair{#1}{{#2},{#3}}} % ordered triple
+\newcommand{\fdef}[2]{\langle\,{#1}\mid{#2}\,\rangle} % inline function
+\newcommand{\funcs}[2]{{}^{#1}{#2}} % functions
+
+%---------- Theorems ----------%
+% Types
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem*{example}{Example}
+\newtheorem*{exercise}{Exercise}
+
+\theoremstyle{plain}
+\newtheorem*{axm}{Axiom}
+\newtheorem{lem}{Lemma}
+\newtheorem{prop}{Proposition}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem*{ths}{Thesis}
+
+\theoremstyle{remark}
+\newtheorem*{app}{Applications}
+\newtheorem*{rmk}{Remark}
+\newtheorem*{ccse}{Countable case}
+\newtheorem*{gcse}{General case}
+
+\newcommand{\smn}{\(s\)-\(m\)-\(n\)}
+
+% Numbering
+\numberwithin{defn}{section}
+\numberwithin{lem}{section}
+\numberwithin{prop}{section}
+\numberwithin{thm}{section}
+\numberwithin{cor}{section}
+
+%---------- Environments ----------%
+
+\newenvironment{lecture}[1]{\bigskip}{}

@@ -1,0 +1,72 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Logic
+% Semantics
+%
+\section{Semantics}
+\subsection*{Theorems}
+\begin{thm}[Coincidence]
+Let \(\I_1=(\A_1,\beta_1)\) be an \(S_1\)-interpretation and \(\I_2=(\A_2,\beta_2)\) be an \(S_2\)-interpretation on the same domain. Set \(S=S_1\sect S_2\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(t\in T^S\) and \(\I_1\)~and~\(\I_2\) agree on the symbols and variables occuring in~\(t\), then \(\I_1(t)=\I_2(t)\).
+\item[(b)] If \(\varphi\in L^S\) and \(\I_1\)~and~\(\I_2\) agree on the symbols and free variables occuring in~\(\varphi\), then \(\I_1\models\varphi\) iff \(\I_2\models\varphi\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+Induction on terms and formulas.
+\end{proof}
+\begin{app}
+Justifying the intuition that only the interpretation of the symbols and \emph{free} variables occurring in a formula are relevant in determining its truth, and so in particular that sentences express purely structural properties. Allowing us to define the notions of interpretation, consequence, satisfiability (etc.) without reference to a fixed symbol set.
+\end{app}
+
+\begin{thm}[Isomorphism]
+Let \(\A\)~and~\(\B\) be \(S\)-structures with \(\pi:\A\iso\B\). Then for all \(\varphi\in L_n^S\) and \(a_1,\ldots,a_n\in A\),
+\[\A\models\varphi[a_1,\ldots,a_n]\iff\B\models\varphi[\pi(a_1),\ldots,\pi(a_n)]\]
+\end{thm}
+\begin{proof}[Proof idea]
+Induction on terms and formulas.
+\end{proof}
+\begin{cor}
+If \(\A\iso\B\), then for all sentences~\(\varphi\), \(\A\models\varphi\) iff \(\B\models\varphi\).
+\end{cor}
+\begin{app}
+Justifying the intuition that the same structural statements are true in isomorphic structures.
+\end{app}
+
+\begin{thm}[Substructure]
+Let \(\A\)~and~\(\B\) be \(S\)-structures with \(\A\subseteq\B\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(\varphi\in L_n^S\) is universal, then for all \(a_1,\ldots,a_n\in A\),
+\[\B\models\varphi[a_1,\ldots,a_n]\implies\A\models\varphi[a_1,\ldots,a_n]\]
+\item[(b)] If \(\varphi\in L_n^S\) is existential, then for all \(a_1,\ldots,a_n\in A\),
+\[\A\models\varphi[a_1,\ldots,a_n]\implies\B\models\varphi[a_1,\ldots,a_n]\]
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+Induction on formulas.
+\end{proof}
+\begin{cor}
+Let \(\A\subseteq\B\). Then for all universal sentences~\(\varphi\), if \(\B\models\varphi\) then \(\A\models\varphi\), and for all existential sentences~\(\varphi\), if \(\A\models\varphi\) then \(\B\models\varphi\).
+\end{cor}
+\begin{app}
+Motivating construction of universal axioms.
+\end{app}
+
+\begin{thm}[Substitution]
+Let \(\I\)~be an \(S\)-interpretation, and let \(x_0,\ldots,x_r\) be pairwise distinct variables and \(t_0,\ldots,t_r\in T^S\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(t\in T^S\), then
+\[\I\,\Bigl(t\,\frac{t_0\cdots t_r}{x_0\cdots x_r}\Bigr)=\I\,\frac{\I(t_0)\cdots\I(t_r)}{x_0\cdots x_r}(t)\]
+\item[(b)] If \(\varphi\in L^S\), then
+\[\I\models\varphi\frac{t_0\cdots t_r}{x_0\cdots x_r}\iff\I\frac{\I(t_0)\cdots\I(t_r)}{x_0\cdots x_r}\models\varphi\]
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+Induction on terms and formulas.
+\end{proof}
+\begin{app}
+Establishing the equivalence of syntactic and semantic substitution. Loosely speaking, it shows that you can equivalently substitute new meanings for existing terms, or substitute new terms having those meanings.
+\end{app}

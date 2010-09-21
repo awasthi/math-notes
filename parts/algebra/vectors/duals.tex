@@ -1,0 +1,77 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Algebra
+% Vector Spaces
+% Linear Functionals and Dual Spaces
+%
+\section{Linear Functionals and Dual Spaces}
+\subsection*{Definitions}
+\begin{defn}
+The \emph{dual space} of~\(V\) is the vector space \(\dual{V}=\Hom(V,\F)\) of linear functionals from~\(V\) to~\(\F\).
+\end{defn}
+\begin{defn}
+If \(\beta=(v_1,\ldots,v_n)\) is a basis of~\(V\), the \emph{i-th coordinate function} is \(\pi_i^{\beta}:V\to\F\) mapping \(v\mapsto\alpha_i\), where
+\[v=\alpha_1v_1+\cdots+\alpha_nv_n\]
+\end{defn}
+\begin{defn}
+If \(\beta=(v_1,\ldots,v_n)\) is a basis of~\(V\), then the \emph{dual basis} to~\(\beta\) in~\(V^*\) is \(\dual{\beta}=(\pi_1^{\beta},\ldots,\pi_n^{\beta})\).
+\end{defn}
+\begin{defn}
+If \(T\in\Hom(V,W)\), the \emph{dual} or \emph{transpose} of~\(T\) is \(\dual{T}:\dual{W}\to\dual{V}\) mapping \(g\mapsto gT\).
+\end{defn}
+\begin{defn}
+If \(v\in V\), the \emph{dual} of~\(v\) is \(\dual{v}:\dual{V}\to\F\) mapping \(g\mapsto g(v)\).
+\end{defn}
+\subsection*{Theorems}
+\begin{thm}[Dual isomorphism]
+If \(V\)~is finite-dimensional, then \(V\iso\dual{V}\).
+\end{thm}
+\begin{proof}[Proof idea]
+By dimension, since
+\[\dim\dual{V}=\dim\Hom(V,\F)=(\dim V)(\dim\F)=\dim V\qedhere\]
+\end{proof}
+\begin{rmk}
+Note this isomorphism is not natural since it relies on a choice of basis.
+\end{rmk}
+
+\begin{thm}[Dual basis]
+If \(\beta=(v_1,\ldots,v_n)\) is a basis of~\(V\), then \(\dual{\beta}=(\pi_1^{\beta},\ldots,\pi_n^{\beta})\) is a basis of~\(\dual{V}\). Every \(f\in\dual{V}\) can be written uniquely in the form
+\[f=\sum_{i=1}^nf(v_i)\pi_i^{\beta}\]
+\end{thm}
+\begin{proof}[Proof idea]
+By direct computation.
+\end{proof}
+\begin{app}
+Computing in the dual space.
+\end{app}
+
+\begin{thm}[Dual transformation matrix]
+Let \(V\)~and~\(W\) have bases \(\beta=(v_1,\ldots,v_n)\) and \(\gamma=(w_1,\ldots,w_m)\), respectively. If \(T\in\Hom(V,W)\) with dual~\(\dual{T}\), then
+\[\mat(\dual{T},\dual{\gamma},\dual{\beta})=\transpose{\mat(T,\beta,\gamma)}\]
+\end{thm}
+\begin{proof}[Proof idea]
+By direct computation, if \(\mat(T)=(a_{ij})\),
+\begin{align*}
+\dual{T}(\pi_j^{\gamma})&=\pi_j^{\gamma}T\\
+	&=\sum_{i=1}^n(\pi_j^{\gamma}Tv_i)\pi_i^{\beta}\\
+	&=\sum_{i=1}^n\pi_j^{\gamma}\bigl(\sum_{k=1}^m a_{ki}w_k\bigr)\pi_i^{\beta}\\
+	&=\sum_{i=1}^n\sum_{k=1}^m a_{ki}\pi_j^{\gamma}(w_k)\pi_i^{\beta}\\
+	&=\sum_{i=1}^n a_{ji}\pi_i^{\beta}
+\end{align*}
+So \(\mat(\dual{T})_{ij}=\mat(T)_{ji}\), that is, \(\mat(\dual{T})=\transpose{\mat(T)}\).
+\end{proof}
+\begin{app}
+Computing the dual transformation.
+\end{app}
+
+\begin{thm}[Double dual isomorphism]
+If \(V\)~is finite-dimensional, then the map \(v\mapsto\dual{v}\) witnesses a natural isomorphism \(V\iso\ddual{V}\).
+\end{thm}
+\begin{proof}[Proof idea]
+The map is trivially linear, and injective since its kernel is trivial (note if \(\dual{v}=0\), then for any basis~\(\beta\) of~\(V\), the coefficients of~\(v\) over~\(\beta\) must all be zero). The rest follows by dimension. 
+\end{proof}
+\begin{rmk}
+If \(V\)~is infinite-dimensional, none of \(V\), \(\dual{V}\), and \(\ddual{V}\) need be isomorphic.
+\end{rmk}

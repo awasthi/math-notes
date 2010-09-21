@@ -1,0 +1,205 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Analysis
+% Real Analysis
+% Continuity
+%
+\section{Continuity}
+\subsection*{Definitions}
+\begin{defn}
+Let \(X,Y\) be metric spaces, \(E\subseteq X\), and \(f:E\to Y\). Let \(p\in X\) be a limit point of~\(E\) and \(q\in Y\). If for every \(\epsilon>0\) there exists \(\delta>0\) such that \(d_Y(f(x),q)<\epsilon\) for all \(x\in E\) with \(0<d_X(x,p)<\delta\), then \(q\)~is a \emph{limit} of~\(f\) at~\(p\), denoted \(q=\lim_{x\to p}f(x)\) or \(f(x)\to q\) as \(x\to p\).
+\end{defn}
+
+\begin{defn}
+Let \(X,Y\) be metric spaces, \(E\subseteq X\), and \(f:E\to Y\). Let \(p\in E\). Then \(f\)~is \emph{continuous at~\(p\)} if for every \(\epsilon>0\) there exists \(\delta>0\) such that \(d_Y(f(x),f(p))<\epsilon\) for all \(x\in E\) with \(d_X(x,p)<\delta\).
+
+If \(f\)~is not continuous at~\(p\) (but defined at~\(p\)), \(f\)~is \emph{discontinuous at~\(p\)}.
+
+If \(f\)~is continuous at every point of~\(E\), then \(f\)~is \emph{continuous (on~\(E\))}.
+\end{defn}
+
+\begin{defn}
+Let \(X,Y\) be metric spaces, \(E\subseteq X\), and \(f:E\to Y\). Then \(f\)~is \emph{uniformly continuous (on~\(E\))} if for every \(\epsilon>0\), there exists \(\delta>0\) such that \(d_Y(f(x),f(y))<\epsilon\) for all \(x,y\in E\) with \(d_X(x,y)<\delta\).
+\end{defn}
+
+\begin{defn}
+Let \(Y\)~be a metric space and \(f:(a,b)\to Y\). Let \(p\in(a,b)\) and \(q\in Y\). If for every \(\epsilon>0\) there exists \(\delta>0\) such that \(d_Y(f(x),q)<\epsilon\) for all \(x\in(p-\delta,p)\), then \(q\)~is a \emph{left-hand limit} of~\(f\) at~\(p\), denoted \(q=f(p-)\). Analogously for \emph{right-hand limit}~\(f(p+)\).
+\end{defn}
+
+\subsection*{Theorems}
+\begin{thm}[Characterization of limits by sequences]
+Let \(X,Y\) be metric spaces, \(E\subseteq X\), and \(f:E\to Y\). Let \(p\in X\) be a limit point of~\(E\) and \(q\in Y\). Then
+\begin{align*}
+&\lim_{x\to p}f(x)=q&&\iff&&\lim_{n\to\infty}f(x_n)=q\\
+&&&&&\text{for all sequences }\{x_n\}\text{ in }E\\
+&&&&&\text{with }\lim x_n=p\text{ and }x_n\ne p
+\end{align*}
+\end{thm}
+\begin{proof}[Proof idea]
+Use epsilons.
+\end{proof}
+
+\begin{cor}
+Limits of functions are unique.
+\end{cor}
+\begin{proof}[Proof idea]
+By uniqueness of sequential limits.
+\end{proof}
+\begin{rmk}
+Uniqueness also holds for extended limits of functions on~\(\R\).
+\end{rmk}
+
+\begin{thm}[Limits and field operations in~\(\C\)]
+Let \(X\)~be a metric space, \(E\subseteq X\), \(f:E\to\C\), and \(g:E\to\C\). If \(f\)~and~\(g\) have limits at \(p\in X\), then
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\lim_{x\to p}(f+g)(x)=\lim_{x\to p}f(x)+\lim_{x\to p}g(x)\)
+\item[(b)] \(\lim_{x\to p}(fg)(x)=\lim_{x\to p}f(x)\cdot\lim_{x\to p}g(x)\)
+\item[(c)] \(\lim_{x\to p}(f/g)(x)=\lim_{x\to p}f(x)/\lim_{x\to p}g(x)\) if \(\lim_{x\to p}g(x)\ne0\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+By the above theorem and properties of sequential limits in~\(\C\).
+\end{proof}
+
+\begin{rmk}
+Analogous results hold for extended limits of functions on~\(\R\), wherever the expressions on the right are defined (determinate forms).
+\end{rmk}
+
+\begin{thm}[Limits and operations in~\(\R^k\)]
+Let \(X\)~be a metric space, \(E\subseteq X\), \(\vec{f}:E\to\R^k\), and \(\vec{g}:E\to\R^k\). If \(\vec{f}\)~and~\(\vec{g}\) have limits at \(p\in X\) and \(\alpha\in\R\), then
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\lim_{x\to p}(\alpha\vec{f})(x)=\alpha\lim_{x\to p}\vec{f}(x)\)
+\item[(b)] \(\lim_{x\to p}(\vec{f}+\vec{g})(x)=\lim_{x\to p}\vec{f}(x)+\lim_{x\to p}\vec{g}(x)\)
+\item[(c)] \(\lim_{x\to p}(\vec{f}\dotprod\vec{g})(x)=\lim_{x\to p}\vec{f}(x)\dotprod\lim_{x\to p}\vec{g}(x)\)
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+By the above theorem and properties of sequential limits in~\(\R^k\).
+\end{proof}
+
+\begin{thm}[Characterizations of continuity]
+Let \(X,Y\) be metric spaces, \(E\subseteq X\), and \(f:E\to Y\). Let \(p\in E\) be a limit point of~\(E\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(f\)~is continuous at~\(p\) iff \(\lim_{x\to p}f(x)=f(p)\).
+\item[(b)] \(f\)~is continuous iff \(f^{-1}\)~takes open [closed] sets to open [closed] sets.
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), use epsilons.
+
+For~(b), use epsilons for open sets, then take complements for closed sets.
+\end{proof}
+
+\begin{thm}[Continuity and composition]
+Let \(f:X\to Y\) be continuous and \(g:Y\to Z\) continuous on~\(f(X)\). Then \(g\circ f\)~is continuous.
+\end{thm}
+\begin{proof}[Proof idea]
+Use nested epsilons.
+\end{proof}
+
+\begin{thm}[Continuity and field operations in~\(\C\)]
+Let \(f:X\to\C\) and \(g:X\to\C\) be continuous. Then
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(f+g\)~is continuous.
+\item[(b)] \(fg\)~is continuous.
+\item[(c)] \(f/g\)~is continuous if \(g(x)\ne0\) on~\(X\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+At isolated points there is nothing to prove. At limit points, use the limit characterization of continuity and properties of limits in~\(\C\).
+\end{proof}
+
+\begin{thm}[Continuity in~\(\R^k\)]
+Let \(\vec{f}:X\to\R^k\) and \(\vec{g}:X\to\R^k\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(\vec{f}=(f_1,\ldots,f_k)\), then \(\vec{f}\)~is continuous iff \(f_i\)~is continuous for \(1\le i\le k\).
+\item[(b)] If \(\vec{f}\)~and~\(\vec{g}\) are continuous and \(\alpha\in\R\), then
+\begin{enumerate}[itemsep=0pt]
+\item[(i)] \(\alpha\vec{f}\)~is continuous.
+\item[(ii)] \(\vec{f}+\vec{g}\) is continuous.
+\item[(iii)] \(\vec{f}\dotprod\vec{g}\) is continuous.
+\end{enumerate}
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), at isolated points there is nothing to prove; at limit points, use the limit characterization of continuity together with the characterization of limits (of sequences) in~\(\R^k\).
+
+For~(b), use~(a) and properties of continuity in~\(\R\).
+\end{proof}
+
+\begin{thm}[Continuity preserves compactness]
+Let \(X\)~be compact and \(f:X\to Y\) continuous. Then \(f(X)\)~is compact.
+\end{thm}
+\begin{proof}[Proof idea]
+Since \(f^{-1}\)~takes open sets to open sets, any open covering of~\(f(X)\) can be pulled back to an open covering of~\(X\), yielding a finite subcovering.
+\end{proof}
+
+\begin{cor}[Extreme value theorem in~\(\R\)]
+Let \(X\)~be compact, \(f:X\to\R\) continuous. Set
+\[\alpha=\inf f(X)\qquad\beta=\sup f(X)\]
+Then there exist \(x,y\in X\) with \(f(x)=\alpha\) and \(f(y)=\beta\).
+\end{cor}
+\begin{proof}[Proof idea]
+By Heine-Borel, \(f(X)\)~is closed and bounded, so \(\alpha,\beta\in f(X)\).
+\end{proof}
+\begin{app}
+Mean value theorem, algebraic closure of~\(\C\), etc.
+\end{app}
+
+\begin{thm}[Uniform continuity]
+Let \(X\)~be compact and \(f:X\to Y\) continuous. Then \(f\)~is uniformly continuous.
+\end{thm}
+\begin{proof}[Proof idea]
+Given \(\epsilon>0\), for each point in~\(X\) fix a neighborhood whose extension witnesses continuity of~\(f\) at the point for~\(\epsilon\). By compactness, \(X\)~is covered by finitely many such neighborhoods. Let \(\delta>0\)~be a fraction of the minimum radius. It follows that uniformity holds for~\(\epsilon\) with~\(\delta\).
+\end{proof}
+\begin{app}
+Riemann integrability of continuous functions.
+\end{app}
+
+\begin{thm}[Continuity preserves connectedness]
+Let \(X\)~be connected and \(f:X\to Y\) continuous. Then \(f(E)\)~is connected.
+\end{thm}
+\begin{proof}[Proof idea]
+Since \(f^{-1}\)~takes closed sets to closed sets.
+\end{proof}
+
+\begin{cor}[Intermediate value theorem in~\(\R\)]
+Let \(f:[a,b]\to\R\) be continuous. If \(\min\{f(a),f(b)\}<y<\max\{f(a),f(b)\}\), then there exists \(x\in(a,b)\) with \(f(x)=y\).
+\end{cor}
+\begin{proof}[Proof idea]
+By the characterization of connectedness in~\(\R\).
+\end{proof}
+
+\begin{thm}[Monotonic functions on~\(\R\)]
+If \(f:(a,b)\to\R\) increases monotonically, then for \(x\in(a,b)\),
+\[\sup_{a<t<x} f(t)=f(x-)\le f(x)\le f(x+)=\inf_{x<t<b}f(t)\]
+If \(a<x<y<b\), then \(f(x+)\le f(y-)\).
+
+Analogously if \(f\)~decreases monotonically.
+\end{thm}
+\begin{proof}[Proof idea]
+Use epsilons.
+\end{proof}
+\begin{app}
+Monotonic functions have only jump discontinuities, and at most countably many.
+\end{app}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Reducing function limits to sequence limits.
+\item Proving continuity:
+\begin{itemize}[itemsep=0pt]
+\item Characterizations (limit, open and closed sets).
+\item Closure properties (composites, sums, products, etc.).
+\end{itemize}
+\item Using continuity:
+\begin{itemize}[itemsep=0pt]
+\item Characterizations.
+\item Uniform continuity.
+\item Preservation of compactness.
+\item Preservation of connectedness.
+\end{itemize}
+\item Reducing \(\R^k\)-valued functions to \(\R\)-valued (component) functions.
+\end{itemize}

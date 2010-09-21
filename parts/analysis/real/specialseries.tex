@@ -1,0 +1,337 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Analysis
+% Real Analysis
+% Power Series and Fourier Series
+%
+\section{Power Series and Fourier Series}
+\subsection*{Definitions}
+\begin{defn}
+A function \(f:\C\to\C\) is \emph{analytic} if it has a power series representation, that is, if it can be written in the form \(f(z)=\sum_{n=0}^\infty c_n(z-a)^n\).
+\end{defn}
+\begin{defn}
+The \emph{exponential} function \(\exp:\C\to\C\) is defined by
+\[\exp(z)=\sum_{n=0}^\infty\frac{z^n}{n!}\]
+Also, \(e=\exp(1)\).
+\end{defn}
+\begin{defn}
+The \emph{(natural) logarithm} function \(\log:(0,+\infty)\to\R\) is defined by
+\[\log(\exp(x))=x\quad(x\in\R)\qquad\text{or}\qquad\exp(\log(y))=y\quad(y>0)\]
+\end{defn}
+\begin{defn}
+The \emph{cosine} and \emph{sine} functions \(\cos:\R\to\R\) and \(\sin:\R\to\R\) are defined by
+\[\exp(ix)=\cos(x)+i\sin(x)\quad(x\in\R)\]
+\end{defn}
+\begin{defn}
+A \emph{trigonometric polynomial} is an expression of the form
+\[f(x)=a_0+\sum_{n=1}^N[a_n\cos(nx)+b_n\sin(nx)]\quad(a_i,b_j\in\C,x\in\R)\]
+or
+\[f(x)=\sum_{n=-N}^N c_n\exp(inx)\quad(c_i\in\C,x\in\R)\]
+\end{defn}
+\begin{defn}
+A \emph{trigonometric series} is a function of the form
+\[f(x)=\sum_{-\infty}^\infty c_n\exp(inx)=\lim_{N\to\infty}\sum_{n=-N}^N c_n\exp(inx)\quad(x\in\R)\]
+\end{defn}
+\begin{defn}
+Let \(f:\R\to\C\) have period~\(2\pi\) and \(f\in\RI\) on \([-\pi,\pi]\). The \emph{(trigonometric) Fourier coefficients} of~\(f\) are
+\[c_n=\frac{1}{2\pi}\int_{-\pi}^\pi f(x)\exp(-inx)\,dx\quad(n\in\Z)\]
+The \emph{(trigonometric) Fourier series} of~\(f\) is given by
+\[f(x)\fourier\sum_{-\infty}^\infty c_n\exp(inx)\quad(x\in\R)\]
+and the partial sums are denoted~\(s_{N,f}(x)\).
+\end{defn}
+\begin{defn}
+Let \(f:\R\to\C\) and \(f\in\RI\) on \([-\pi,\pi]\). The \emph{mean-square norm} of~\(f\) on~\([-\pi,\pi]\) is given by
+\[\lsnorm{f}=\sqrt{\frac{1}{2\pi}\int_{-\pi}^\pi\abs{f(x)}^2\,dx}\]
+\end{defn}
+
+\subsection*{Theorems}
+\begin{thm}[Convergence of power series in~\(\C\)]
+Let \(f(z)=\sum c_n z^n\) converge for \(\abs{z}<R\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(f\)~converges absolutely for \(\abs{z}<R\).
+\item[(b)] For any \(0<\epsilon\le R\), \(f\)~converges uniformly on \(\abs{z}\le R-\epsilon\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), recall any power series converges absolutely within its radius of convergence (by the root test), and note \(R\)~is at most the radius of convergence for~\(f\).
+
+For~(b), use the Weierstrass \(M\)-test. For \(\abs{z}\le R-\epsilon\),
+\[\abs{c_nz^n}=\abs{c_n}\abs{z}^n\le\abs{c_n}(R-\epsilon)^n\]
+But \(R-\epsilon<R\), so \(\sum\abs{c_n}(R-\epsilon)^n\) converges by part~(a), and the result follows.
+\end{proof}
+\begin{app}
+Proving properties (continuity, differentiability, integrability, etc.) of power series from properties of the terms.
+\end{app}
+\begin{rmk}
+Uniform convergence does not occur in general on \(\abs{z}<R\).
+\end{rmk}
+
+\begin{thm}[Differentiability of power series in~\(\C\)]
+Let \(f(z)=\sum c_n z^n\) converge for \(\abs{z}<R\). Then \(f\)~is differentiable term by term, that is,
+\[\Bigl(\sum_{n=0}^\infty c_n z^n\Bigr)'=\sum_{n=1}^\infty n c_n z^{n-1}\qquad(\abs{z}<R)\]
+\end{thm}
+\begin{proof}[Proof idea]
+By uniform convergence of power series and the theorem on uniform convergence and differentiation.
+\end{proof}
+\begin{cor}
+\(f\)~is infinitely differentiable term by term, that is,
+\[\Bigl(\sum_{n=0}^\infty c_n z^n\Bigr)^{(k)}=\sum_{n=k}^\infty n(n-1)\cdots(n-k+1) c_n z^{n-k}\qquad(\abs{z}<R)\]
+and \(c_k=f^{(k)}(0)/k!\) for all~\(k\).
+\end{cor}
+\begin{proof}[Proof idea]
+By induction using the theorem.
+\end{proof}
+\begin{cor}[Continuity of power series in~\(\C\)]
+\(f\)~is continuous on \(\abs{z}<R\).
+\end{cor}
+\begin{cor}[Uniqueness of power series representations in~\(\C\)]
+\(f\)~has a unique power series representation on \(\abs{z}<R\).
+\end{cor}
+\begin{rmk}
+Since \(c_k=f^{(k)}/k!\), information can be transferred between derivatives of \(f\)~and coefficients of its power series representation.
+\end{rmk}
+
+\begin{thm}[Integrability of power series in~\(\C\)]
+Let \(f(z)=\sum c_n z^n\) converge for \(\abs{z}<R\). Then for any \(0<\epsilon<R\), \(f\in\RI\) on \([-R+\epsilon,R-\epsilon]\), and
+\[\int_{-R+\epsilon}^{R-\epsilon}\sum c_n x^n\,dx=\Bigl[\sum\frac{c_n x^{n+1}}{n+1}\Bigr]_{-R+\epsilon}^{R-\epsilon}\]
+\end{thm}
+\begin{proof}[Proof idea]
+By the fundamental theorem of calculus.
+\end{proof}
+
+\begin{thm}[Taylor]
+Let \(f(x)=\sum c_n x^n\) converge on \((-R,R)\). If \(a\in(-R,R)\), then
+\[f(x)=\sum\frac{f^{(n)}(a)}{n!}(x-a)^n\qquad(\abs{x-a}<R-\abs{a})\]
+\end{thm}
+\begin{proof}[Proof idea]
+Massage the power series expansion for~\(f\), apply the binomial theorem, then change the order of a double summation.
+
+In detail, prove
+\begin{align*}
+f(x)&=\sum_{n=0}^\infty c_n [a+(x-a)]^n\\
+	&=\sum_{n=0}^\infty c_n \sum_{k=0}^n\binom{n}{k}a^{n-k}(x-a)^k\\
+	&=\sum_{k=0}^\infty\Bigl[\sum_{n=k}^\infty\binom{n}{k}c_n a^{n-k}\Bigr](x-a)^k\\
+	&=\sum\frac{f^{(k)}(a)}{k!}(x-a)^k
+\end{align*}
+To justify the change in order of summation, use a lemma:
+\begin{lem}
+If \(\{a_{ij}\}\)~is a double sequence in~\(\C\) such that for all~\(i\), \(\sum_{j=0}^\infty\abs{a_{ij}}=b_i\), and \(\sum_{i=0}^\infty b_i\)~converges, then
+\[\sum_{i=0}^\infty\sum_{j=0}^\infty a_{ij}=\sum_{j=0}^\infty\sum_{i=0}^\infty a_{ij}\]
+\end{lem}
+\begin{proof}[Proof idea]
+By clever use of continuity.
+
+Let the~\(a_{ij}\) form a grid. For summing over rows, use a metric space \(x_0,x_1,\ldots,x_{\infty}\) with \(x_n\to x_{\infty}\) as \(n\to\infty\), and for each~\(i\) define a row sum function~\(f_i\) with
+\[f_i(x_n)=\sum_{j=0}^n a_{ij}\qquad\text{and}\qquad f_i(x_{\infty})=\sum_{j=0}^\infty a_{ij}\]
+Then \(f_i\)~is continuous at~\(x_{\infty}\). Now define a column sum function \(g(x)=\sum_{i=0}^\infty f_i(x)\). By the assumptions, \(f_i\to g\) uniformly, so \(g\)~is continuous at~\(x_{\infty}\) and we can use this to interchange the order of row and column summation:
+\begin{equation*}
+\sum_{i=0}^\infty\sum_{j=0}^\infty a_{ij}
+	=g(x_{\infty})
+	=\lim_{x_n\to x_{\infty}}g(x_n)
+	=\lim_{n\to\infty}\sum_{i=0}^\infty \sum_{j=0}^n a_{ij}
+	=\lim_{n\to\infty}\sum_{j=0}^n\sum_{i=0}^\infty a_{ij}
+	=\sum_{j=0}^\infty\sum_{i=0}^\infty a_{ij}\qedhere
+\end{equation*}
+\end{proof}
+\noindent The conditions of the lemma hold when \(\abs{x-a}<R-\abs{a}\).
+\end{proof}
+\begin{app}
+Approximating analytic functions at arbitrary points within their radii of convergence, obtaining better approximations near those points.
+\end{app}
+
+\begin{thm}[Properties of the exponential in~\(\C\)]
+\ 
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\exp(z)\)~is defined on~\(\C\).
+\item[(b)] \(\exp(z+w)=\exp(z)\exp(w)\) for all \(z,w\in\C\).
+\item[(c)] \(\exp(z)\ne0\) for all \(z\in\C\), and \(\exp(x)>0\) for all \(x\in\R\).
+\item[(d)] \(\exp(x)\)~is strictly increasing on~\(\R\).
+\item[(e)] \(\exp(x)\to+\infty\) as \(x\to+\infty\), and \(\exp(x)\to0\) as \(x\to-\infty\).
+\item[(f)] \(x^n\exp(-x)\to0\) as \(x\to+\infty\).
+\item[(g)] \(\exp'(z)=\exp(z)\) for all \(z\in\C\).
+\item[(h)] \(\exp(x)=e^x\) for all \(x\in\R\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+By looking at the power series expansion \(\exp(z)=\sum_{n=0}^\infty\frac{z^n}{n!}\).
+
+For~(a), by the ratio test.
+
+For~(b), by absolute convergence and the binomial theorem,
+\begin{align*}
+\exp(z)\exp(w)&=\sum\frac{z^n}{n!}\sum\frac{w^n}{n!}\\
+	&=\sum\sum_{k=0}^n\frac{z^{n-k}w^k}{(n-k)!k!}\\
+	&=\sum\frac{1}{n!}\sum_{k=0}^n\binom{n}{k}z^{n-k}w^k\\
+	&=\sum\frac{(z+w)^n}{n!}=\exp(z+w)
+\end{align*}
+Note in particular \(\exp(z)\exp(-z)=\exp(0)=1\) for all \(z\in\C\), which together with the expansion shows (c)--(e).
+
+For~(f), \(\exp(x)>x^{n+1}/(n+1)!\) for \(x>0\), so
+\[x^n\exp(-x)=\frac{x^n}{\exp(x)}<\frac{(n+1)!}{x}\to0\text{ as }x\to+\infty\]
+
+For~(g), note
+\[\lim_{h\to0}\frac{\exp(z+h)-\exp(z)}{h}=\exp(z)\lim_{h\to0}\frac{[\exp(h)-1]}{h}=\exp(z)\]
+
+For~(h), use~(b) and induction to establish the result for integers, then take roots to establish it for rationals, then take limits and appeal to continuity of~\(\exp(x)\) to establish it for reals.
+\end{proof}
+
+\begin{thm}[Properties of the logarithm in~\(\R\)]
+\ 
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\log(x)\) is defined on \((0,+\infty)\).
+\item[(b)] \(\log(xy)=\log(x)+\log(y)\) for all \(x,y>0\).
+\item[(c)] \(\log(x)\)~is strictly increasing on \((0,+\infty)\).
+\item[(d)] \(\log(x)\to+\infty\) as \(x\to+\infty\), and \(\log(x)\to-\infty\) as \(x\to0\).
+\item[(e)] \(x^{-n}\log(x)\to0\) as \(x\to+\infty\) for all \(n>0\).
+\item[(f)] \(\log'(x)=1/x\) for all \(x>0\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+By definition of~\(\log(x)\) and properties of~\(\exp(x)\).
+\end{proof}
+\begin{cor}
+\(\displaystyle\log(x)=\int_1^x\frac{1}{t}\,dt\)
+\end{cor}
+\begin{cor}[Exponentiation in~\(\R\)]
+For \(x,y\in\R\) with \(x>0\),
+\[x^y=\exp(y\log(x))\]
+\end{cor}
+\begin{cor}[Derivatives of powers in~\(\R\)]
+For \(x,y\in\R\) with \(x>0\),
+\[(x^y)'=yx^{y-1}\]
+\end{cor}
+
+\begin{thm}[Properties of trigonometric functions in~\(\C\)]
+\ 
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\cos^2(x)+\sin^2(x)=1\) for all \(x\in\R\).
+\item[(b)] \(\cos'(x)=-\sin(x)\) and \(\sin'(x)=\cos(x)\) for all \(x\in\R\).
+\item[(c)] There exists unique \(\pi>0\) such that \(\pi/2\)~is least \(x>0\) with \(\cos(x)=0\); also, \(\cos(x)\)~and~\(\sin(x)\) have period~\(2\pi\) and \(\exp(z)\)~has period~\(2\pi i\).
+\item[(d)] If \(z\in\C\) and \(\abs{z}=1\), there exists a unique \(x\in[0,2\pi)\) such that \(z=\exp(ix)\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+By definition of \(\cos(x)\)~and~\(\sin(x)\) and properties of~\(\exp(z)\).
+
+For~(a), by definitions
+\[\cos^2(x)+\sin^2(x)=\abs{\exp(ix)}^2=\exp(ix)\conj{\exp(ix)}=\exp(ix)\exp(-ix)=1\]
+
+For~(b), by the derivative of~\(\exp(z)\).
+
+For~(c), note \(\cos(0)=1\), and by looking at terms of the series there exist \(x>0\) with \(\cos(x)<0\), hence by continuity of~\(\cos(x)\) and the intermediate value theorem there is a least \(x_0>0\) with \(\cos(x_0)=0\). Set \(\pi=2x_0\). By (a)~and~(b), \(\sin(\pi/2)=1\), hence \(\exp(2\pi i)=1\), and the periodicity properties follow.
+
+For~(d), write \(z=x+iy\), then consider the possible quadrants of the complex plane in which \(x\)~and~\(y\) may lie and appeal to the intermediate value theorem on \(\cos(x)\)~or~\(\sin(x)\).
+\end{proof}
+\begin{cor}[Polar form in~\(\C\)]
+If \(z\in\C\) and \(z\ne0\), there exist unique \(r\ge0\) and \(\theta\in[0,2\pi)\) such that \(z=r\exp(i\theta)\).
+\end{cor}
+\begin{app}
+Simplifying complex multiplication, showing that it can be interpreted geometrically as scaling and rotation in the complex plane (note if \(z=re^{i\alpha}\) and \(w=se^{i\beta}\), \(zw=rse^{i(\alpha+\beta)}\)).
+\end{app}
+\begin{rmk}
+The function~\(\exp(ix)\) parametrizes the unit circle in the complex plane over \([0,2\pi)\). The functions \(\cos(x)\)~and~\(\sin(x)\), and the number~\(\pi\), can be shown to have their usual geometric properties.
+\end{rmk}
+
+\begin{thm}[Algebraic closure of~\(\C\)]
+Let \(P(z)\)~be a nonconstant polynomial over~\(\C\). Then \(P(z)\)~has a root in~\(\C\).
+\end{thm}
+\begin{proof}[Proof idea]
+By contradiction, using polar form to `control' multiplication in~\(\C\) and exhibit a problem if there is no root.
+
+If \(P(z)\)~has no root, let \(\mu=\inf_{z\in\C}\abs{P(z)}\). Show that \(P(z)\)~takes on magnitude~\(\mu\) at some point~\(z_0\) by finding a closed disc outside of which \(\abs{P(z)}\)~is large, then appealing to the extreme value theorem inside.
+
+Simplify things a bit by writing \(Q(z)=P(z+z_0)/P(z_0)\), so \(Q\)~is a nonconstant polynomial, \(Q(0)=1\), and \(\abs{Q(z)}\ge1\) for all \(z\in\C\). Now using an upper bound for~\(Q(z)\) in terms of~\(z\), construct \(z=re^{i\theta}\) such that \(\abs{Q(z)}<1\)---a contradiction.
+\end{proof}
+\begin{app}
+Factoring polynomials in~\(\C\) into linear factors, etc.
+\end{app}
+
+\begin{thm}[Properties of trigonometric polynomials]
+Let \(f(x)=\sum_{-N}^N c_n e^{inx}\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(f\)~has period~\(2\pi\).
+\item[(b)] \(c_m=\frac{1}{2\pi}\int_{-\pi}^\pi f(x)e^{-imx}\,dx\) for all \(m\in\Z\).
+\item[(c)] \(f\)~has a unique trigonometric polynomial representation.
+\item[(d)] \(f\)~is \(\R\)-valued iff \(\conj{c_n}=c_{-n}\) for \(0\le n\le N\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), by periodicity of the complex exponential function.
+
+For~(b), by the fundamental theorem of calculus and periodicity of the complex exponential function,
+\[\frac{1}{2\pi}\int_{-\pi}^\pi e^{inx}=\begin{cases}
+1&\text{if }n=0\\
+0&\text{if }n\ne0
+\end{cases}\quad(n\in\Z)\]
+The rest follows.
+
+Note (c) follows from~(b), and (d)~follows from (b)~and~(c).
+\end{proof}
+
+\begin{thm}[Trigonometric polynomial approximation]
+Let \(f:\R\to\C\) be continuous with period~\(2\pi\). Then there exists a sequence~\(\{P_n\}\) of trigonometric polynomials such that \(P_n\to f\) uniformly.
+\end{thm}
+\begin{proof}[Proof idea]
+By Stone's Theorem.
+
+Regard \(f\)~and the trigonometric polynomials as functions on the unit circle in the complex plane. The trigonometric polynomials form a self-adjoint algebra which separates points and vanishes nowhere.
+\end{proof}
+
+\begin{thm}[Least-squares property of Fourier sums]
+Let \(f:\R\to\C\) have period~\(2\pi\) and \(f\in\RI\) on \([-\pi,\pi]\). If
+\[t_N(x)=\sum_{-N}^N a_n e^{inx}\quad(a_i\in\C,x\in\R)\]
+then
+\[\lsnorm{f-s_{N,f}}\le\lsnorm{f-t_N}\]
+and equality holds iff \(a_n=c_n\) for \(-N\le n\le N\).
+\end{thm}
+\begin{proof}[Proof idea]
+Expand and massage.
+\begin{align*}
+\int\abs{f-t_N}^2&=\int\abs{f}^2-\int f\conj{t_N}-\int\conj{f}t_N+\int\abs{t_N}^2\\
+	&=\int\abs{f}^2-2\pi\Bigl(\sum c_n\conj{a_n}+\sum\conj{c_n}a_n-\sum a_n\conj{a_n}\Bigr)\\
+	&=\int\abs{f}^2+2\pi\Bigl(\sum\abs{c_n-a_n}^2-\sum\abs{c_n}^2\Bigr)
+\end{align*}
+The expression on the right is minimized iff \(a_n=c_n\).
+\end{proof}
+\begin{app}
+Showing that among trigonometric polynomials, the partial sums of the Fourier series for~\(f\) provide the best mean-square approximation to~\(f\).
+\end{app}
+\begin{cor}[Bessel inequality]
+\[\frac{1}{2\pi}\int_{-\pi}^\pi\abs{s_{N,f}(x)}^2\,dx\le\sum_{-\infty}^\infty\abs{c_n}^2\le\frac{1}{2\pi}\int_{-\pi}^\pi\abs{f(x)}^2\,dx\]
+In particular, \(c_n\to0\) as \(n\to\infty\).
+\end{cor}
+\begin{proof}[Proof idea]
+Take \(a_n=c_n\) in the last equality of the proof.
+\end{proof}
+\begin{app}
+Showing that the mean-square magnitudes of the partial sums of the Fourier series for~\(f\) are bounded above by the mean-square magnitude of~\(f\).
+\end{app}
+
+\begin{thm}[Mean-square convergence of Fourier sums]
+Let \(f:\R\to\C\) have period~\(2\pi\) and \(f\in\RI\) on \([-\pi,\pi]\). Then
+\[\lim_{N\to\infty}\lsnorm{f-s_{N,f}}=0\]
+\end{thm}
+\begin{proof}[Proof idea]
+By trigonometric polynomial approximation.
+
+In detail, given \(\epsilon>0\), construct continuous periodic~\(g\) with \(\lsnorm{f-g}<\epsilon/3\), and choose a trigonometric polynomial~\(P\) of degree~\(N_0\) with \(\lsnorm{g-P}<\epsilon/3\). Then by the least-squares property of Fourier sums for~\(g\),
+\[\lsnorm{g-s_{N,g}}<\epsilon/3\quad(N\ge N_0)\]
+By the Bessel inequality,
+\[\lsnorm{s_{N,f}-s_{N,g}}=\lsnorm{s_{N,f-g}}\le\lsnorm{f-g}<\epsilon/3\]
+Therefore by the triangle inequality,
+\[\lsnorm{f-s_{N,f}}\le\lsnorm{f-g}+\lsnorm{g-s_{N,g}}+\lsnorm{s_{N,g}-s_{N,f}}\le\epsilon\quad(N\ge N_0)\]
+The result follows as \(\epsilon\to0\).
+\end{proof}
+
+\begin{rmk}
+Pointwise [uniform, etc.] convergence for Fourier series is more delicate than for power series, and we do not cover this. It is worth noting informally that convergence of a Fourier series at a point follows from `localized' properties of the function at the point (e.g. differentiability), unlike with power series.
+\end{rmk}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Getting information about analytic functions from power series expansions and conversely, including transferring information between coefficients and derivative values to relate local and global behavior.
+\item Approximating analytic functions using Taylor series expansions.
+\item Approximating continuous periodic functions using Fourier series expansions.
+\end{itemize}

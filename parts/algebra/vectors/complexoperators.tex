@@ -1,0 +1,185 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Algebra
+% Vector Spaces
+% Operators on Complex Vector Spaces
+%
+\section{Operators on Complex Vector Spaces}
+\subsection*{Definitions}
+\begin{defn}
+If \(T\in\Hom(V)\), \(\lambda\in\F\), and \(v\in V\), then \(v\)~is a \emph{generalized eigenvector} of~\(T\) corresponding to~\(\lambda\) if \((T-\lambda I)^kv=0\) for some \(k\ge0\).
+
+The space of all generalized eigenvectors of~\(T\) corresponding to~\(\lambda\) is called the \emph{generalized eigenspace} of~\(T\) corresponding to~\(\lambda\).
+\end{defn}
+
+\begin{defn}
+The \emph{multiplicity} of an eigenvalue is the dimension of its corresponding generalized eigenspace.
+\end{defn}
+
+\begin{defn}
+An operator \(T\in\Hom(V)\) is \emph{nilpotent} if \(T^k=0\) for some \(k\ge0\).
+\end{defn}
+
+\begin{defn}
+If \(V\)~is complex, \(T\in\Hom(V)\), and \(\lambda_1,\ldots,\lambda_m\in\F\) are the distinct eigenvalues of~\(T\) with multiplicities \(d_1,\ldots,d_m\), the \emph{characteristic polynomial} of~\(T\) is
+\[p(z)=(z-\lambda_1)^{d_1}\cdots(z-\lambda_m)^{d_m}\]
+\end{defn}
+
+\begin{defn}
+If \(T\in\Hom(V)\), the \emph{minimal polynomial} of~\(T\) is the monic polynomial of smallest degree such that \(p(T)=0\).
+\end{defn}
+
+\subsection*{Theorems}
+\begin{thm}[Generalized eigenspace]
+If \(V\)~is finite-dimensional, \(T\in\Hom(V)\), and \(\lambda\in\F\), the generalized eigenspace of~\(T\) corresponding to~\(\lambda\) is~\(\ker(T-\lambda I)^{\dim V}\).
+\end{thm}
+\begin{proof}[Proof idea]
+For arbitrary \(S\in\Hom(V)\), argue that
+\[\ker S\subseteq\ker S^2\subseteq\cdots\subseteq\ker S^{\dim V}=\ker S^{\dim V+1}=\cdots\]
+Then take \(S=T-\lambda I\).
+\end{proof}
+
+\begin{thm}[Eigenvalue multiplicity]
+If \(V\)~is finite-dimensional, \(T\in\Hom(V)\), and \(\lambda\in\F\), the number of times \(\lambda\)~appears along the diagonal of any upper-triangular matrix for~\(T\) is \(\dim\ker(T-\lambda I)^{\dim V}\).
+\end{thm}
+\begin{proof}[Proof idea]
+By a tedious induction on~\(\dim V\).
+\end{proof}
+\begin{app}
+Multiplicity.
+\end{app}
+
+\begin{cor}[Eigenvalue multiplicity over~\(\C\)]
+If \(V\)~is complex,
+\[\dim V=\sum\text{multiplicities of eigenvalues of~\(T\)}\]
+\end{cor}
+\begin{proof}[Proof idea]
+By choosing an upper-triangular matrix for~\(T\) and summing eigenvalue multiplicities along the diagonal.
+\end{proof}
+\begin{app}
+Generalized eigenspace decomposition.
+\end{app}
+
+\begin{thm}[Generalized eigenspace decomposition over~\(\C\)]
+If \(V\)~is finite-dimensional and complex, \(T\in\Hom(V)\), and \(\lambda_1,\ldots,\lambda_m\in\C\) are the distinct eigenvalues of~\(T\) with corresponding generalized eigenspaces \(U_1,\ldots,U_m\), then
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(V=U_1\directsum\cdots\directsum U_m\).
+\item[(b)] \(U_i\)~is invariant under~\(T\) for \(i\in\{1,\ldots,m\}\).
+\item[(c)] \((T-\lambda_i I)|_{U_i}\)~is nilpotent on~\(U_i\) for \(i\in\{1,\ldots,n\}\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), by multiplicity,
+\begin{align*}
+\dim V&=\dim U_1+\cdots+\dim U_m\\
+	&=\dim(U_1+\cdots+U_m)
+\end{align*}
+where the second equality holds since \(U_1+\cdots+U_m\) is invariant under~\(T\) and contains all the eigenvalues of~\(T\).
+
+For~(b), by direct argument.
+
+For~(c), by definitions.
+\end{proof}
+\begin{app}
+Simplifying matrices, analyzing operators.
+\end{app}
+\begin{rmk}
+The generalized eigenspace decomposition shows that any operator on a complex vector space is composed of parts which are just nilpotent operators plus scalar multiples of the identity.
+\end{rmk}
+
+\begin{thm}[Block diagonal matrices over~\(\C\)]
+If \(V\)~is finite-dimensional and complex, \(T\in\Hom(V)\), and \(\lambda_1,\ldots,\lambda_m\in\C\) are the distinct eigenvalues of~\(T\), then there is a basis of~\(V\) with respect to which \(\mat(T)\)~is block diagonal of the form
+\[\mat(T)=\left[\begin{matrix}
+A_1&&0\\
+&\ddots&\\
+0&&A_m
+\end{matrix}\right]\]
+where each block~\(A_i\) is upper-triangular of the form
+\[A_i=\left[\begin{matrix}
+\lambda_i&&*\\
+&\ddots&\\
+0&&\lambda_i
+\end{matrix}\right]\]
+\end{thm}
+\begin{proof}[Proof idea]
+By the generalized eigenspace decomposition and analysis of nilpotent operators.
+
+Write \(V=U_1\directsum\cdots\directsum U_m\) where \(U_i\)~is the generalized eigenspace corresponding to~\(\lambda_i\). Then \(T-\lambda_i I\)~is nilpotent on~\(U_i\), so by constructing an appropriate basis for~\(U_i\) (starting with a basis of \(\ker(T-\lambda_i I)\), extending it to a basis of \(\ker(T-\lambda_i I)^2\), etc),
+\[\mat((T-\lambda_i I)|_{U_i})=\left[\begin{matrix}
+0&&*\\
+&\ddots&\\
+0&&0
+\end{matrix}\right]\]
+Combine these bases to form a basis of~\(V\) which gives~\(\mat(T)\) the desired form.
+\end{proof}
+
+\begin{thm}[Jordan form over~\(\C\)]
+If \(V\)~is finite-dimensional and complex, \(T\in\Hom(V)\), and \(\lambda_1,\ldots,\lambda_m\in\C\) are the distinct eigenvalues of~\(T\), then there is a basis of~\(V\) with respect to which \(\mat(T)\)~is block diagonal of the form
+\[\mat(T)=\left[\begin{matrix}
+A_1&&0\\
+&\ddots&\\
+0&&A_m
+\end{matrix}\right]\]
+where each block~\(A_i\) is an upper-triangular Jordan block of the form
+\[A_i=\left[\begin{matrix}
+\lambda_i&1&&0\\
+&\ddots&\ddots&\\
+&&\ddots&1\\
+0&&&\lambda_i
+\end{matrix}\right]\]
+\end{thm}
+\begin{proof}[Proof idea]
+By the generalized eigenspace decomposition and analysis of nilpotent operators, as before, but this time choosing bases of the generalized eigenspaces more carefully.
+
+By a tedious induction on~\(\dim V\), it can be shown that any nilpotent operator \(N\in\Hom(V)\) has a matrix of the form
+\[\mat(N)=\left[\begin{matrix}
+0&1&&0\\
+&\ddots&\ddots&\\
+&&\ddots&1\\
+0&&&0
+\end{matrix}\right]\]
+with respect to a certain basis of~\(V\). Apply this result to the generalized eigenspace decomposition and piece things together as before.
+\end{proof}
+
+\begin{rmk}
+All of the canonical matrix forms we have constructed for operators on complex vector spaces are upper triangular, but with increasing amounts of zeros.
+\end{rmk}
+
+\begin{thm}[Cayley-Hamilton]
+If \(V\)~is finite-dimensional and complex, \(T\in\Hom(V)\), and \(p\)~is the characteristic polynomial of~\(T\), then \(p(T)=0\).
+\end{thm}
+\begin{proof}[Proof idea]
+Choose a basis \((v_1,\ldots,v_n)\) with respect to which \(\mat(T)\)~is upper-triangular with diagonal entries \(\lambda_1,\ldots,\lambda_n\). By multiplicity, \(p(z)=(z-\lambda_1)\cdots(z-\lambda_n)\), so
+\[p(T)=(T-\lambda_1 I)\cdots(T-\lambda_n I)\]
+Now argue by induction on~\(i\) that \((T-\lambda_1 I)\cdots(T-\lambda_i I)v_i=0\) for \(i\in\{1,\ldots,n\}\) using the form of~\(\mat(T)\), so \(p(T)=0\).
+\end{proof}
+
+\begin{thm}[Minimal polynomial]
+Let \(V\)~be finite-dimensional and \(T\in\Hom(V)\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(p\)~is a polynomial over~\(\F\), \(p(T)=0\) iff the minimal polynomial of~\(T\) divides~\(p\).
+\item[(b)] The roots of the minimal polynomial of~\(T\) are precisely the eigenvalues of~\(T\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), by polynomial division with remainder.
+
+For~(b), by direct argument.
+\end{proof}
+\begin{app}
+Computing eigenvalues.
+\end{app}
+\begin{cor}
+If \(V\)~is complex, the degree of the minimal polynomial of~\(T\) is at most~\(\dim V\).\footnote{This result also holds for real vector spaces, by the real Cayley-Hamilton theorem.}
+\end{cor}
+\begin{proof}[Proof idea]
+By Cayley-Hamilton.
+\end{proof}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Simplifying matrices of operators for ease of analysis and computation using the generalized eigenspace decomposition and derived canonical forms.
+\item Computing eigenvalues by computing and factoring minimal polynomials.
+\end{itemize}

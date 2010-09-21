@@ -1,0 +1,62 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Logic
+% Completeness
+%
+\section{Completeness}
+\subsection*{Theorems}
+\begin{thm}[Henkin]
+Let \(\Phi\)~be a consistent set of formulas that is negation complete and contains witnesses. Then \(\Phi\)~is satisfiable.
+\end{thm}
+\begin{proof}[Proof idea]
+Construct the term interpretation~\(\I^{\Phi}\) based on provable consequences of~\(\Phi\), then show by induction on formulas that \(\I^{\Phi}\models\varphi\) iff \(\Phi\proves\varphi\).
+\end{proof}
+\begin{app}
+Completeness.
+\end{app}
+
+\begin{thm}[Completeness]
+If \(\Phi\)~is consistent, then \(\Phi\)~is satisfiable.
+\end{thm}
+\begin{proof}[Proof idea]
+Construct a consistent extension of~\(\Phi\) which is negation complete and contains witnesses, then appeal to Henkin's theorem.
+
+\begin{ccse}
+Suppose \(S\)~is at most countable. If \(\free(\Phi)\)~is finite, adjoin witness formulas to~\(\Phi\) for the countably many formulas in~\(L^S\) beginning with an existential quantifier, using a `new' variable symbol for the witness term at each step. Argue by induction that the extension is consistent. Then recursively extend the extension to obtain a maximally consistent set of formulas, which is negation complete.
+
+If \(\free(\Phi)\)~is infinite, replace free variables in~\(\Phi\) with constants to obtain a set~\(\Phi^*\) of sentences corresponding to~\(\Phi\). By a simple substitution argument, for all \(\Psi\subseteq\Phi\), \(\Psi\)~is satisfiable iff its corresponding subset \(\Psi^*\subseteq\Phi^*\) is satisfiable. Now by looking at corresponding finite subsets and using the above, \(\Phi^*\)~is consistent because \(\Phi\)~is consistent. Therefore \(\Phi^*\)~is satisfiable by the above, and hence \(\Phi\)~is satisfiable.
+\end{ccse}
+\begin{gcse}
+Suppose \(S\)~is arbitrary. Adjoin witness formulas to~\(\Phi\) recursively, at each step introducing new witness constants and constructing witness formulas for the previous step. Take the union. Again, argue by induction that the extension is consistent (this makes use of the countable case above), and then recursively extend to obtain a maximally consistent set of formulas.
+\end{gcse}
+\end{proof}
+\begin{app}
+Adequacy of proof calculus. Compactness. Lowenheim-Skolem.
+\end{app}
+
+\begin{cor}[Completeness]
+If \(\Phi\models\varphi\), then \(\Phi\proves\varphi\).
+\end{cor}
+\begin{proof}[Proof idea]
+If \(\Phi\models\varphi\), then \(\Phi\union\{\lnot\varphi\}\) is not satisfiable and hence not consistent by the theorem, so \(\Phi\proves\varphi\).
+\end{proof}
+\begin{rmk}
+Note the corollary is actually equivalent to the theorem. Indeed, suppose \(\Phi\models\varphi\) implies \(\Phi\proves\varphi\). If \(\Phi\)~is not satisfiable, \(\Phi\models\psi\) is vacuously true for all~\(\psi\), so for (say) \(\varphi=v_0\equiv v_0\), \(\Phi\models\varphi\) and \(\Phi\models\lnot\varphi\). But then \(\Phi\proves\varphi\) and \(\Phi\proves\lnot\varphi\), so \(\Phi\)~is inconsistent.
+\end{rmk}
+
+\begin{thm}[Adequacy]
+\ 
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\Phi\models\varphi\) iff \(\Phi\proves\varphi\).
+\item[(b)] \(\Phi\)~is consistent iff \(\Phi\)~is satisfiable.
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+Correctness and completeness.
+\end{proof}
+\begin{rmk}
+By previous remarks, (a)~and~(b) are actually equivalent.
+\end{rmk}

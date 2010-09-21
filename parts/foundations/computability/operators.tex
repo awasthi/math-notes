@@ -1,0 +1,78 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Computability
+% Effective Operations on Partial Functions
+%
+\section{Effective Operations on Partial Functions}
+\subsection*{Theorems}
+\begin{thm}
+Let \(\Phi:\FF_m\to\FF_n\) be an operator. Then \(\Phi\)~is recursive iff
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\Phi\)~is continuous (and hence monotone), that is, for all \(f\in\FF_m\) and \(\vec{x},y\),
+\[\Phi(f)(\vec{x})\simeq y\iff\text{there exists a finite }\theta\subseteq f\text{ with }\Phi(\theta)(\vec{x})\simeq y\]
+\item[(b)] the function \(\phi(z,\vec{x})\) given by
+\[\phi(z,\vec{x})\simeq\begin{cases}
+\Phi(\theta)(\vec{x})&\text{if }z=\coding{\theta}\text{ for finite }\theta\in\FF_m\\
+\text{undefined}&\text{otherwise}
+\end{cases}\]
+is computable.
+\end{enumerate}
+\end{thm}
+\begin{app}
+Easily prove operators to be recursive.
+\end{app}
+
+\begin{thm}[Myhill-Sheperdson I]
+Let \(\Psi:\FF_m\to\FF_n\) be a recursive operator. Then there exists a total computable function~\(h\) such that for all~\(e\),
+\[\Psi(\phi_e^{(m)})=\phi_{h(e)}^{(n)}\]
+\end{thm}
+\begin{proof}[Proof idea]
+Proceed by search.
+
+Let \(\psi(z,\vec{x})\) witness recursiveness of~\(\Psi\). Using the \smn\ theorem together with universal programs, construct \(\phi_{h(e)}^{(n)}\) to search for finite \(\theta\subseteq\phi_e^{(m)}\) with \(\psi(\coding{\theta},\vec{x})\)~defined, and return such a value if found.
+\end{proof}
+
+\noindent Call a total function~\(h\) a \emph{extensional} (for \(m\)~and~\(n\)) if \(\phi_a^{(m)}=\phi_b^{(m)}\) implies \(\phi_{h(a)}^{(n)}=\phi_{h(b)}^{(n)}\).
+
+\begin{thm}[Myhill-Sheperdson II]
+Let \(h\)~be an extensional total computable function. Then there exists a unique continuous operator \(\Psi:\FF_m\to\FF_n\) such that, for all~\(e\),
+\[\Psi(\phi_e^{(m)})=\phi_{h(e)}^{(n)}\]
+Moreover, \(\Psi\)~is recursive.
+\end{thm}
+\begin{proof}[Proof idea]
+Proceed by extension.
+
+First note that \(h\)~naturally induces an operation on computable functions, which includes in particular the finite functions. Any continuous operator~\(\Psi\) extending this operation must be defined in the obvious way in terms of the finite functions, and hence is unique (if it exists). By the Rice-Shapiro theorem, the operation on computable functions is continuous, and it follows that \(\Psi\)~is well defined. Now \(\Psi\)~is trivially continuous by definition, and its operation on finite functions can easily be computed using~\(h\), so \(\Psi\)~is recursive.
+\end{proof}
+\begin{app}
+The Myhill-Sheperdson theorem establishes the equivalence of two formalizations of the notion of an effective operation on computable functions. It thereby allows one to conveniently switch between the two as needed.
+\end{app}
+
+\begin{thm}[Kleene's first recursion theorem]
+Let \(\Phi:\FF_m\to\FF_n\) be a continuous operator. Then there exists a function~\(f_{\Phi}\) which is a least fixed point for~\(\Phi\), that is,
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\Phi(f_{\Phi})=f_{\Phi}\)
+\item[(b)] \(\Phi(g)=g\) implies \(f_{\Phi}\subseteq g\)
+\end{enumerate}
+Moreover, if \(\Phi\)~is recursive, then \(f_{\Phi}\)~is computable.
+\end{thm}
+\begin{proof}[Proof idea]
+Construct the fixed point by iterating~\(\Phi\) and taking a limit. Specifically, recursively (in the set theoretic sense) define the sequence
+\begin{align*}
+f_0&=f_{\emptyset}\\
+f_{n+1}&=\Phi(f_n)\\
+f_{\Phi}&=\bigunion_{n\ge0} f_n
+\end{align*}
+If \(\Phi\)~is recursive, then by the Myhill-Sheperdson theorem (part I) we can effectively index the functions in this sequence, so values of \(f_{\Phi}\)~are computable.
+\end{proof}
+\begin{app}
+Proving existence and computability of a very broad class of recursive functions. In the semantics of formal programming languages, giving meaning to recursively defined programs.
+\end{app}
+\begin{rmk}
+Note that the proof of the recursion theorem relies on a basic set-theoretic recursion principle to ensure the existence of the sequence~\((f_n)\), and so ultimately the existence of~\(f_{\Phi}\).
+
+Note also the method used to construct the fixed point works in any context where there is a monotone operator behaving appropriately at limit points, and is used in other areas of mathematics.
+\end{rmk}

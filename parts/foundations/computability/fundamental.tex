@@ -1,0 +1,85 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Computability
+% Fundamental Theorem of Computability
+%
+\section{Fundamental Theorem of Computability}
+\subsection*{Theorems}
+\begin{thm}[Fundamental theorem of computability]
+The standard formalizations of the notion of effective computability each yield the same class of functions.
+\end{thm}
+\begin{proof}[Proof concept]
+On a case by case basis, establish that one formalization is equivalent to another, often by `implementing' or `simulating' each in terms of the other.
+\end{proof}
+\begin{app}
+Establishing computability of a larger class of functions more easily. Justifying Church's Thesis.
+\end{app}
+
+\begin{ths}[Church]
+The standard formalizations of effective computability correctly capture the informal notion.
+\end{ths}
+\begin{proof}[Idea]
+This is not a theorem susceptible to proof. It is an informal claim supported by various pieces of evidence including (i) the character of the formalizations, (ii) the fundamental theorem, (iii) the observed extensiveness of the class of functions obtained, etc.
+\end{proof}
+\begin{app}
+Establishing computability of functions with informal arguments.
+\end{app}
+
+\begin{rmk}
+We have the following relationships:
+\begin{multline*}
+\text{primitive recursive functions}\ (\PRR)\\
+\subset\text{general recursive functions}\ =\ \mu\text{-recursive functions}\ (\MUR)\\
+\subset\text{partial recursive functions}\ (\PAR)
+\end{multline*}
+Recall also the term \emph{recursive function} generally means \(\mu\)-recursive function (p.~50), and all functions of this type are total. The first inclusion above is strict since some total functions make essential use of the \(\mu\)~operator (like the Ackermann function).
+\end{rmk}
+
+\begin{rmk}
+Let \(\Sigma=\{a_1,\ldots,a_k\}\) be a finite alphabet. Define a \(k\)-adic encoding \(\hat\ :\Sigma^*\to\N\) as follows: \(\hat{\Lambda}=0\), and
+\[\widehat{a_{r_0}\cdots a_{r_m}}=r_0+r_1k+\cdots+r_mk^m\]
+We claim this encoding is bijective.
+\end{rmk}
+\begin{proof}
+Note that to establish injectivity, it is sufficient to show that
+\[d_0+d_1k+\cdots+d_mk^m=0\quad\implies\quad d_0=\cdots=d_m=0\]
+whenever \(1-k\le d_j\le k-1\) for all \(0\le j\le m\). We first prove a lemma:
+
+\begin{lem}
+For \(k\ge 1\), \(m\ge 0\), and \(d_j\le k-1\) for \(0\le j\le m\),
+\[d_0+d_1k+\cdots+d_mk^m<k^{m+1}\]
+\end{lem}
+\begin{proof}
+By induction on~\(m\). For \(m=0\), the result holds since \(d_0\le k-1<k\). If \(m>0\) and the result holds for \(m-1\), then we have
+\begin{align*}
+d_0+d_1k+\cdots+d_mk^m&=\bigl(d_0+d_1k+\cdots+d_{m-1}k^{m-1}\bigr)+d_mk^m\\
+	&<k^m+(k-1)k^m\\
+	&=k^{m+1}
+\end{align*}
+Hence the result holds for~\(m\).
+\end{proof}
+\noindent We now return to the above claim. If \(m=0\), the result is trivial. Suppose \(m>0\), the result holds for \(m-1\), and
+\[d_0+d_1k+\cdots+d_mk^m=0\]
+If \(d_m=0\), we are done by induction. Suppose towards a contradiction, and without loss of generality, that \(d_m<0\). Then \(-d_m\ge 1\), and we have
+\[d_0+d_1k+\cdots+d_{m-1}k^{m-1}=(-d_m)k^m\ge k^m\]
+---contradicting the above lemma. Hence \(d_m=0\), and the result holds for~\(m\).
+
+To establish surjectivity, we first prove the following lemma:
+\begin{lem}
+For \(k\ge1\) and \(m\ge0\), let~\(S_m\) denote the set of all~\(n\) for which there exist \(r_0,\ldots,r_m\) with \(1\le r_j\le k\) for \(0\le j\le m\) and \(n=r_0+r_1k+\cdots+r_mk^m\). Then
+\[S_m=\{\,n\in\N\mid 1+k+\cdots+k^m\le n\le k+k^2+\cdots+k^{m+1}\,\}\]
+\end{lem}
+\begin{proof}
+Let~\(S_m^*\) denote the set on the right. Clearly \(S_m\subseteq S_m^*\). Note that \(\ord{S_m^*}=k^{m+1}\). But by the injectivity of the encoding, \(\ord{S_m}=k^{m+1}\). It follows that \(S_m=S_m^*\).
+\end{proof}
+\noindent It is then immediate that \(\N-\{0\}=\bigunion_{m\in\N}S_m\) (and, in fact, this union is disjoint). Thus the encoding is surjective.
+\end{proof}
+
+\begin{rmk}
+There are numerous ways of effectively coding objects as natural numbers. Examples include \emph{prime coding} (\cite[p.~41]{cutland80}), \emph{binary coding} (\cite[ex.~2.4.16(5)]{cutland80}), \emph{\(k\)-adic coding} (\cite[p.~61]{cutland80}), and various ad hoc codings (like simpler prime codings for fixed-length sequences and even-odd coding \cite[ex.~2.4.16(2)]{cutland80}).
+
+Every coding serves a similar purpose, though there are differences between them. For example, a \(k\)-adic coding can accommodate arbitrary-length sequences, but the values in a sequence must come from a finite set (of cardinality~\(\le k\)). On the other hand, certain ad hoc codings accommodate only fixed-length sequences, but with values from a (countably) infinite set. The prime and binary codings cited allow coding of arbitrary-length sequences with values from a (countably) infinite set, so in this sense they are more powerful than some others. However, simpler coding schemes may also be combined to produce more powerful ones (for example, see the proof of the computability of the Ackermann function in \cite[p.~46--47]{cutland80}).
+\end{rmk}

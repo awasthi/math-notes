@@ -1,0 +1,391 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Analysis
+% Real Analysis
+% Sequences and Series of Numbers
+%
+\section{Sequences and Series of Numbers}
+\subsection*{Definitions}
+\subsubsection*{Sequences}
+\begin{defn}
+A \emph{sequence} in a set~\(X\) is a function \(x:\N\to X\), usually denoted~\(\{x_n\}\) with \(x_n=x(n)\). If \(\sigma:\N\to\N\) is increasing, the sequence \(x\circ\sigma\) is a \emph{subsequence} of~\(x\).
+
+A sequence is \emph{finite}, \emph{infinite}, etc. according as its range satisfies these properties.
+\end{defn}
+
+\begin{defn}
+In a metric space, a sequence~\(\{x_n\}\) \emph{converges} to a point~\(p\) if for all \(\epsilon>0\), there exists~\(N\) such that for all \(n\ge N\), \(d(x_n,p)<\epsilon\). In this case \(p\)~is called a \emph{limit} of~\(\{x_n\}\), denoted \(p=\lim x_n\) or \(x_n\to p\). If \(\{x_n\}\)~does not have a limit, it \emph{diverges}.
+
+A limit of a subsequence of~\(\{x_n\}\) is a \emph{subsequential limit} of~\(\{x_n\}\).
+\end{defn}
+
+\begin{defn}
+In a metric space, a sequence~\(\{x_n\}\) is a \emph{Cauchy sequence} if for all \(\epsilon>0\), there exists~\(N\) such that for all \(m,n\ge N\), \(d(x_m,x_n)<\epsilon\).
+\end{defn}
+
+\begin{defn}
+A metric space in which every Cauchy sequence converges is \emph{complete}.
+\end{defn}
+
+\begin{defn}
+In~\(\R\), a sequence~\(\{x_n\}\) is \emph{monotonically increasing} if \(x_n\le x_{n+1}\) for all~\(n\), and \emph{monotonically decreasing} if \(x_n\ge x_{n+1}\) for all~\(n\). A sequence is \emph{monotonic} if it is monotonically increasing or monotonically decreasing.
+\end{defn}
+
+\begin{defn}
+In~\(\R\), for a sequence~\(\{x_n\}\), if for all~\(M\) there exists~\(N\) such that for all \(n\ge N\), \(x_n>M\), then \emph{\(\{x_n\}\)~diverges to~\(+\infty\)}, written \(x_n\to+\infty\). Analogously, we may have \emph{\(\{x_n\}\)~diverges to~\(-\infty\)}, written \(x_n\to-\infty\).
+\end{defn}
+
+\begin{defn}
+In~\(\R\), for a sequence~\(\{x_n\}\), the set of \emph{extended subsequential limits} of~\(\{x_n\}\) includes the set of subsequential limits of~\(\{x_n\}\) together with possibly \(+\infty\)~or~\(-\infty\) according as \(\{x_n\}\)~has subsequences diverging to \(+\infty\)~or~\(-\infty\), respectively.
+
+Let \(E\)~be the set of extended subsequential limits of~\(\{x_n\}\). Then define
+\[\liminf x_n=\inf E\qquad\limsup x_n=\sup E\]
+with supremum and infimum taken in \(\R\union\{\pm\infty\}\). These are called the \emph{lower limit} and \emph{upper limit} of~\(\{x_n\}\), respectively.
+\end{defn}
+
+\subsubsection*{Series}
+\begin{defn}
+Let \(\{a_n\}\)~be a sequence in~\(\C\). If \(s_n=\sum_{k=0}^n a_k\), then \(\{s_n\}\)~is called the \emph{series} of~\(\{a_n\}\), denoted~\(\sum a_n\). Each~\(s_n\) is a \emph{partial sum} of~\(\{a_n\}\), and each~\(a_n\) is a \emph{term} of~\(\sum a_n\). If \(\sum a_n\)~converges to~\(s\), we also informally identify~\(\sum a_n\) with~\(s\).
+\end{defn}
+
+\begin{defn}
+The series \(\sum a_n\)~converges \emph{absolutely} if \(\sum\abs{a_n}\)~converges. \(\sum a_n\)~converges \emph{conditionally} if \(\sum a_n\)~converges but not absolutely.
+\end{defn}
+
+\begin{defn}
+The series \(\sum a_n\)~is \emph{alternating} if terms have alternating sign (in~\(\R\)).
+\end{defn}
+
+\begin{defn}
+If \(\sum a_n\)~is a series and \(\pi:\N\to\N\) is a bijection, \(\sum a_{\pi(n)}\)~is a \emph{rearrangement} of~\(\sum a_n\).
+\end{defn}
+
+\begin{defn}
+The series~\(\sum c_nz^n\) (a function of~\(z\)) is a \emph{power series}.
+\end{defn}
+
+\subsection*{Theorems}
+\subsubsection*{Sequences}
+\begin{thm}[Basics of limits of sequences]
+Assume a background metric space.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] Limits of sequences are unique.
+\item[(b)] \(p\)~is the limit of~\(\{x_n\}\) iff every neighborhood of~\(p\) contains~\(x_n\) for almost all~\(n\).
+\item[(c)] \(p\)~is a limit point of a set~\(E\) iff \(p\)~is the limit of an infinite sequence in~\(E\).
+\item[(d)] \(p\)~is a limit point of the range of~\(\{x_n\}\) iff \(p\)~is the limit of an infinite subsequence of~\(\{x_n\}\).
+\item[(e)] Convergent sequences are bounded.
+\item[(f)] The set of subsequential limits of a sequence is closed.
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), observe two limits must be arbitrarily close, and hence equal.
+
+Note (b)~follows from definitions.
+
+For~(c), if \(p\)~is a limit point of~\(E\), choose pairwise distinct \(x_k\in N_{\delta_k}(p)\sect E\) for \(\delta_k=1/k\) with \(k=1,2,\ldots\); use~(b) for the converse.
+
+Note (d)~follows from~(c).
+
+Note (e)~follows from~(b).
+
+For~(f), a limit point of subsequential limits is itself a subsequential limit.
+\end{proof}
+
+\begin{thm}[Limits and field operations in~\(\C\)]
+Let \(\{a_n\},\{b_n\}\) be convergent sequences in~\(\C\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\lim(a_n+b_n)=\lim a_n+\lim b_n\)
+\item[(b)] \(\lim(a_nb_n)=\lim a_n\cdot\lim b_n\)
+\item[(c)] \(\lim(1/a_n)=1/\lim a_n\) provided \(a_n\ne0\) for \(n=1,2,\ldots\) and \(\lim a_n\ne0\).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+Write \(a=\lim a_n\) and \(b=\lim b_n\).
+
+For~(a), write \((a_n+b_n)-(a+b)=(a_n-a)+(b_n-b)\) and let \(n\to\infty\).
+
+For~(b), write \(a_nb_n-ab=(a_n-a)(b_n-b)+a(b_n-b)+b(a_n-a)\) and let \(n\to\infty\).
+
+For~(c), write \(1/a_n-1/a=(a-a_n)/a_na\) and let \(n\to\infty\).
+
+(Formally, use epsilons!)
+\end{proof}
+
+\begin{thm}[Limits in~\(\R^k\)]
+Let \(\{\vec{x}_n\},\{\vec{y}_n\}\) be sequences in~\(\R^k\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(\vec{x}_n=(x_{n,1},\ldots,x_{n,k})\) and \(\vec{x}=(x_1,\ldots,x_k)\), then
+\[\vec{x}=\lim\vec{x}_n\quad\iff\quad x_i=\lim x_{n,i}\ (1\le i\le k)\]
+\item[(b)] If \(\{\vec{x}_n\}\)~and~\(\{\vec{y}_n\}\) are convergent and \(\alpha=\lim\alpha_n\) in~\(\R\), then
+\begin{enumerate}[itemsep=0pt]
+\item[(i)] \(\lim(\alpha_n\vec{x}_n)=\alpha\lim\vec{x}_n\)
+\item[(ii)] \(\lim(\vec{x}_n+\vec{y}_n)=\lim\vec{x}_n+\lim\vec{y}_n\)
+\item[(iii)] \(\lim(\vec{x}_n\dotprod\vec{y}_n)=\lim\vec{x}_n\dotprod\lim\vec{y}_n\)
+\end{enumerate}
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), use epsilons and the definition of the norm in~\(\R^k\).
+
+Note (b)~follows from~(a) and properties of limits in~\(\R\).
+\end{proof}
+\begin{app}
+Characterizing properties of \(\R^k\)-valued sequences [functions] in terms of properties of \(\R\)-valued component sequences [functions], and thereby extending results from~\(\R\) to~\(\R^k\) by applying them to components. For functions, this includes limits, continuity, differentiability, etc.
+\end{app}
+
+\begin{thm}[Limits and compactness]
+Every sequence in a compact metric space has a convergent subsequence.
+\end{thm}
+\begin{proof}[Proof idea]
+If the sequence is finite, the result is trivial. If the sequence is infinite, it has a limit point (of its range) by compactness, hence a subsequential limit.
+\end{proof}
+\begin{cor}[Bolzano-Weierstrass]
+Every bounded sequence in~\(\R^k\) has a convergent subsequence.
+\end{cor}
+\begin{proof}[Proof idea]
+Such a sequence is contained in a compact \(k\)-cell.
+\end{proof}
+\begin{rmk}
+These results are essentially reformulations of results from the previous chapter into the language of sequences.
+\end{rmk}
+
+\begin{thm}[Cauchy sequences]
+Assume a background metric space.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] Convergent sequences are Cauchy.
+\item[(b)] If the space is compact, Cauchy sequences are convergent (that is, compact spaces are complete).
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), if points are getting arbitrarily close to a limit, they are getting arbitrarily close to each other.
+
+For~(b), choose a convergent subsequence, then argue all points of the sequence are getting arbitrarily close to the subsequential limit.
+\end{proof}
+\begin{cor}[Completeness of~\(\R^k\)]
+\(\R^k\)~is complete.
+\end{cor}
+\begin{proof}[Proof idea]
+Cauchy sequences are bounded, so contained in a compact \(k\)-cell.
+\end{proof}
+\begin{app}
+Cauchy criterion for convergence of a sequence [series].
+\end{app}
+
+\begin{thm}[Monotonic sequences in~\(\R\)]
+If a sequence is monotonic, it is convergent iff it is bounded.
+\end{thm}
+\begin{proof}[Proof idea]
+The forward direction is known. For the reverse direction, use the least upper bound or greatest lower bound property.
+\end{proof}
+\begin{app}
+Convergence criterion for series of nonnegative terms.
+\end{app}
+
+\begin{thm}[Lower and upper limits in~\(\R\union\{\pm\infty\}\)]
+Let \(\{x_n\}\)~be a sequence in~\(\R\) and
+\[\alpha=\liminf x_n\qquad\beta=\limsup x_n\]
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(\alpha\)~and~\(\beta\) are extended subsequential limits of~\(\{x_n\}\).
+\item[(b)] If \(\gamma<\alpha\), then \(\gamma<x_n\) for almost all~\(n\).
+\item[(c)] If \(\gamma>\beta\), then \(\gamma>x_n\) for almost all~\(n\).
+\end{enumerate}
+Moreover, \(\alpha\)~and~\(\beta\) are unique in satisfying these properties.
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), note that either \(\alpha\)~and~\(\beta\) are extended limit points of the set of extended subsequential limits of~\(\{x_n\}\), or else they are the only elements in the set, hence are extended subsequential limits themselves.
+
+For~(b), if \(x_n\le\gamma\) for infinitely many~\(n\), then \(\{x_n\}\)~has an extended subsequential limit \(\lambda\le\gamma\), so \(\alpha\le\lambda\le\gamma<\alpha\)---a contradiction.
+
+For~(c), argue similarly.
+
+Uniqueness is immediate.
+\end{proof}
+
+\subsubsection*{Series}
+All series are in~\(\C\) unless otherwise implied. Ordering of terms (e.g. nonnegativity) always implies those terms are in~\(\R\).
+
+\begin{thm}[Cauchy criterion]
+The series \(\sum a_n\) converges iff for all \(\epsilon>0\), there exists~\(N\) such that for all \(n\ge m\ge N\),
+\[\abs{\sum_{k=m}^n a_k}<\epsilon\]
+\end{thm}
+\begin{proof}[Proof idea]
+This just means the sequence of partial sums is Cauchy.
+\end{proof}
+\begin{app}
+Proving convergence without reference to a limit.
+\end{app}
+
+\begin{cor}[Divergence test]
+If \(\sum a_n\)~converges, then \(\lim a_n=0\).
+\end{cor}
+\begin{app}
+Proving divergence.
+\end{app}
+\begin{rmk}
+\emph{The converse is false!} Consider the harmonic series~\(\sum 1/n\).
+\end{rmk}
+
+\begin{thm}
+A series of nonnegative terms converges iff its sequence of partial sums is bounded.
+\end{thm}
+\begin{proof}[Proof idea]
+The forward direction is known, and the reverse direction holds since the partial sums monotonically increase.
+\end{proof}
+
+\begin{thm}[Geometric series]
+If \(0\le x<1\), \(\sum x^n=1/(1-x)\). If \(x\ge1\), \(\sum x^n\)~diverges.
+\end{thm}
+\begin{proof}[Proof idea]
+Write \(s_n=\sum_{k=0}^n x^k=1+\cdots+x^n\). Then \(xs_n=s_{n+1}-1\), so if \(x\ne 1\),
+\[s_n=\frac{1-x^{n+1}}{1-x}\]
+Thus \(s_n\to 1/(1-x)\) as \(n\to\infty\).
+
+If \(x=1\), \(s_n=n\to\infty\) as \(n\to\infty\), so divergence follows from the divergence test.
+\end{proof}
+\begin{app}
+Often used with the comparison test for convergence.
+\end{app}
+
+\begin{thm}[Comparison test]
+Let \(\sum a_n\)~and~\(\sum b_n\) be series.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(\abs{a_n}\le b_n\) for almost all~\(n\) and \(\sum b_n\)~converges, then \(\sum a_n\)~converges.
+\item[(b)] If \(a_n\ge b_n\ge 0\) for almost all~\(n\) and \(\sum b_n\)~diverges, then \(\sum a_n\)~diverges.
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), use the Cauchy criterion.
+
+Note (b)~follows from~(a).
+\end{proof}
+\begin{app}
+Proving convergence and divergence, root test, ratio test.
+\end{app}
+
+\begin{cor}[Root test]
+Let \(\sum a_n\)~be a series and \(\lambda=\limsup\sqrt[n]{\abs{a_n}}\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(\lambda<1\), then \(\sum a_n\)~converges.
+\item[(b)] If \(\lambda>1\), then \(\sum a_n\)~diverges.
+\end{enumerate}
+\end{cor}
+\begin{proof}[Proof idea]
+For~(a), by comparison with a geometric series. If \(\lambda<1\), fix \(\lambda<\beta<1\). Then by the upper limit property for~\(\lambda\), \(\sqrt[n]{\abs{a_n}}<\beta\) for almost all~\(n\), that is, \(\abs{a_n}<\beta^n\) for almost all~\(n\). But \(\sum\beta^n\)~is a convergent geometric series, so \(\sum a_n\)~converges by the comparison test.
+
+For~(b), by the divergence test. If \(\lambda>1\), there are infinitely many~\(a_n\) with \(\abs{a_n}>1\), so \(\lim a_n\ne 0\).
+\end{proof}
+
+\begin{cor}[Ratio test]
+Let \(\sum a_n\)~be a series and \(\lambda=\limsup\abs{\frac{a_{n+1}}{a_n}}\).
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(\lambda<1\), then \(\sum a_n\)~converges.
+\item[(b)] If \(\abs{a_{n+1}/a_n}\ge 1\) for almost all~\(n\), then \(\sum a_n\)~diverges.
+\end{enumerate}
+\end{cor}
+\begin{proof}[Proof idea]
+For~(a), by comparison with a geometric series. If \(\lambda<1\), fix \(\lambda<\beta<1\) and~\(N\) such that \(\abs{a_{n+1}/a_n}<\beta\) for all \(n\ge N\). Then
+\[\abs{a_{N+k}}<\beta\abs{a_{N+k-1}}<\beta^2\abs{a_{N+k-2}}<\cdots<\beta^k\abs{a_N}\]
+for all \(k\ge1\). Convergence follows by comparison with~\(\sum\beta^n\).
+
+For~(b), by the divergence test.
+\end{proof}
+
+\begin{rmk}
+The comparison, root, and ratio tests are tests for absolute convergence. The root test is better than the ratio test. The root and ratio tests give no information when \(\lambda=1\), as illustrated by the series \(\sum 1/n\)~and~\(\sum 1/n^2\).
+\end{rmk}
+
+\begin{thm}[Cauchy subseries theorem]
+Let \(\sum a_n\)~be a series with \(a_1\ge a_2\ge\cdots\ge0\). Then \(\sum a_n\)~converges iff the series \(\sum 2^n a_{2^n}\)~converges.
+\end{thm}
+\begin{proof}[Proof idea]
+Since both of the series have nonnegative terms, it is sufficient to show equivalence for boundedness of partial sums.
+
+Show that for any given partial sum of one series, you can go far enough out in the other series to surpass it (up to a multiple of~\(2\)). Therefore one sequence is unbounded iff the other sequence is unbounded.
+\end{proof}
+\begin{app}
+\(\sum\frac{1}{n^k}\)~converges for \(k>1\) and diverges for \(k\le 1\).
+\end{app}
+
+\begin{thm}[Series and field operations]
+Let \(\sum a_n\)~and~\(\sum b_n\) be series.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(\sum_{n=0}^\infty a_n\)~is convergent, then for all \(N\ge0\), \(\sum_{n=N+1}^{\infty}a_n\)~is convergent and
+\[\sum_{n=0}^{\infty}a_n=\sum_{n=0}^N a_n+\sum_{n=N+1}^\infty a_n\]
+\item[(b)] If \(\sum a_n\)~and~\(\sum b_n\) are convergent, then
+\[\sum(a_n+b_n)=\sum a_n+\sum b_n\]
+\item[(c)] If \(\sum a_n\)~is absolutely convergent, \(\sum b_n\)~is convergent, and \(c_n=\sum_{k=0}^n a_kb_{n-k}\), then
+\[\sum c_n=\bigl(\sum a_n\bigr)\bigl(\sum b_n\bigr)\]
+\item[(d)] If \(\sum a_n\)~has bounded partial sums and \(b_1\ge b_2\ge\cdots\ge0\) and \(\lim b_n=0\), then \(\sum a_nb_n\)~converges.
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For (a)~and~(b), use the addition rule for limits of the partial sums.
+
+For~(c), let \(A_n\)~and~\(A\) be the partial sum and sum of~\(\sum a_n\), respectively; similarly use \(B_n,B\) for~\(\sum b_n\) and \(C_n\)~for~\(\sum c_n\). Then
+\begin{align*}
+C_n&=a_0b_0+(a_0b_1+a_1b_0)+\cdots+(a_0b_n+a_1b_{n-1}+\cdots+a_nb_0)\\
+	&=a_0B_n+a_1B_{n-1}+\cdots+a_nB_0\\
+	&=A_nB+a_0(B-B_n)+\cdots+a_n(B-B_0)
+\end{align*}
+Set \(\delta_n=a_0(B-B_n)+\cdots+a_n(B-B_0)\). Now argue using absolute convergence of~\(\sum a_n\) and convergence of~\(\sum b_n\) that \(\delta_n\to 0\) as \(n\to\infty\), so \(C_n\to AB\) as \(n\to\infty\).
+
+For~(d), use summation by parts to express a partial sum of~\(\sum a_nb_n\) in terms of a partial sum of~\(\sum a_n\) and terms of~\(\sum b_n\), then use the Cauchy criterion.
+\end{proof}
+
+\begin{cor}[Alternating series]
+Let \(\sum c_n\)~be an alternating series with \(\abs{c_1}\ge\abs{c_2}\ge\cdots\) and \(\lim\abs{c_n}=0\). Then \(\sum c_n\)~converges.
+\end{cor}
+\begin{proof}[Proof idea]
+Use~(c) with \(a_n=(-1)^{n+1}\) and \(b_n=\abs{c_n}\).
+\end{proof}
+
+\begin{thm}[Rearrangements]
+Let \(\sum a_n\)~be a series.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] If \(\sum a_n\)~is conditionally convergent and \(-\infty\le\alpha\le\beta\le+\infty\), then there exists a rearrangement~\(\sum a_n'\) with
+\[\liminf s_n'=\alpha\qquad\limsup s_n'=\beta\]
+where \(\{s_n'\}\)~is the sequence of partial sums.
+\item[(b)] If \(\sum a_n\)~is absolutely convergent, every rearrangement converges (absolutely) to the same sum.
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), argue that the sum of the positive terms in~\(\sum a_n\) must diverge to~\(+\infty\), and the sum of the negative terms to~\(-\infty\), lest \(\sum a_n\)~is absolutely convergent.
+
+Now choose sequences \(\{\alpha_n\}\)~and~\(\{\beta_n\}\) with \(\alpha_n\to\alpha\) and \(\beta_n\to\beta\) and \(\alpha_n<\beta_n\) for all~\(n\). Construct a sequence of partial sums for a rearrangement as follows: first take positive terms from~\(\sum a_n\) (in their original order) until the partial sum is just greater than~\(\beta_1\); then take negative terms until the partial sum is just less than~\(\alpha_1\); and so on... This process can be carried out indefinitely since we have enough positive and negative terms. The resulting rearrangement has the desired properties.
+
+For~(b), use the Cauchy criterion, and go sufficiently far out in the terms of any rearrangement.
+\end{proof}
+
+\begin{thm}[Radius of convergence]
+Let \(\sum c_nz^n\)~be a power series and \(R=1/\limsup\sqrt[n]{\abs{c_n}}\). Then the series converges (absolutely) for \(\abs{z}<R\) and diverges for \(\abs{z}>R\).
+\end{thm}
+\begin{proof}[Proof idea]
+By the root test.
+\end{proof}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Lower and upper limit properties.
+\item Proving convergence or divergence of sequences:
+\begin{itemize}[itemsep=0pt]
+\item Cauchy criterion.
+\item Monotonicity.
+\item Arithmetic (sums, products, etc.).
+\end{itemize}
+\item Proving convergence or divergence of series:
+\begin{itemize}[itemsep=0pt]
+\item Known forms (geometric series, alternating series, etc.).
+\item Divergence test.
+\item Cauchy criterion.
+\item Comparison test.
+\item Root test.
+\item Ratio test.
+\item Boundedness (for nonnegative terms).
+\item Cauchy subseries (for nonnegative, monotonically decreasing terms).
+\item Arithmetic (sums, summation by parts, products, etc.).
+\item Using properties of power series (continuity, etc.).
+\end{itemize}
+\item Reducing sequences in~\(\R^k\) to sequences (of components) in~\(\R\).
+\end{itemize}

@@ -1,0 +1,83 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Computability
+% Recursive and Recursively Enumerable Sets
+%
+\section{Recursive and Recursively Enumerable Sets}
+\subsection*{Theorems}
+\begin{thm}[Recursive enumerability]
+For a set~\(A\), the following are equivalent:
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(A\)~is recursively enumerable (r.e.)
+\item[(b)] The predicate `\(x\in A\)' is partially decidable
+\item[(c)] There exists a primitive recursive predicate \(R(x,y)\) such that \(x\in A\iff\exists y\,R(x,y)\)
+\item[(d)] There exists a partially decidable predicate \(M(x,\vec{y})\) such that \(x\in A\iff\exists\vec{y}\,M(x,\vec{y})\)
+\item[(e)] \(A\)~is the domain of a unary computable function (\(A=W_k\) for some~\(k\))
+\item[(f)] \(A\)~is the range of a computable function (\(A=E_k^{(n)}\) for some~\(k\))
+\item[(g)] If \(A\ne\emptyset\), \(A\)~is the range of a unary primitive recursive function
+\item[(h)] (Matiyasevich) \(A\)~is diophantine
+\item[(i)] (Matiyasevich) \(A\)~is the set of nonnegative values of a diophantine polynomial
+\end{enumerate}
+\end{thm}
+\begin{app}
+See the notes on Matiyasevich's theorem above.
+\end{app}
+
+\begin{thm}
+Let \(A\)~be a set.
+\begin{enumerate}[itemsep=0pt]
+\item[(a)] \(A\)~is recursive iff both \(A\)~and~\(\overline{A}\) are r.e.
+\item[(b)] If \(A\)~is infinite, \(A\)~is recursive iff \(A\)~can be recursively enumerated in increasing order.
+\end{enumerate}
+\end{thm}
+\begin{proof}[Proof idea]
+For~(a), use multitasking. For~(b), for the forward implication, recursively search for the elements in~\(A\) in order; for the other implication, decide \(x\in A\) by searching the ordered list and halting once you have found~\(x\) or something larger.
+\end{proof}
+
+\begin{cor}
+Every infinite r.e. set contains an infinite recursive subset.
+\end{cor}
+\begin{proof}[Proof idea]
+Recursively enumerate an infinite subset in increasing order.
+\end{proof}
+
+\noindent Recall \(K=\{\,x\mid x\in W_x\,\}\) is a creative set.
+
+\begin{thm}[Rice-Shapiro]
+Suppose \(\A\subseteq\CC_1\) and \(A=\{\,x\mid\phi_x\in\A\,\}\) is r.e. For all \(f\in\CC_1\),
+\[f\in\A\iff\text{there exists a finite function }\theta\subseteq f\text{ with }\theta\in\A\]
+\end{thm}
+\begin{proof}[Proof idea]
+Show if either direction of the implication fails, then the \smn\ theorem (with the help of universal programs) can be used to reduce~\(\overline{K}\) to~\(A\), so \(A\)~is not r.e.
+\end{proof}
+\begin{app}
+Establishing non-recursive enumerability of classes of functions. Rice's theorem. The Myhill-Sheperdson theorem.
+\end{app}
+
+\begin{thm}
+Suppose \(\A\subset\CC_1\) and \(f_{\emptyset}\in\A\). Then \(A=\{\,x\mid\phi_x\in\A\,\}\) is productive.
+\end{thm}
+\begin{proof}[Proof idea]
+Proceed as in Rice's theorem to reduce~\(\overline{K}\) to~\(A\).
+\end{proof}
+
+\begin{cor}
+Suppose \(\A\subseteq\CC_1\) and \(A=\{\,x\mid\phi_x\in\A\,\}\) is r.e. with \(\emptyset\subset A\subset\N\). Then \(A\)~is creative.
+\end{cor}
+
+\begin{thm}
+A productive set contains an infinite r.e. subset.
+\end{thm}
+\begin{proof}[Proof idea]
+Starting with an index for the empty set, repeatedly apply the productive function for the set to construct an ascending chain of finite subsets. The elements adjoined at each step form an infinite r.e. subset.
+\end{proof}
+
+\begin{thm}[Post]
+There exists a simple set.
+\end{thm}
+\begin{proof}[Proof idea]
+Construct a computable function whose range contains an element from every infinite r.e. set, picking elements carefully so that the complement of the range remains infinite.
+\end{proof}

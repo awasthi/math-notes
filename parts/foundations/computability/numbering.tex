@@ -1,0 +1,40 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Foundations
+% Computability
+% Godel Numbering and Parametrization
+%
+\section{G\"odel Numbering and Parametrization}
+\subsection*{Theorems}
+\begin{thm}[G\"odel numbering]
+The set~\(\P\) of programs is effectively denumerable.
+\end{thm}
+\begin{proof}[Proof idea.]
+Show that URM programs can be effectively coded as finite sequences of numbers, which can in turn be effectively coded as numbers.
+\end{proof}
+\begin{app}
+A fundamental result supporting the rest of the theory. It allows us to treat code as data, opening the door to effective operations on code (and hence on computable functions) as seen in the \smn\ theorem, universal programs, and much other theory. It also provides us an indexing of computable functions.
+\end{app}
+
+\begin{cor}
+For each~\(n\), \(\CC_n\)~is denumerable, and \(\CC\)~is denumerable.
+\end{cor}
+\begin{app}
+Diagonalizing on computable functions (etc.).
+\end{app}
+
+\begin{thm}[Kleene's \smn\ theorem]
+For all \(m\ge1\), there exists a primitive recursive function \(s^m(e,\vec{x})\) such that for all \(n\)~and~\(e\),
+\[\phi_{s^m(e,\vec{x})}^{(n)}(\vec{y})\simeq\phi_e^{(m+n)}(\vec{x},\vec{y})\]
+for all \(m\)-tuples~\(\vec{x}\) and \(n\)-tuples~\(\vec{y}\).
+
+In particular, if \(f(x,y)\) is computable, there exists a primitive recursive function~\(s(x)\) such that \(\phi_{s(x)}(y)\simeq f(x,y)\) for all~\(y\).
+\end{thm}
+\begin{proof}[Proof idea.]
+Program hacking. Have \(s^m\)~decode~\(e\) to obtain~\(P_e\), hack~\(P_e\) by prepending code which first shifts register contents and loads~\(\vec{x}\) into the lowest registers, and return the code of the hacked program.
+\end{proof}
+\begin{app}
+Effectively currying computable functions and indexing the resulting functions. Used in conjunction with with universal functions to perform effective operations on computable functions, and in conjunction with the second recursion theorem to define computable functions in terms of their own source code.
+\end{app}

@@ -1,0 +1,48 @@
+%
+% Notes on Mathematics
+% John Peloquin
+%
+% Analysis
+% Complex Analysis
+% Complex Numbers
+\section{Complex Numbers}
+\subsection*{Definitions}
+Basic definitions assumed.
+\subsection*{Theorems}
+\begin{thm}[Existence of~\(\C\)]
+There exists an algebraically closed field~\(\C\) (the complex numbers) containing~\(\R\) as a subfield.
+\end{thm}
+\begin{proof}[Proof idea]
+Let complex numbers be ordered pairs of real numbers with addition and multiplication defined appropriately. Prove algebraic closure later.
+\end{proof}
+\begin{app}
+All subsequent theory.
+\end{app}
+
+\begin{thm}[Polar form]
+If \(z\ne0\), there exist unique \(r\ge0\) and \(\theta\in(-\pi,\pi]\) such that
+\[z=r(\cos\theta+i\sin\theta)=re^{i\theta}\]
+\end{thm}
+\begin{proof}[Proof idea]
+By geometry in the complex plane and Euler's identity (definition).
+\end{proof}
+\begin{app}
+Multiplication, geometry of multiplication as scaling and rotation.
+\end{app}
+
+\begin{thm}[Roots]
+If \(z=re^{i\theta}\) and \(n\ge1\), the \(n\)~distinct \(n\)-th roots of~\(z\) are given by
+\[w_k=\sqrt[n]{r}\exp\Bigl(\frac{\theta+2k\pi}{n}\Bigr)\quad(k=0,\ldots,n-1)\]
+\end{thm}
+\begin{proof}[Proof idea]
+Polar form.
+
+In detail, if \(w=se^{i\phi}\) is an \(n\)-th root of~\(z\), then
+\[s^ne^{in\phi}=w^n=z=re^{i\theta}\]
+so by geometry in the complex plane, \(s^n=r\) and \(n\phi=\theta+2k\pi\) for some integer~\(k\). The distinct roots are obtained by letting \(k=0,\ldots,n-1\).
+\end{proof}
+
+\subsection*{Techniques}
+\begin{itemize}[itemsep=0pt]
+\item Using polar form for multiplication.
+\end{itemize}
